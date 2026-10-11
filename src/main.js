@@ -1,54 +1,34 @@
 import * as THREE from 'three';
+import { createRenderer, resizeViewport } from './core/renderer.js';
+import { createCamera } from './core/camera.js';
+import { createLighting } from './core/lighting.js';
 
-// Сцена
+// Stage 2: keep a simple visible marker until the actual geography is migrated.
+const canvas = document.createElement('canvas');
+canvas.id = 'view';
+document.getElementById('app').appendChild(canvas);
+
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x101725);
+const renderer = createRenderer(canvas);
+const { camera, controls } = createCamera(canvas);
+createLighting(scene);
 
-// Камера
-const camera = new THREE.PerspectiveCamera(
-  44,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
-camera.position.set(0, 5, 10);
-camera.lookAt(0, 0, 0);
-
-// Рендерер
-const renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-document.getElementById('app').appendChild(renderer.domElement);
-
-// Освещение
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambientLight);
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-directionalLight.position.set(5, 10, 5);
-scene.add(directionalLight);
-
-// Тестовая геометрия — вращающийся куб
-const geometry = new THREE.BoxGeometry(2, 2, 2);
+// Temporary test object at the original OrbitControls target.
+// It is deliberately large enough to be visible from the legacy camera.
+const geometry = new THREE.BoxGeometry(30, 30, 30);
 const material = new THREE.MeshStandardMaterial({ color: 0x00aa00 });
 const cube = new THREE.Mesh(geometry, material);
+cube.position.set(-4, 12, -25);
+cube.castShadow = true;
+cube.receiveShadow = true;
 scene.add(cube);
 
-// Анимация
-function animate() {
-  requestAnimationFrame(animate);
-  
-  cube.rotation.x += 0.01;
-  cube.rotation.y += 0.01;
-  
+function frame() {
+  requestAnimationFrame(frame);
+  controls.update();
+  cube.rotation.y += 0.005;
   renderer.render(scene, camera);
 }
+requestAnimationFrame(frame);
 
-animate();
-
-// Адаптивность
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+window.addEventListener('resize', () => resizeViewport(renderer, camera));
