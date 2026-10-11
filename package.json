@@ -9,7 +9,8 @@
     "baseline:verify": "node tools/baseline.mjs --verify",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:core": "node --test tests/core-primitives.test.mjs"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",
