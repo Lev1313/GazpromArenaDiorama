@@ -33,8 +33,8 @@ test('original parking has exactly 18 cars and 32 spectators', () => {
   assert.ok(parked.every(o => o.parent === scene));
   assert.ok(people.every(o => o.parent === scene));
   // 18 car groups + 32 people groups + 28 painted bay marks +
-  // 6 picnic table boxes + 28 boundary bollards + 1 Golf sprite.
-  assert.equal(scene.children.length, 113);
+  // 6 picnic table boxes + 14 boundary bollards + 1 Golf sprite.
+  assert.equal(scene.children.length, 99);
 });
 
 test('parked-car rows and visitor-free slots retain original coordinates', () => {
@@ -102,5 +102,5 @@ test('people, parking lines and boundary bollards preserve original forms', () =
     && o.geometry.type === 'CylinderGeometry'
     && o.geometry.parameters.height === 0.65
     && o.material.color.getHex() === 0xe6974e);
-  assert.equal(bollards.length, 28);
+  assert.equal(bollards.length, 14);
 });
