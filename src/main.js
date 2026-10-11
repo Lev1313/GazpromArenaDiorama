@@ -6,8 +6,10 @@ import { createMaterialSystem } from './materials/materials.js';
 import { createTerrain } from './world/terrain.js';
 import { createStadium } from './world/stadium.js';
 import { createZsd } from './world/zsd.js';
+import { createLakhta } from './world/lakhta.js';
+import { createSurroundings } from './world/surroundings.js';
 
-// Stage 3.4: original terrain, arena and ZSD; vehicles and other landmarks follow.
+// Stage 3.5: original static environment (before batching and vehicle migration).
 const canvas = document.createElement('canvas');
 canvas.id = 'view';
 document.getElementById('app').appendChild(canvas);
@@ -18,9 +20,11 @@ const { camera, controls } = createCamera(canvas);
 createLighting(scene);
 
 const { mat } = createMaterialSystem();
-const { materials, arenaX } = createTerrain(scene, mat);
-createStadium(scene, mat, materials, arenaX);
+const { materials, arenaX, islandOutline } = createTerrain(scene, mat);
+const { steel } = createStadium(scene, mat, materials, arenaX);
 createZsd(scene, mat, materials);
+createLakhta(scene, mat, materials, steel);
+createSurroundings(scene, mat, materials, arenaX, islandOutline, steel);
 
 function frame() {
   requestAnimationFrame(frame);
