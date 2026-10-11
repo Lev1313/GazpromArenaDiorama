@@ -72,6 +72,7 @@ export function createHudController({
     toggleDay,
     setSpeedScale,
     toggleSmoke,
+    isSmokeEnabled: () => drift.smokeEnabled,
     setCameraPreset,
     getStats,
   };
