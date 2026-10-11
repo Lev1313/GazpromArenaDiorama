@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test:core": "node --test tests/core-primitives.test.mjs tests/terrain.test.mjs tests/stadium.test.mjs tests/zsd.test.mjs tests/surroundings.test.mjs tests/batching.test.mjs"
+    "test:core": "node --test tests/core-primitives.test.mjs tests/terrain.test.mjs tests/stadium.test.mjs tests/zsd.test.mjs tests/surroundings.test.mjs tests/batching.test.mjs tests/parking.test.mjs"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",
