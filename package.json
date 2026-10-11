@@ -6,11 +6,18 @@
   "scripts": {
     "serve:legacy": "node tools/serve.mjs",
     "baseline": "node tools/baseline.mjs",
-    "baseline:verify": "node tools/baseline.mjs --verify"
+    "baseline:verify": "node tools/baseline.mjs --verify",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",
     "playwright-core": "^1.64.0",
-    "pngjs": "^7.0.0"
+    "pngjs": "^7.0.0",
+    "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "three": "^0.164.1"
   }
 }
