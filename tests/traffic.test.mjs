@@ -35,7 +35,7 @@ function makeSetup(realZsd = false) {
 }
 
 test('14 ZSD cars and 3 visitor cars use their original initial states', () => {
-  const { scene, traffic, staticObjects } = makeSetup();
+  const { scene, traffic, markings, staticObjects } = makeSetup();
   assert.equal(traffic.highCars.length, 14);
   assert.equal(traffic.visitors.length, 3);
   assert.equal(scene.children.length - staticObjects, 23);
