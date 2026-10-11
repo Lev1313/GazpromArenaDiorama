@@ -1,0 +1,285 @@
+{
+  "shots": [
+    "01_overview_night",
+    "02_preset_meet",
+    "03_preset_arena",
+    "04_preset_zsd",
+    "05_preset_top",
+    "06_preset_drift",
+    "07_reset_camera",
+    "08_overview_day",
+    "09_arena_day",
+    "10_orbit_drag",
+    "11_drift_t0",
+    "12_drift_t+2s",
+    "13_drift_smoke_off",
+    "14_drive_chase",
+    "15_drive_top",
+    "16_drive_moving",
+    "17_drive_after_brake_skids",
+    "18_drive_collision",
+    "19_drive_reset",
+    "20_after_exit_camera_restored",
+    "21_photo_sources_open",
+    "22_mobile_overview",
+    "23_mobile_drive"
+  ],
+  "checks": [
+    {
+      "name": "WebGL scene initialised, no #err message",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Initial stats text",
+      "ok": true,
+      "detail": "Дрифт: 2 авто · на парковке: 18 · зрителей: 32"
+    },
+    {
+      "name": "Pause button toggles label",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reset camera reproduces overview draw calls",
+      "ok": true,
+      "detail": "1919 draw calls"
+    },
+    {
+      "name": "Day button switches label",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night restored",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Orbit drag rotates the camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume button restores label",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Drifters / smoke animate over time",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Smoke toggle off",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Smoke toggle on",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo slider accepts value",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Stats keep updating (visitor cars park)",
+      "ok": true,
+      "detail": "Дрифт: 2 авто · на парковке: 19 · зрителей: 32"
+    },
+    {
+      "name": "Drive mode: panel visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Drive mode: button label",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Drive mode: body.driving class",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera view: Сверху",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera view: Свободно",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera view cycles back: Сзади",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Throttle accelerates (km/h > 10, gear D)",
+      "ok": true,
+      "detail": "17 км/ч, попыток сброса: 0"
+    },
+    {
+      "name": "Collision detection stops the Golf",
+      "ok": true,
+      "detail": "Препятствие — сдай назад"
+    },
+    {
+      "name": "Reverse gear R",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "R resets Golf (0 km/h, N)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Esc exits drive mode",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Photo sources panel lists 4 links",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No page errors (desktop)",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile: touch pedals visible in drive mode",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "frameStats": {
+    "01_overview_night": {
+      "time": 3166.66666666666,
+      "drawCalls": 1919,
+      "triangles": 159292
+    },
+    "02_preset_meet": {
+      "time": 3333.3333333333253,
+      "drawCalls": 1656,
+      "triangles": 154278
+    },
+    "03_preset_arena": {
+      "time": 3499.9999999999905,
+      "drawCalls": 1022,
+      "triangles": 137128
+    },
+    "04_preset_zsd": {
+      "time": 3666.6666666666556,
+      "drawCalls": 1891,
+      "triangles": 158732
+    },
+    "05_preset_top": {
+      "time": 3833.3333333333208,
+      "drawCalls": 1864,
+      "triangles": 158184
+    },
+    "06_preset_drift": {
+      "time": 3999.999999999986,
+      "drawCalls": 1335,
+      "triangles": 143264
+    },
+    "07_reset_camera": {
+      "time": 4166.666666666653,
+      "drawCalls": 1919,
+      "triangles": 159292
+    },
+    "08_overview_day": {
+      "time": 4333.333333333323,
+      "drawCalls": 1919,
+      "triangles": 159292
+    },
+    "09_arena_day": {
+      "time": 4499.999999999993,
+      "drawCalls": 1022,
+      "triangles": 137128
+    },
+    "10_orbit_drag": {
+      "time": 5500.000000000011,
+      "drawCalls": 1919,
+      "triangles": 159292
+    },
+    "11_drift_t0": {
+      "time": 5533.333333333345,
+      "drawCalls": 1336,
+      "triangles": 143348
+    },
+    "12_drift_t+2s": {
+      "time": 7533.333333333381,
+      "drawCalls": 1345,
+      "triangles": 143666
+    },
+    "13_drift_smoke_off": {
+      "time": 8033.33333333339,
+      "drawCalls": 1257,
+      "triangles": 143566
+    },
+    "14_drive_chase": {
+      "time": 49116.666666665245,
+      "drawCalls": 1102,
+      "triangles": 138240
+    },
+    "15_drive_top": {
+      "time": 49199.99999999857,
+      "drawCalls": 960,
+      "triangles": 117130
+    },
+    "16_drive_moving": {
+      "time": 49966.66666666512,
+      "drawCalls": 1087,
+      "triangles": 137688
+    },
+    "17_drive_after_brake_skids": {
+      "time": 50549.99999999837,
+      "drawCalls": 1060,
+      "triangles": 137082
+    },
+    "18_drive_collision": {
+      "time": 52566.66666666474,
+      "drawCalls": 969,
+      "triangles": 135426
+    },
+    "19_drive_reset": {
+      "time": 54649.99999999777,
+      "drawCalls": 1022,
+      "triangles": 137828
+    },
+    "20_after_exit_camera_restored": {
+      "time": 54699.999999997766,
+      "drawCalls": 1877,
+      "triangles": 159712
+    },
+    "21_photo_sources_open": {
+      "time": 54716.66666666443,
+      "drawCalls": 1877,
+      "triangles": 159712
+    },
+    "22_mobile_overview": {
+      "time": 3166.66666666666,
+      "drawCalls": 1915,
+      "triangles": 159264
+    },
+    "23_mobile_drive": {
+      "time": 3333.3333333333253,
+      "drawCalls": 864,
+      "triangles": 133794
+    }
+  },
+  "consoleErrors": [],
+  "url": "http://127.0.0.1:8766/legacy/gazprom_arena_diorama.html",
+  "browser": "msedge 155.0.4283.45",
+  "ok": true
+}

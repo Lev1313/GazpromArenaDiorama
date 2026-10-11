@@ -44,6 +44,7 @@ Improve architectural accuracy and geographic realism before detailing vehicles.
 Keep a progress log in PROGRESS.md.
 
 ## Technical notes (from audit 2026-10-11)
-- Source of truth: `gazprom_arena_diorama.html` (Three.js r164 + OrbitControls embedded as base64; runs from file:// or `py -m http.server`).
+- Source of truth: `legacy/gazprom_arena_diorama.html` (byte-identical copy of the original, never edit). Three.js r164 + OrbitControls embedded as base64; runs from file:// or `npm run serve:legacy`.
+- Visual/functional regression: `npm run baseline:verify [-- --url <page>]` compares against `baseline/screenshots/` (deterministic clock, SwiftShader; 27 checks, 23 shots). Re-baseline (`npm run baseline`) only on purpose, after an approved visual change.
 - Scene axes: north = -Z, east = +X. Arena center x = 41; parking lot x -28..12, z -40..40; ZSD axis west of the lot; Lakhta at (-62, -102), distance compressed.
 - Migration to Vite + modular Three.js: proposed in PROGRESS.md section 7, not yet approved. Transfer must be 1:1 (same three version, same coordinates) before any improvements.

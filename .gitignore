@@ -1,0 +1,5 @@
+node_modules/
+dist/
+baseline/_current/
+baseline/_file/
+*.diff.png

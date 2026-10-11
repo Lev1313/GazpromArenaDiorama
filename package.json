@@ -1,0 +1,16 @@
+{
+  "name": "gazprom-arena-diorama",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "serve:legacy": "node tools/serve.mjs",
+    "baseline": "node tools/baseline.mjs",
+    "baseline:verify": "node tools/baseline.mjs --verify"
+  },
+  "devDependencies": {
+    "pixelmatch": "^8.0.0",
+    "playwright-core": "^1.64.0",
+    "pngjs": "^7.0.0"
+  }
+}
