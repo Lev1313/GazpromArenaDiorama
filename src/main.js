@@ -5,8 +5,9 @@ import { createLighting } from './core/lighting.js';
 import { createMaterialSystem } from './materials/materials.js';
 import { createTerrain } from './world/terrain.js';
 import { createStadium } from './world/stadium.js';
+import { createZsd } from './world/zsd.js';
 
-// Stage 3.3: the stadium joins the original terrain, without a test cube.
+// Stage 3.4: original terrain, arena and ZSD; vehicles and other landmarks follow.
 const canvas = document.createElement('canvas');
 canvas.id = 'view';
 document.getElementById('app').appendChild(canvas);
@@ -19,6 +20,7 @@ createLighting(scene);
 const { mat } = createMaterialSystem();
 const { materials, arenaX } = createTerrain(scene, mat);
 createStadium(scene, mat, materials, arenaX);
+createZsd(scene, mat, materials);
 
 function frame() {
   requestAnimationFrame(frame);
