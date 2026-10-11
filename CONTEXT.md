@@ -62,3 +62,11 @@ Keep a progress log in PROGRESS.md.
 - `parked[5]` is the silver Golf VI (paint `0xbdc8d1`, position x=-22.4, z=16). Preserve this object as the future controllable car when reintroducing drive mode.
 - Future traffic and drifters should reuse the `car()` factory from `src/vehicles/car.js` and avoid batching dynamic car groups.
 - Implementation awaits local review in `review/stage4-parked-cars`.
+
+
+## Drift migration — stage 4.2
+- `src/vehicles/drift.js` owns the two drifting cars, a fixed 4,000-segment tire-mark buffer, 90 reusable smoke sprites, three pre-existing tire rings, and `driftPose(t, phase)`.
+- Call `createDriftSystem(scene, carFactory)` after static batching and parked-vehicle creation, then call `drift.update(dt, { people, driving, golfPosition })` from the animation loop. The default stage 4.2 loop passes `people` only; Golf integration will supply the other parameters later.
+- Keep the legacy 0.045 s tire updates, 0.075 s smoke emission, phase difference 1.1, and maximum frame dt 0.06 s. Expose `setSmokeEnabled()` to the later UI without inventing new behaviour.
+- The smoke CanvasTexture comes from `src/materials/textures.js`; Node tests inject a THREE.Texture to avoid needing a DOM canvas.
+- Review branch: `review/stage4-drift`. Await local unit tests and visual inspection before merging.
