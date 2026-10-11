@@ -79,3 +79,11 @@ Keep a progress log in PROGRESS.md.
 - For future Golf drive mode call `traffic.update(dt, {driving:driveState.active, golfPosition:golf.position})`; moving visitors yield at separation <4.6.
 - The preexisting drift module remains independent and continues to be updated after traffic. Traffic module exposes `parkedVisitorCount` for future stats UI.
 - Review branch `review/stage4-traffic` awaits local tests and visual approval before merging.
+
+
+## Golf VI control — stage 4.4
+- Silver Golf is `parked[5]` and is controlled by `src/vehicles/golfDrive.js`, which is a DOM-free controller; `src/ui/driveUi.js` owns keyboard/touch buttons and the temporary driving HUD.
+- Use the original parking `parkingOutline` from `createTerrain()`; collision checks must include the other parked cars, spectators, lamp posts, tables, drifting vehicles and active visitors. No traffic/car meshes are ever statically batched.
+- RAF order: `drive.updateDriving(dt)`, `traffic.update(dt,{driving,golfPosition})`, `drift.update(dt,{people,driving,golfPosition})`, then either `drive.updateDriveCamera(dt)` or `controls.update()`, then render. Keep max dt .06s.
+- Original drive camera views: chase, overhead, free; exit restores orbit camera/target and car starting position. Golf braking must reuse the drift module's smoke and skid resources.
+- The full original HUD, camera presets and day/night, speed-scale, pause toggles remain a distinct next stage. Branch `review/stage4-golf-drive` needs local tests and manual browser validation before merging.
