@@ -11,8 +11,9 @@ import { createSurroundings } from './world/surroundings.js';
 import { batchArchitecture } from './core/batching.js';
 import { createCarFactory } from './vehicles/car.js';
 import { createParkingMeet } from './world/parkingMeet.js';
+import { createDriftSystem } from './vehicles/drift.js';
 
-// Stage 4.1: original static environment plus 18 parked cars and 32 spectators.
+// Stage 4.2: original static scene, parked cars, spectators and animated drifters.
 const canvas = document.createElement('canvas');
 canvas.id = 'view';
 document.getElementById('app').appendChild(canvas);
@@ -41,8 +42,16 @@ const { parked, people } = createParkingMeet(scene, mat, materials, carFactory);
 scene.userData.parkedCars = parked.length;
 scene.userData.spectators = people.length;
 
-function frame() {
+// Dynamic drift objects are created only after static architecture batching.
+const drift = createDriftSystem(scene, carFactory);
+scene.userData.drifters = drift.drifters.length;
+
+let last = performance.now();
+function frame(now) {
   requestAnimationFrame(frame);
+  const dt = Math.max(0, Math.min((now - last) / 1000, .06));
+  last = now;
+  drift.update(dt, { people });
   controls.update();
   renderer.render(scene, camera);
 }
