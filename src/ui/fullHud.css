@@ -1,0 +1,90 @@
+/* Original HUD layout and palette, scoped to the modular version. */
+#full-hud {
+  position: fixed; z-index: 16; top: 18px; left: 18px;
+  width: min(320px, calc(100vw - 36px));
+  max-height: calc(100vh - 90px); overflow-y: auto;
+  padding: 18px 20px; color: #fff; font: 14px system-ui, sans-serif;
+  background: #111b2cdd; border: 1px solid #4a648477;
+  border-radius: 15px; backdrop-filter: blur(12px);
+  scrollbar-width: thin;
+}
+#full-hud h1 { font-size: 19px; line-height: 1.3; margin: 0 0 7px; }
+#full-hud .hud-description { color: #b9cde4; line-height: 1.5; margin: 0 0 14px; }
+#full-hud .hud-description small { display: block; margin-top: 2px; }
+#full-hud .hud-buttons { display: flex; flex-wrap: wrap; gap: 3px; }
+#full-hud button {
+  background: #28476a; color: white;
+  padding: 9px 12px; border: 1px solid #6587ad;
+  border-radius: 9px; cursor: pointer; margin: 3px 3px 0 0;
+  font: inherit; touch-action: manipulation;
+}
+#full-hud button:hover { background: #39628a; }
+#full-hud button:focus-visible { outline: 2px solid #65c9ff; outline-offset: 2px; }
+#full-hud #drive.primary {
+  display: block; width: 100%; margin: 0 0 8px;
+  background: #66caff; color: #102238;
+  border-color: #8cd8ff; font-weight: 750;
+}
+#full-hud #drive.primary:hover { background: #85d6ff; }
+#full-hud .hud-tempo {
+  display: flex; align-items: center; gap: 10px;
+  color: #b9cde4; margin-top: 13px;
+}
+#full-hud #speed { width: 130px; max-width: 75%; accent-color: #65c9ff; }
+#full-hud #stats { color: #b9cde4; margin-top: 10px; font-size: 12px; line-height: 1.45; }
+#full-hud #err { color: #ffbcac; font-size: 12px; }
+#full-hud .hud-description,
+#full-hud #stats { overflow-wrap: break-word; }
+
+/* Keep Golf controls accessible while hiding scenery presets on a drive. */
+#full-hud.driving {
+  width: min(245px, calc(100vw - 36px)); padding: 12px 14px;
+}
+#full-hud.driving h1 { font-size: 15px; }
+#full-hud.driving .hud-description,
+#full-hud.driving #stats,
+#full-hud.driving .hud-tempo { display: none; }
+#full-hud.driving .hud-buttons button:not(#pause):not(#day) { display: none; }
+
+/* Photo sources and the original orbit-controls hint. */
+#photoSources {
+  position: fixed; z-index: 12; right: 18px; bottom: 16px;
+  background: #122033e8; border: 1px solid #4a648477;
+  border-radius: 10px; max-width: min(300px, calc(100vw - 36px));
+  padding: 10px 14px; font: 12px system-ui, sans-serif; color: #bbd7e9;
+}
+#photoSources[hidden] { display: none; }
+#photoSources summary { cursor: pointer; }
+#photoSources a { display: block; color: #91d9ff; margin: 12px 0; line-height: 1.4; }
+#photoSources small { display: block; line-height: 1.5; }
+.full-hint {
+  position: fixed; z-index: 13; left: 18px; bottom: 16px;
+  background: #111b2c99; border-radius: 8px; padding: 9px 12px;
+  color: #bfcede; font: 12px system-ui, sans-serif;
+  pointer-events: none;
+}
+/* The previous drive-only toolbar is now empty: its controls moved to HUD. */
+#golf-ui .golf-toolbar { display: none; }
+@media (max-width: 650px) {
+  #full-hud { top: 10px; left: 10px; right: 10px;
+    width: auto; max-height: 50vh; padding: 12px 14px; }
+  #full-hud h1 { font-size: 16px; }
+  #full-hud .hud-description { font-size: 12px; margin-bottom: 8px; }
+  #full-hud button { padding: 7px 9px; font-size: 12px; }
+  #full-hud.driving { width: min(210px, calc(100vw - 20px)); }
+  #photoSources { bottom: 40px; right: 10px; max-width: 230px; }
+  .full-hint { left: 10px; bottom: 10px; font-size: 10px; }
+}
+/* Keep the drive instrument clear of the restored HUD. */
+#golf-ui #drivePanel {
+  top: auto; left: auto; right: 20px; bottom: 58px;
+}
+@media (max-width: 650px) {
+  #golf-ui #drivePanel {
+    top: auto; left: auto; right: 10px; bottom: 120px;
+    width: min(240px, calc(100vw - 20px)); padding: 12px;
+  }
+  #golf-ui .instrument #kmh { font-size: 34px; }
+  #golf-ui .keyHelp { display: none; }
+  .full-hint { display: none; }
+}
