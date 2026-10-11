@@ -277,3 +277,17 @@ dist/assets/index-2MTkIwOA.js  464.08 kB │ gzip: 115.74 kB
 
 ### Что дальше
 Этап 2: перенос ядра — renderer (настройки теней, тональная компрессия, exposure), камера с OrbitControls, свет (HemisphereLight + DirectionalLight), цикл анимации, resize, обработчик ошибок WebGL.
+
+
+## 11. Этап 3.1: материалы и примитивы (ветка review/stage3-materials-primitives)
+
+**Статус:** реализация записана в GitHub; локальная проверка пользователем ещё не выполнена, с master не объединено.
+
+- `src/materials/materials.js` — материал `mat(color, extra)`, точные значения roughness/metalness, ключ кэша и отключение общего кэша после будущего `batchArchitecture()`. Начальная палитра материалов перенесена из оригинала.
+- `src/materials/textures.js` — исходные процедурные текстуры асфальта (seed 1701) и дыма. Пока они не используются в сцене.
+- `src/utils/primitives.js` — `cube`, `cyl`, `line`, `polygon` с исходными сигнатурами и флагами теней. Вместо глобальной переменной scene передаётся родительская сцена; по желанию можно указать другую группу.
+- `src/utils/signs.js` — `surfaceSign` и `label` с исходными CanvasTexture и настройками.
+- `src/main.js` — тестовый куб теперь создаётся через извлечённые `mat` и `cube`. Географию не переносили.
+- `tests/core-primitives.test.mjs` и `npm run test:core` — модульные проверки материалов, кэша и геометрических хелперов.
+
+**Нужно выполнить локально перед принятием:** `npm.cmd run test:core`, `npm.cmd run build`, `npm.cmd run baseline:verify`, а также проверить тестовый куб и OrbitControls в браузере. Эталонные скриншоты не обновлять. Исходники в `legacy/` и оригинальном HTML не менять.
