@@ -12,8 +12,9 @@ import { batchArchitecture } from './core/batching.js';
 import { createCarFactory } from './vehicles/car.js';
 import { createParkingMeet } from './world/parkingMeet.js';
 import { createDriftSystem } from './vehicles/drift.js';
+import { createTrafficSystem } from './vehicles/traffic.js';
 
-// Stage 4.2: original static scene, parked cars, spectators and animated drifters.
+// Stage 4.3: static diorama, parked cars, drifting cars and original moving traffic.
 const canvas = document.createElement('canvas');
 canvas.id = 'view';
 document.getElementById('app').appendChild(canvas);
@@ -26,7 +27,7 @@ createLighting(scene);
 const { mat, stopSharingStaticMaterials } = createMaterialSystem();
 const { materials, arenaX, islandOutline } = createTerrain(scene, mat);
 const { steel } = createStadium(scene, mat, materials, arenaX);
-createZsd(scene, mat, materials);
+const highway = createZsd(scene, mat, materials);
 createLakhta(scene, mat, materials, steel);
 createSurroundings(scene, mat, materials, arenaX, islandOutline, steel);
 
@@ -38,9 +39,14 @@ scene.userData.staticBatchCount = staticBatchCount;
 
 // Following the original order: dynamic car paint after material cache is disabled.
 const carFactory = createCarFactory(scene, mat);
-const { parked, people } = createParkingMeet(scene, mat, materials, carFactory);
+const { parked, people, markings } = createParkingMeet(scene, mat, materials, carFactory);
 scene.userData.parkedCars = parked.length;
 scene.userData.spectators = people.length;
+
+// The original scene constructs highway/visitor traffic before drifters.
+const traffic = createTrafficSystem(scene, carFactory, highway, markings);
+scene.userData.highwayCars = traffic.highCars.length;
+scene.userData.visitors = traffic.visitors.length;
 
 // Dynamic drift objects are created only after static architecture batching.
 const drift = createDriftSystem(scene, carFactory);
@@ -51,6 +57,7 @@ function frame(now) {
   requestAnimationFrame(frame);
   const dt = Math.max(0, Math.min((now - last) / 1000, .06));
   last = now;
+  traffic.update(dt);
   drift.update(dt, { people });
   controls.update();
   renderer.render(scene, camera);
