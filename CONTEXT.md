@@ -87,3 +87,12 @@ Keep a progress log in PROGRESS.md.
 - RAF order: `drive.updateDriving(dt)`, `traffic.update(dt,{driving,golfPosition})`, `drift.update(dt,{people,driving,golfPosition})`, then either `drive.updateDriveCamera(dt)` or `controls.update()`, then render. Keep max dt .06s.
 - Original drive camera views: chase, overhead, free; exit restores orbit camera/target and car starting position. Golf braking must reuse the drift module's smoke and skid resources.
 - The full original HUD, camera presets and day/night, speed-scale, pause toggles remain a distinct next stage. Branch `review/stage4-golf-drive` needs local tests and manual browser validation before merging.
+
+
+## Stage 4.5 — complete HUD, old controls and smoke/camera integration
+- New `src/ui/hudController.js` handles pause/day/night/tempo/smoke/preset-camera state without DOM, reusing original scene/camera/light constants. `src/ui/fullHud.js` mounts the original scene-wide buttons, live stats and four photo-source links.
+- Full HUD **reparents the existing #drive button and #hint** from `installDriveUi()`; never create duplicates of either. The old driveUi retains the Golf event listeners, drive panel and touch pedals. On drive, scenery presets are hidden while Golf, pause and day buttons stay accessible.
+- The frame loop must freeze driving, traffic and drifting when paused; when running, update Golf with unscaled `dt`, traffic/drift with `dt * speedScale`. Always update camera/OrbitControls and render even on pause.
+- UI stats use `staticCount - Number(drive.state.active) + traffic.parkedVisitorCount`, along with the current spectator/drifter arrays. Refresh from state after Golf enters/exits and visitors park.
+- After local approval, plan a **separate Vite browser regression suite** in addition to `baseline:verify`, which exclusively checks the untouched legacy file. No visual improvements/geographic adjustments until the modular migration is accepted.
+- Review branch: `review/stage4-full-hud`, awaiting local unit tests, Vite build, and manual functional/visual validation before merging into master.
