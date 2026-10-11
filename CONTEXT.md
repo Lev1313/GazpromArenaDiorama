@@ -48,3 +48,9 @@ Keep a progress log in PROGRESS.md.
 - Visual/functional regression: `npm run baseline:verify [-- --url <page>]` compares against `baseline/screenshots/` (deterministic clock, SwiftShader; 27 checks, 23 shots). Re-baseline (`npm run baseline`) only on purpose, after an approved visual change.
 - Scene axes: north = -Z, east = +X. Arena center x = 41; parking lot x -28..12, z -40..40; ZSD axis west of the lot; Lakhta at (-62, -102), distance compressed.
 - Migration to Vite + modular Three.js: proposed in PROGRESS.md section 7, not yet approved. Transfer must be 1:1 (same three version, same coordinates) before any improvements.
+
+## Architecture milestone — static batching
+- After terrain, stadium, ZSD, Lakhta and surroundings have been created, call `batchArchitecture(scene)` exactly once, then `stopSharingStaticMaterials()`, BEFORE adding any moving cars or interactive objects.
+- Preserve the original grouping by shared material identity and shadow flags, and do not batch transparent signs, smoke, or dynamic vehicle meshes.
+- Optimization changes the scene graph structure; any future object references must be created after batching or explicitly excluded from it. The static grouping must be visually regression-tested against the preceding branch.
+- Stage 3.6 is under review in `review/stage3-static-batching`; do not treat it as merged or tested yet.
