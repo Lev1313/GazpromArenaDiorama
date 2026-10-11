@@ -9,8 +9,10 @@ import { createZsd } from './world/zsd.js';
 import { createLakhta } from './world/lakhta.js';
 import { createSurroundings } from './world/surroundings.js';
 import { batchArchitecture } from './core/batching.js';
+import { createCarFactory } from './vehicles/car.js';
+import { createParkingMeet } from './world/parkingMeet.js';
 
-// Stage 3.6: batch the original static environment before cars are added.
+// Stage 4.1: original static environment plus 18 parked cars and 32 spectators.
 const canvas = document.createElement('canvas');
 canvas.id = 'view';
 document.getElementById('app').appendChild(canvas);
@@ -32,6 +34,12 @@ createSurroundings(scene, mat, materials, arenaX, islandOutline, steel);
 const staticBatchCount = batchArchitecture(scene);
 stopSharingStaticMaterials();
 scene.userData.staticBatchCount = staticBatchCount;
+
+// Following the original order: dynamic car paint after material cache is disabled.
+const carFactory = createCarFactory(scene, mat);
+const { parked, people } = createParkingMeet(scene, mat, materials, carFactory);
+scene.userData.parkedCars = parked.length;
+scene.userData.spectators = people.length;
 
 function frame() {
   requestAnimationFrame(frame);
