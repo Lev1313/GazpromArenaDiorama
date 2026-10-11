@@ -54,3 +54,11 @@ Keep a progress log in PROGRESS.md.
 - Preserve the original grouping by shared material identity and shadow flags, and do not batch transparent signs, smoke, or dynamic vehicle meshes.
 - Optimization changes the scene graph structure; any future object references must be created after batching or explicitly excluded from it. The static grouping must be visually regression-tested against the preceding branch.
 - Stage 3.6 is under review in `review/stage3-static-batching`; do not treat it as merged or tested yet.
+
+
+## Vehicles migration — stage 4.1
+- Static architecture is batched BEFORE any vehicle groups are created. Car creation follows `stopSharingStaticMaterials()`; separate vehicle paint materials must not be shared accidentally.
+- The original parking layout contains 18 parked car groups and 32 spectator groups, with 28 painted parking-space lines and 14 short boundary bollards. No drifters or highway/visitor traffic are in stage 4.1.
+- `parked[5]` is the silver Golf VI (paint `0xbdc8d1`, position x=-22.4, z=16). Preserve this object as the future controllable car when reintroducing drive mode.
+- Future traffic and drifters should reuse the `car()` factory from `src/vehicles/car.js` and avoid batching dynamic car groups.
+- Implementation awaits local review in `review/stage4-parked-cars`.
