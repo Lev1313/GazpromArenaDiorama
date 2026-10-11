@@ -70,3 +70,12 @@ Keep a progress log in PROGRESS.md.
 - Keep the legacy 0.045 s tire updates, 0.075 s smoke emission, phase difference 1.1, and maximum frame dt 0.06 s. Expose `setSmokeEnabled()` to the later UI without inventing new behaviour.
 - The smoke CanvasTexture comes from `src/materials/textures.js`; Node tests inject a THREE.Texture to avoid needing a DOM canvas.
 - Review branch: `review/stage4-drift`. Await local unit tests and visual inspection before merging.
+
+
+## Traffic migration — stage 4.3
+- `src/vehicles/traffic.js` creates 14 moving ZSD vehicles plus 3 visitors, after static batching and before `createDriftSystem()`.
+- It needs `createZsd()`'s `highwayCurve/highwayPoint`, the common `createCarFactory()` and `createParkingMeet()`'s parking `markings` material. The objects stay dynamic and must never be merged with static architecture.
+- Preserve the legacy speed/direction maths for ZSD (`dt*.025`) and visitor arrival/parking/departure on CatmullRomCurve3 (`dt*3 / route.getLength()`), including starting delays 0/12/24 seconds and dwell times 22/28/34 seconds.
+- For future Golf drive mode call `traffic.update(dt, {driving:driveState.active, golfPosition:golf.position})`; moving visitors yield at separation <4.6.
+- The preexisting drift module remains independent and continues to be updated after traffic. Traffic module exposes `parkedVisitorCount` for future stats UI.
+- Review branch `review/stage4-traffic` awaits local tests and visual approval before merging.
