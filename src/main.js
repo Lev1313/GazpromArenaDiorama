@@ -2,8 +2,10 @@ import * as THREE from 'three';
 import { createRenderer, resizeViewport } from './core/renderer.js';
 import { createCamera } from './core/camera.js';
 import { createLighting } from './core/lighting.js';
+import { createMaterialSystem } from './materials/materials.js';
+import { createPrimitives } from './utils/primitives.js';
 
-// Stage 2: keep a simple visible marker until the actual geography is migrated.
+// Stage 3.1: the test object now uses the real legacy material/primitive helpers.
 const canvas = document.createElement('canvas');
 canvas.id = 'view';
 document.getElementById('app').appendChild(canvas);
@@ -13,15 +15,11 @@ const renderer = createRenderer(canvas);
 const { camera, controls } = createCamera(canvas);
 createLighting(scene);
 
-// Temporary test object at the original OrbitControls target.
-// It is deliberately large enough to be visible from the legacy camera.
-const geometry = new THREE.BoxGeometry(30, 30, 30);
-const material = new THREE.MeshStandardMaterial({ color: 0x00aa00 });
-const cube = new THREE.Mesh(geometry, material);
-cube.position.set(-4, 12, -25);
-cube.castShadow = true;
-cube.receiveShadow = true;
-scene.add(cube);
+const { mat } = createMaterialSystem();
+const { cube: makeCube } = createPrimitives(scene);
+
+// Temporary marker: next stages will replace it with the actual terrain.
+const cube = makeCube(30, 30, 30, mat(0x00aa00), -4, 12, -25);
 
 function frame() {
   requestAnimationFrame(frame);
