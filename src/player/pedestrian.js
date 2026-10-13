@@ -26,12 +26,14 @@ export function vehicleOutline(car) {
 }
 
 /** DOM-free controller. A circle sweeps in <= .025 m steps; no physics engine. */
-export function createPedestrian({ scene, camera, controls, parked, people = [],
+export function createPedestrian({ scene, camera, controls, parked, people = [], playerId = 'local-player',
   visitors = [], drifters = [], staticObstacles = [], parkingOutline, islandOutline,
   isWalkable = () => true, getGroundHeight = () => -.12 }) {
   const { model, animate } = createCharacterModel(scene);
   const keys = new Set();
-  const state = { active: false, speed: 0, yaw: 0, cameraYaw: 0, phase: 0, stride: 0, contact: false };
+  // Canonical physical player state; seating reuses this object and this model.
+  const state = { playerId, mode: 'onFoot', vehicleId: null, seatId: null,
+    active: false, speed: 0, yaw: 0, cameraYaw: 0, phase: 0, stride: 0, contact: false };
   let savedView, lastSafe;
 
   function collision(x, z) {
@@ -92,6 +94,7 @@ export function createPedestrian({ scene, camera, controls, parked, people = [],
     camera.lookAt(controls.target);
   }
   function setWalking(active) {
+    if (active && state.vehicleId !== null) return false;
     if (Boolean(active) === state.active) return state.active;
     clearKeys();
     if (active) {
@@ -115,6 +118,22 @@ export function createPedestrian({ scene, camera, controls, parked, people = [],
     clearKeys();
     const spawn = findSpawn();
     if (spawn) { model.position.copy(spawn); lastSafe.copy(spawn); state.speed = 0; updateCamera(1, true); }
+  }
+  function suspendWalking() {
+    clearKeys(); state.active = false; state.speed = state.stride = 0;
+  }
+  function setSeatedPose(position, yaw) {
+    model.position.copy(position); model.rotation.y = yaw; model.visible = true;
+    state.yaw = yaw; animate(0, 0, true);
+  }
+  function resumeAt(position, yaw = state.yaw) {
+    if (collision(position.x, position.z)) return false;
+    clearKeys(); model.position.set(position.x, getGroundHeight(position.x, position.z), position.z);
+    lastSafe = model.position.clone(); model.rotation.y = yaw;
+    state.yaw = yaw; state.cameraYaw = Math.atan2(Math.sin(yaw), -Math.cos(yaw));
+    state.speed = state.stride = state.phase = 0; state.contact = false;
+    state.active = model.visible = true; controls.enabled = false;
+    animate(0,0); updateCamera(1,true); return true;
   }
   function update(dt) {
     if (!state.active || dt <= 0 || !Number.isFinite(dt)) return;
@@ -157,5 +176,6 @@ export function createPedestrian({ scene, camera, controls, parked, people = [],
     animate(state.phase, state.stride);
   }
   return { state, model, keys, setWalking, setKey, clearKeys, update, updateCamera, resetPosition,
-    collision, findSpawn, rotateCamera: delta => { if (state.active) state.cameraYaw += delta; } };
+    collision, findSpawn, getGroundHeight, suspendWalking, setSeatedPose, resumeAt,
+    rotateCamera: delta => { if (state.active) state.cameraYaw += delta; } };
 }

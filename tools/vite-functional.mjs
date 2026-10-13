@@ -26,6 +26,13 @@ window.__readDiorama = () => {
       blocked: Boolean(pedestrian.collision(pedestrian.model.position.x,pedestrian.model.position.z)),
       legAngle: pedestrian.model.children[0].children[4].rotation.x },
     parked: parked.map(c=>({...pose(c),footprint:c.userData.footprint})),
+    player: seating.serialize(),
+    golfBlocking:seating.golfBlocksTraffic(),
+    seats: vehicleRegistry.vehicles.map(v=>({vehicleId:v.vehicleId,canDrive:v.canDrive,
+      seats:v.seats.map(s=>({seatId:s.seatId,role:s.role,occupiedBy:s.occupiedBy,
+        entry:vehicleRegistry.worldPosition(v,s).toArray(),
+        position:vehicleRegistry.worldPosition(v,s,'localPosition').toArray()}))})),
+    seatMessage:seating.getStatus().message,
     drive: drive.state, keys: [...drive.keys], status: drive.getStatus(),
     camera: { position: camera.position.toArray(), target: controls.target.toArray(),
       aspect: camera.aspect, enabled: controls.enabled },
@@ -48,7 +55,16 @@ window.__placePedestrian = (x,z) => {
   if(pedestrian.collision(x,z)) throw new Error('Unsafe browser fixture');
   pedestrian.clearKeys(); pedestrian.model.position.set(x,-.12,z);
   pedestrian.state.cameraYaw=0; pedestrian.updateCamera(1,true);
-};`;
+};
+window.__approachSeat = (id,seatId) => {
+  if(seating.isSeated()) throw new Error('Fixture requires on foot');
+  const point=vehicleRegistry.worldPosition(id,seatId);
+  if(!point || !pedestrian.resumeAt(point)) throw new Error('Unsafe door fixture');
+};
+const originalPedestrianCollision=pedestrian.collision;
+window.__blockSeatExit = value => { pedestrian.collision=value?()=>true:originalPedestrianCollision; };
+window.__occupySeat = (id,seatId,occupied) => occupied ? vehicleRegistry.claim(id,seatId,'fixture-player')
+  : vehicleRegistry.release(id,seatId,'fixture-player');`;
 
 function clock() {
   let time = 0, token = 0, gl;
@@ -385,6 +401,75 @@ async function pedestrianTests(page) {
   await click(page,'#walkExit');
 }
 
+async function seatingTests(page) {
+  const approach=async(id,seat)=>{await page.evaluate(([v,s])=>window.__approachSeat(v,s),[id,seat]);await step(page);};
+  const seatIn=(s,id,seat)=>s.seats.find(v=>v.vehicleId===id).seats.find(v=>v.seatId===seat);
+  await click(page,'#day');await click(page,'#walk');
+  let a=await snapshot(page);
+  check('18 distinct stable vehicle identities and 72 seat records',a.seats.length===18
+    && new Set(a.seats.map(v=>v.vehicleId)).size===18 && a.seats.every(v=>v.seats.length===4));
+  for(const [id,name] of [['parked-golf-red','golf'],['parked-lexus-rx','lexus'],['parked-mercedes-gl','mercedes'],['parked-00','procedural']]) {
+    await approach(id,'driver');
+    check('Door prompt selects '+name,await page.locator('#seatPrompt').isVisible()
+      && (await page.locator('#seatPrompt').textContent()).includes('E — сесть'));
+    if(name!=='procedural')await shot(page,'seating-'+name+'-door');
+    await key(page,'KeyE');a=await snapshot(page);
+    check('E occupies concrete '+name+' driver seat without starting Golf',a.player.vehicleId===id && a.player.seatId==='driver'
+      && a.player.mode==='driver' && !a.pedestrian.active && !a.drive.active
+      && seatIn(a,id,'driver').occupiedBy===a.player.playerId && distance(a.player.position,seatIn(a,id,'driver').position)<1e-6);
+    await page.keyboard.down('w');await step(page,30);await page.keyboard.up('w');let b=await snapshot(page);
+    check('Seated '+name+' ignores walking input and stays attached',same(a.player.position,b.player.position) && b.pedestrian.keys.length===0);
+    if(name!=='procedural')await shot(page,'seating-'+name+'-seated');
+    await key(page,'KeyC');check('Seated car camera changes '+name,distance(a.camera.position,(await snapshot(page)).camera.position)>1);
+    await key(page,'Escape');b=await snapshot(page);
+    check('Esc safely exits '+name+' and resumes walking once',b.player.mode==='onFoot' && b.player.vehicleId===null && b.pedestrian.active
+      && !b.pedestrian.blocked && seatIn(b,id,'driver').occupiedBy===null
+      && distance(b.player.position,seatIn(a,id,'driver').entry)<1.5);
+  }
+  const id='parked-lexus-rx';
+  await approach(id,'front-passenger');await key(page,'KeyE');a=await snapshot(page);
+  check('Right side selects front passenger',a.player.mode==='passenger' && a.player.seatId==='front-passenger');
+  await page.evaluate(()=>window.__blockSeatExit(true));const seatedPosition=a.player.position;
+  await click(page,'#seatExit');a=await snapshot(page);
+  check('Blocked exit refuses without teleport or releasing occupancy',a.player.vehicleId===id && same(a.player.position,seatedPosition)
+    && seatIn(a,id,'front-passenger').occupiedBy===a.player.playerId && a.seatMessage.includes('нет свободного места'));
+  await click(page,'#map');a=await snapshot(page);
+  check('Preset cannot bypass blocked physical exit',a.player.vehicleId===id && !a.camera.enabled);
+  await page.evaluate(()=>window.__blockSeatExit(false));await key(page,'KeyE');
+  await approach(id,'driver');await page.evaluate(([id])=>window.__occupySeat(id,'driver',true),[id]);await step(page);
+  await key(page,'KeyE');a=await snapshot(page);
+  check('Occupied nearest seat rejects E without switching sides',a.player.mode==='onFoot' && a.player.vehicleId===null
+    && seatIn(a,id,'driver').occupiedBy==='fixture-player' && a.seatMessage.includes('занято'));
+  await page.evaluate(([id])=>window.__occupySeat(id,'driver',false),[id]);
+  await approach('parked-golf-player','driver');await key(page,'KeyE');a=await snapshot(page);
+  check('Silver Golf driver seat starts existing drive controller',a.drive.active && a.player.vehicleId==='parked-golf-player'
+    && !a.pedestrian.active && a.player.mode==='driver');
+  await page.keyboard.down('w');await step(page,60);await page.keyboard.up('w');a=await snapshot(page);
+  check('Physical seated Golf drives and carries character',a.drive.speed>3 && distance(a.golf.position,a.home)>1
+    && distance(a.player.position,seatIn(a,'parked-golf-player','driver').position)<1e-6);
+  await shot(page,'seating-golf-driving');
+  const moved=a.golf.position;
+  await key(page,'KeyE');a=await snapshot(page);
+  check('Moving Golf refuses physical exit',a.drive.active && a.player.mode==='driver' && a.seatMessage.includes('Останови'));
+  await click(page,'#walk');a=await snapshot(page);
+  check('Walking button cannot bypass speed guard',a.drive.active && a.player.mode==='driver');
+  await page.keyboard.down('Space');await step(page,120);await page.keyboard.up('Space');a=await snapshot(page);
+  check('Handbrake still stops seated Golf',Math.abs(a.drive.speed)<.5);
+  const stopped=a.golf.position;
+  await click(page,'#driveExit');a=await snapshot(page);
+  check('Drive exit preserves stopped Golf pose and resumes on foot',!a.drive.active && a.pedestrian.active && !a.pedestrian.blocked
+    && a.player.mode==='onFoot' && distance(stopped,a.golf.position)<1e-7 && distance(a.golf.position,a.home)>1 && a.golfBlocking);
+  await shot(page,'seating-golf-exit');
+  await approach('parked-golf-player','front-passenger');await key(page,'KeyE');a=await snapshot(page);
+  check('Golf passenger seat does not give driving input',!a.drive.active && a.player.mode==='passenger');
+  await click(page,'#day');check('Night works while seated',(await snapshot(page)).lighting.sun===.65);
+  await click(page,'#day');await click(page,'#meet');a=await snapshot(page);
+  check('Camera preset safely releases passenger seat and preserves parked Golf',!a.drive.active && a.player.vehicleId===null
+    && a.camera.enabled && distance(stopped,a.golf.position)<1e-7);
+  await click(page,'#drive');await key(page,'KeyR');await key(page,'Escape');a=await snapshot(page);
+  check('Legacy Golf button and R still reset home',!a.drive.active && distance(a.golf.position,a.home)<1e-7 && !a.golfBlocking);
+}
+
 let server,browser;
 try {
   await mkdir(out,{recursive:true});
@@ -396,8 +481,9 @@ try {
   browser=await chromium.launch({channel:'msedge',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--force-color-profile=srgb']});
   report.browser=browser.version();
   const url='http://127.0.0.1:'+server.address().port+'/';
-  const scenarios=[['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
-  for(const [name,test,mobile] of process.argv.includes('--pedestrian') ? scenarios.filter(s=>s[0]==='pedestrian') : scenarios) {
+  const scenarios=[['seating',seatingTests],['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
+  const selected=process.argv.includes('--seating')?'seating':process.argv.includes('--pedestrian')?'pedestrian':null;
+  for(const [name,test,mobile] of selected ? scenarios.filter(s=>s[0]===selected) : scenarios) {
     console.log('\nScenario: '+name);
     const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1400,height:850},deviceScaleFactor:1,isMobile:Boolean(mobile),hasTouch:Boolean(mobile)});
     const page=await context.newPage();

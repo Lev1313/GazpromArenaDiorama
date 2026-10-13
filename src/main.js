@@ -25,6 +25,9 @@ import { createPedestrian } from './player/pedestrian.js';
 import { createControlModes } from './player/controlModes.js';
 import { installPedestrianUi } from './ui/pedestrianUi.js';
 import { captureGroundSurface } from './player/groundSurface.js';
+import { createVehicleRegistry } from './vehicles/vehicleSeats.js';
+import { createVehicleInteraction } from './player/vehicleInteraction.js';
+import { installVehicleInteractionUi } from './ui/vehicleInteractionUi.js';
 
 // Stage 4.5: restore the original HUD on top of the complete modular scene.
 const canvas = document.createElement('canvas');
@@ -55,6 +58,7 @@ scene.userData.staticBatchCount = staticBatchCount;
 // Following the original order: dynamic car paint after material cache is disabled.
 const carFactory = createCarFactory(scene, mat);
 const { parked, people, markings, golf, golfLabel, staticCount } = createParkingMeet(scene, mat, materials, carFactory);
+const vehicleRegistry = createVehicleRegistry(parked);
 await replaceWithParkedGolf(parked[2]).catch(error => console.error('Unable to load parked Golf model', error));
 replaceWithParkedLexus(parked[17]).then(() => {
   canvas.dataset.lexusModel = 'loaded';
@@ -96,6 +100,7 @@ const pedestrian = createPedestrian({
   getGroundHeight: pedestrianGround,
 });
 const modes = createControlModes(drive, pedestrian);
+const seating = createVehicleInteraction({registry:vehicleRegistry,pedestrian,drive,modes,camera,controls});
 const root = document.getElementById('app');
 const driveUi = installDriveUi(root, drive);
 const updateHeadlights = configureNightLighting(scene, { arenaX, headlightCars: [
@@ -110,6 +115,7 @@ const hud = createHudController({
 });
 const fullHud = installFullHud(root, hud, driveUi, drive);
 const pedestrianUi = installPedestrianUi(root, pedestrian, modes, hud, canvas);
+const seatingUi = installVehicleInteractionUi(root, seating, drive, hud);
 
 let last = performance.now();
 function frame(now) {
@@ -124,15 +130,20 @@ function frame(now) {
   if (hud.state.running) {
     drive.updateDriving(dt);
     const simDt = dt * hud.state.speedScale;
-    traffic.update(simDt, { driving: drive.state.active, golfPosition: golf.position });
+    // A physically parked Golf remains an obstacle after its driver gets out.
+    const golfBlocking = seating.golfBlocksTraffic();
+    traffic.update(simDt, { driving: golfBlocking, golfPosition: golf.position });
     drift.update(simDt, {
-      people, driving: drive.state.active, golfPosition: golf.position,
+      people, driving: golfBlocking, golfPosition: golf.position,
     });
     pedestrian.update(walkDt);
   }
   updateHeadlights();
+  seating.update(hud.state.running ? walkDt : 0);
   if (pedestrian.state.active) {
     pedestrian.updateCamera(walkDt);
+  } else if (seating.isSeated() && !drive.state.active) {
+    seating.updateCamera(walkDt);
   } else if (drive.state.active && drive.state.view !== 2) {
     drive.updateDriveCamera(dt);
   } else {
@@ -141,6 +152,7 @@ function frame(now) {
   driveUi.render();
   fullHud.render();
   pedestrianUi.render();
+  seatingUi.render();
   renderer.render(scene, camera);
 }
 requestAnimationFrame(frame);
