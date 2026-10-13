@@ -29,7 +29,7 @@ test('stadium group and facade sign match the legacy placement', () => {
   assert.equal(arenaX, 41);
   assert.deepEqual(arena.stadium.position.toArray(), [41, 0, 0]);
   assert.ok(scene.children.includes(arena.stadium));
-  assert.equal(arena.stadium.children.length, 300);
+  assert.equal(arena.retractableRoof.leaves.length, 2);
   assert.deepEqual(signArgs, ['ГАЗПРОМ АРЕНА', 0xe9faff, 0x244558, 13, 1.1]);
   assert.ok(scene.children.includes(arena.arenaSign));
   assert.deepEqual(arena.arenaSign.position.toArray(), [arenaX - 24.3, 10.2, 0]);
@@ -41,11 +41,19 @@ test('roof geometry and glazing retain the original dimensions', () => {
   assert.equal(arena.roof.geometry.type, 'BufferGeometry');
   assert.equal(arena.roof.geometry.getAttribute('position').count, 6 * 97);
   assert.equal(arena.roof.material.side, THREE.DoubleSide);
-  const dome = arena.stadium.children.find(
-    (mesh) => mesh.geometry.getAttribute('position').count === 11 * 65,
-  );
-  assert.ok(dome, 'double retractable roof surface');
-  assert.equal(dome.material.side, THREE.DoubleSide);
+  const leaves = arena.retractableRoof.leaves;
+  assert.equal(leaves.length, 2);
+  for (const leaf of leaves) {
+    assert.equal(leaf.material.side, THREE.DoubleSide);
+    assert.ok(Array.from(leaf.geometry.attributes.position.array).every(Number.isFinite));
+    leaf.geometry.computeBoundingBox();
+    const bounds = leaf.geometry.boundingBox;
+    assert.ok(Math.abs(bounds.min.z + 15) < 1e-5 && Math.abs(bounds.max.z - 15) < 1e-5);
+    assert.ok(Math.abs(bounds.min.y - 13.52) < 1e-5 && Math.abs(bounds.max.y - 16.32) < 1e-5);
+  }
+  assert.ok(Math.abs(leaves[0].geometry.boundingBox.min.x) < 1e-5);
+  assert.ok(Math.abs(leaves[1].geometry.boundingBox.max.x) < 1e-5);
+  assert.equal(leaves.reduce((n, leaf) => n + leaf.geometry.index.count, 0), 10 * 64 * 6);
   assert.equal(arena.steel.color.getHex(), 0xc5cbc9);
   assert.equal(arena.facade.color.getHex(), 0x345063);
 });

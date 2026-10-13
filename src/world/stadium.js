@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import { createPrimitives } from '../utils/primitives.js';
 import { surfaceSign } from '../utils/signs.js';
+import { createClosedArenaRoof } from './arenaRoof.js';
 
 /**
- * The original low-poly Gazprom Arena, copied from the legacy HTML.
- * Geometry, loop counts, colors, dimensions, placements and material calls
- * are intentionally unchanged. Only legacy globals are injected.
+ * The low-poly Gazprom Arena, based on the migrated legacy architecture.
+ * Stage 6.1 refines the closed roof leaves; the foundation, fixed roof,
+ * facade, masts and site placement retain the accepted dimensions.
  *
  * Note: stadium meshes are children of the translated stadium group;
  * structural stays, roof seams, galleries and signs are added to the scene
@@ -55,14 +56,8 @@ const roof=arenaSurface(roofVerts,roofIndices,mat(0xbac2c4,{roughness:.6,metalne
 const seamMat=mat(0x7e8d94,{roughness:.7});
 for(let i=0;i<32;i++){const a=i/32*Math.PI*2;for(let j=0;j<5;j++){const p=roofPoint(a,j/5),q=roofPoint(a,(j+1)/5);line([arenaX+p.x,p.y+.065,p.z],[arenaX+q.x,q.y+.065,q.z],seamMat,.026);}}
 for(const v of [.4,.8,1])for(let i=0;i<96;i++){const p=roofPoint(i/96*Math.PI*2,v),q=roofPoint((i+1)/96*Math.PI*2,v);line([arenaX+p.x,p.y+.065,p.z],[arenaX+q.x,q.y+.065,q.z],v===1?steel:seamMat,v===1?.13:.026);}
-// Closed double retractable roof: domed rectangular capsule with a central seam.
-const domeVerts=[],domeIndices=[],domeLayers=10,domeSegments=64;
-function domePoint(a,u){const edge=roofInner(a);return new THREE.Vector3(edge[0]*u,13.52+2.8*(1-u*u),edge[1]*u);}
-for(let j=0;j<=domeLayers;j++)for(let i=0;i<=domeSegments;i++)domeVerts.push(...domePoint(i/domeSegments*Math.PI*2,j/domeLayers).toArray());
-for(let j=0;j<domeLayers;j++)for(let i=0;i<domeSegments;i++){const k=j*(domeSegments+1)+i;domeIndices.push(k,k+1,k+domeSegments+1,k+1,k+domeSegments+2,k+domeSegments+1);}
-arenaSurface(domeVerts,domeIndices,mat(0xe2e7e4,{roughness:.4,metalness:.12,side:THREE.DoubleSide}));
-for(let i=0;i<28;i++){const z=-15+i*30/28,z2=-15+(i+1)*30/28;line([arenaX,13.56+2.8*(1-(z/15)**2),z],[arenaX,13.56+2.8*(1-(z2/15)**2),z2],seamMat,.05);}
-for(let k=-8;k<=8;k+=2){const x=k,limit=15*Math.pow(1-Math.pow(Math.abs(x)/10.2,3.2258),1/3.2258);for(let j=0;j<12;j++){const z=-limit+j*limit*2/12,z2=-limit+(j+1)*limit*2/12;const domeY=z=>13.57+2.8*(1-Math.pow(Math.pow(Math.abs(x)/10.2,3.2258)+Math.pow(Math.abs(z)/15,3.2258),2/3.2258));line([arenaX+x,domeY(z),z],[arenaX+x,domeY(z2),z2],mat(0xa7b7bc),.023);}}
+// Two closed leaves with a reference-informed frame grid, at the legacy footprint.
+const retractableRoof = createClosedArenaRoof(stadium, mat);
 for(const y of [11.08,11.3]){const o=arenaMesh(new THREE.TorusGeometry(26.55,.11,5,96),y>11.1?cyan:steel,0,y);o.scale.y=27/26.55;o.rotation.x=Math.PI/2;}
 // Eight masts lean inward, with stays ending on the fixed roof.
 for(let i=0;i<8;i++){const a=i*Math.PI/4+Math.PI/8,base=[arenaX+23.5*Math.cos(a),5.1,23.5*Math.sin(a)],top=[arenaX+17.7*Math.cos(a),23.0,17.7*Math.sin(a)];line(base,top,steel,.20);for(const da of [-.22,.22]){const p=roofPoint(a+da,.83);line(top,[arenaX+p.x,p.y,p.z],steel,.045);}cyl(.095,.095,.18,mat(0xff4444,{emissive:0xff1200,emissiveIntensity:.6}),top[0],top[1]+.1,top[2],6);}
@@ -79,6 +74,7 @@ const arenaSign=surfaceSign('ГАЗПРОМ АРЕНА',0xe9faff,0x244558,13,1.1
     stadium,
     arenaSign,
     roof,
+    retractableRoof,
     steel,
     shellMat,
     facade,
