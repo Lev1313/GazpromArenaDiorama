@@ -112,3 +112,11 @@ Keep a progress log in PROGRESS.md.
 - Candidate gallery: `vite-baseline/_current/review.html`; JSON report and PNGs in the same ignored directory. Mobile Golf HUD partially covers the car; retain current layout pending user review.
 - Regenerate the gallery with `node tools/vite-review.mjs` (UTF-8 source/output). Do not pipe Cyrillic JavaScript through Windows PowerShell's default native-process encoding: it replaced the original gallery text with question marks. The repaired gallery was checked in Edge, including all 15 image URLs.
 - Visual approval received on 2026-10-13; references created and verified. User authorized commit/push of the review branch followed by stage 5.2. Fetch revealed existing `origin/review/stage5-performance` at `5d6300f` with `tools/perf-compare.mjs`; inspect/reuse it, preserving the accepted 5.1 work and master.
+
+## Stage 5.2 measurements — 2026-10-13
+- Stage 5.1 was pushed as `a0a8215` to `review/stage5-vite-visual-baseline`. Work continued on existing `review/stage5-performance`, merging accepted 5.1 via `e61f3ad`. Master remains unchanged.
+- `npm run perf:compare` builds production assets and compares them to legacy using actual Edge/SwiftShader. Both simulations first advance to t=3s and pause; measurements then use native clocks/RAF, not synthetic timing.
+- Three alternating repetitions, six camera presets, 10 warmup + 30 measured frames per view/run: 1,080 measured frames. Draw calls and submitted triangles match exactly for all views; counts include shadows.
+- Vite callback median was 0.35–1.40ms higher in this experiment. Treat as a profiling lead, not a proven root cause. No optimization or application changes were made.
+- This establishes the static software-rendering comparison only; it does not measure gaming GPU FPS, active driving/simulation, load time or memory growth. Stage 5.3 functional coverage remains separate.
+- Preserved results: `performance/reports/2026-10-13-swiftshader/RESULTS.md`, `report.md`, `report.json` (raw frames, environment and source hashes). Method: `performance/README.md`. Build and all 51 core tests passed.

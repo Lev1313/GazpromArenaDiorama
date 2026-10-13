@@ -4,3 +4,4 @@ baseline/_current/
 baseline/_file/
 *.diff.png
 vite-baseline/_current/
+performance/_current/
