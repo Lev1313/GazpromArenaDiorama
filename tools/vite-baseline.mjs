@@ -283,6 +283,10 @@ async function capture() {
     }
     results.ok &&= allEqual;
   }
+  // Record pixel comparison outcome too; failed verifications must not
+  // leave an apparently passing candidate report behind.
+  await writeFile(join(currentDir, 'report.json'),
+    JSON.stringify(results, null, 2) + '\n');
   console.log('\n' + results.checks.filter(x => x.ok).length
     + '/' + results.checks.length + ' checks passed; '
     + results.shots.length + ' Vite screenshots -> ' + currentDir);
