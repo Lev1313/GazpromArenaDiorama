@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "head": "0f4b9031407dc95e317475054a59cd4a46a17fde",
+  "browser": "msedge 155.0.4283.45",
+  "platform": "win32",
+  "shots": [
+    "01_overview_night",
+    "02_preset_meet",
+    "03_preset_arena",
+    "04_preset_zsd",
+    "05_preset_top",
+    "06_preset_drift",
+    "07_reset_camera",
+    "08_overview_day",
+    "09_arena_day",
+    "10_drift_smoke_off",
+    "11_drive_chase",
+    "12_drive_top",
+    "13_photo_sources",
+    "14_mobile_overview",
+    "15_mobile_drive"
+  ],
+  "checks": [
+    {
+      "label": "Vite initializes new scene and full HUD",
+      "ok": true
+    },
+    {
+      "label": "Exactly one Golf button",
+      "ok": true
+    },
+    {
+      "label": "Initial car and spectator statistics",
+      "ok": true
+    },
+    {
+      "label": "Four links to original photo sources",
+      "ok": true
+    },
+    {
+      "label": "Pause works",
+      "ok": true
+    },
+    {
+      "label": "Day mode works",
+      "ok": true
+    },
+    {
+      "label": "Smoke toggle works",
+      "ok": true
+    },
+    {
+      "label": "Golf HUD shown",
+      "ok": true
+    },
+    {
+      "label": "Golf top view works",
+      "ok": true
+    },
+    {
+      "label": "Exit Golf restores scene HUD and photo sources",
+      "ok": true
+    },
+    {
+      "label": "Mobile pedals visible",
+      "ok": true
+    },
+    {
+      "label": "No console/page errors",
+      "ok": true
+    }
+  ],
+  "consoleErrors": [],
+  "thresholdPercent": 0.1,
+  "approved": true
+}

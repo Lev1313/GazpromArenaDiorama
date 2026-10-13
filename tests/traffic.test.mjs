@@ -5,6 +5,10 @@ import { createMaterialSystem, createBaseMaterials } from '../src/materials/mate
 import { createCarFactory } from '../src/vehicles/car.js';
 import { createTrafficSystem } from '../src/vehicles/traffic.js';
 import { createZsd } from '../src/world/zsd.js';
+import { createParkingMeet } from '../src/world/parkingMeet.js';
+import { driveArea, parkingLights } from '../src/world/siteLayout.js';
+import { parkingOutline } from '../src/world/terrain.js';
+import { carOverlap, circleOverlap } from '../src/vehicles/golfDrive.js';
 
 function makeSetup(realZsd = false) {
   const scene = new THREE.Scene();
@@ -34,7 +38,7 @@ function makeSetup(realZsd = false) {
   return { scene, traffic, highway, markings, staticObjects };
 }
 
-test('14 ZSD cars and 3 visitor cars use their original initial states', () => {
+test('14 ZSD cars keep original states and 3 guests start beyond the east edge', () => {
   const { scene, traffic, markings, staticObjects } = makeSetup();
   assert.equal(traffic.highCars.length, 14);
   assert.equal(traffic.visitors.length, 3);
@@ -54,8 +58,8 @@ test('14 ZSD cars and 3 visitor cars use their original initial states', () => {
     assert.equal(c.delay, i * 12);
     assert.equal(c.parkTime, 22 + i * 6);
     assert.equal(c.o.visible, i === 0);
-    assert.deepEqual(c.arrive.points[0].toArray(), [-10, 0, -48]);
-    assert.deepEqual(c.arrive.points[3].toArray(), [-17 + 9 * i, 0, -32]);
+    assert.deepEqual(c.arrive.points[0].toArray(), [95, 0, 30.5]);
+    assert.deepEqual(c.arrive.points.at(-1).toArray(), [-17 + 9 * i, 0, -35]);
   }
 
   const lines = scene.children.filter(o => o.isMesh &&
@@ -86,7 +90,7 @@ test('ZSD cars move at original .025/s pace in both directions and maintain lane
 test('guest arrives, parks for the original dwell time, leaves, then waits to return', () => {
   const { traffic } = makeSetup();
   const guest = traffic.visitors[0];
-  for (let i = 0; i < 200 && guest.state !== 'park'; i++) traffic.update(.25);
+  for (let i = 0; i < 400 && guest.state !== 'park'; i++) traffic.update(.25);
   assert.equal(guest.state, 'park');
   assert.equal(traffic.parkedVisitorCount >= 1, true);
   assert.equal(guest.t, 1);
@@ -105,10 +109,12 @@ test('guest arrives, parks for the original dwell time, leaves, then waits to re
     assert.equal(guest.state, 'park');
   }
   traffic.update(.3);
+  assert.equal(guest.state, 'reverse');
+  for (let i = 0; i < 80 && guest.state === 'reverse'; i++) traffic.update(.25);
   assert.equal(guest.state, 'leave');
   assert.equal(guest.t, 0);
 
-  for (let i = 0; i < 200 && guest.state === 'leave'; i++) traffic.update(.25);
+  for (let i = 0; i < 400 && guest.state === 'leave'; i++) traffic.update(.25);
   assert.equal(guest.state, 'arrive');
   assert.equal(guest.delay, 14);
   assert.equal(guest.t, 0);
@@ -149,4 +155,46 @@ test('visitor/road traffic integrates with the existing ZSD geometry without new
   assert.equal(scene.children.length, count);
   assert.equal(traffic.highCars.length, 14);
   assert.equal(traffic.visitors.length, 3);
+});
+
+test('complete guest routes keep the car footprint on asphalt and clear parked cars, people and lamps', () => {
+  const { traffic } = makeSetup();
+  const scene = new THREE.Scene(), { mat } = createMaterialSystem();
+  const { parked, people } = createParkingMeet(scene, mat, createBaseMaterials(mat), createCarFactory(scene, mat), {
+    makeLabel() { return new THREE.Sprite(); },
+  });
+  const area = driveArea(parkingOutline);
+  for (const guest of traffic.visitors) for (const name of ['arrive','reverse','leave']) {
+    const curve = guest[name];
+    for (let i=0;i<=2000;i++) {
+      const p=curve.getPointAt(i/2000), d=curve.getTangentAt(i/2000);
+      const yaw=-Math.atan2(d.z,d.x), at=`${name} ${i}: ${p.x},${p.z}`;
+      for (const a of [-1.96,1.96]) for (const b of [-1.04,1.04]) {
+        const x=p.x+a*d.x-b*d.z, z=p.z+a*d.z+b*d.x;
+        assert.ok(x>89 || area(x,z), 'Off asphalt '+at);
+      }
+      assert.ok(!parked.some(o=>carOverlap(p,yaw,o)), 'Parked car '+at);
+      assert.ok(!people.some(o=>circleOverlap(p,yaw,o.position.x,o.position.z,.4)), 'Spectator '+at);
+      assert.ok(!parkingLights.some(([x,z])=>circleOverlap(p,yaw,x,z,.35)), 'Lamp '+at);
+    }
+    if (name==='reverse') {
+      assert.ok(curve.getPointAt(1).distanceTo(guest.leave.getPointAt(0))<1e-8);
+      assert.ok(curve.getTangentAt(1).dot(guest.leave.getTangentAt(0))<-.999);
+    }
+  }
+});
+
+test('all guests complete repeated visits without collisions or visible teleports', () => {
+  const { traffic } = makeSetup(), completed=[0,0,0];
+  for (let frame=0;frame<60*600;frame++) {
+    const before=traffic.visitors.map(c=>({p:c.o.position.clone(),visible:c.o.visible,state:c.state}));
+    traffic.update(1/60);
+    traffic.visitors.forEach((c,i)=>{
+      if (before[i].state==='leave' && c.state==='arrive') completed[i]++;
+      if (before[i].visible && c.o.visible) assert.ok(before[i].p.distanceTo(c.o.position)<.07, 'Visible teleport');
+      if(c.o.visible) for(const other of traffic.visitors.slice(i+1)) if(other.o.visible)
+        assert.ok(!carOverlap(c.o.position,c.o.rotation.y,other.o), 'Visitors overlap');
+    });
+  }
+  assert.ok(completed.every(n=>n>=3), `Visitors stuck: completed ${completed}`);
 });

@@ -1,12 +1,85 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
-import { parkingOutline } from '../src/world/terrain.js';
+import { parkingOutline, islandOutline } from '../src/world/terrain.js';
+import { driveArea, freeDriveArea, groundObstacles, arenaX, accessOutlines, accessWidth, eastArrival } from '../src/world/siteLayout.js';
+import { createMaterialSystem, createBaseMaterials } from '../src/materials/materials.js';
+import { createCarFactory } from '../src/vehicles/car.js';
+import { createParkingMeet } from '../src/world/parkingMeet.js';
+import { createPrimitives } from '../src/utils/primitives.js';
+
+test('three accesses have equal constant width and mirror symmetry', () => {
+  assert.equal(accessWidth, 6);
+  for (const polygon of accessOutlines) {
+    assert.equal(Math.max(...polygon.map(p => p[1])) - Math.min(...polygon.map(p => p[1])), accessWidth);
+    assert.equal(polygon[0][1], polygon[1][1]);
+    assert.equal(polygon[2][1], polygon[3][1]);
+  }
+  const sorted = p => p.map(([x,z]) => `${x},${z}`).sort();
+  assert.deepEqual(sorted(accessOutlines[0].map(([x,z]) => [x,-z])), sorted(accessOutlines[2]));
+  assert.deepEqual(sorted(accessOutlines[1].map(([x,z]) => [x,-z])), sorted(accessOutlines[1]));
+});
+
+test('east approach connects the future arrival point to the ring within the scene boundary', () => {
+  const { controller: drive, golf } = setup({ isDriveable: driveArea(parkingOutline) });
+  for (const z of [30.5, 33.5]) for (let x = 50; x <= 86; x += .25) {
+    assert.equal(drive.blocked(new THREE.Vector3(x, 0, z), Math.PI), false, `East lane ${x},${z}`);
+  }
+  assert.equal(drive.blocked(new THREE.Vector3(88, 0, 32), 0), true, 'Car cannot cross the board edge');
+  assert.equal(drive.blocked(new THREE.Vector3(86, 0, 38), 0), true, 'No driving over the roadside');
+  drive.setDriving(true);
+  golf.position.set(eastArrival.stagingX, 0, eastArrival.z);
+  golf.rotation.y = Math.PI;
+  drive.setKey('KeyW', true);
+  for (let i = 0; i < 260; i++) drive.updateDriving(1 / 60);
+  assert.ok(golf.position.x < 52, 'Controller reaches the ring from the eastern staging point');
+  assert.equal(drive.state.contact, 0);
+});
+
+test('new middle and south accesses clear actual parked cars and spectators', () => {
+  const scene = new THREE.Scene();
+  const { mat } = createMaterialSystem();
+  const meet = createParkingMeet(scene, mat, createBaseMaterials(mat), createCarFactory(scene, mat), {
+    makeLabel: () => new THREE.Sprite(new THREE.SpriteMaterial()),
+  });
+  const { controller: drive } = setup({ isDriveable: driveArea(parkingOutline), parked: meet.parked, people: meet.people });
+  const clear = (x, z, yaw) => assert.equal(drive.blocked(new THREE.Vector3(x, 0, z), yaw), false, `Blocked ${x}, ${z}`);
+  for (let x = 0; x <= 16.5; x += .25) clear(x, 0, 0);
+  for (let i = 0; i <= 90; i++) {
+    const a = (90 - i) * Math.PI / 180;
+    clear(16.5 + 3 * Math.cos(a), -3 + 3 * Math.sin(a), Math.PI / 2 - a);
+  }
+  for (let x = 6; x <= 50; x += .25) {
+    clear(x, 31, 0);
+  }
+});
+
+test('Golf footprint can cross the access road and complete a ring lap without entering the podium', () => {
+  const { controller: drive, golf } = setup({ isDriveable: driveArea(parkingOutline) });
+  for (let x = 5; x <= arenaX; x += .25) {
+    assert.equal(drive.blocked(new THREE.Vector3(x, 0, -30.5), 0), false, `Access at x=${x}`);
+  }
+  for (const radius of [30.5, 33.5]) for (let i = 0; i < 360; i++) {
+    const a = i * Math.PI / 180;
+    const pos = new THREE.Vector3(arenaX + radius * Math.cos(a), 0, radius * Math.sin(a));
+    assert.equal(drive.blocked(pos, -a - Math.PI / 2), false, `Ring at ${i} degrees`);
+  }
+  assert.equal(drive.blocked(new THREE.Vector3(arenaX, 0, 0), 0), true);
+  assert.equal(drive.blocked(new THREE.Vector3(13, 0, 12), 0), true, 'No shortcut across the grass');
+  assert.equal(drive.blocked(new THREE.Vector3(arenaX + 37, 0, 0), 0), true);
+  drive.setDriving(true);
+  golf.position.set(5, 0, -30.5);
+  golf.rotation.y = 0;
+  drive.setKey('KeyW', true);
+  for (let i = 0; i < 160; i++) drive.updateDriving(1 / 60);
+  assert.ok(golf.position.x > 20, 'Actual controller crosses the former parking boundary');
+  assert.equal(drive.state.contact, 0);
+});
 import {
   createGolfDrive, pointInLot, carOverlap, circleOverlap, viewNames,
 } from '../src/vehicles/golfDrive.js';
 
-function setup() {
+function setup(options = {}) {
   const golf = new THREE.Group();
   golf.position.set(-22.4, 0, 16);
   golf.userData.frontWheels = [new THREE.Group(), new THREE.Group()];
@@ -37,12 +110,60 @@ function setup() {
   const controller = createGolfDrive({
     golf, golfLabel, parked, people, visitors, drifters, drift,
     camera, controls, lotOutline: parkingOutline,
+    ...options,
   });
   return {
     controller, golf, golfLabel, camera, controls, parked, people,
     visitors, drifters, drift, effects,
   };
 }
+
+test('free driving crosses grass while keeping the full car on land and outside the stadium', () => {
+  const paved=driveArea(parkingOutline);
+  const {controller:drive,golf}=setup({isDriveable:freeDriveArea(islandOutline),getGroundHeight:(x,z)=>paved(x,z)?0:-.33});
+  assert.equal(drive.blocked(new THREE.Vector3(30,0,32),0),false,'Grass inside the ring-road bend');
+  assert.equal(drive.blocked(new THREE.Vector3(30,0,39),0),false,'Grass outside the road');
+  assert.equal(drive.blocked(new THREE.Vector3(89,0,32),0),true,'East edge');
+  assert.equal(drive.blocked(new THREE.Vector3(-60,0,0),0),true,'Water');
+  assert.equal(drive.blocked(new THREE.Vector3(50,0,0),0),true,'Stadium');
+  drive.setDriving(true);golf.position.set(30,0,30);golf.rotation.y=-Math.PI/2;
+  drive.setKey('KeyW',true);
+  for(let i=0;i<80;i++)drive.updateDriving(1/60);
+  assert.ok(golf.position.z>35,'Actual controller leaves asphalt onto grass');
+  assert.ok(golf.position.y<-.3,'Car follows the lower grass surface');
+  assert.equal(drive.state.contact,0);
+});
+
+test('solid ground objects block off-road driving; asphalt and overhead geometry do not', () => {
+  const scene=new THREE.Scene();
+  for(const [w,h,d,x,y,z] of [[2,3,2,30,1,39],[15,.1,15,30,-.2,39],[10,1,10,30,16,39]]) {
+    const mesh=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshBasicMaterial());
+    mesh.position.set(x,y,z);scene.add(mesh);
+  }
+  const obstacles=groundObstacles(scene);
+  assert.equal(obstacles.length,1);
+  const {controller:drive}=setup({isDriveable:freeDriveArea(islandOutline),staticObstacles:obstacles});
+  assert.equal(drive.blocked(new THREE.Vector3(30,0,39),0),true);
+  assert.equal(drive.blocked(new THREE.Vector3(24,0,39),0),false);
+});
+
+test('rotated fences and inclined supports do not create invisible rectangular barriers', () => {
+  const scene=new THREE.Scene(), material=new THREE.MeshBasicMaterial();
+  const {cube,line}=createPrimitives(scene);
+  cube(14,2,.15,material,0,1,0,Math.PI/4);
+  line([20,0,0],[40,10,0],material,.15);
+  const {controller:drive}=setup({isDriveable:()=>true,staticObstacles:groundObstacles(scene)});
+  assert.equal(drive.blocked(new THREE.Vector3(4,0,4),0),false,'Empty corner of the old fence AABB');
+  assert.equal(drive.blocked(new THREE.Vector3(35,0,0),0),false,'Support is overhead here');
+  assert.equal(drive.blocked(new THREE.Vector3(0,0,0),0),true,'Actual fence still blocks');
+  assert.equal(drive.blocked(new THREE.Vector3(20,0,0),0),true,'Actual support foot still blocks');
+});
+
+test('free ground between stadium stairs is not excluded by an oversized invisible circle', () => {
+  const area=freeDriveArea(islandOutline);
+  assert.equal(area(arenaX+27*Math.cos(Math.PI/16),27*Math.sin(Math.PI/16)),true);
+  assert.equal(area(arenaX+24,0),false,'Solid podium still excluded');
+});
 
 test('parking shape and rotated car footprint preserve collision behaviour', () => {
   assert.equal(pointInLot(-8, 0, parkingOutline), true);
@@ -155,4 +276,32 @@ test('braking creates skid/smoke effects and keys clear when leaving', () => {
   drive.setDriving(false);
   assert.equal(drive.keys.size, 0);
   assert.equal(drive.state.active, false);
+});
+
+test('handbrake steering produces sideways travel and releasing it restores grip', () => {
+  const {controller:drive,golf,effects}=setup({isDriveable:()=>true});
+  drive.setDriving(true);drive.setKey('KeyW',true);
+  for(let i=0;i<90;i++)drive.updateDriving(1/60);
+  const speed=drive.state.speed;
+  drive.setKey('Space',true);drive.setKey('KeyA',true);
+  for(let i=0;i<30;i++)drive.updateDriving(1/60);
+  const before=golf.position.clone();drive.updateDriving(1/60);
+  const movement=golf.position.clone().sub(before);
+  const sideways=Math.abs(movement.x*Math.sin(golf.rotation.y)+movement.z*Math.cos(golf.rotation.y));
+  assert.ok(sideways>movement.length()*.2,'Movement diverges from body heading');
+  assert.ok(drive.state.speed>speed*.6,'Momentum is retained');
+  assert.ok(effects.skids>0&&effects.smoke>0);
+  drive.setKey('Space',false);drive.setKey('KeyA',false);
+  for(let i=0;i<60;i++)drive.updateDriving(1/60);
+  assert.ok(Math.abs(drive.state.slip)<.02,'Grip recovered');
+  drive.resetGolf();assert.equal(drive.state.slip,0);
+});
+
+test('handbrake at rest does not spin the car or emit smoke', () => {
+  const {controller:drive,golf,effects}=setup();
+  drive.setDriving(true);const home=golf.position.clone();
+  drive.setKey('Space',true);drive.setKey('KeyA',true);
+  for(let i=0;i<60;i++)drive.updateDriving(1/60);
+  assert.ok(golf.position.equals(home));assert.equal(golf.rotation.y,0);
+  assert.equal(effects.smoke,0);assert.equal(drive.state.slip,0);
 });

@@ -31,7 +31,7 @@ const names = [
   '04_preset_zsd', '05_preset_top', '06_preset_drift',
   '07_reset_camera', '08_overview_day', '09_arena_day',
   '10_drift_smoke_off', '11_drive_chase', '12_drive_top',
-  '13_photo_sources', '14_mobile_overview', '15_mobile_drive',
+  '13_interface_hidden', '14_mobile_overview', '15_mobile_drive',
 ];
 
 function head() {
@@ -164,6 +164,9 @@ async function capture() {
       await page.waitForFunction(() =>
         document.querySelector('#stats')?.textContent?.length > 0,
         null, { timeout: 60000 });
+      await page.waitForFunction(() => document.getElementById('view')?.dataset.lexusModel === 'loaded'
+        && document.getElementById('view')?.dataset.mercedesModel === 'loaded',
+        null, { timeout: 120000, polling: 100 });
       return { context, page };
     }
     async function snap(page, name) {
@@ -188,8 +191,8 @@ async function capture() {
     check('Initial car and spectator statistics',
       /Дрифт: 2 авто · на парковке: 18 · зрителей: 32/.test(
         await page.locator('#stats').textContent()));
-    check('Four links to original photo sources',
-      await page.locator('#photoSources a[href]').count() === 4);
+    check('Photo sources removed and interface toggle available',
+      await page.locator('#photoSources').count() === 0 && await page.locator('#hudToggle').isVisible());
     await advance(page, 180);
     await page.click('#pause');
     check('Pause works', await page.locator('#pause').textContent() === '▶ Продолжить');
@@ -226,8 +229,19 @@ async function capture() {
       await page.locator('#viewName').textContent() === 'Сверху');
     await snap(page, '12_drive_top');
     await page.click('#driveExit');
-    await page.click('#photoSources summary');
-    await snap(page, '13_photo_sources');
+    // Golf updates its own panel synchronously, but the scene-wide HUD
+    // observes driving state on the next RAF. Our clock is manual.
+    await advance(page);
+    check('Exit Golf restores scene HUD',
+      !await page.locator('#drivePanel').isVisible()
+      && await page.locator('#meet').isVisible());
+    await page.click('#hudToggle');
+    check('Interface hides and restore button remains visible',
+      !await page.locator('#full-hud').isVisible() && !await page.locator('#hint').isVisible()
+      && await page.locator('#hudToggle').isVisible());
+    await snap(page, '13_interface_hidden');
+    await page.keyboard.press('KeyH');
+    check('H restores interface', await page.locator('#full-hud').isVisible());
     await context.close();
 
     const mobile = await newPage({
@@ -237,6 +251,11 @@ async function capture() {
     await advance(mobile.page, 180);
     await mobile.page.click('#pause');
     await snap(mobile.page, '14_mobile_overview');
+    await mobile.page.click('#hudToggle');
+    check('Mobile interface hides and restores with the toggle',
+      !await mobile.page.locator('#full-hud').isVisible() && await mobile.page.locator('#hudToggle').isVisible());
+    await mobile.page.click('#hudToggle');
+    assert(await mobile.page.locator('#full-hud').isVisible(), 'Mobile HUD was not restored');
     await mobile.page.click('#drive');
     check('Mobile pedals visible',
       await mobile.page.locator('.touchControls').isVisible());

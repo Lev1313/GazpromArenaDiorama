@@ -1,16 +1,10 @@
 import * as THREE from 'three';
+import { pointInPolygon, parkingLights } from '../world/siteLayout.js';
 
 // Original low-poly Golf footprint collision math, moved out of the HTML.
 // All measurements use the same world coordinates as the parking lot.
 export function pointInLot(x, z, lotOutline) {
-  let inside = false;
-  for (let i = 0, j = lotOutline.length - 1; i < lotOutline.length; j = i++) {
-    const [xi, zi] = lotOutline[i], [xj, zj] = lotOutline[j];
-    if ((zi > z) !== (zj > z) && x < (xj - xi) * (z - zi) / (zj - zi) + xi) {
-      inside = !inside;
-    }
-  }
-  return inside;
+  return pointInPolygon(x, z, lotOutline);
 }
 
 function axes(yaw) {
@@ -27,8 +21,8 @@ export function carOverlap(pos, yaw, other, pad = 0) {
     const dot = (u, v) => u.x * v.x + u.z * v.z;
     const ra = (1.96 + pad) * Math.abs(dot(axis, a[0]))
       + (1.04 + pad) * Math.abs(dot(axis, a[1]));
-    const rb = 1.96 * Math.abs(dot(axis, b[0]))
-      + 1.04 * Math.abs(dot(axis, b[1]));
+    const rb = (other.userData.footprint?.halfLength ?? 1.96) * Math.abs(dot(axis, b[0]))
+      + (other.userData.footprint?.halfWidth ?? 1.04) * Math.abs(dot(axis, b[1]));
     if (Math.abs(dot(d, axis)) > ra + rb) return false;
   }
   return true;
@@ -44,6 +38,23 @@ export function circleOverlap(pos, yaw, x, z, r) {
   ) < r;
 }
 
+export function polygonOverlap(pos, yaw, outline) {
+  const a=axes(yaw);
+  const separated=axis=>{
+    const centre=pos.x*axis.x+pos.z*axis.z;
+    const radius=1.96*Math.abs(axis.x*a[0].x+axis.z*a[0].z)+1.04*Math.abs(axis.x*a[1].x+axis.z*a[1].z);
+    let min=Infinity,max=-Infinity;
+    for(const [x,z] of outline){const p=x*axis.x+z*axis.z;min=Math.min(min,p);max=Math.max(max,p);}
+    return max<centre-radius || min>centre+radius;
+  };
+  if(a.some(separated))return false;
+  for(let i=0;i<outline.length;i++){
+    const p=outline[i],q=outline[(i+1)%outline.length];
+    if(separated({x:-(q[1]-p[1]),z:q[0]-p[0]}))return false;
+  }
+  return true;
+}
+
 export const viewNames = ['Сзади', 'Сверху', 'Свободно'];
 
 /**
@@ -57,6 +68,9 @@ export const viewNames = ['Сзади', 'Сверху', 'Свободно'];
 export function createGolfDrive({
   golf, golfLabel, parked, people, visitors, drifters,
   drift, camera, controls, lotOutline,
+  isDriveable = (x, z) => pointInLot(x, z, lotOutline),
+  staticObstacles = [],
+  getGroundHeight = () => 0,
 }) {
   const golfHome = golf.position.clone();
   const golfHeading = golf.rotation.y;
@@ -64,6 +78,7 @@ export function createGolfDrive({
   const state = {
     active: false, speed: 0, steer: 0, view: 0, contact: 0,
     skidTime: 0, lastRear: null,
+    slip: 0,
   };
   let savedView = null;
 
@@ -71,10 +86,9 @@ export function createGolfDrive({
     const a = axes(yaw);
     for (const dx of [-1.96, 1.96]) {
       for (const dz of [-1.04, 1.04]) {
-        if (!pointInLot(
+        if (!isDriveable(
           pos.x + a[0].x * dx + a[1].x * dz,
           pos.z + a[0].z * dx + a[1].z * dz,
-          lotOutline,
         )) return true;
       }
     }
@@ -84,10 +98,8 @@ export function createGolfDrive({
     for (const p of people) {
       if (circleOverlap(pos, yaw, p.position.x, p.position.z, .5)) return true;
     }
-    for (const x of [-26, 10]) {
-      for (const z of [-28, 0, 28]) {
+    for (const [x, z] of parkingLights) {
         if (circleOverlap(pos, yaw, x, z, .45)) return true;
-      }
     }
     for (const [x, z] of [[8, 12], [-25, -12]]) {
       if (circleOverlap(pos, yaw, x, z, 1)) return true;
@@ -97,6 +109,13 @@ export function createGolfDrive({
     }
     for (const c of visitors) {
       if (c.o.visible && carOverlap(pos, yaw, c.o, .12)) return true;
+    }
+    for (const box of staticObstacles) {
+      if(box.minY>pos.y+1.7 || box.maxY<pos.y-.1)continue;
+      const dx=(box.minX+box.maxX)/2-pos.x, dz=(box.minZ+box.maxZ)/2-pos.z;
+      const hx=(box.maxX-box.minX)/2, hz=(box.maxZ-box.minZ)/2;
+      if(Math.abs(dx)>hx+2.23 || Math.abs(dz)>hz+2.23)continue;
+      if (polygonOverlap(pos,yaw,box.outline)) return true;
     }
     return false;
   }
@@ -125,6 +144,7 @@ export function createGolfDrive({
     golf.rotation.y = golfHeading;
     state.speed = 0;
     state.steer = 0;
+    state.slip = 0;
     state.contact = 0;
     state.lastRear = null;
     for (const wheel of golf.userData.frontWheels) wheel.rotation.y = 0;
@@ -143,14 +163,15 @@ export function createGolfDrive({
       state.view = 0;
       state.speed = 0;
       state.steer = 0;
-      golfLabel.visible = false;
+      state.slip = 0;
+      if (golfLabel) golfLabel.visible = false;
       controls.enabled = false;
       updateDriveCamera(1, true);
     } else {
       state.active = false;
       resetGolf();
       controls.enabled = true;
-      golfLabel.visible = true;
+      if (golfLabel) golfLabel.visible = true;
       if (savedView) {
         camera.position.copy(savedView.position);
         controls.target.copy(savedView.target);
@@ -194,7 +215,9 @@ export function createGolfDrive({
       state.steer += (desired - state.steer) * (1 - Math.exp(-h * 9));
       let v = state.speed;
       if (brake) {
-        v = Math.sign(v) * Math.max(0, Math.abs(v) - h * 19);
+        // Rear-wheel handbrake: lose speed gradually while retaining momentum.
+        const drag=forward && !backward && v>2 ? 1.3 : 4.5;
+        v = Math.sign(v) * Math.max(0, Math.abs(v) - h * drag);
       } else if (forward && !backward) {
         v += h * (v < -.15 ? 13 : 6.2);
       } else if (backward && !forward) {
@@ -205,14 +228,22 @@ export function createGolfDrive({
       }
 
       v = THREE.MathUtils.clamp(v, -4.5, 15);
-      const yaw = golf.rotation.y + v * Math.tan(state.steer) / 2.65 * h;
+      const sliding=brake && Math.abs(v)>2;
+      const turn=v*Math.tan(state.steer)/2.65*h*(sliding?1.6:1);
+      const yaw = golf.rotation.y + turn;
+      // With locked rear wheels the body rotates ahead of its travel direction.
+      // Releasing the handbrake smoothly restores lateral grip.
+      state.slip=THREE.MathUtils.clamp((state.slip-(sliding?turn:0))*Math.exp(-h*(sliding?.65:5)),-.85,.85);
+      const travelYaw=yaw+state.slip;
       const next = golf.position.clone().add(new THREE.Vector3(
-        Math.cos(yaw) * v * h, 0, -Math.sin(yaw) * v * h,
+        Math.cos(travelYaw) * v * h, 0, -Math.sin(travelYaw) * v * h,
       ));
       if (blocked(next, yaw)) {
         state.speed = 0;
+        state.slip = 0;
         state.contact = .65;
       } else {
+        next.y += (getGroundHeight(next.x,next.z)-next.y)*(1-Math.exp(-h*15));
         golf.position.copy(next);
         golf.rotation.y = yaw;
         state.speed = v;
@@ -224,7 +255,7 @@ export function createGolfDrive({
       wheel.rotation.y = state.steer;
     }
 
-    if (brake && Math.abs(state.speed) > 2) {
+    if ((brake || Math.abs(state.slip)>.08) && Math.abs(state.speed) > 2) {
       state.skidTime += dt;
       const rear = drift.rearPoints(golf);
       if (state.lastRear) {
@@ -250,7 +281,8 @@ export function createGolfDrive({
       message: state.contact > 0
         ? 'Препятствие — сдай назад'
         : drift.driftWaiting ? 'Дрифтеры пропускают тебя'
-          : 'Свободный заезд по парковке',
+          : Math.abs(state.slip)>.12 ? 'Дрифт · отпусти ручник для сцепления'
+            : keys.has('Space') ? 'Ручной тормоз' : 'Свободный заезд',
       viewName: viewNames[state.view],
       active: state.active,
     };

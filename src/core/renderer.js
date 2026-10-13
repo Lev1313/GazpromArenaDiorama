@@ -8,6 +8,7 @@ import * as THREE from 'three';
  */
 export function createRenderer(canvas) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.localClippingEnabled = true; // Visitor cars enter through the scene edge.
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 

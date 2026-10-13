@@ -21,7 +21,7 @@ function makeTerrain() {
 }
 
 test('legacy coastline and parking coordinates are preserved', () => {
-  assert.equal(arenaX, 41);
+  assert.equal(arenaX, 50);
   assert.deepEqual(islandOutline[0], [-25, -53]);
   assert.deepEqual(islandOutline[islandOutline.length - 1], [0, -52]);
   assert.deepEqual(mainlandOutline[0], [-89, -129]);
@@ -33,10 +33,9 @@ test('legacy coastline and parking coordinates are preserved', () => {
 test('legacy terrain creates the correct layers, coastline, apron and parking', () => {
   const { scene, terrain, textureTarget } = makeTerrain();
   const objects = scene.children;
-  // 2 ground slabs, 2 shoreline polygons, 18 coastline links,
-  // apron and parking, 4 curbs, arena platform, ring, 2 access strips,
-  // and 40 circular markings.
-  assert.equal(objects.length, 72);
+  // Keep the original ground layers while making room for the new access.
+  assert.ok(terrain.accessRoad.parent === scene);
+  assert.ok(arenaX - terrain.ringRoad.geometry.parameters.outerRadius - 1 > Math.max(...parkingOutline.map(p => p[0])), 'Arena apron must clear parking');
   assert.deepEqual(objects[0].position.toArray(), [0, -3, -24]);
   assert.equal(objects[0].geometry.parameters.width, 180);
   assert.deepEqual(objects[1].position.toArray(), [0, -0.7, -24]);
@@ -52,20 +51,20 @@ test('legacy terrain creates the correct layers, coastline, apron and parking', 
   assert.deepEqual(apron.position.toArray(), [-10, -0.17, -44]);
   assert.equal(parking.geometry.type, 'ShapeGeometry');
   assert.equal(parking.position.y, -0.12);
-  assert.strictEqual(apron.material, terrain.materials.asphalt);
-  assert.strictEqual(parking.material, terrain.materials.asphalt);
+  assert.strictEqual(apron.material, terrain.materials.road);
+  assert.strictEqual(parking.material, terrain.materials.road);
   assert.strictEqual(textureTarget, terrain.materials.asphalt);
 });
 
-test('arena foundation, ring road and 40 markings preserve legacy dimensions', () => {
+test('shifted ring retains its radii and marking dimensions', () => {
   const { scene, terrain } = makeTerrain();
   const ring = terrain.ringRoad;
   assert.ok(scene.children.includes(ring));
   assert.equal(ring.geometry.type, 'RingGeometry');
   assert.equal(ring.geometry.parameters.innerRadius, 29);
-  assert.equal(ring.geometry.parameters.outerRadius, 32);
+  assert.equal(ring.geometry.parameters.outerRadius, 35);
   assert.equal(ring.geometry.parameters.thetaSegments, 96);
-  assert.deepEqual(ring.position.toArray(), [41, -0.13, 0]);
+  assert.deepEqual(ring.position.toArray(), [50, -0.13, 0]);
   assert.equal(ring.rotation.x, -Math.PI / 2);
   assert.strictEqual(ring.material, terrain.materials.road);
 

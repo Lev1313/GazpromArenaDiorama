@@ -25,6 +25,17 @@ test('Lakhta retains five twisting wings, original anchor and height', () => {
   assert.equal(wings.length, 5);
   assert.ok(wings.every(m => m.geometry.attributes.position.count === 66));
   assert.ok(wings.every(m => m.geometry.index.count === 192));
+  // FrontSide culls inward triangles: the original winding exposed the back
+  // of the tower and made the near facade disappear when orbiting the camera.
+  for (const wing of wings) {
+    const g=wing.geometry;
+    for(let i=0;i<g.index.count;i+=3) {
+      const [a,b,c]=[0,1,2].map(j=>new THREE.Vector3().fromBufferAttribute(g.attributes.position,g.index.getX(i+j)));
+      const normal=b.clone().sub(a).cross(c.clone().sub(a));
+      const centre=a.clone().add(b).add(c).divideScalar(3);
+      assert.ok(normal.dot(new THREE.Vector3(centre.x+62,0,centre.z+102))>0,'Facade must face outward');
+    }
+  }
 
   const bottom = towerVertex(0, 0);
   assert.ok(Math.abs(bottom.x - (-62 + 4.43)) < 1e-9);
@@ -78,11 +89,7 @@ test('landscaping preserves 67 trees and 16 point lights', () => {
   assert.equal(signs.length, 7);
   assert.equal(signs.filter(([text]) => text === 'P').length, 3);
   assert.equal(signs.filter(([text]) => text === 'ПЕШЕХОДЫ').length, 4);
-  assert.deepEqual(labels, [
-    ['ЛАХТА · расстояние сжато', -61, -78],
-    ['КРЕСТОВСКИЙ ОСТРОВ', 54, 49],
-    ['СЕВЕР ↑', 78, -78],
-  ]);
+  assert.deepEqual(labels, []);
 });
 
 test('surroundings retain fencing and coast handrails', () => {

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import { createHudController } from '../src/ui/hudController.js';
+import { createLighting, configureNightLighting, setLightingMode } from '../src/core/lighting.js';
 
 function setup() {
   const scene = new THREE.Scene();
@@ -15,8 +16,8 @@ function setup() {
     updates: 0,
     update() { this.updates++; },
   };
-  const hemi = { intensity: 1.8 };
-  const sun = { intensity: 2.5 };
+  const hemi = new THREE.HemisphereLight();
+  const sun = new THREE.DirectionalLight();
   const drift = {
     drifters: [{}, {}],
     smokeEnabled: true,
@@ -44,13 +45,35 @@ function setup() {
   };
 }
 
-test('HUD starts in legacy nighttime, running at normal tempo with smoke', () => {
+test('moving-car headlights follow the car and switch off for parked, hidden and daytime cars', () => {
+  const scene=new THREE.Scene(), {hemi,sun}=createLighting(scene);
+  const cars=[new THREE.Group(),new THREE.Group(),new THREE.Group()];
+  cars.forEach(c=>scene.add(c));
+  const active=[true,true,false];
+  const update=configureNightLighting(scene,{arenaX:50,headlightCars:cars.map((car,i)=>({car,isActive:()=>active[i],projector:i===0}))});
+  const entries=scene.userData.headlights;
+  assert.deepEqual(entries.map(e=>e.beam.visible),[true,true,false]);
+  assert.strictEqual(entries[0].beam.geometry,entries[1].beam.geometry);
+  cars[0].position.set(10,0,20);cars[0].rotation.y=Math.PI/2;
+  scene.updateMatrixWorld(true);
+  const target=entries[0].light.target.getWorldPosition(new THREE.Vector3());
+  assert.ok(Math.abs(target.x-10)<1e-8 && target.z<20,'Beam points forward in car coordinates');
+  active[0]=false;cars[1].visible=false;active[2]=true;update();
+  assert.deepEqual(entries.map(e=>e.beam.visible),[false,false,true]);
+  assert.equal(entries[0].light.intensity,0);
+  setLightingMode(scene,{toneMappingExposure:1},hemi,sun,true);
+  assert.ok(entries.every(e=>!e.beam.visible));
+  setLightingMode(scene,{toneMappingExposure:1},hemi,sun,false);
+  assert.equal(entries[2].beam.visible,true);
+});
+
+test('HUD starts with the night light scheme, normal tempo and smoke', () => {
   const { hud, renderer, hemi, sun } = setup();
   assert.deepEqual(hud.state, { running: true, day: false, speedScale: 1 });
   assert.equal(hud.isSmokeEnabled(), true);
-  assert.equal(renderer.toneMappingExposure, 1.55);
-  assert.equal(hemi.intensity, 1.8);
-  assert.equal(sun.intensity, 2.5);
+  assert.equal(renderer.toneMappingExposure, 1.15);
+  assert.equal(hemi.intensity, .4);
+  assert.equal(sun.intensity, .65);
 });
 
 test('pause and resume preserve the original key-release behaviour', () => {
@@ -73,9 +96,10 @@ test('day/night controls update sky, fog, lights and ACES exposure', () => {
   assert.equal(hud.toggleDay(), false);
   assert.equal(scene.background.getHex(), 0x101725);
   assert.equal(scene.fog.color.getHex(), 0x101725);
-  assert.equal(hemi.intensity, 2); // Original's post-toggle nighttime.
-  assert.equal(sun.intensity, 2.5);
-  assert.equal(renderer.toneMappingExposure, 1.55);
+  assert.equal(hemi.intensity, .4);
+  assert.equal(sun.intensity, .65);
+  assert.equal(sun.color.getHex(), 0x9cbcff);
+  assert.equal(renderer.toneMappingExposure, 1.15);
 });
 
 test('tempo slider preserves original range and ignores invalid numbers', () => {

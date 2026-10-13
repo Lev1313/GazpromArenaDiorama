@@ -1,0 +1,311 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "Initial scene counts and unique controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Initial stats are rendered",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Highway vehicles actually move",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Both drifters move, emit smoke and leave tire marks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pause freezes traffic, visitors, drift and effects",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset meet",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset arena",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset high",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset map",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset drift",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset reset",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Orbit mouse drag rotates camera while paused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mouse wheel zooms camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Day updates actual sky, fog, light and exposure",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night restores legacy toggled lighting",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Smoke off hides actual particles",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume advances simulation while disabled smoke stays hidden",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Smoke emission resumes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo 0.3 changes simulation time and traffic rate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo 1 changes simulation time and traffic rate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo 2 changes simulation time and traffic rate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Photo sources open with four secure external links",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Desktop resize updates canvas and camera projection",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Visitor arrives, parks, departs and hides before next visit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Live parking counter follows actual visitor states",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Long simulation keeps smoke, skid buffers and scene size bounded",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Entering Golf enables drive HUD and updates counter",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pause also freezes Golf position and speed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume clears held driving keys",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf camera Сверху",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf camera Свободно",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf camera Сзади",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "W accelerates and physically moves Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A steers left and changes heading",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "D steers right",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Space reduces speed and writes Golf skid segments",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Brake stops Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Obstacle collision stops Golf and displays warning",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "S reverses away from obstacle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "R restores home pose, speed and steering",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowUp",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowLeft",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowDown",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowRight",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Blur handler clears throttle without stuck acceleration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Hidden-document handler clears driving keys",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Typing in input does not accelerate Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Esc restores overview, car and scene HUD",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Scene tempo does not scale Golf acceleration",
+      "ok": true,
+      "detail": "1.0333333333333523 / 1.033333333333318"
+    },
+    {
+      "name": "Mobile pedals visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Real touch throttle accelerates Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Multitouch gas and steering work together",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Touch release clears both keys",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile reverse pedal selects reverse gear",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Touch cancellation releases captured key",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile camera button switches to overhead",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile landscape resize updates render dimensions",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile exit hides pedals and restores scene",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No browser console or page errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "desktop-controls.png",
+    "traffic-long-run.png",
+    "golf-functional.png",
+    "mobile-touch.png"
+  ],
+  "generatedAt": "2026-10-13T11:58:34.308Z",
+  "head": "c323014838a32b6f44cd15e0707edc951c115ca1",
+  "mode": "Production bundle with read-only snapshot hook; manual 60 Hz clock; Edge SwiftShader",
+  "browser": "155.0.4283.45"
+}
