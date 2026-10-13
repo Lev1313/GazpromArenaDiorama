@@ -96,3 +96,11 @@ Keep a progress log in PROGRESS.md.
 - UI stats use `staticCount - Number(drive.state.active) + traffic.parkedVisitorCount`, along with the current spectator/drifter arrays. Refresh from state after Golf enters/exits and visitors park.
 - After local approval, plan a **separate Vite browser regression suite** in addition to `baseline:verify`, which exclusively checks the untouched legacy file. No visual improvements/geographic adjustments until the modular migration is accepted.
 - Review branch: `review/stage4-full-hud`, awaiting local unit tests, Vite build, and manual functional/visual validation before merging into master.
+
+
+## Stage 5.1 — new Vite visual regression, not legacy screenshots
+- The modular application has its own deterministic Playwright+Edge+SwiftShader screenshots in `tools/vite-baseline.mjs`, completely independent of `tools/baseline.mjs` and `baseline/screenshots/` (legacy).
+- `vite:shots` generates **unapproved** candidate PNGs and report under `vite-baseline/_current/` (gitignored); visually inspect first. `vite:approve` explicitly creates approved PNGs in `vite-baseline/screenshots/` and `vite-baseline/reference.json`. `vite:verify` compares new screenshots against approved references. Never auto-approve or auto-overwrite reference images.
+- Scenarios include the six view presets, day/night, smoke toggle, Golf two camera views, photo panel and desktop/mobile layout. All captures use controlled 1/60-second requestAnimationFrame and a private Vite server on a free localhost port.
+- Approval is **pending** in `review/stage5-vite-visual-baseline`; no reference PNGs should be assumed to exist yet. They must be generated/approved on the user's Windows machine and explicitly committed.
+- Stage 5.2 performance measurement and stage 5.3 comprehensive Vite browser functional coverage remain separate after this baseline is accepted.
