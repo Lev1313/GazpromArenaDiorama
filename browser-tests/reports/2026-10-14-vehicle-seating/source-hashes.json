@@ -1,0 +1,62 @@
+﻿[
+    {
+        "path":  "package.json",
+        "sha256":  "2e019f5297436ebfa4865020e7439e3aafe20d5a5dad78c56f9ef6f3a2977d7e"
+    },
+    {
+        "path":  "src/main.js",
+        "sha256":  "84239cf56f8ebfa280800ba547020ad3d39561125588fef747291d19a8503b81"
+    },
+    {
+        "path":  "src/player/pedestrian.js",
+        "sha256":  "0f20b5f9582ae9007e2a4a12f01e5bb95449a2c4aa33ad9714e3745cdd333ab9"
+    },
+    {
+        "path":  "src/player/characterModel.js",
+        "sha256":  "08db37faaccffbd16220cd38ca78b916234163701841fb99655268385bd7cf06"
+    },
+    {
+        "path":  "src/player/controlModes.js",
+        "sha256":  "5e93330237d74b3cfdb241b3e1f21f7a24eb246be99559d63287c365c7cd0685"
+    },
+    {
+        "path":  "src/player/vehicleInteraction.js",
+        "sha256":  "0cb42c72b8b193f3d7d17477c3686620b01d2dd42bf5770ca153aabdf1a7b004"
+    },
+    {
+        "path":  "src/vehicles/vehicleSeats.js",
+        "sha256":  "2a39a622135f80a07d6d08ff559ac4528c998165c59c39f1dd708b605d78a964"
+    },
+    {
+        "path":  "src/vehicles/golfDrive.js",
+        "sha256":  "14738590eec40c9803837f253371525c83dd4b3c2be0d265c1d343668531d44f"
+    },
+    {
+        "path":  "src/ui/hudController.js",
+        "sha256":  "9a4badac5378b7cdf724c0f05faf284bcd37bf377eb88bd9f570648b02675b1e"
+    },
+    {
+        "path":  "src/ui/vehicleInteractionUi.js",
+        "sha256":  "e0c103623f172202b7aef03dc8c0acbb21287a4c2c764e21ebfbc8d727bc2e65"
+    },
+    {
+        "path":  "src/ui/vehicleInteractionUi.css",
+        "sha256":  "531b94daf44afb14305c55411b5b3b9d56b84aa6439267df9cbd840d2c265d42"
+    },
+    {
+        "path":  "tests/golf-physical-exit.test.mjs",
+        "sha256":  "7ff4f415623159c0bfe0a01b2739e94c6f591c8431d03267b7912c19bcbb6edb"
+    },
+    {
+        "path":  "tests/vehicle-interaction.test.mjs",
+        "sha256":  "b6d7caf1ef3a8bc2dfc7bc41d6da8cc8bc5f0b2530b7b52d785af74c51ae4052"
+    },
+    {
+        "path":  "tests/vehicle-seats.test.mjs",
+        "sha256":  "290139e5abd5622474af30714551e12c83fa5a711989f806c5036714207c6ca1"
+    },
+    {
+        "path":  "tools/vite-functional.mjs",
+        "sha256":  "e508c35e8948608f10aec700922635ec0f214ef24ef39f0000dc785e76d40bd7"
+    }
+]

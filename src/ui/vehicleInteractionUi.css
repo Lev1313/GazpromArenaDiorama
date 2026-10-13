@@ -1,0 +1,17 @@
+#seatPanel { position:fixed; z-index:18; right:20px; bottom:60px;
+  max-width:310px; padding:14px 18px; color:#d8eaff; background:#111b2ce8;
+  border:1px solid #6587ad; border-radius:12px; font:13px/1.5 system-ui; }
+#seatPanel.driving { bottom:335px; }
+#seatPanel p { margin:8px 0; }
+#seatPanel button,#seatPrompt { background:#28476a; color:white; border:1px solid #6587ad;
+  border-radius:8px; padding:9px 12px; margin-right:6px; cursor:pointer; }
+#seatPrompt,#seatFeedback { position:fixed; z-index:18; bottom:105px; left:50%; transform:translateX(-50%);
+  font:14px system-ui; box-shadow:0 2px 14px #0008; }
+#seatFeedback { color:white; background:#111b2ce8; border-radius:8px; padding:10px 14px; }
+#seatPrompt:disabled { background:#3d4756; cursor:default; }
+#seatPanel[hidden],#seatPrompt[hidden],#seatFeedback[hidden],#seatPanel button[hidden] { display:none; }
+@media(max-width:650px) {
+  #seatPanel { right:10px; bottom:52px; max-width:260px; padding:10px; font-size:11px; }
+  #seatPanel.driving { bottom:350px; }
+  #seatPrompt { bottom:100px; width:75%; font-size:12px; }
+}

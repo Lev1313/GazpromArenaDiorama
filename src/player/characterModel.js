@@ -34,7 +34,17 @@ export function createCharacterModel(scene) {
   }
   model.visible = false;
   scene.add(model);
-  function animate(phase, amount) {
+  function animate(phase, amount, seated = false) {
+    body.scale.y = seated ? .88 : 1;
+    // Draw elbows inward in the compact cabin; standing shoulders retain
+    // their original width. This avoids arms cutting through door glazing.
+    arms.forEach((arm,i)=>{arm.position.x=(i===0?-1:1)*(seated?.19:.31);});
+    if (seated) {
+      for (const leg of legs) leg.rotation.x = -1.3;
+      for (const arm of arms) arm.rotation.x = -1.05;
+      body.position.y = 0;
+      return;
+    }
     const swing = Math.sin(phase) * .55 * amount;
     legs[0].rotation.x = swing; legs[1].rotation.x = -swing;
     arms[0].rotation.x = -swing * .8; arms[1].rotation.x = swing * .8;

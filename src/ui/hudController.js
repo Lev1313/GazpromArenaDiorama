@@ -51,8 +51,8 @@ export function createHudController({
     const preset = cameraPresets[name];
     if (!preset) throw new RangeError('Unknown camera preset: ' + name);
     // Original camera buttons always exit driving mode first.
-    drive.setDriving(false);
-    modes?.overview();
+    if (modes) { if (modes.overview() === false) return false; }
+    else drive.setDriving(false);
     camera.position.set(...preset.position);
     controls.target.set(...preset.target);
     controls.update();

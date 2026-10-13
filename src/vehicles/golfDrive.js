@@ -180,6 +180,34 @@ export function createGolfDrive({
     }
   }
 
+  /**
+   * Release the physically occupied driver seat without returning the Golf home.
+   * Seating validates a safe exit speed and position before calling this method.
+   * The legacy setDriving(false) and explicit resetGolf() keep their home reset.
+   * restoreCamera:false transfers camera ownership to the pedestrian controller.
+   */
+  function stopDriving({ restoreCamera = true } = {}) {
+    keys.clear();
+    state.active = false;
+    state.speed = 0;
+    state.steer = 0;
+    state.slip = 0;
+    state.contact = 0;
+    state.skidTime = 0;
+    state.lastRear = null;
+    state.view = 0;
+    for (const wheel of golf.userData.frontWheels) wheel.rotation.y = 0;
+    if (golfLabel) golfLabel.visible = true;
+    if (restoreCamera) {
+      controls.enabled = true;
+      if (savedView) {
+        camera.position.copy(savedView.position);
+        controls.target.copy(savedView.target);
+      }
+      controls.update();
+    }
+  }
+
   function cycleDriveView() {
     if (!state.active) return;
     state.view = (state.view + 1) % 3;
@@ -290,7 +318,7 @@ export function createGolfDrive({
 
   return {
     state, golf, keys, golfHome, golfHeading,
-    blocked, setKey, clearKeys, setDriving, resetGolf,
+    blocked, setKey, clearKeys, setDriving, stopDriving, resetGolf,
     cycleDriveView, updateDriving, updateDriveCamera, getStatus,
   };
 }
