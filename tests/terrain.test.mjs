@@ -51,8 +51,8 @@ test('legacy terrain creates the correct layers, coastline, apron and parking', 
   assert.deepEqual(apron.position.toArray(), [-10, -0.17, -44]);
   assert.equal(parking.geometry.type, 'ShapeGeometry');
   assert.equal(parking.position.y, -0.12);
-  assert.strictEqual(apron.material, terrain.materials.asphalt);
-  assert.strictEqual(parking.material, terrain.materials.asphalt);
+  assert.strictEqual(apron.material, terrain.materials.road);
+  assert.strictEqual(parking.material, terrain.materials.road);
   assert.strictEqual(textureTarget, terrain.materials.asphalt);
 });
 

@@ -41,12 +41,13 @@
   #golf-ui #drivePanel { top: 66px; }
   #golf-ui.driving .touchControls {
     position: fixed; inset: auto 16px 18px; z-index: 20;
-    display: flex; justify-content: space-between; gap: 9px;
+    display: flex; justify-content: space-between; gap: 6px;
     pointer-events: none;
   }
   #golf-ui .touchControls button {
     pointer-events: auto; user-select: none; touch-action: none;
-    min-height: 65px; min-width: 65px; flex: 1; font-size: 28px;
+    min-height: 65px; min-width: 0; flex: 1; font-size: 28px;
     background: #134469df;
   }
+  #golf-ui .touchControls .handbrake { font-size: 11px; padding: 10px 4px; }
 }

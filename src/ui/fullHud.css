@@ -46,17 +46,16 @@
 #full-hud.driving .hud-tempo { display: none; }
 #full-hud.driving .hud-buttons button:not(#pause):not(#day) { display: none; }
 
-/* Photo sources and the original orbit-controls hint. */
-#photoSources {
-  position: fixed; z-index: 12; right: 18px; bottom: 16px;
+/* A small persistent control restores the main panel after hiding it. */
+#hudToggle {
+  position: fixed; z-index: 21; right: 18px; bottom: 16px;
   background: #122033e8; border: 1px solid #4a648477;
-  border-radius: 10px; max-width: min(300px, calc(100vw - 36px));
-  padding: 10px 14px; font: 12px system-ui, sans-serif; color: #bbd7e9;
+  border-radius: 10px; padding: 10px 14px;
+  font: 12px system-ui, sans-serif; color: #bbd7e9;
+  cursor: pointer; touch-action: manipulation;
 }
-#photoSources[hidden] { display: none; }
-#photoSources summary { cursor: pointer; }
-#photoSources a { display: block; color: #91d9ff; margin: 12px 0; line-height: 1.4; }
-#photoSources small { display: block; line-height: 1.5; }
+#hudToggle:focus-visible { outline: 2px solid #65c9ff; outline-offset: 2px; }
+#full-hud[hidden], .full-hint[hidden] { display: none; }
 .full-hint {
   position: fixed; z-index: 13; left: 18px; bottom: 16px;
   background: #111b2c99; border-radius: 8px; padding: 9px 12px;
@@ -72,7 +71,8 @@
   #full-hud .hud-description { font-size: 12px; margin-bottom: 8px; }
   #full-hud button { padding: 7px 9px; font-size: 12px; }
   #full-hud.driving { width: min(210px, calc(100vw - 20px)); }
-  #photoSources { bottom: 40px; right: 10px; max-width: 230px; }
+  #hudToggle { right: 10px; bottom: 10px; font-size: 11px; padding: 8px; }
+  #full-hud.driving ~ #hudToggle { top: 10px; bottom: auto; }
   .full-hint { left: 10px; bottom: 10px; font-size: 10px; }
 }
 /* Keep the drive instrument clear of the restored HUD. */

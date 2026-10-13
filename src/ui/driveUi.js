@@ -31,12 +31,13 @@ export function installDriveUi(root, drive) {
         <button type="button" id="driveReset">R · На место</button>
         <button type="button" id="driveExit">Выйти</button>
       </div>
-      <div class="keyHelp">W / ↑ — газ · S / ↓ — тормоз и задний ход<br>A D / ← → — руль · Пробел — тормоз</div>
+      <div class="keyHelp">W / ↑ — газ · S / ↓ — тормоз и задний ход<br>A D / ← → — руль · Пробел — ручник / дрифт</div>
     </section>
     <div class="touchControls" aria-label="Педали и руль">
       <button type="button" data-drive-key="KeyA" aria-label="Руль влево">←</button>
       <button type="button" data-drive-key="KeyD" aria-label="Руль вправо">→</button>
       <button type="button" data-drive-key="KeyS" aria-label="Тормоз и назад">↓</button>
+      <button type="button" data-drive-key="Space" class="handbrake" aria-label="Ручной тормоз для дрифта">Ручник</button>
       <button type="button" data-drive-key="KeyW" aria-label="Газ">↑</button>
     </div>
   `;
@@ -56,7 +57,7 @@ export function installDriveUi(root, drive) {
     button.setAttribute('aria-pressed', String(status.active));
     layer.classList.toggle('driving', status.active);
     hint.textContent = status.active
-      ? 'WASD / стрелки — ехать · Пробел — тормоз · C — камера · R — вернуть машину · Esc — выйти'
+      ? 'WASD / стрелки — ехать · Пробел — ручник / дрифт · C — камера · R — вернуть машину · Esc — выйти'
       : 'ЛКМ — вращение · колесо — масштаб · ПКМ — перемещение';
   }
 

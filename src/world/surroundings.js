@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import { createPrimitives } from '../utils/primitives.js';
 import { ring, parkingLights } from './siteLayout.js';
-import { surfaceSign as defaultSurfaceSign, label as defaultLabel } from '../utils/signs.js';
+import { surfaceSign as defaultSurfaceSign } from '../utils/signs.js';
 
 /**
- * Legacy trees, parking lights, railings, road markings and area labels.
+ * Trees, parking lights, railings and road markings.
  * Legacy forms, with stage 6.3 gate/landscaping adjustments to clear roads.
  * @param {THREE.Scene} scene
  * @param {Function} mat
@@ -12,11 +12,11 @@ import { surfaceSign as defaultSurfaceSign, label as defaultLabel } from '../uti
  * @param {number} arenaX
  * @param {number[][]} islandOutline
  * @param {THREE.Material} steel
- * @param {{ makeSurfaceSign?: Function, makeLabel?: Function }} options
+ * @param {{ makeSurfaceSign?: Function }} options
  */
 export function createSurroundings(
   scene, mat, materials, arenaX, islandOutline, steel,
-  { makeSurfaceSign = defaultSurfaceSign, makeLabel = defaultLabel } = {},
+  { makeSurfaceSign = defaultSurfaceSign } = {},
 ) {
   const { cube, cyl, line } = createPrimitives(scene);
   const { concrete, slab, white, gold } = materials;
@@ -50,10 +50,6 @@ for(const x of [-25,9])for(let j=0;j<6;j++){cube(.32,.025,2.5,mat(0x46515a),x,-.
 for(const [x,z,w,d] of [[-7,25,6,2],[-17,-30,3,4],[0,-25,4,1.7],[-19,6,2,3]])cube(w,.015,d,mat(0x454d52),x,-.103,z);
 // Retaining wall and promenade handrails along the water's edge.
 for(let i=0;i<island.length-1;i++){const a=island[i],b=island[i+1],dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz);if(a[0]>60&&b[0]>60)continue;cube(len,.65,.55,concrete,(a[0]+b[0])/2,-.45,(a[1]+b[1])/2,-Math.atan2(dz,dx));line([a[0],.65,a[1]],[b[0],.65,b[1]],fenceMat,.04);for(let j=0;j<=Math.ceil(len/2.7);j++){const t=j/Math.ceil(len/2.7);line([a[0]+dx*t,-.1,a[1]+dz*t],[a[0]+dx*t,.7,a[1]+dz*t],fenceMat,.035);}}
-// North marker and landmark labels.
-// Canvas-based landmark labels are handled by the shared helper.
-const label = (text, x, z) => makeLabel(scene, text, x, z);
-label('ЛАХТА · расстояние сжато',-61,-78);label('КРЕСТОВСКИЙ ОСТРОВ',54,49);label('СЕВЕР ↑',78,-78);
 
   return { fenceMat };
 }

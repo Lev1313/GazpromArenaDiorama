@@ -33,8 +33,8 @@ test('original parking has exactly 18 cars and 32 spectators', () => {
   assert.ok(parked.every(o => o.parent === scene));
   assert.ok(people.every(o => o.parent === scene));
   // 18 car groups + 32 people groups + 28 painted bay marks +
-  // 6 picnic table boxes + 14 boundary bollards + 1 Golf sprite.
-  assert.equal(scene.children.length, 99);
+  // 6 picnic table boxes; orange boundary cones have been removed.
+  assert.equal(scene.children.length, 84);
 });
 
 test('parked-car rows and visitor-free slots retain original coordinates', () => {
@@ -77,16 +77,15 @@ test('car factory retains original dimensions, wheels and independent paint', ()
   assert.ok(left.children[0].castShadow);
 });
 
-test('Golf VI keeps its silver body, label and original parking slot', () => {
+test('Golf VI keeps its silver body and original slot without a floating label', () => {
   const { parked, golf, golfLabel } = setup();
   assert.strictEqual(golf, parked[5]);
   assert.deepEqual(golf.position.toArray(), [-22.4, 0, 16]);
   assert.equal(golf.children[0].material.color.getHex(), 0xbdc8d1);
-  assert.deepEqual(golfLabel.position.toArray(), [-23, 2.5, 17]);
-  assert.deepEqual(golfLabel.scale.toArray(), [6, 1, 1]);
+  assert.equal(golfLabel, null);
 });
 
-test('people, parking lines and boundary bollards preserve original forms', () => {
+test('people and parking lines are preserved without orange cones', () => {
   const { scene, people, markings } = setup();
   assert.deepEqual(people[0].position.toArray(), [-25.2, 0, -25.4]);
   assert.deepEqual(people[31].position.toArray(), [2, 0, 37]);
@@ -103,5 +102,5 @@ test('people, parking lines and boundary bollards preserve original forms', () =
     && o.geometry.type === 'CylinderGeometry'
     && o.geometry.parameters.height === 0.65
     && o.material.color.getHex() === 0xe6974e);
-  assert.equal(bollards.length, 14);
+  assert.equal(bollards.length, 0);
 });

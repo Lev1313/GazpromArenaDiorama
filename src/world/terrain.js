@@ -71,8 +71,8 @@ export function createTerrain(scene, mat, { applyAsphalt = applyAsphaltTexture }
   }
 
   // Apron and expanded car-meet parking area east of the elevated highway.
-  cube(9, 0.08, 11, asphalt, -10, -0.17, -44);
-  polygon(parkingOutline, -0.12, asphalt);
+  cube(9, 0.08, 11, road, -10, -0.17, -44);
+  polygon(parkingOutline, -0.12, road);
   applyAsphalt(asphalt);
 
   cube(0.3, 0.18, 62, concrete, -27.5, -0.08, 0);

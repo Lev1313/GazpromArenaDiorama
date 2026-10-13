@@ -137,8 +137,8 @@ async function sceneTests(page) {
   check('Day updates actual sky, fog, light and exposure', b.lighting.background===0x91c5e4
     && b.lighting.fog===0x91c5e4 && b.lighting.hemi===3 && b.lighting.sun===4 && b.lighting.exposure===1.25);
   await click(page,'#day'); b=await snapshot(page);
-  check('Night restores legacy toggled lighting', b.lighting.background===0x101725
-    && b.lighting.fog===0x101725 && b.lighting.hemi===2 && b.lighting.sun===2.5 && b.lighting.exposure===1.55);
+  check('Night restores dim moon lighting', b.lighting.background===0x101725
+    && b.lighting.fog===0x101725 && b.lighting.hemi===.4 && b.lighting.sun===.65 && b.lighting.exposure===1.15);
   await click(page,'#smoke'); b=await snapshot(page);
   check('Smoke off hides actual particles', !b.drift.smokeEnabled && b.drift.smokeVisible===0);
   await click(page,'#pause'); await step(page,60); b=await snapshot(page);
@@ -152,9 +152,11 @@ async function sceneTests(page) {
       && near((b.highCars[0].t-a.highCars[0].t+1)%1,.025*speed));
   }
   await page.locator('#speed').fill('1');
-  await click(page,'#photoSources summary');
-  check('Photo sources open with four secure external links', await page.locator('#photoSources').getAttribute('open')!==null
-    && await page.locator('#photoSources a[target="_blank"][rel="noopener"]').count()===4);
+  await click(page,'#hudToggle');
+  check('Photo sources removed; main interface hides and restores', await page.locator('#photoSources').count()===0
+    && !await page.locator('#full-hud').isVisible() && await page.locator('#hudToggle').isVisible());
+  await key(page,'KeyH');
+  assert(await page.locator('#full-hud').isVisible(), 'H did not restore the interface');
   await resize(page,1000,650); b=await snapshot(page);
   check('Desktop resize updates canvas and camera projection', b.canvas.width===1000 && b.canvas.height===650 && near(b.camera.aspect,1000/650));
   await shot(page,'desktop-controls');
@@ -325,6 +327,8 @@ try {
     try {
       await page.addInitScript(clock); await page.goto(url);
       await page.waitForFunction(()=>typeof window.__readDiorama==='function');
+      await page.waitForFunction(()=>document.getElementById('view')?.dataset.lexusModel==='loaded'
+        && document.getElementById('view')?.dataset.mercedesModel==='loaded',null,{timeout:120000,polling:100});
       await step(page,2); await test(page,context);
       report.errors.push(...await page.evaluate(()=>window.__functionalErrors));
     } catch(error) {

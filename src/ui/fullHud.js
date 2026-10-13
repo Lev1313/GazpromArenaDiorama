@@ -54,20 +54,33 @@ export function installFullHud(root, controller, driveUi, drive) {
   hint.classList.add('full-hint');
   root.appendChild(hint);
 
-  const details = document.createElement('details');
-  details.id = 'photoSources';
-  details.innerHTML = `
-    <summary>Фото-основа</summary>
-    <div>
-      <a href="https://gazprom-arena.com/locations/parkovki/" target="_blank" rel="noopener">Арена и парковки · официальный сайт</a>
-      <a href="https://gazprom-arena.com/technologies/" target="_blank" rel="noopener">Раздвижная крыша · устройство</a>
-      <a href="https://35photo.pro/sergd/albums/12214/" target="_blank" rel="noopener">ЗСД у Арены · Сергей Дегтярёв</a>
-      <a href="https://peterburg.center/ln/marshrut-krestovskiy-ostrov-1-chasovaya-progulka-ot-stanciy-metro-krestovskiy-ostrov-do.html" target="_blank" rel="noopener">Общий вид эстакады и района</a>
-      <small>Формы воссозданы вручную по фотографиям.
-      География и масштаб макета упрощены.</small>
-    </div>
-  `;
-  root.appendChild(details);
+  const visibilityButton = document.createElement('button');
+  visibilityButton.id = 'hudToggle';
+  visibilityButton.type = 'button';
+  visibilityButton.setAttribute('aria-controls', 'full-hud hint');
+  visibilityButton.title = 'Показать или скрыть интерфейс · H';
+  root.appendChild(visibilityButton);
+  let interfaceVisible = true;
+  function renderVisibility() {
+    hud.hidden = !interfaceVisible;
+    hint.hidden = !interfaceVisible;
+    visibilityButton.textContent = interfaceVisible ? 'Скрыть интерфейс' : 'Показать интерфейс';
+    visibilityButton.setAttribute('aria-expanded', String(interfaceVisible));
+  }
+  function toggleVisibility() {
+    interfaceVisible = !interfaceVisible;
+    renderVisibility();
+  }
+  function onVisibilityKey(e) {
+    if (e.code !== 'KeyH' || e.repeat || e.ctrlKey || e.altKey || e.metaKey
+      || ['INPUT', 'TEXTAREA', 'SELECT'].includes(e.target?.tagName)
+      || e.target?.isContentEditable) return;
+    e.preventDefault();
+    toggleVisibility();
+  }
+  visibilityButton.addEventListener('click', toggleVisibility);
+  window.addEventListener('keydown', onVisibilityKey);
+  renderVisibility();
 
   const pauseButton = hud.querySelector('#pause');
   const dayButton = hud.querySelector('#day');
@@ -83,7 +96,6 @@ export function installFullHud(root, controller, driveUi, drive) {
     const status = drive.state.active;
     if (status !== wasDriving) {
       hud.classList.toggle('driving', status);
-      details.hidden = status;
       wasDriving = status;
     }
     const text = controller.getStats();
@@ -128,7 +140,6 @@ export function installFullHud(root, controller, driveUi, drive) {
   render();
   return {
     element: hud,
-    photoSources: details,
     render,
     dispose() {
       hud.removeEventListener('click', onClick);
@@ -139,7 +150,10 @@ export function installFullHud(root, controller, driveUi, drive) {
       driveButton.classList.remove('primary');
       hint.classList.remove('full-hint');
       hud.remove();
-      details.remove();
+      visibilityButton.removeEventListener('click', toggleVisibility);
+      window.removeEventListener('keydown', onVisibilityKey);
+      visibilityButton.remove();
+      hint.hidden = false;
     },
   };
 }

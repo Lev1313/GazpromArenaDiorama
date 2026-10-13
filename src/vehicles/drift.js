@@ -1,14 +1,25 @@
 import * as THREE from 'three';
 import { createSmokeTexture } from '../materials/textures.js';
 
-// Legacy layout: the two drifters orbit (-8.1, 0) on an elongated oval.
-// This function is intentionally identical to the original driftPose().
+// Keep the parking-centre envelope; vary both radius and pace independently.
+function routePoint(t, phase) {
+  const a=t*.41-phase+.16*Math.sin(t*.29+phase)+.1*Math.sin(t*.133+phase*1.9);
+  const rx=7.25+.5*Math.sin(t*.19+phase*.8)+.25*Math.cos(2*a+phase);
+  const rz=18+.9*Math.sin(t*.16+phase*1.4);
+  return {a,x:-8.1+.18*Math.sin(t*.11+phase)+rx*Math.cos(a),z:rz*Math.sin(a)+.35*Math.sin(2*a+phase)};
+}
+
 export function driftPose(t, phase) {
-  const a = t * .43 - phase, r = 7.4 + .25 * Math.sin(a * 3);
-  const x = -8.1 + r * Math.cos(a), z = 18.5 * Math.sin(a);
-  const dr = .75 * Math.cos(a * 3);
-  const dx = dr * Math.cos(a) - r * Math.sin(a), dz = 18.5 * Math.cos(a);
-  return { x, z, angle: -Math.atan2(dz, dx) + .43 + .09 * Math.sin(a * 2) };
+  const p=routePoint(t,phase), e=.02, before=routePoint(t-e,phase),after=routePoint(t+e,phase);
+  const vx=(after.x-before.x)/(2*e),vz=(after.z-before.z)/(2*e);
+  const ax=(after.x-2*p.x+before.x)/(e*e),az=(after.z-2*p.z+before.z)/(e*e);
+  const speed=Math.hypot(vx,vz),curvature=(vx*az-vz*ax)/(speed**3);
+  const blend=THREE.MathUtils.smoothstep(Math.abs(Math.sin(p.a)),.16,.82);
+  const slip=-Math.tanh(curvature*25)*(.02+(.58+.11*Math.sin(t*.233+phase*.6))*blend);
+  const travelAngle=-Math.atan2(vz,vx);
+  const intensity=THREE.MathUtils.clamp(speed*Math.abs(Math.sin(slip))/2.2,0,1);
+  const wheelAngle=THREE.MathUtils.clamp(-slip*.85-Math.atan(2.65*curvature)*.22,-.55,.55);
+  return {x:p.x,z:p.z,angle:travelAngle+slip,travelAngle,slip,speed,intensity,wheelAngle};
 }
 
 /**
@@ -18,8 +29,7 @@ export function driftPose(t, phase) {
  * the legacy scene. No DOM/controls required; update() runs from main's RAF.
  *
  * The optional texture factory is for Node unit tests (no browser canvas).
- * When the drive-mode module arrives, supply its Golf position/active state
- * to update() for the same yielding behaviour as the legacy updateTraffic().
+ * Golf position/active state preserves the existing yielding behavior.
  */
 export function createDriftSystem(
   scene,
@@ -28,8 +38,8 @@ export function createDriftSystem(
 ) {
   const driftCenter = new THREE.Vector2(-8.1, 0);
   const drifters = [
-    { o: car(0xffa24e, { sport: true }), phase: 0, lastRear: null },
-    { o: car(0x4ed8d4, { sport: true }), phase: 1.1, lastRear: null },
+    { o: car(0xffa24e, { sport: true }), phase: 0, lastRear: null, smokeTimer: 0 },
+    { o: car(0x4ed8d4, { sport: true }), phase: 2.4, lastRear: null, smokeTimer: 0 },
   ];
 
   // Legacy circular skid buffer: fixed storage for 4,000 line segments.
@@ -52,14 +62,14 @@ export function createDriftSystem(
   let skidCursor = 0, skidCount = 0;
 
   function rearPoints(o) {
-    return [-.65, .65].map(z => new THREE.Vector3(-1.25, .015, z)
+    return [-.88, .88].map(z => new THREE.Vector3(-1.13, -.108, z)
       .applyAxisAngle(new THREE.Vector3(0, 1, 0), o.rotation.y)
       .add(o.position));
   }
 
   function addSkid(a, b) {
     const i = skidCursor * 6;
-    skidPositions.set([a.x, .014, a.z, b.x, .014, b.z], i);
+    skidPositions.set([a.x, a.y, a.z, b.x, b.y, b.z], i);
     skidCursor = (skidCursor + 1) % skidCapacity;
     skidCount = Math.min(skidCapacity, skidCount + 1);
   }
@@ -81,22 +91,26 @@ export function createDriftSystem(
     smokePool.push({ o: sprite, age: 10, life: 2.3, vx: 0, vz: 0 });
   }
 
-  let smokeIndex = 0, smokeTimer = 0, smokeEnabled = true;
+  let smokeIndex = 0, smokeEnabled = true;
   let simTime = 0, trackTimer = 0, driftTime = 0, driftWaiting = false;
 
-  function emitSmoke(point, heading) {
+  function emitSmoke(point, heading, intensity = 1, speed = 0) {
     const p = smokePool[smokeIndex];
     smokeIndex = (smokeIndex + 1) % smokePool.length;
     p.age = 0;
     p.o.position.copy(point);
-    p.o.position.y = .3;
+    p.o.position.y = point.y + .3;
     p.o.visible = true;
-    p.vx = -Math.cos(heading) * .6 + .18;
-    p.vz = Math.sin(heading) * .6;
+    p.life=1.25+.85*intensity;
+    p.opacity=.12+.22*intensity;
+    p.size=.35+.3*intensity;
+    p.growth=.9+.5*intensity;
+    p.vx = -Math.cos(heading) * (.25+speed*.03) + .1*Math.sin(smokeIndex*2.3);
+    p.vz = Math.sin(heading) * (.25+speed*.03) + .08*Math.cos(smokeIndex*1.7);
     p.o.material.rotation = simTime * 1.7;
   }
 
-  // The three lightly visible pre-laid rings are already present at t=0.
+  // Faint historical tyre rings; fresh rear-wheel marks show the actual path.
   const prelaidTracks = [];
   for (const offset of [-.5, .4, 1]) {
     const points = [];
@@ -104,14 +118,14 @@ export function createDriftSystem(
       const a = i / 128 * Math.PI * 2;
       points.push(new THREE.Vector3(
         driftCenter.x + (7.4 + offset) * Math.cos(a),
-        .006,
+        -.114,
         (18.5 + offset) * Math.sin(a),
       ));
     }
     const line = new THREE.Line(
       new THREE.BufferGeometry().setFromPoints(points),
       new THREE.LineBasicMaterial({
-        color: 0x131d25, transparent: true, opacity: .5,
+        color: 0x131d25, transparent: true, opacity: .12,
       }),
     );
     scene.add(line);
@@ -132,7 +146,6 @@ export function createDriftSystem(
   function update(dt, { driving = false, golfPosition = null, people = [] } = {}) {
     simTime += dt;
     trackTimer += dt;
-    smokeTimer += dt;
 
     driftWaiting = Boolean(driving && golfPosition && drifters.some(c => {
       const p = driftPose(driftTime + dt + .3, c.phase);
@@ -143,18 +156,25 @@ export function createDriftSystem(
     for (const c of drifters) {
       const p = driftPose(driftTime, c.phase);
       c.o.position.set(p.x, 0, p.z);
-      c.o.rotation.y = p.angle;
-      for (const wheel of c.o.userData.frontWheels) wheel.rotation.y = -.4;
+      c.o.rotation.y += Math.atan2(Math.sin(p.angle-c.o.rotation.y),Math.cos(p.angle-c.o.rotation.y));
+      c.slip=p.slip;c.speed=driftWaiting?0:p.speed;c.intensity=driftWaiting?0:p.intensity;
+      c.travelAngle=p.travelAngle;
+      for (const wheel of c.o.userData.frontWheels) wheel.rotation.y = p.wheelAngle;
 
       const rear = rearPoints(c.o);
-      if (trackTimer >= .045) {
+      if (!driftWaiting && p.intensity > .2 && trackTimer >= .045) {
         if (c.lastRear) {
           for (let j = 0; j < 2; j++) addSkid(c.lastRear[j], rear[j]);
         }
         c.lastRear = rear;
-      }
-      if (!driftWaiting && smokeEnabled && smokeTimer >= .075) {
-        for (const point of rear) emitSmoke(point, p.angle);
+      } else if(driftWaiting || p.intensity<=.2) c.lastRear=null;
+      if (!driftWaiting && smokeEnabled && p.intensity > .12) {
+        c.smokeTimer+=dt;
+        const interval=.2-.11*p.intensity;
+        const count=Math.min(3,Math.floor(c.smokeTimer/interval));
+        if(count){c.smokeTimer%=interval;for(let i=0;i<count;i++)for(const point of rear)emitSmoke(point,p.travelAngle,p.intensity,p.speed);}
+      } else {
+        c.smokeTimer=0;
       }
     }
 
@@ -162,7 +182,6 @@ export function createDriftSystem(
       trackTimer = 0;
       refreshSkids();
     }
-    if (smokeTimer >= .075) smokeTimer = 0;
 
     for (const p of smokePool) {
       p.age += dt;
@@ -170,12 +189,13 @@ export function createDriftSystem(
         p.o.visible = false;
         continue;
       }
-      p.o.position.x += p.vx * dt;
-      p.o.position.z += p.vz * dt;
-      p.o.position.y += dt * .4;
-      const size = .6 + p.age * 1.2;
+      p.o.position.x += (p.vx+.14) * dt;
+      p.o.position.z += (p.vz+.025) * dt;
+      const damping=Math.exp(-dt*.65);p.vx*=damping;p.vz*=damping;
+      p.o.position.y += dt * .35;
+      const size = p.size + p.age * p.growth;
       p.o.scale.set(size, size, 1);
-      p.o.material.opacity = .32 * (1 - p.age / p.life);
+      p.o.material.opacity = p.opacity*Math.min(1,p.age/.1)*(1-p.age/p.life)**1.5;
     }
 
     // Spectators' subtle swaying comes from the same legacy updateTraffic().
