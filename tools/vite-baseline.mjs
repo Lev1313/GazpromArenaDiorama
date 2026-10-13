@@ -226,6 +226,13 @@ async function capture() {
       await page.locator('#viewName').textContent() === 'Сверху');
     await snap(page, '12_drive_top');
     await page.click('#driveExit');
+    // Golf updates its own panel synchronously, but the scene-wide HUD
+    // observes driving state on the next RAF. Our clock is manual.
+    await advance(page);
+    check('Exit Golf restores scene HUD and photo sources',
+      !await page.locator('#drivePanel').isVisible()
+      && await page.locator('#photoSources summary').isVisible()
+      && await page.locator('#meet').isVisible());
     await page.click('#photoSources summary');
     await snap(page, '13_photo_sources');
     await context.close();

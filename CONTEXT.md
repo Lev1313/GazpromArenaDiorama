@@ -102,5 +102,13 @@ Keep a progress log in PROGRESS.md.
 - The modular application has its own deterministic Playwright+Edge+SwiftShader screenshots in `tools/vite-baseline.mjs`, completely independent of `tools/baseline.mjs` and `baseline/screenshots/` (legacy).
 - `vite:shots` generates **unapproved** candidate PNGs and report under `vite-baseline/_current/` (gitignored); visually inspect first. `vite:approve` explicitly creates approved PNGs in `vite-baseline/screenshots/` and `vite-baseline/reference.json`. `vite:verify` compares new screenshots against approved references. Never auto-approve or auto-overwrite reference images.
 - Scenarios include the six view presets, day/night, smoke toggle, Golf two camera views, photo panel and desktop/mobile layout. All captures use controlled 1/60-second requestAnimationFrame and a private Vite server on a free localhost port.
-- Approval is **pending** in `review/stage5-vite-visual-baseline`; no reference PNGs should be assumed to exist yet. They must be generated/approved on the user's Windows machine and explicitly committed.
+- User approved the 15 candidates on 2026-10-13. `vite:approve` created references and `vite:verify` passed all 12 checks and 15 pixel comparisons at 0.000% difference.
 - Stage 5.2 performance measurement and stage 5.3 comprehensive Vite browser functional coverage remain separate after this baseline is accepted.
+
+## Stage 5.1 local review — 2026-10-13
+- Actual checkout on arrival was clean `master` at `88b8b29`, also the tip of `review/stage5-vite-visual-baseline`; older pending-merge notes above are historical, not current branch evidence. Continued on the review branch without changing master.
+- Local checks passed: 51 core tests, production build, legacy 27 checks / 23 images at 0.000% difference, Vite 12 checks / 15 candidate images, no browser errors (Edge 155.0.4283.45, Windows, SwiftShader).
+- The deterministic Vite runner must advance one RAF after `#driveExit` before accessing photo sources: fullHud observes drive state in the frame loop. Added a check that exit restores scene controls and photo sources; application code was not changed.
+- Candidate gallery: `vite-baseline/_current/review.html`; JSON report and PNGs in the same ignored directory. Mobile Golf HUD partially covers the car; retain current layout pending user review.
+- Regenerate the gallery with `node tools/vite-review.mjs` (UTF-8 source/output). Do not pipe Cyrillic JavaScript through Windows PowerShell's default native-process encoding: it replaced the original gallery text with question marks. The repaired gallery was checked in Edge, including all 15 image URLs.
+- Visual approval received on 2026-10-13; references created and verified. User authorized commit/push of the review branch followed by stage 5.2. Fetch revealed existing `origin/review/stage5-performance` at `5d6300f` with `tools/perf-compare.mjs`; inspect/reuse it, preserving the accepted 5.1 work and master.
