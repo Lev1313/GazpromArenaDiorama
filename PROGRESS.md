@@ -2,6 +2,9 @@
 
 ### Stage 7B — Vehicle Interaction & Seating — 2026-10-14
 
+PR: https://github.com/Lev1313/GazpromArenaDiorama/pull/5 — открыт в master,
+не объединён; реализация `7f8930d`. Production не опубликован.
+
 - От подтверждённого master `d00a02a` после объединения PR #4 создана
   ветка `feature/vehicle-seating` и `.worktrees/vehicle-seating`.
   Незакоммиченный пользовательский CONTEXT, ZIP и резервный GLB сохранены.
