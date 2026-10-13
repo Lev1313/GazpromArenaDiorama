@@ -15,7 +15,9 @@
     "vite:approve": "node tools/vite-baseline.mjs --approve",
     "vite:verify": "node tools/vite-baseline.mjs --verify",
     "perf:compare": "npm run build && node tools/perf-compare.mjs",
-    "test:browser": "node tools/vite-functional.mjs"
+    "test:browser": "node tools/vite-functional.mjs",
+    "test:pedestrian": "node --test tests/pedestrian.test.mjs",
+    "test:pedestrian:browser": "node tools/vite-functional.mjs --pedestrian"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",

@@ -1,0 +1,14 @@
+#pedestrianPanel {
+  position: fixed; z-index: 17; right: 18px; bottom: 60px;
+  padding: 14px 18px; border: 1px solid #6587ad; border-radius: 12px;
+  color: #d8eaff; background: #111b2ce8; font: 13px/1.6 system-ui;
+}
+#pedestrianPanel[hidden] { display: none; }
+#pedestrianPanel p { margin: 8px 0; }
+#pedestrianPanel button { background: #28476a; color: white; border: 1px solid #6587ad;
+  border-radius: 8px; padding: 8px; margin-right: 5px; cursor: pointer; }
+#full-hud #walk { margin-bottom: 8px; }
+#full-hud.walking .hud-description, #full-hud.walking .hud-tempo, #full-hud.walking #stats { display: none; }
+@media (max-width: 650px) {
+  #pedestrianPanel { left: 10px; right: 10px; bottom: 52px; font-size: 11px; padding: 10px; }
+}

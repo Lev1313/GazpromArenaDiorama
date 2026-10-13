@@ -1,0 +1,147 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "Walk enters at a clear parking point with third-person camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "W walks through parking lane and animates legs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Shift increases walking pace",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pause freezes position and animation; paused input is ignored",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume has no stuck movement key",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking cannot pass through actual Golf GLB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Character slides beside Golf and can move away",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking cannot pass through actual Lexus GLB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Character slides beside Lexus and can move away",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking cannot pass through actual Mercedes GLB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Character slides beside Mercedes and can move away",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Existing parking fence blocks pedestrian",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pedestrian slides along actual parking fence",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Feet rest on actual raised footpath",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual island boundary stops walking into water and follows grass height",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mouse rotates smooth chase camera while OrbitControls remain disabled",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking follows rotated camera direction",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night walking preserves lighting scheme",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk exits, hides character and restores overview",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset exits walk and retains arena preset",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf activation exits walking with exclusive input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf still accelerates after walking",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking activation exits Golf and clears its input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk blur clears held input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk recovery returns to a clear point",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No browser console or page errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "pedestrian-day.png",
+    "pedestrian-golf.png",
+    "pedestrian-lexus.png",
+    "pedestrian-mercedes.png",
+    "pedestrian-night.png"
+  ],
+  "generatedAt": "2026-10-13T21:52:13.912Z",
+  "head": "eda36dd5ebeca6a366d4ccc97a2d57fdff910f45",
+  "mode": "Production bundle with snapshot and pedestrian start-position fixtures; manual 60 Hz clock; Edge SwiftShader",
+  "browser": "155.0.4283.45"
+}
