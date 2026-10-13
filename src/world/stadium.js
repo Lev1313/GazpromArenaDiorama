@@ -2,14 +2,16 @@ import * as THREE from 'three';
 import { createPrimitives } from '../utils/primitives.js';
 import { surfaceSign } from '../utils/signs.js';
 import { createClosedArenaRoof } from './arenaRoof.js';
+import { createArenaBase } from './arenaBase.js';
+import { arenaX as defaultArenaX } from './siteLayout.js';
 
 /**
  * The low-poly Gazprom Arena, based on the migrated legacy architecture.
- * Stage 6.1 refines the closed roof leaves; the foundation, fixed roof,
- * facade, masts and site placement retain the accepted dimensions.
+ * Stage 6.1 refines the roof leaves; 6.2 joins the podium and stairs.
+ * Fixed roof, facade, masts and site placement retain accepted dimensions.
  *
  * Note: stadium meshes are children of the translated stadium group;
- * structural stays, roof seams, galleries and signs are added to the scene
+ * structural stays, roof seams and signs are added to the scene
  * exactly as in legacy. Grouping/rebatching is reserved for a later stage.
  *
  * @param {THREE.Scene} scene
@@ -22,11 +24,11 @@ export function createStadium(
   scene,
   mat,
   materials,
-  arenaX = 41,
+  arenaX = defaultArenaX,
   { makeSurfaceSign = surfaceSign } = {},
 ) {
   const { cube, cyl, line } = createPrimitives(scene);
-  const { concrete, slab, white } = materials;
+  const { concrete } = materials;
   const surfaceSign = makeSurfaceSign;
 
 // Gazprom Arena: proportions and features based on official ground photos and aerial references.
@@ -34,7 +36,7 @@ const stadium=new THREE.Group();stadium.position.set(arenaX,0,0);scene.add(stadi
 function arenaMesh(geometry,material,x=0,y=0,z=0){const m=new THREE.Mesh(geometry,material);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;stadium.add(m);return m;}
 const steel=mat(0xc5cbc9,{metalness:.3,roughness:.55}),shellMat=mat(0xb1b1a9,{metalness:.12,roughness:.72}),facade=mat(0x345063,{metalness:.5,roughness:.27}),cyan=mat(0x7bdaed,{emissive:0x188bab,emissiveIntensity:.45}),darkGlass=mat(0x1b2d38,{metalness:.25,roughness:.35}),warmWindow=mat(0x7a8989,{emissive:0x6b6544,emissiveIntensity:.28});
 // Raised podium and the open column-supported lower tier.
-arenaMesh(new THREE.CylinderGeometry(23.6,24.6,1.8,80),concrete,0,.85);
+const base = createArenaBase(stadium, mat, concrete, steel);
 arenaMesh(new THREE.CylinderGeometry(18.8,18.2,5.1,80),darkGlass,0,4.2);
 for(let i=0;i<32;i++){const a=i*Math.PI/16;line([arenaX+21.5*Math.cos(a),1.8,21.5*Math.sin(a)],[arenaX+19.6*Math.cos(a),6.2,19.6*Math.sin(a)],steel,.24);}
 // Broad inverted bowl: lower edge recedes towards the columns.
@@ -59,19 +61,24 @@ for(const v of [.4,.8,1])for(let i=0;i<96;i++){const p=roofPoint(i/96*Math.PI*2,
 // Two closed leaves with a reference-informed frame grid, at the legacy footprint.
 const retractableRoof = createClosedArenaRoof(stadium, mat);
 for(const y of [11.08,11.3]){const o=arenaMesh(new THREE.TorusGeometry(26.55,.11,5,96),y>11.1?cyan:steel,0,y);o.scale.y=27/26.55;o.rotation.x=Math.PI/2;}
-// Eight masts lean inward, with stays ending on the fixed roof.
-for(let i=0;i<8;i++){const a=i*Math.PI/4+Math.PI/8,base=[arenaX+23.5*Math.cos(a),5.1,23.5*Math.sin(a)],top=[arenaX+17.7*Math.cos(a),23.0,17.7*Math.sin(a)];line(base,top,steel,.20);for(const da of [-.22,.22]){const p=roofPoint(a+da,.83);line(top,[arenaX+p.x,p.y,p.z],steel,.045);}cyl(.095,.095,.18,mat(0xff4444,{emissive:0xff1200,emissiveIntensity:.6}),top[0],top[1]+.1,top[2],6);}
-// Entrance stairs, terrace lawns and roofed parking galleries around the podium.
-for(let i=0;i<16;i++){const a=i*Math.PI/8;for(let j=0;j<7;j++){const r=25+j*.48;const step=cube(2.9,.18,.52,concrete,arenaX+r*Math.cos(a),1.7-j*.24,r*Math.sin(a),Math.PI/2-a);}
- if(i!==8){const r=28.5,patch=cube(3.4,.12,3.2,mat(0x547354),arenaX+r*Math.cos(a+.09),.05,r*Math.sin(a+.09),Math.PI/2-a);}
+// Trim the eight free lower mast ends at their intersection with the bowl.
+// Keep the original line slope, tips and stays. The bowl expands from
+// r=20.4 at y=5.1 to r=24 at y=9.5; the mast leans in toward r=17.7 at y=23.
+const mastSlope = (23.5 - 17.7) / (23 - 5.1);
+const mastJoinY = 5.1 + (23.5 - 20.4) / (mastSlope + (24 - 20.4) / (9.5 - 5.1));
+const mastJoinR = 23.5 - mastSlope * (mastJoinY - 5.1);
+for(let i=0;i<8;i++){const a=i*Math.PI/4+Math.PI/8,base=[arenaX+mastJoinR*Math.cos(a),mastJoinY,mastJoinR*Math.sin(a)],top=[arenaX+17.7*Math.cos(a),23.0,17.7*Math.sin(a)];line(base,top,steel,.20);for(const da of [-.22,.22]){const p=roofPoint(a+da,.83);line(top,[arenaX+p.x,p.y,p.z],steel,.045);}cyl(.095,.095,.18,mat(0xff4444,{emissive:0xff1200,emissiveIntensity:.6}),top[0],top[1]+.1,top[2],6);}
+// Terrace lawns stay inside the ring road; stairs are built with the podium.
+for(let i=0;i<16;i++){const a=i*Math.PI/8;
+ if(i!==8){const r=27,b=a+Math.PI/16;cube(3.4,.12,3.2,mat(0x547354),arenaX+r*Math.cos(b),.05,r*Math.sin(b),Math.PI/2-b);}
 }
-for(let i=0;i<12;i++){const a=i*Math.PI/6;if(Math.cos(a)<-.62)continue;const r=30.3,x=arenaX+r*Math.cos(a),z=r*Math.sin(a),yaw=Math.PI/2-a;cube(6.6,.32,4.7,concrete,x,1.9,z,yaw);cube(6.3,.18,4.4,slab,x,-.04,z,yaw);for(const dx of [-2.6,0,2.6]){const xx=x+dx*Math.sin(a),zz=z-dx*Math.cos(a);cube(.16,1.8,.16,steel,xx,.9,zz);}for(let k=-2;k<=2;k++)cube(.08,.02,3.4,white,x+k*Math.sin(a),2.075,z-k*Math.cos(a),yaw);}
 // Facade name follows the western face, visible from the car-meet area.
 const arenaSign=surfaceSign('ГАЗПРОМ АРЕНА',0xe9faff,0x244558,13,1.1);arenaSign.position.set(arenaX-24.3,10.2,0);arenaSign.rotation.y=-Math.PI/2;scene.add(arenaSign);
 
 
   return {
     stadium,
+    base,
     arenaSign,
     roof,
     retractableRoof,

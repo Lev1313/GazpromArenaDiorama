@@ -117,7 +117,7 @@ async function sceneTests(page) {
   check('Pause freezes traffic, visitors, drift and effects', !b.hud.running && same(a.highCars, b.highCars)
     && same(a.visitors, b.visitors) && same(a.drift, b.drift));
   const presets = {
-    meet: [[-20,64,64],[-8,0,0]], arena: [[-6,29,54],[41,9,0]],
+    meet: [[-20,64,64],[-8,0,0]], arena: [[3,29,54],[50,9,0]],
     high: [[-85,95,95],[-27,12,-17]], map: [[0,230,-23.99],[0,0,-24]],
     drift: [[-9,44,37],[-8,1,0]], reset: [[-115,150,190],[-4,12,-25]],
   };
@@ -161,15 +161,18 @@ async function sceneTests(page) {
 }
 
 async function trafficTests(page) {
+  await click(page,'#day');
+  await click(page,'#map');
   const initial=await snapshot(page), states=new Set(); let counted=false, completed=false;
-  for(let second=0;second<100;second++) {
+  for(let second=0;second<240;second++) {
     await step(page,60,false);
     const s=await snapshot(page), guest=s.visitors[0]; states.add(guest.state);
+    if ([2,30,65,100].includes(second)) await shot(page,'visitor-route-'+second);
     checkStats(s, await page.locator('#stats').textContent());
     if(s.parkedVisitors>0) counted=true;
     if(states.has('leave') && guest.state==='arrive' && !guest.visible && guest.delay>0) {completed=true;break;}
   }
-  check('Visitor arrives, parks, departs and hides before next visit', states.has('arrive') && states.has('park') && states.has('leave') && completed);
+  check('Visitor arrives, parks, reverses, departs and hides before next visit', states.has('arrive') && states.has('park') && states.has('reverse') && states.has('leave') && completed);
   check('Live parking counter follows actual visitor states', counted);
   await step(page,60*130,false); const end=await snapshot(page);
   check('Long simulation keeps smoke, skid buffers and scene size bounded', end.drift.smokePoolSize===90

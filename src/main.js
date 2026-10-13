@@ -4,6 +4,7 @@ import { createCamera } from './core/camera.js';
 import { createLighting } from './core/lighting.js';
 import { createMaterialSystem } from './materials/materials.js';
 import { createTerrain } from './world/terrain.js';
+import { driveArea } from './world/siteLayout.js';
 import { createStadium } from './world/stadium.js';
 import { createZsd } from './world/zsd.js';
 import { createLakhta } from './world/lakhta.js';
@@ -60,6 +61,7 @@ const drive = createGolfDrive({
   golf, golfLabel, parked, people,
   visitors: traffic.visitors, drifters: drift.drifters,
   drift, camera, controls, lotOutline: parkingOutline,
+  isDriveable: driveArea(parkingOutline),
 });
 const root = document.getElementById('app');
 const driveUi = installDriveUi(root, drive);

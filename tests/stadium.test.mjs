@@ -4,6 +4,7 @@ import * as THREE from 'three';
 import { createMaterialSystem } from '../src/materials/materials.js';
 import { createTerrain } from '../src/world/terrain.js';
 import { createStadium } from '../src/world/stadium.js';
+import { podium } from '../src/world/arenaBase.js';
 
 function buildArena() {
   const scene = new THREE.Scene();
@@ -26,8 +27,8 @@ function buildArena() {
 
 test('stadium group and facade sign match the legacy placement', () => {
   const { scene, arena, arenaX, signArgs } = buildArena();
-  assert.equal(arenaX, 41);
-  assert.deepEqual(arena.stadium.position.toArray(), [41, 0, 0]);
+  assert.equal(arenaX, 50);
+  assert.deepEqual(arena.stadium.position.toArray(), [50, 0, 0]);
   assert.ok(scene.children.includes(arena.stadium));
   assert.equal(arena.retractableRoof.leaves.length, 2);
   assert.deepEqual(signArgs, ['ГАЗПРОМ АРЕНА', 0xe9faff, 0x244558, 13, 1.1]);
@@ -66,10 +67,30 @@ test('eight mast warning lights and the surrounding architecture are present', (
       && obj.material?.emissive?.getHex() === 0xff1200,
   );
   assert.equal(warningLights.length, 8);
-  // Legacy roof seams, support rods, stairs and galleries live in scene,
-  // not in the translated stadium group. Preserve this until batching.
-  assert.ok(scene.children.length > 800);
-  assert.equal(arena.stadium.children[0].geometry.type, 'CylinderGeometry');
-  assert.equal(arena.stadium.children[0].geometry.parameters.radiusTop, 23.6);
-  assert.equal(arena.stadium.children[0].geometry.parameters.radiusBottom, 24.6);
+  assert.ok(arena.stadium.children.includes(arena.base.group));
+});
+
+test('podium stairs join the deck, reach the plaza and clear the ring road', () => {
+  const { arena } = buildArena();
+  arena.stadium.updateMatrixWorld(true);
+  assert.equal(arena.base.stairs.length, 16);
+  for (const flight of arena.base.stairs) {
+    const treads = flight.children.filter(o => o.geometry?.type === 'BoxGeometry');
+    assert.equal(treads.length, 10);
+    const bounds = treads.map(t => {
+      t.geometry.computeBoundingBox();
+      return t.geometry.boundingBox.clone().translate(t.position);
+    });
+    assert.ok(Math.abs(bounds[0].max.y - podium.deckY) < 1e-6);
+    assert.ok(Math.hypot(podium.stairStart, podium.width / 2) < podium.radius,
+      'Top tread must overlap the deck across its entire width');
+    for (let i = 0; i < bounds.length; i++) {
+      assert.ok(Math.abs(bounds[i].min.y - podium.groundY) < 1e-6);
+      if (i) {
+        assert.ok(Math.abs(bounds[i].min.z - bounds[i - 1].max.z) < 1e-6);
+        assert.ok(bounds[i].max.y < bounds[i - 1].max.y);
+      }
+      assert.ok(Math.hypot(podium.stairStart + bounds[i].max.z, podium.width / 2) < 29);
+    }
+  }
 });

@@ -44,7 +44,7 @@ export function createHudController({
   const cameraPresets = {
     meet: { position: [-20, 64, 64], target: [-8, 0, 0] },
     drift: { position: [-9, 44, 37], target: [-8, 1, 0] },
-    arena: { position: [-6, 29, 54], target: [arenaX, 9, 0] },
+    arena: { position: [arenaX - 47, 29, 54], target: [arenaX, 9, 0] },
     high: { position: [-85, 95, 95], target: [-27, 12, -17] },
     map: { position: [0, 230, -23.99], target: [0, 0, -24] },
     reset: { position: [-115, 150, 190], target: [-4, 12, -25] },

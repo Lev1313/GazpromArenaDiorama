@@ -43,8 +43,9 @@ test('parked-car rows and visitor-free slots retain original coordinates', () =>
     const x = row === 0 ? -22.4 : 6.1;
     for (let j = 0; j < 7; j++) {
       const car = parked[row * 7 + j];
-      assert.deepEqual(car.position.toArray(), [x, 0, -24 + j * 8]);
-      assert.equal(car.rotation.y, row === 0 ? 0 : Math.PI);
+      const relocated = row === 1 && j === 3;
+      assert.deepEqual(car.position.toArray(), relocated ? [5.5, 0, -37] : [x, 0, -24 + j * 8]);
+      assert.equal(car.rotation.y, relocated ? Math.PI / 2 : row === 0 ? 0 : Math.PI);
       assert.equal(car.userData.frontWheels.length, 2);
     }
   }

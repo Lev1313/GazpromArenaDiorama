@@ -1,16 +1,10 @@
 import * as THREE from 'three';
+import { pointInPolygon, parkingLights } from '../world/siteLayout.js';
 
 // Original low-poly Golf footprint collision math, moved out of the HTML.
 // All measurements use the same world coordinates as the parking lot.
 export function pointInLot(x, z, lotOutline) {
-  let inside = false;
-  for (let i = 0, j = lotOutline.length - 1; i < lotOutline.length; j = i++) {
-    const [xi, zi] = lotOutline[i], [xj, zj] = lotOutline[j];
-    if ((zi > z) !== (zj > z) && x < (xj - xi) * (z - zi) / (zj - zi) + xi) {
-      inside = !inside;
-    }
-  }
-  return inside;
+  return pointInPolygon(x, z, lotOutline);
 }
 
 function axes(yaw) {
@@ -57,6 +51,7 @@ export const viewNames = ['Сзади', 'Сверху', 'Свободно'];
 export function createGolfDrive({
   golf, golfLabel, parked, people, visitors, drifters,
   drift, camera, controls, lotOutline,
+  isDriveable = (x, z) => pointInLot(x, z, lotOutline),
 }) {
   const golfHome = golf.position.clone();
   const golfHeading = golf.rotation.y;
@@ -71,10 +66,9 @@ export function createGolfDrive({
     const a = axes(yaw);
     for (const dx of [-1.96, 1.96]) {
       for (const dz of [-1.04, 1.04]) {
-        if (!pointInLot(
+        if (!isDriveable(
           pos.x + a[0].x * dx + a[1].x * dz,
           pos.z + a[0].z * dx + a[1].z * dz,
-          lotOutline,
         )) return true;
       }
     }
@@ -84,10 +78,8 @@ export function createGolfDrive({
     for (const p of people) {
       if (circleOverlap(pos, yaw, p.position.x, p.position.z, .5)) return true;
     }
-    for (const x of [-26, 10]) {
-      for (const z of [-28, 0, 28]) {
+    for (const [x, z] of parkingLights) {
         if (circleOverlap(pos, yaw, x, z, .45)) return true;
-      }
     }
     for (const [x, z] of [[8, 12], [-25, -12]]) {
       if (circleOverlap(pos, yaw, x, z, 1)) return true;
@@ -250,7 +242,7 @@ export function createGolfDrive({
       message: state.contact > 0
         ? 'Препятствие — сдай назад'
         : drift.driftWaiting ? 'Дрифтеры пропускают тебя'
-          : 'Свободный заезд по парковке',
+          : 'Свободный заезд',
       viewName: viewNames[state.view],
       active: state.active,
     };
