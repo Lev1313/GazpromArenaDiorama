@@ -1,6 +1,13 @@
 
 # Gazprom Arena Diorama
 
+## Current status — 2026-10-13
+- Modular migration verification stages 5.1–5.3 are implemented and locally checked. Historical per-stage "pending" notes below describe earlier milestones, not the current working state.
+- Working branch for functional coverage: `review/stage5-functional-regression`, based on completed performance stage `c323014`. Master remains untouched at `88b8b29`.
+- Verification layers: `test:core` (51), `test:browser` (59 production-bundle integration checks), `vite:verify` (12 checks / 15 approved images), `baseline:verify` (27 checks / 23 legacy images).
+- User accepted Vite visuals at stage 5.1. Subsequent 5.2/5.3 work changes tooling/docs only, not scene geometry, car behaviour or UI.
+- Next product work is geographic/architectural accuracy, under user visual review; do not silently optimize or redesign vehicles/UI. The measured callback overhead remains a separate profiling lead.
+
 ## Goal
 Build an interactive low-poly 3D diorama of the Gazprom Arena surroundings in Saint Petersburg.
 
@@ -120,3 +127,10 @@ Keep a progress log in PROGRESS.md.
 - Vite callback median was 0.35–1.40ms higher in this experiment. Treat as a profiling lead, not a proven root cause. No optimization or application changes were made.
 - This establishes the static software-rendering comparison only; it does not measure gaming GPU FPS, active driving/simulation, load time or memory growth. Stage 5.3 functional coverage remains separate.
 - Preserved results: `performance/reports/2026-10-13-swiftshader/RESULTS.md`, `report.md`, `report.json` (raw frames, environment and source hashes). Method: `performance/README.md`. Build and all 51 core tests passed.
+
+## Stage 5.3 browser functional coverage — 2026-10-13
+- `npm run test:browser` builds into ignored `browser-tests/_current/dist/`, serves it locally, and uses Edge/SwiftShader with a manual 60 Hz clock. The test-only Vite transform appends a JSON snapshot reader to main.js in memory; application source files and normal production builds do not expose the hook.
+- 59 checks passed: scene controls, actual traffic/drift/smoke/skids, pause, light parameters, tempo, camera presets/orbit/zoom, guest lifecycle/counter, bounded effects, Golf physics/input/collision/reverse/reset/cameras/exit, touch/multitouch/cancel and resize. Read state only; operate the actual UI rather than calling controller methods.
+- Resize is asynchronous: wait for actual canvas dimensions/projection using timer polling, not an immediate snapshot or frozen RAF polling. An initial harness failure was fixed this way; no app bug or app change was needed.
+- Blur/visibility events are simulated handler tests; touch is browser emulation, not a physical phone test. The bounded-object check is not a memory profiler. Do not overstate coverage as exhaustive across all devices/trajectories.
+- Evidence/method: `browser-tests/README.md`, `browser-tests/reports/2026-10-13/report.json` plus four inspected PNGs and source hashes. Checks: 59/59 browser, 51/51 core, normal build, Vite 15/15 images and legacy 23/23 images at 0.000% difference. Approved references were not overwritten.
