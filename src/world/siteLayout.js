@@ -52,7 +52,7 @@ function convexHull(points) {
 }
 
 /** Capture ground-level solid bounds before architecture is merged. */
-export function groundObstacles(scene) {
+export function groundObstacles(scene, height = 1.7) {
   const obstacles=[];
   scene.updateMatrixWorld(true);
   scene.traverse(o=>{
@@ -61,17 +61,17 @@ export function groundObstacles(scene) {
     if(!g.boundingBox)g.computeBoundingBox();
     const box=g.boundingBox.clone().applyMatrix4(o.matrixWorld);
     // Flat asphalt/grass/curbs can be crossed; higher solid objects cannot.
-    if(box.max.y<=.35 || box.min.y>=1.65)return;
+    if(box.max.y<=.35 || box.min.y>=height-.05)return;
     // Clip geometry to vehicle height before projecting onto the ground.
     // A rotated fence or inclined support must not fill its entire world AABB.
     const vertices=Array.from({length:g.attributes.position.count},(_,i)=>
       new Vector3().fromBufferAttribute(g.attributes.position,i).applyMatrix4(o.matrixWorld));
-    const points=vertices.filter(p=>p.y>=-.5&&p.y<=1.7).map(p=>[p.x,p.z]);
+    const points=vertices.filter(p=>p.y>=-.5&&p.y<=height).map(p=>[p.x,p.z]);
     const count=g.index?.count ?? vertices.length;
     for(let i=0;i<count;i+=3)for(let j=0;j<3;j++){
       const a=vertices[g.index?g.index.getX(i+j):i+j];
       const b=vertices[g.index?g.index.getX(i+(j+1)%3):i+(j+1)%3];
-      for(const y of [-.5,1.7])if((a.y<y&&b.y>y)||(b.y<y&&a.y>y)){
+      for(const y of [-.5,height])if((a.y<y&&b.y>y)||(b.y<y&&a.y>y)){
         const t=(y-a.y)/(b.y-a.y);points.push([a.x+(b.x-a.x)*t,a.z+(b.z-a.z)*t]);
       }
     }

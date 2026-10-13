@@ -1,0 +1,50 @@
+﻿[
+    {
+        "path":  "src/main.js",
+        "sha256":  "70951c3e53d029f8b6eaeae8a1b2ce6fb098474c9e16d149e3a19ada435fb008"
+    },
+    {
+        "path":  "src/ui/hudController.js",
+        "sha256":  "aad09a130965130baf9be3610a8b916da683a70168db3fd955311426c577475a"
+    },
+    {
+        "path":  "src/world/siteLayout.js",
+        "sha256":  "24880089be4d47ff51fda30e3ca7d51da0ce4da562fada73c5aab75c4fce4ac8"
+    },
+    {
+        "path":  "src/ui/pedestrianUi.js",
+        "sha256":  "fcf62f294909dc26e54a16cdbc58899d5a2d32d438acc1a8e6279ee5adbcdc47"
+    },
+    {
+        "path":  "src/ui/pedestrianUi.css",
+        "sha256":  "396e017fe973433e4bc9aa04254556ce217990979f75cd276cbe22ed55c41911"
+    },
+    {
+        "path":  "tests/pedestrian.test.mjs",
+        "sha256":  "4e69f0a480ec38be9984d2cd17fa9897c1688249eecaeea7a6727686462a6b4d"
+    },
+    {
+        "path":  "tools/vite-functional.mjs",
+        "sha256":  "06182ecb79a9de360bb75acbe44bfa1750582ddd7c265eab003aaa73087cfe7b"
+    },
+    {
+        "path":  "package.json",
+        "sha256":  "7e1fe66b6a35ad942eb24975d7e3c257e260ef78b5eb0f8d80d344be7575c789"
+    },
+    {
+        "path":  "src/player/characterModel.js",
+        "sha256":  "64f5300186fbc848be3f98e5392599711c64356682c8920e99ff2fb3c918d31c"
+    },
+    {
+        "path":  "src/player/controlModes.js",
+        "sha256":  "1aff5ca0f7b31c320b535fe23182d81afceafb2661758360ca7848bed1801371"
+    },
+    {
+        "path":  "src/player/groundSurface.js",
+        "sha256":  "f908b33320510f1a5737efdd34f8270356c88db4443cb48f135b8d510cad2034"
+    },
+    {
+        "path":  "src/player/pedestrian.js",
+        "sha256":  "038a9fe18da02dda16fd11132a7e7af8c6f45077735834b0ecdad28175db8036"
+    }
+]

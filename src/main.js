@@ -21,6 +21,10 @@ import { createGolfDrive } from './vehicles/golfDrive.js';
 import { installDriveUi } from './ui/driveUi.js';
 import { createHudController } from './ui/hudController.js';
 import { installFullHud } from './ui/fullHud.js';
+import { createPedestrian } from './player/pedestrian.js';
+import { createControlModes } from './player/controlModes.js';
+import { installPedestrianUi } from './ui/pedestrianUi.js';
+import { captureGroundSurface } from './player/groundSurface.js';
 
 // Stage 4.5: restore the original HUD on top of the complete modular scene.
 const canvas = document.createElement('canvas');
@@ -39,6 +43,8 @@ const highway = createZsd(scene, mat, materials);
 createLakhta(scene, mat, materials, steel);
 createSurroundings(scene, mat, materials, arenaX, islandOutline, steel);
 const staticObstacles = groundObstacles(scene);
+const pedestrianObstacles = groundObstacles(scene, 1.85);
+const pedestrianGround = captureGroundSurface(scene);
 
 // Exact legacy order: geometry batching first, then disable material sharing
 // so later car paint materials are not accidentally shared.
@@ -83,6 +89,13 @@ const drive = createGolfDrive({
   getGroundHeight: (x,z) => pavedArea(x,z) || (x>=-14.5 && x<=-5.5 && z>=-49.5 && z<=-38.5)
     ? 0 : Math.hypot(x-arenaX,z)<=36 ? -.13 : -.33,
 });
+const pedestrian = createPedestrian({
+  scene, camera, controls, parked, people, visitors: traffic.visitors, drifters: drift.drifters,
+  staticObstacles: pedestrianObstacles, parkingOutline, islandOutline,
+  isWalkable: freeDriveArea(islandOutline),
+  getGroundHeight: pedestrianGround,
+});
+const modes = createControlModes(drive, pedestrian);
 const root = document.getElementById('app');
 const driveUi = installDriveUi(root, drive);
 const updateHeadlights = configureNightLighting(scene, { arenaX, headlightCars: [
@@ -93,14 +106,18 @@ const updateHeadlights = configureNightLighting(scene, { arenaX, headlightCars: 
 ] });
 const hud = createHudController({
   scene, renderer, camera, controls, hemi, sun, arenaX,
-  drift, traffic, drive, staticCount, people,
+  drift, traffic, drive, staticCount, people, pedestrian, modes,
 });
 const fullHud = installFullHud(root, hud, driveUi, drive);
+const pedestrianUi = installPedestrianUi(root, pedestrian, modes, hud, canvas);
 
 let last = performance.now();
 function frame(now) {
   requestAnimationFrame(frame);
-  const dt = Math.max(0, Math.min((now - last) / 1000, .06));
+  const elapsed = Math.max(0, (now - last) / 1000);
+  const dt = Math.min(elapsed, .06);
+  // Walking keeps real elapsed time even below 17 FPS; bound long tab stalls.
+  const walkDt = Math.min(elapsed, .25);
   last = now;
   // Original order and timing: Golf uses real dt; traffic and drifting
   // use simulation dt multiplied by the user-selected tempo.
@@ -111,15 +128,19 @@ function frame(now) {
     drift.update(simDt, {
       people, driving: drive.state.active, golfPosition: golf.position,
     });
+    pedestrian.update(walkDt);
   }
   updateHeadlights();
-  if (drive.state.active && drive.state.view !== 2) {
+  if (pedestrian.state.active) {
+    pedestrian.updateCamera(walkDt);
+  } else if (drive.state.active && drive.state.view !== 2) {
     drive.updateDriveCamera(dt);
   } else {
     controls.update();
   }
   driveUi.render();
   fullHud.render();
+  pedestrianUi.render();
   renderer.render(scene, camera);
 }
 requestAnimationFrame(frame);

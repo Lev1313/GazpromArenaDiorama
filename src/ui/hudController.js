@@ -8,7 +8,7 @@ import { setLightingMode } from '../core/lighting.js';
  */
 export function createHudController({
   scene, renderer, camera, controls, hemi, sun, arenaX,
-  drift, traffic, drive, staticCount, people,
+  drift, traffic, drive, staticCount, people, pedestrian, modes,
 }) {
   const state = { running: true, day: false, speedScale: 1 };
   setLightingMode(scene, renderer, hemi, sun, false);
@@ -16,6 +16,7 @@ export function createHudController({
   function togglePause() {
     state.running = !state.running;
     drive.clearKeys(); // same as legacy pause button
+    pedestrian?.clearKeys();
     return state.running;
   }
 
@@ -51,6 +52,7 @@ export function createHudController({
     if (!preset) throw new RangeError('Unknown camera preset: ' + name);
     // Original camera buttons always exit driving mode first.
     drive.setDriving(false);
+    modes?.overview();
     camera.position.set(...preset.position);
     controls.target.set(...preset.target);
     controls.update();

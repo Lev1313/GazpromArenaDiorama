@@ -12,15 +12,20 @@ const out = join(root, 'browser-tests/_current');
 const report = { ok: false, checks: [], errors: [], screenshots: [],
   generatedAt: new Date().toISOString(),
   head: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
-  mode: 'Production bundle with read-only snapshot hook; manual 60 Hz clock; Edge SwiftShader' };
+  mode: 'Production bundle with snapshot and pedestrian start-position fixtures; manual 60 Hz clock; Edge SwiftShader' };
 
 // Only the private test build receives this observation hook. No mutable object
-// references or controller methods escape; inputs still use the actual DOM/UI.
+// references or controller methods escape through the snapshot; movement inputs
+// use the actual DOM/UI. A separate pedestrian fixture only sets test start poses.
 const observation = `
 window.__readDiorama = () => {
   const pose = o => ({ position: o.position.toArray(), yaw: o.rotation.y, visible: o.visible });
   return JSON.parse(JSON.stringify({
     hud: hud.state, golf: pose(golf), home: drive.golfHome.toArray(),
+    pedestrian: { ...pose(pedestrian.model), ...pedestrian.state, keys: [...pedestrian.keys],
+      blocked: Boolean(pedestrian.collision(pedestrian.model.position.x,pedestrian.model.position.z)),
+      legAngle: pedestrian.model.children[0].children[4].rotation.x },
+    parked: parked.map(c=>({...pose(c),footprint:c.userData.footprint})),
     drive: drive.state, keys: [...drive.keys], status: drive.getStatus(),
     camera: { position: camera.position.toArray(), target: controls.target.toArray(),
       aspect: camera.aspect, enabled: controls.enabled },
@@ -37,6 +42,12 @@ window.__readDiorama = () => {
     counts: { parked: parked.length, people: people.length, children: scene.children.length },
     canvas: { width: canvas.width, height: canvas.height }, stats: hud.getStats()
   }));
+};
+// Test fixture placement only; normal builds have neither observation nor fixture hooks.
+window.__placePedestrian = (x,z) => {
+  if(pedestrian.collision(x,z)) throw new Error('Unsafe browser fixture');
+  pedestrian.clearKeys(); pedestrian.model.position.set(x,-.12,z);
+  pedestrian.state.cameraYaw=0; pedestrian.updateCamera(1,true);
 };`;
 
 function clock() {
@@ -307,6 +318,73 @@ async function mobileTests(page, context) {
   await cdp.detach();
 }
 
+async function pedestrianTests(page) {
+  const read=async()=> (await snapshot(page)).pedestrian;
+  const press=async(code,frames)=>{await page.keyboard.down(code);await step(page,frames);await page.keyboard.up(code);};
+  await click(page,'#day');
+  const overview=(await snapshot(page)).camera;
+  await click(page,'#walk');let a=await read();
+  check('Walk enters at a clear parking point with third-person camera',a.active && a.visible && !a.blocked
+    && !(await snapshot(page)).camera.enabled && !(await snapshot(page)).drive.active);
+  await shot(page,'pedestrian-day');
+  await press('KeyW',60);let b=await read();
+  check('W walks through parking lane and animates legs',a.position[2]-b.position[2]>2 && b.stride>.9 && b.phase>0 && !b.blocked);
+  a=b;await page.keyboard.down('Shift');await press('KeyS',60);await page.keyboard.up('Shift');b=await read();
+  check('Shift increases walking pace',b.position[2]-a.position[2]>3.3);
+  await click(page,'#pause');a=await read();await page.keyboard.down('w');await step(page,120);await page.keyboard.up('w');b=await read();
+  check('Pause freezes position and animation; paused input is ignored',same(a,b));
+  await click(page,'#pause');await step(page,30);b=await read();
+  check('Resume has no stuck movement key',distance(a.position,b.position)<1e-7 && b.keys.length===0);
+  // Each GLB fixture starts just outside its measured footprint. Movement is
+  // real keyboard input; the test places only the initial clear point.
+  for(const [index,name] of [[2,'Golf'],[17,'Lexus'],[16,'Mercedes']]) {
+    const c=(await snapshot(page)).parked[index], f=c.footprint;
+    const extent=Math.abs(Math.cos(c.yaw))*f.halfLength+Math.abs(Math.sin(c.yaw))*f.halfWidth;
+    await page.evaluate(([x,z])=>window.__placePedestrian(x,z),[c.position[0]+extent+.8,c.position[2]]);
+    await press('KeyA',120);b=await read();
+    check('Walking cannot pass through actual '+name+' GLB',b.position[0]>c.position[0]+extent+.29 && b.contact && !b.blocked);
+    await shot(page,'pedestrian-'+name.toLowerCase());
+    // Diagonal input has a tangent component and must slide along the side.
+    a=b;await page.keyboard.down('a');await press('KeyW',35);await page.keyboard.up('a');b=await read();
+    check('Character slides beside '+name+' and can move away',a.position[2]-b.position[2]>.5 && !b.blocked);
+  }
+  await page.evaluate(()=>window.__placePedestrian(10.8,8));
+  await press('KeyD',120);b=await read();
+  check('Existing parking fence blocks pedestrian',b.position[0]<11.4 && b.contact && !b.blocked);
+  a=b;await page.keyboard.down('d');await press('KeyS',40);await page.keyboard.up('d');b=await read();
+  check('Pedestrian slides along actual parking fence',b.position[2]-a.position[2]>.7 && b.position[0]<11.4 && !b.blocked);
+  await page.evaluate(()=>window.__placePedestrian(13.3,8));await press('KeyS',30);b=await read();
+  check('Feet rest on actual raised footpath',near(b.position[1],-.15,1e-6) && !b.blocked);
+  await page.evaluate(()=>window.__placePedestrian(88,0));
+  await press('KeyD',120);b=await read();
+  check('Actual island boundary stops walking into water and follows grass height',b.position[0]<88.7 && b.contact
+    && !b.blocked && near(b.position[1],-.45));
+  await page.evaluate(()=>window.__placePedestrian(-18,-8));
+  a=(await snapshot(page)).camera;
+  await page.mouse.move(800,450);await page.mouse.down();await page.mouse.move(980,450,{steps:8});await page.mouse.up();await step(page,30);
+  b=await snapshot(page);
+  check('Mouse rotates smooth chase camera while OrbitControls remain disabled',distance(a.position,b.camera.position)>1 && !b.camera.enabled);
+  a=b.pedestrian;await press('KeyW',30);b=await read();
+  check('Walking follows rotated camera direction',Math.abs(b.position[0]-a.position[0])>.3 && !b.blocked);
+  await click(page,'#day');await shot(page,'pedestrian-night');
+  check('Night walking preserves lighting scheme',(await snapshot(page)).lighting.sun===.65 && (await read()).visible);
+  await click(page,'#walk');b=await snapshot(page);
+  check('Walk exits, hides character and restores overview',!b.pedestrian.active && !b.pedestrian.visible && b.camera.enabled
+    && distance(b.camera.position,overview.position)<.001 && distance(b.camera.target,overview.target)<.001);
+  await click(page,'#walk');await click(page,'#arena');b=await snapshot(page);
+  check('Camera preset exits walk and retains arena preset',!b.pedestrian.active && distance(b.camera.position,[3,29,54])<.001);
+  await click(page,'#walk');await click(page,'#drive');b=await snapshot(page);
+  check('Golf activation exits walking with exclusive input',b.drive.active && !b.pedestrian.active);
+  await press('KeyW',60);b=await snapshot(page);
+  check('Golf still accelerates after walking',b.drive.speed>3 && b.drive.active);
+  await click(page,'#walk');b=await snapshot(page);
+  check('Walking activation exits Golf and clears its input',b.pedestrian.active && !b.drive.active && b.keys.length===0);
+  await page.keyboard.down('w');await page.evaluate(()=>window.dispatchEvent(new Event('blur')));await step(page);await page.keyboard.up('w');
+  check('Walk blur clears held input',(await read()).keys.length===0);
+  await click(page,'#walkReset');check('Walk recovery returns to a clear point',!(await read()).blocked);
+  await click(page,'#walkExit');
+}
+
 let server,browser;
 try {
   await mkdir(out,{recursive:true});
@@ -318,7 +396,8 @@ try {
   browser=await chromium.launch({channel:'msedge',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--force-color-profile=srgb']});
   report.browser=browser.version();
   const url='http://127.0.0.1:'+server.address().port+'/';
-  for(const [name,test,mobile] of [['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true]]) {
+  const scenarios=[['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
+  for(const [name,test,mobile] of process.argv.includes('--pedestrian') ? scenarios.filter(s=>s[0]==='pedestrian') : scenarios) {
     console.log('\nScenario: '+name);
     const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1400,height:850},deviceScaleFactor:1,isMobile:Boolean(mobile),hasTouch:Boolean(mobile)});
     const page=await context.newPage();
@@ -326,7 +405,7 @@ try {
     page.on('console',m=>{if(m.type()==='error' && !/favicon/.test(m.location()?.url||'')) report.errors.push(name+': '+m.text());});
     try {
       await page.addInitScript(clock); await page.goto(url);
-      await page.waitForFunction(()=>typeof window.__readDiorama==='function');
+      await page.waitForFunction(()=>typeof window.__readDiorama==='function',null,{polling:100,timeout:120000});
       await page.waitForFunction(()=>document.getElementById('view')?.dataset.lexusModel==='loaded'
         && document.getElementById('view')?.dataset.mercedesModel==='loaded',null,{timeout:120000,polling:100});
       await step(page,2); await test(page,context);
