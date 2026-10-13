@@ -2,6 +2,9 @@
 
 ### Stage 7A — Pedestrian Walking — 2026-10-14
 
+PR: https://github.com/Lev1313/GazpromArenaDiorama/pull/4 — открыт в master,
+не объединён; реализация `23e89ee`. Production не опубликован.
+
 - Работа в отдельной ветке `feature/pedestrian-walking` от `origin/master`
   `eda36dd`, после проверки объединения PR #2/#3. Worktree:
   `.worktrees/pedestrian-walking`. Незакоммиченный пользовательский CONTEXT,
