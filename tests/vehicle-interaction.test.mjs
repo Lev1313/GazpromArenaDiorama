@@ -68,7 +68,7 @@ function assertPose(f, vehicle, seat) {
   assert.equal(f.pedestrian.state.yaw, f.pedestrian.model.rotation.y);
 }
 
-test('all 18 specific parked cars support driver seating and nearby safe exit; only player Golf drives', () => {
+test('all 18 specific parked cars support driver seating and nearby safe exit; all drivers activate the selected car', () => {
   const f = fixture();
   for (let index = 0; index < 18; index++) {
     const { vehicle, seat } = approach(f, index);
@@ -82,7 +82,7 @@ test('all 18 specific parked cars support driver seating and nearby safe exit; o
     assert.equal(seat.occupiedBy, f.pedestrian.state.playerId);
     assert.equal(f.pedestrian.state.active, false);
     assert.equal(f.pedestrian.keys.size, 0);
-    assert.equal(f.drive.state.active, index === 5);
+    assert.equal(f.drive.state.active, true);
     assert.equal(f.controls.enabled, false);
     assertPose(f, vehicle, seat);
     const before = f.pedestrian.model.position.clone();
@@ -201,7 +201,7 @@ test('blocked door exit preserves occupancy, actor/car pose and driving; no dist
     assert.equal(f.pedestrian.state.vehicleId, vehicle.vehicleId);
     assert.equal(f.pedestrian.state.active, false);
     assert.equal(seat.occupiedBy, f.pedestrian.state.playerId);
-    assert.equal(f.drive.state.active, index === 5);
+    assert.equal(f.drive.state.active, true);
     assert(f.interaction.getStatus().message);
   }
 });
@@ -375,4 +375,54 @@ test('stationary seated camera cycling and overview exit restore the original vi
   assert.equal(f.controls.enabled, true);
   assert.deepEqual(f.camera.position.toArray(), [-115, 150, 190]);
   assert.deepEqual(f.controls.target.toArray(), [-4, 12, -25]);
+});
+
+// Stage 7C: drive through the same proximity/occupancy path as the UI, never by assigning poses.
+test('all 18 drivers accelerate, steer, brake, exit and reenter without moving previous cars',()=>{
+  const f=fixture(), saved=new Map();
+  for(let index=0;index<18;index++) {
+    const {vehicle,seat}=approach(f,index), before=vehicle.car.position.clone(), yaw=vehicle.car.rotation.y;
+    assert(f.interaction.enter());assert.equal(f.drive.golf,vehicle.car);
+    f.drive.setKey('KeyW',true);
+    for(let i=0;i<30;i++)f.drive.updateDriving(1/60);
+    f.drive.setKey('KeyW',false);f.drive.setKey('KeyA',true);
+    for(let i=0;i<10;i++)f.drive.updateDriving(1/60);
+    f.drive.setKey('KeyA',false);f.interaction.update(1/60);
+    assert(vehicle.car.position.distanceTo(before)>.4);
+    assert(Math.abs(vehicle.car.rotation.y-yaw)>.005);assertPose(f,vehicle,seat);
+    assert.equal(f.interaction.exit(),false,'Moving exit refused');
+    f.drive.setKey('Space',true);
+    for(let i=0;i<120;i++)f.drive.updateDriving(1/60);
+    f.drive.setKey('Space',false);
+    const stopped={position:vehicle.car.position.clone(),yaw:vehicle.car.rotation.y};
+    assert(f.interaction.exit());assert(vehicle.car.position.equals(stopped.position));
+    assert.equal(vehicle.car.rotation.y,stopped.yaw);
+    for(const [car,pose] of saved){assert(car.position.equals(pose.position));assert.equal(car.rotation.y,pose.yaw);}
+    saved.set(vehicle.car,stopped);
+    approach(f,index);assert(f.interaction.enter());assert(vehicle.car.position.equals(stopped.position));
+    assert(f.interaction.exit());
+  }
+});
+test('every passenger seat rejects driving input after switching vehicle',()=>{
+  const f=fixture();
+  for(let index=0;index<18;index++)for(const seatId of ['front-passenger','rear-left','rear-right']) {
+    const {vehicle}=approach(f,index,seatId);const before=vehicle.car.position.clone();
+    assert(f.interaction.enter());f.drive.setKey('KeyW',true);f.drive.updateDriving(.5);
+    assert.equal(f.drive.state.active,false);assert(vehicle.car.position.equals(before));assert(f.interaction.exit());
+  }
+});
+
+test('explicit reset targets each occupied vehicle and preserves its driver seat',()=>{
+  const f=fixture();
+  for(let index=0;index<18;index++) {
+    const {vehicle,seat}=approach(f,index), home=vehicle.car.position.clone(), yaw=vehicle.car.rotation.y;
+    assert(f.interaction.enter());f.drive.setKey('KeyW',true);
+    for(let i=0;i<30;i++)f.drive.updateDriving(1/60);
+    assert(vehicle.car.position.distanceTo(home)>.4);
+    f.drive.resetGolf();f.interaction.update(1/60);
+    assert(vehicle.car.position.equals(home));assert.equal(vehicle.car.rotation.y,yaw);
+    assert.equal(f.pedestrian.state.vehicleId,vehicle.vehicleId);
+    assert.equal(seat.occupiedBy,f.pedestrian.state.playerId);assertPose(f,vehicle,seat);
+    assert(f.interaction.exit());
+  }
 });

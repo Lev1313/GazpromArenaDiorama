@@ -1,0 +1,25 @@
+{
+  "baseline": "e7dcf3e",
+  "method": "5 alternating batches x 10000 frames after 1000 warmup; Node simulation only; original parking layout; inactive local driver; full traffic/drift/effects",
+  "node": "v24.20.0",
+  "samples": {
+    "baseline": [
+      0.04221800999999999,
+      0.03138028000000004,
+      0.03655939000000003,
+      0.036764829999999984,
+      0.04896265000000003
+    ],
+    "candidate": [
+      0.06593793,
+      0.03205084000000002,
+      0.03969025999999999,
+      0.04648577,
+      0.036040560000000006
+    ]
+  },
+  "medianMs": {
+    "baseline": 0.036764829999999984,
+    "candidate": 0.03969025999999999
+  }
+}

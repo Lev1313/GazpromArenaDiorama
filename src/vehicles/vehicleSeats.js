@@ -2,7 +2,7 @@ import { Vector3 } from 'three';
 
 const specialVehicles = {
   2: { vehicleId: 'parked-golf-red', displayName: 'Golf VI · красный', anchorY: -.28, frontX: -.25, rearX: -.85 },
-  5: { vehicleId: 'parked-golf-player', displayName: 'Golf VI · управляемый', anchorY: .05 },
+  5: { vehicleId: 'parked-golf-player', displayName: 'Golf VI · серебристый', anchorY: .05 },
   16: { vehicleId: 'parked-mercedes-gl', displayName: 'Mercedes GL', anchorY: .15, frontX: -.25, rearX: -.85 },
   17: { vehicleId: 'parked-lexus-rx', displayName: 'Lexus RX', anchorY: -.02, frontX: -.25, rearX: -.85 },
 };
@@ -38,7 +38,7 @@ export function createVehicleRegistry(parked) {
       vehicleId,
       car,
       index,
-      canDrive: index === 5,
+      canDrive: true,
       displayName: definition?.displayName ?? `Автомобиль ${index + 1}`,
       seats: seatDefinitions.map(({ seatId, role, side, front }) => ({
         seatId, role, side, front,
@@ -47,6 +47,7 @@ export function createVehicleRegistry(parked) {
         occupiedBy: null,
       })),
     };
+    car.userData.displayName=vehicle.displayName;
     byId.set(vehicleId, vehicle);
     return vehicle;
   });

@@ -9,7 +9,7 @@ export function createControlModes(drive, pedestrian) {
     }
     if (active && seating?.canLegacyDrive && !seating.canLegacyDrive()) return false;
     if (active) pedestrian.setWalking(false);
-    setDriving(active);
+    if (active) drive.startLegacy(); else if (drive.state.active) setDriving(false);
     return true;
   };
   return {
@@ -23,7 +23,7 @@ export function createControlModes(drive, pedestrian) {
       pedestrian.setWalking(false); drive.setDriving(false); return true;
     },
     attachSeating(controller) { seating = controller; },
-    beginSeatedDriving() { setDriving(true); },
+    beginSeatedDriving(vehicle) { drive.startVehicle(vehicle); },
     finishSeatedDriving() { drive.stopDriving({restoreCamera:false}); },
   };
 }

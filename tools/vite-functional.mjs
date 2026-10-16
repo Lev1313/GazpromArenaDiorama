@@ -19,6 +19,8 @@ const report = { ok: false, checks: [], errors: [], screenshots: [],
 // use the actual DOM/UI. A separate pedestrian fixture only sets test start poses.
 const observation = `
 window.__readDiorama = () => {
+  const geometries=new Set(),textures=new Set(),materials=new Set();
+  scene.traverse(o=>{if(o.geometry)geometries.add(o.geometry);for(const m of o.material?(Array.isArray(o.material)?o.material:[o.material]):[]){materials.add(m);for(const v of Object.values(m))if(v?.isTexture)textures.add(v);}});
   const pose = o => ({ position: o.position.toArray(), yaw: o.rotation.y, visible: o.visible });
   return JSON.parse(JSON.stringify({
     hud: hud.state, golf: pose(golf), home: drive.golfHome.toArray(),
@@ -46,6 +48,10 @@ window.__readDiorama = () => {
       skidCapacity: drift.skidCapacity, skidArrayLength: drift.skidPositions.length,
       smokeEnabled: drift.smokeEnabled, smokePoolSize: drift.smokePool.length,
       smokeVisible: drift.smokePool.filter(p => p.o.visible).length },
+    resources: {sceneGeometries:geometries.size,sceneTextures:textures.size,sceneMaterials:materials.size,geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,
+      triangles:renderer.info.render.triangles,calls:renderer.info.render.calls,
+      models:performance.getEntriesByType('resource').filter(r=>r.name.includes('.glb')).map(r=>r.name)},
+    headlights:scene.userData.headlights.map(e=>({vehicleId:e.car.userData.vehicleId,visible:e.beam.visible,intensity:e.light?.intensity})),
     counts: { parked: parked.length, people: people.length, children: scene.children.length },
     canvas: { width: canvas.width, height: canvas.height }, stats: hud.getStats()
   }));
@@ -402,32 +408,56 @@ async function pedestrianTests(page) {
 }
 
 async function seatingTests(page) {
-  const approach=async(id,seat)=>{await page.evaluate(([v,s])=>window.__approachSeat(v,s),[id,seat]);await step(page);};
+  const seatKey=async code=>{await page.keyboard.press(code);await step(page,1,false);};
+  const approach=async(id,seat)=>{await page.evaluate(([v,s])=>window.__approachSeat(v,s),[id,seat]);await step(page,1,false);};
   const seatIn=(s,id,seat)=>s.seats.find(v=>v.vehicleId===id).seats.find(v=>v.seatId===seat);
   await click(page,'#day');await click(page,'#walk');
   let a=await snapshot(page);
   check('18 distinct stable vehicle identities and 72 seat records',a.seats.length===18
     && new Set(a.seats.map(v=>v.vehicleId)).size===18 && a.seats.every(v=>v.seats.length===4));
-  for(const [id,name] of [['parked-golf-red','golf'],['parked-lexus-rx','lexus'],['parked-mercedes-gl','mercedes'],['parked-00','procedural']]) {
-    await approach(id,'driver');
-    check('Door prompt selects '+name,await page.locator('#seatPrompt').isVisible()
-      && (await page.locator('#seatPrompt').textContent()).includes('E — сесть'));
-    if(name!=='procedural')await shot(page,'seating-'+name+'-door');
-    await key(page,'KeyE');a=await snapshot(page);
-    check('E occupies concrete '+name+' driver seat without starting Golf',a.player.vehicleId===id && a.player.seatId==='driver'
-      && a.player.mode==='driver' && !a.pedestrian.active && !a.drive.active
-      && seatIn(a,id,'driver').occupiedBy===a.player.playerId && distance(a.player.position,seatIn(a,id,'driver').position)<1e-6);
-    await page.keyboard.down('w');await step(page,30);await page.keyboard.up('w');let b=await snapshot(page);
-    check('Seated '+name+' ignores walking input and stays attached',same(a.player.position,b.player.position) && b.pedestrian.keys.length===0);
-    if(name!=='procedural')await shot(page,'seating-'+name+'-seated');
-    await key(page,'KeyC');check('Seated car camera changes '+name,distance(a.camera.position,(await snapshot(page)).camera.position)>1);
-    await key(page,'Escape');b=await snapshot(page);
-    check('Esc safely exits '+name+' and resumes walking once',b.player.mode==='onFoot' && b.player.vehicleId===null && b.pedestrian.active
-      && !b.pedestrian.blocked && seatIn(b,id,'driver').occupiedBy===null
-      && distance(b.player.position,seatIn(a,id,'driver').entry)<1.5);
+  const initialResources=a.resources;
+  const previousPoses=new Map();
+  for(const [index,vehicle] of a.seats.entries()) {
+    const id=vehicle.vehicleId;
+    const name=({'parked-golf-red':'red-golf','parked-lexus-rx':'lexus-rx','parked-mercedes-gl':'mercedes-gl','parked-00':'procedural'})[id];
+    await approach(id,'driver');await seatKey('KeyE');a=await snapshot(page);
+    check('Driver E activates selected vehicle '+id,a.drive.active && a.status.vehicleId===id && a.player.vehicleId===id
+      && a.player.mode==='driver' && !a.pedestrian.active);
+    await page.keyboard.down('w');await step(page,index>=16?45:30,false);await page.keyboard.up('w');
+    await page.keyboard.down('a');await step(page,8,false);await page.keyboard.up('a');
+    let b=await snapshot(page);
+    check('Keyboard physics moves and steers '+id,distance(a.parked[index].position,b.parked[index].position)>.35
+      && Math.abs(a.parked[index].yaw-b.parked[index].yaw)>.005 && b.status.speedKmh>0
+      && distance(b.player.position,seatIn(b,id,'driver').position)<1e-6);
+    for(const [other,pose] of previousPoses)check('Switch preserves previous vehicle '+other+' while driving '+id,
+      same(b.parked[other],pose));
+    if(name)await shot(page,'driving-'+name);
+    if(id==='parked-lexus-rx') {
+      await click(page,'#day');b=await snapshot(page);
+      check('Night projector follows selected Lexus',b.headlights[0].vehicleId===id && b.headlights[0].visible && b.headlights[0].intensity>0);
+      await click(page,'#day');
+    }
+    await seatKey('KeyE');b=await snapshot(page);
+    check('Moving exit refuses '+id,b.drive.active && b.player.vehicleId===id);
+    await page.keyboard.down('Space');await step(page,10,false);b=await snapshot(page);
+    check('Selected rear axle emits skids '+id,b.drive.lastRear?.length===2 && b.drift.smokeVisible>0);
+    await step(page,110,false);await page.keyboard.up('Space');b=await snapshot(page);
+    check('Handbrake stops '+id,Math.abs(b.drive.speed)<.5);
+    const stopped=b.parked[index];
+    await seatKey('KeyE');b=await snapshot(page);
+    check('Safe exit preserves position and yaw '+id,b.player.vehicleId===null && b.pedestrian.active
+      && same(b.parked[index],stopped) && !b.pedestrian.blocked);
+    await approach(id,'driver');await seatKey('KeyE');b=await snapshot(page);
+    check('Reentry resumes at saved pose '+id,b.drive.active && same(b.parked[index],stopped));
+    await seatKey('KeyE'); previousPoses.set(index,(await snapshot(page)).parked[index]);
   }
+  let finalResources=(await snapshot(page)).resources;
+  check('All-car session keeps model requests and scene resources bounded',same(initialResources.models,finalResources.models)
+    && finalResources.sceneGeometries===initialResources.sceneGeometries && finalResources.sceneTextures===initialResources.sceneTextures
+    && finalResources.sceneMaterials===initialResources.sceneMaterials,JSON.stringify({initialResources,finalResources}));
+  report.multiCarResources={initial:initialResources,final:finalResources};
   const id='parked-lexus-rx';
-  await approach(id,'front-passenger');await key(page,'KeyE');a=await snapshot(page);
+  await approach(id,'front-passenger');await seatKey('KeyE');a=await snapshot(page);
   check('Right side selects front passenger',a.player.mode==='passenger' && a.player.seatId==='front-passenger');
   await page.evaluate(()=>window.__blockSeatExit(true));const seatedPosition=a.player.position;
   await click(page,'#seatExit');a=await snapshot(page);
@@ -435,38 +465,38 @@ async function seatingTests(page) {
     && seatIn(a,id,'front-passenger').occupiedBy===a.player.playerId && a.seatMessage.includes('нет свободного места'));
   await click(page,'#map');a=await snapshot(page);
   check('Preset cannot bypass blocked physical exit',a.player.vehicleId===id && !a.camera.enabled);
-  await page.evaluate(()=>window.__blockSeatExit(false));await key(page,'KeyE');
+  await page.evaluate(()=>window.__blockSeatExit(false));await seatKey('KeyE');
   await approach(id,'driver');await page.evaluate(([id])=>window.__occupySeat(id,'driver',true),[id]);await step(page);
-  await key(page,'KeyE');a=await snapshot(page);
+  await seatKey('KeyE');a=await snapshot(page);
   check('Occupied nearest seat rejects E without switching sides',a.player.mode==='onFoot' && a.player.vehicleId===null
     && seatIn(a,id,'driver').occupiedBy==='fixture-player' && a.seatMessage.includes('занято'));
   await page.evaluate(([id])=>window.__occupySeat(id,'driver',false),[id]);
-  await approach('parked-golf-player','driver');await key(page,'KeyE');a=await snapshot(page);
+  await approach('parked-golf-player','driver');await seatKey('KeyE');await seatKey('KeyR');a=await snapshot(page);
   check('Silver Golf driver seat starts existing drive controller',a.drive.active && a.player.vehicleId==='parked-golf-player'
     && !a.pedestrian.active && a.player.mode==='driver');
-  await page.keyboard.down('w');await step(page,60);await page.keyboard.up('w');a=await snapshot(page);
+  await page.keyboard.down('w');await step(page,60,false);await page.keyboard.up('w');a=await snapshot(page);
   check('Physical seated Golf drives and carries character',a.drive.speed>3 && distance(a.golf.position,a.home)>1
     && distance(a.player.position,seatIn(a,'parked-golf-player','driver').position)<1e-6);
   await shot(page,'seating-golf-driving');
   const moved=a.golf.position;
-  await key(page,'KeyE');a=await snapshot(page);
+  await seatKey('KeyE');a=await snapshot(page);
   check('Moving Golf refuses physical exit',a.drive.active && a.player.mode==='driver' && a.seatMessage.includes('Останови'));
   await click(page,'#walk');a=await snapshot(page);
   check('Walking button cannot bypass speed guard',a.drive.active && a.player.mode==='driver');
-  await page.keyboard.down('Space');await step(page,120);await page.keyboard.up('Space');a=await snapshot(page);
+  await page.keyboard.down('Space');await step(page,120,false);await page.keyboard.up('Space');a=await snapshot(page);
   check('Handbrake still stops seated Golf',Math.abs(a.drive.speed)<.5);
   const stopped=a.golf.position;
   await click(page,'#driveExit');a=await snapshot(page);
   check('Drive exit preserves stopped Golf pose and resumes on foot',!a.drive.active && a.pedestrian.active && !a.pedestrian.blocked
     && a.player.mode==='onFoot' && distance(stopped,a.golf.position)<1e-7 && distance(a.golf.position,a.home)>1 && a.golfBlocking);
   await shot(page,'seating-golf-exit');
-  await approach('parked-golf-player','front-passenger');await key(page,'KeyE');a=await snapshot(page);
+  await approach('parked-golf-player','front-passenger');await seatKey('KeyE');a=await snapshot(page);
   check('Golf passenger seat does not give driving input',!a.drive.active && a.player.mode==='passenger');
   await click(page,'#day');check('Night works while seated',(await snapshot(page)).lighting.sun===.65);
   await click(page,'#day');await click(page,'#meet');a=await snapshot(page);
   check('Camera preset safely releases passenger seat and preserves parked Golf',!a.drive.active && a.player.vehicleId===null
     && a.camera.enabled && distance(stopped,a.golf.position)<1e-7);
-  await click(page,'#drive');await key(page,'KeyR');await key(page,'Escape');a=await snapshot(page);
+  await click(page,'#drive');await seatKey('KeyR');await seatKey('Escape');a=await snapshot(page);
   check('Legacy Golf button and R still reset home',!a.drive.active && distance(a.golf.position,a.home)<1e-7 && !a.golfBlocking);
 }
 

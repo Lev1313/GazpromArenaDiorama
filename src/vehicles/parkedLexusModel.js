@@ -55,7 +55,7 @@ export async function replaceWithParkedLexus(car) {
   car.clear();
   car.add(orientation, shadow);
   car.userData.frontWheels = [];
-  car.userData.footprint = { halfLength: size.x / 2, halfWidth: size.z / 2 };
+  car.userData.footprint = { halfLength: size.x / 2, halfWidth: size.z / 2, height: size.y };
   car.userData.attribution = {
     title: 'Lexus RX — Deep Blue Mica', author: null, license: null,
     note: 'User-supplied prepared asset; author and license were not provided.',

@@ -58,7 +58,8 @@ export function configureNightLighting(scene, { arenaX, headlightCars = [] }) {
   geometry.setIndex([0,1,2,1,3,2]);
   const beamMaterial = new THREE.MeshBasicMaterial({map:texture,color:0xaccfff,
     transparent:true,opacity:.45,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide});
-  const headlights = headlightCars.map(({car,isActive,projector=false}) => {
+  const headlights = headlightCars.map(source => {
+    const {car,isActive,projector=false}=source;
     const material=beamMaterial.clone();
     // Guest cars are clipped at the east edge, including their light footprint.
     const body=car.children.find(o=>o.isMesh);
@@ -73,12 +74,18 @@ export function configureNightLighting(scene, { arenaX, headlightCars = [] }) {
       light.userData.nightIntensity=65;
       car.add(light,light.target);
     }
-    return {car,isActive,beam,light};
+    return {car,isActive,beam,light,source};
   });
   let daytime=false;
   const updateHeadlights = (day=daytime) => {
     daytime=day;
-    for (const {car,isActive,beam,light} of headlights) {
+    for (const entry of headlights) {
+      const {source,isActive,beam,light}=entry;
+      const car=source.car;
+      if(beam.parent!==car) {car.add(beam);if(light)car.add(light,light.target);entry.car=car;}
+      const halfLength=car.userData.footprint?.halfLength ?? 1.96;
+      beam.position.x=halfLength-1.96;
+      if(light)light.position.x=halfLength-.06;
       const enabled=!day && car.visible && isActive();
       beam.visible=enabled;
       if(light)light.intensity=enabled?65:0;
