@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createWheel } from './wheelAnimation.js';
 
 /**
  * Shared car factory, migrated unchanged from the original diorama.
@@ -19,7 +20,7 @@ function car(color,{sport=false,hatch=false}={}){
  add(new THREE.BoxGeometry(hatch?2.1:1.75,.62,1.43),windows,hatch?-.35:-.15,1.25,0);add(new THREE.BoxGeometry(hatch?2.1:1.55,.09,1.49),paint,hatch?-.35:-.23,1.6,0);
  add(new THREE.BoxGeometry(.12,.68,1.5),paint,-.42,1.22,0);add(new THREE.BoxGeometry(.08,.22,.6),rubber,1.88,.68,0);
  g.userData.frontWheels=[];
- for(const x of [-1.13,1.15])for(const z of [-.88,.88]){const pivot=new THREE.Group();pivot.position.set(x,.4,z);g.add(pivot);const t=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,.23,12),rubber);t.rotation.x=Math.PI/2;pivot.add(t);const r=new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,.25,8),rim);r.rotation.x=Math.PI/2;pivot.add(r);if(x>0)g.userData.frontWheels.push(pivot);}
+ for(const x of [-1.13,1.15])for(const z of [-.88,.88]){const pivot=new THREE.Group();pivot.position.set(x,.4,z);g.add(pivot);const t=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,.23,12),rubber);t.rotation.x=Math.PI/2;pivot.add(t);const r=new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,.25,8),rim);r.rotation.x=Math.PI/2;pivot.add(r);createWheel(g,{id:(x>0?'front':'rear')+'-'+(z<0?'left':'right'),center:pivot.position,radius:.4,steeringPivot:pivot,rollingParts:[t,r]});}
  for(const z of [-.57,.57]){add(new THREE.BoxGeometry(.06,.19,.37),headMat,1.88,.79,z);add(new THREE.BoxGeometry(.06,.17,.32),tailMat,-1.88,.79,z);}
  if(sport){add(new THREE.BoxGeometry(.16,.4,.1),rubber,-1.5,1.14,-.57);add(new THREE.BoxGeometry(.16,.4,.1),rubber,-1.5,1.14,.57);add(new THREE.BoxGeometry(.45,.1,2.05),rubber,-1.5,1.36,0);add(new THREE.BoxGeometry(1.1,.04,.58),rubber,.99,1.06,0);}
  scene.add(g);return g;

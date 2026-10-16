@@ -1,5 +1,7 @@
 # Model credits
 
+Stage 7C.1 wheel derivatives: `golf6_red_v2_wheels.glb`, `lexus_rx_deep_blue_mica_wheels.glb` and `mercedes_gl_x166_obsidian_black_wheels.glb` are lossless topology partitions of the corresponding prepared assets below. Whole connected tire/rim/caliper components were assigned separate mesh nodes for animation; triangles, vertex attributes, embedded images and material definitions were preserved. Reproduce with `node tools/prepare-wheel-models.mjs`. Original assets remain intact. Author/source/license attribution below also applies to these derivatives.
+
 All three car assets originate from downloaded Sketchfab source archives. Those ZIPs include `license.txt` files with the attribution below. The GLB conversions may not embed this metadata; keep this credits file with the project and make it discoverable from the public site.
 
 ## Volkswagen Golf 6

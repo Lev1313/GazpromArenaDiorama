@@ -1,3 +1,4 @@
+import { prepareWheelBounds, installImportedWheels } from './wheelAnimation.js';
 import { Box3, Vector3, Group, Mesh, BoxGeometry, CylinderGeometry, MeshBasicMaterial } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -10,8 +11,9 @@ const blackFinishes = {
 
 /** A single accent SUV, retaining the slot and correcting only black trim. */
 export async function replaceWithParkedLexus(car) {
-  const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}models/cars/lexus_rx_deep_blue_mica.glb`);
+  const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}models/cars/lexus_rx_deep_blue_mica_wheels.glb`);
   const model = gltf.scene;
+  prepareWheelBounds(model);
   model.name = 'lexus-rx-deep-blue-mica-model';
   // Source geometry is Z-up, with its headlights/nose at -X.
   model.rotation.x = -Math.PI / 2;
@@ -54,7 +56,12 @@ export async function replaceWithParkedLexus(car) {
   }
   car.clear();
   car.add(orientation, shadow);
-  car.userData.frontWheels = [];
+  installImportedWheels(car,model);
+  for(const proxy of [...shadow.children].filter(o=>o.geometry===wheelGeometry)) {
+    const id=(proxy.position.x>0?'front':'rear')+'-'+(proxy.position.z<0?'left':'right');
+    const wheel=car.userData.wheels.find(w=>w.id===id);wheel.rollingPivot.add(proxy);
+    proxy.position.set(0,0,0);proxy.scale.set(wheel.radius/radius,1,wheel.radius/radius);
+  }
   car.userData.footprint = { halfLength: size.x / 2, halfWidth: size.z / 2, height: size.y };
   car.userData.attribution = {
     title: 'Lexus RX — Deep Blue Mica', author: null, license: null,
