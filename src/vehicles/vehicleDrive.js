@@ -1,3 +1,4 @@
+import { advanceWheels, steerWheels, resetWheels } from './wheelAnimation.js';
 import * as THREE from 'three';
 import { vehicleTuning } from './vehicleTuning.js';
 import { pointInPolygon, parkingLights } from '../world/siteLayout.js';
@@ -162,7 +163,8 @@ export function createVehicleDrive({
     state.slip = 0;
     state.contact = 0;
     state.lastRear = null;
-    for (const wheel of (golf.userData.frontWheels ?? [])) wheel.rotation.y = 0;
+    steerWheels(golf,0);
+    resetWheels(golf);
     if (state.active) updateDriveCamera(1, true);
   }
 
@@ -221,7 +223,7 @@ export function createVehicleDrive({
     state.skidTime = 0;
     state.lastRear = null;
     state.view = 0;
-    for (const wheel of (golf.userData.frontWheels ?? [])) wheel.rotation.y = 0;
+    steerWheels(golf,0);
     if (golfLabel) golfLabel.visible = true;
     if (restoreCamera) {
       controls.enabled = true;
@@ -297,6 +299,8 @@ export function createVehicleDrive({
         state.contact = .65;
       } else {
         next.y += (getGroundHeight(next.x,next.z)-next.y)*(1-Math.exp(-h*15));
+        const distance=Math.hypot(next.x-golf.position.x,next.z-golf.position.z)*Math.sign(v);
+        advanceWheels(golf,distance,state.steer,{handbrake:brake});
         golf.position.copy(next);
         golf.rotation.y = yaw;
         state.speed = v;
@@ -304,9 +308,7 @@ export function createVehicleDrive({
     }
 
     state.contact = Math.max(0, state.contact - dt);
-    for (const wheel of (golf.userData.frontWheels ?? [])) {
-      wheel.rotation.y = state.steer;
-    }
+    steerWheels(golf,state.steer);
 
     if ((brake || Math.abs(state.slip)>.08) && Math.abs(state.speed) > 2) {
       state.skidTime += dt;

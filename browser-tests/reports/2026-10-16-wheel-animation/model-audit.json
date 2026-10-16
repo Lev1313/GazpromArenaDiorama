@@ -1,0 +1,848 @@
+[
+  {
+    "source": "public/models/cars/golf6_red_v2.glb",
+    "sourceSHA256": "73997fe6828e8c1a5d746af56ec2c810fa97b1ac2ff29bbcd72689da51466151",
+    "sourceBytes": 5569152,
+    "derived": "public/models/cars/golf6_red_v2_wheels.glb",
+    "derivedBytes": 5574392,
+    "wheels": [
+      {
+        "id": "front-left",
+        "center": [
+          1.2413731515407567,
+          0.23153814731165767,
+          -0.7727189958095548
+        ],
+        "radius": 0.3128995003644377,
+        "min": [
+          0.928224861621857,
+          -0.08111256349831819,
+          -0.8851110935211179
+        ],
+        "max": [
+          1.5545214414596562,
+          0.5441888581216335,
+          -0.6603268980979916
+        ]
+      },
+      {
+        "id": "front-right",
+        "center": [
+          1.2332243621349335,
+          0.23092988214455545,
+          0.7804282903671267
+        ],
+        "radius": 0.31289958965498954,
+        "min": [
+          0.9200761914253235,
+          -0.08172112645581364,
+          0.6680369377136233
+        ],
+        "max": [
+          1.5463725328445435,
+          0.5435808907449245,
+          0.8928196430206302
+        ]
+      },
+      {
+        "id": "rear-left",
+        "center": [
+          -1.3587090075016017,
+          0.23153084597550333,
+          -0.7732320725917818
+        ],
+        "radius": 0.31289960455615073,
+        "min": [
+          -1.6718574762344356,
+          -0.08111989440396428,
+          -0.8856239914894107
+        ],
+        "max": [
+          -1.0455605387687679,
+          0.5441815863549709,
+          -0.660840153694153
+        ]
+      },
+      {
+        "id": "rear-right",
+        "center": [
+          -1.3667118549346924,
+          0.23093155107460916,
+          0.7536927163600919
+        ],
+        "radius": 0.3128997237654403,
+        "min": [
+          -1.6798604726791382,
+          -0.0817192787118256,
+          0.641300797462463
+        ],
+        "max": [
+          -1.0535632371902466,
+          0.5435823808610439,
+          0.8660846352577207
+        ]
+      }
+    ],
+    "parts": [
+      {
+        "id": "rear-left",
+        "behavior": "fixed",
+        "material": "mechanical_rally",
+        "triangles": 124
+      },
+      {
+        "id": "rear-right",
+        "behavior": "fixed",
+        "material": "mechanical_rally",
+        "triangles": 124
+      },
+      {
+        "id": "front-left",
+        "behavior": "fixed",
+        "material": "mechanical_rally",
+        "triangles": 124
+      },
+      {
+        "id": "front-right",
+        "behavior": "fixed",
+        "material": "mechanical_rally",
+        "triangles": 124
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "golf6_silver_rims",
+        "triangles": 2662
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "golf6_silver_rims",
+        "triangles": 2662
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "golf6_silver_rims",
+        "triangles": 2662
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "golf6_silver_rims",
+        "triangles": 2662
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "Gar_p1b",
+        "triangles": 400
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "Gar_p1b",
+        "triangles": 400
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "Gar_p1b",
+        "triangles": 400
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "Gar_p1b",
+        "triangles": 400
+      }
+    ],
+    "audit": [
+      {
+        "material": "mechanical_rally",
+        "bucket": "body",
+        "triangles": 7496
+      },
+      {
+        "material": "mechanical_rally",
+        "bucket": "rear-left:fixed",
+        "triangles": 124
+      },
+      {
+        "material": "mechanical_rally",
+        "bucket": "rear-right:fixed",
+        "triangles": 124
+      },
+      {
+        "material": "mechanical_rally",
+        "bucket": "front-left:fixed",
+        "triangles": 124
+      },
+      {
+        "material": "mechanical_rally",
+        "bucket": "front-right:fixed",
+        "triangles": 124
+      },
+      {
+        "material": "golf6_silver_rims",
+        "bucket": "rear-right:rolling",
+        "triangles": 2662
+      },
+      {
+        "material": "golf6_silver_rims",
+        "bucket": "front-right:rolling",
+        "triangles": 2662
+      },
+      {
+        "material": "golf6_silver_rims",
+        "bucket": "rear-left:rolling",
+        "triangles": 2662
+      },
+      {
+        "material": "golf6_silver_rims",
+        "bucket": "front-left:rolling",
+        "triangles": 2662
+      },
+      {
+        "material": "Gar_p1b",
+        "bucket": "rear-right:rolling",
+        "triangles": 400
+      },
+      {
+        "material": "Gar_p1b",
+        "bucket": "front-right:rolling",
+        "triangles": 400
+      },
+      {
+        "material": "Gar_p1b",
+        "bucket": "rear-left:rolling",
+        "triangles": 400
+      },
+      {
+        "material": "Gar_p1b",
+        "bucket": "front-left:rolling",
+        "triangles": 400
+      }
+    ],
+    "materials": 44,
+    "sourceTriangles": 235600,
+    "derivedTriangles": 235600
+  },
+  {
+    "source": "public/models/cars/lexus_rx_deep_blue_mica.glb",
+    "sourceSHA256": "39999abca1bde69b66019d29b4ba6dcd9d7010bb3eddf800c1da0df5e0fbf016",
+    "sourceBytes": 17663616,
+    "derived": "public/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+    "derivedBytes": 17675356,
+    "wheels": [
+      {
+        "id": "front-left",
+        "center": [
+          1.3497631251811981,
+          0.2624034930095763,
+          -0.7886142432689665
+        ],
+        "radius": 0.38240294154357457,
+        "min": [
+          0.9673601984977723,
+          -0.11999946339414688,
+          -0.9174950718879697
+        ],
+        "max": [
+          1.732166051864624,
+          0.6448064494132996,
+          -0.659733414649963
+        ]
+      },
+      {
+        "id": "front-right",
+        "center": [
+          1.3497631251811981,
+          0.26240349300957677,
+          0.7887677252292635
+        ],
+        "radius": 0.38240294154357457,
+        "min": [
+          0.9673601984977721,
+          -0.11999946339414652,
+          0.6598879098892214
+        ],
+        "max": [
+          1.732166051864624,
+          0.6448064494133,
+          0.9176475405693058
+        ]
+      },
+      {
+        "id": "rear-left",
+        "center": [
+          -1.4083470702171326,
+          0.26240310549736023,
+          -0.7886142432689667
+        ],
+        "radius": 0.38240303099155426,
+        "min": [
+          -1.7907500267028809,
+          -0.11999999999999997,
+          -0.9174950718879701
+        ],
+        "max": [
+          -1.0259441137313843,
+          0.6448062109947205,
+          -0.6597334146499634
+        ]
+      },
+      {
+        "id": "rear-right",
+        "center": [
+          -1.4083470702171326,
+          0.2624031054973608,
+          0.7887677252292633
+        ],
+        "radius": 0.3824030309915542,
+        "min": [
+          -1.7907500267028809,
+          -0.11999999999999938,
+          0.6598879098892211
+        ],
+        "max": [
+          -1.0259441137313843,
+          0.6448062109947209,
+          0.9176475405693054
+        ]
+      }
+    ],
+    "parts": [
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "tire_mat4",
+        "triangles": 3937
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "tire_mat4",
+        "triangles": 3983
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "tire_mat4",
+        "triangles": 3983
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "tire_mat4",
+        "triangles": 3937
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "silver_d",
+        "triangles": 769
+      },
+      {
+        "id": "front-left",
+        "behavior": "fixed",
+        "material": "silver_d",
+        "triangles": 1367
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "silver_d",
+        "triangles": 771
+      },
+      {
+        "id": "rear-right",
+        "behavior": "fixed",
+        "material": "silver_d",
+        "triangles": 1359
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "silver_d",
+        "triangles": 771
+      },
+      {
+        "id": "front-right",
+        "behavior": "fixed",
+        "material": "silver_d",
+        "triangles": 1361
+      },
+      {
+        "id": "rear-left",
+        "behavior": "fixed",
+        "material": "silver_d",
+        "triangles": 1360
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "silver_d",
+        "triangles": 771
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "silver",
+        "triangles": 22750
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "silver",
+        "triangles": 22771
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "silver",
+        "triangles": 22728
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "silver",
+        "triangles": 22700
+      },
+      {
+        "id": "rear-left",
+        "behavior": "fixed",
+        "material": "black_matt",
+        "triangles": 117
+      },
+      {
+        "id": "rear-right",
+        "behavior": "fixed",
+        "material": "black_matt",
+        "triangles": 21
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "black_matt",
+        "triangles": 2760
+      },
+      {
+        "id": "front-right",
+        "behavior": "fixed",
+        "material": "black_matt",
+        "triangles": 392
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "black_matt",
+        "triangles": 1404
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "black_matt",
+        "triangles": 1405
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "black_matt",
+        "triangles": 2754
+      },
+      {
+        "id": "front-left",
+        "behavior": "fixed",
+        "material": "black_matt",
+        "triangles": 392
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "brakes1",
+        "triangles": 780
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "brakes1",
+        "triangles": 652
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "brakes1",
+        "triangles": 624
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "brakes1",
+        "triangles": 635
+      }
+    ],
+    "audit": [
+      {
+        "material": "tire_mat4",
+        "bucket": "front-left:rolling",
+        "triangles": 3937
+      },
+      {
+        "material": "tire_mat4",
+        "bucket": "front-right:rolling",
+        "triangles": 3983
+      },
+      {
+        "material": "tire_mat4",
+        "bucket": "rear-right:rolling",
+        "triangles": 3983
+      },
+      {
+        "material": "tire_mat4",
+        "bucket": "rear-left:rolling",
+        "triangles": 3937
+      },
+      {
+        "material": "silver_d",
+        "bucket": "front-left:rolling",
+        "triangles": 769
+      },
+      {
+        "material": "silver_d",
+        "bucket": "front-left:fixed",
+        "triangles": 1367
+      },
+      {
+        "material": "silver_d",
+        "bucket": "rear-right:rolling",
+        "triangles": 771
+      },
+      {
+        "material": "silver_d",
+        "bucket": "rear-right:fixed",
+        "triangles": 1359
+      },
+      {
+        "material": "silver_d",
+        "bucket": "rear-left:rolling",
+        "triangles": 771
+      },
+      {
+        "material": "silver_d",
+        "bucket": "front-right:fixed",
+        "triangles": 1361
+      },
+      {
+        "material": "silver_d",
+        "bucket": "rear-left:fixed",
+        "triangles": 1360
+      },
+      {
+        "material": "silver_d",
+        "bucket": "front-right:rolling",
+        "triangles": 771
+      },
+      {
+        "material": "silver",
+        "bucket": "body",
+        "triangles": 25554
+      },
+      {
+        "material": "silver",
+        "bucket": "rear-left:rolling",
+        "triangles": 22750
+      },
+      {
+        "material": "silver",
+        "bucket": "rear-right:rolling",
+        "triangles": 22771
+      },
+      {
+        "material": "silver",
+        "bucket": "front-left:rolling",
+        "triangles": 22728
+      },
+      {
+        "material": "silver",
+        "bucket": "front-right:rolling",
+        "triangles": 22700
+      },
+      {
+        "material": "black_matt",
+        "bucket": "body",
+        "triangles": 100897
+      },
+      {
+        "material": "black_matt",
+        "bucket": "rear-left:fixed",
+        "triangles": 117
+      },
+      {
+        "material": "black_matt",
+        "bucket": "rear-right:fixed",
+        "triangles": 21
+      },
+      {
+        "material": "black_matt",
+        "bucket": "rear-right:rolling",
+        "triangles": 2760
+      },
+      {
+        "material": "black_matt",
+        "bucket": "front-right:fixed",
+        "triangles": 392
+      },
+      {
+        "material": "black_matt",
+        "bucket": "front-left:rolling",
+        "triangles": 1404
+      },
+      {
+        "material": "black_matt",
+        "bucket": "front-right:rolling",
+        "triangles": 1405
+      },
+      {
+        "material": "black_matt",
+        "bucket": "rear-left:rolling",
+        "triangles": 2754
+      },
+      {
+        "material": "black_matt",
+        "bucket": "front-left:fixed",
+        "triangles": 392
+      },
+      {
+        "material": "brakes1",
+        "bucket": "rear-right:rolling",
+        "triangles": 780
+      },
+      {
+        "material": "brakes1",
+        "bucket": "rear-left:rolling",
+        "triangles": 652
+      },
+      {
+        "material": "brakes1",
+        "bucket": "front-right:rolling",
+        "triangles": 624
+      },
+      {
+        "material": "brakes1",
+        "bucket": "front-left:rolling",
+        "triangles": 635
+      }
+    ],
+    "materials": 21,
+    "sourceTriangles": 657699,
+    "derivedTriangles": 657699
+  },
+  {
+    "source": "public/models/cars/mercedes_gl_x166_obsidian_black.glb",
+    "sourceSHA256": "f7f3a5ac7eb3dfc9a8d18c7301ba0ec5e2241086c6fbdb5d4c340564d7430127",
+    "sourceBytes": 5873544,
+    "derived": "public/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+    "derivedBytes": 5877952,
+    "wheels": [
+      {
+        "id": "front-left",
+        "center": [
+          1.7059945464134216,
+          0.2761330354213718,
+          -0.7886467278003697
+        ],
+        "radius": 0.3961326628923415,
+        "min": [
+          1.3098622560501096,
+          -0.1199999999999993,
+          -0.9591909050941472
+        ],
+        "max": [
+          2.1021268367767334,
+          0.6722660708427429,
+          -0.6181025505065921
+        ]
+      },
+      {
+        "id": "front-right",
+        "center": [
+          1.7059945464134216,
+          0.277185668698512,
+          0.7887554764747615
+        ],
+        "radius": 0.3961325956624932,
+        "min": [
+          1.30986225605011,
+          -0.11894723226316273,
+          0.6182111501693721
+        ],
+        "max": [
+          2.1021268367767334,
+          0.6733185696601868,
+          0.959299802780151
+        ]
+      },
+      {
+        "id": "rear-left",
+        "center": [
+          -1.4007562994956972,
+          0.27613303542137146,
+          -0.788646727800369
+        ],
+        "radius": 0.3961326628923416,
+        "min": [
+          -1.796888589859009,
+          -0.12,
+          -0.9591909050941465
+        ],
+        "max": [
+          -1.0046240091323855,
+          0.6722660708427429,
+          -0.6181025505065915
+        ]
+      },
+      {
+        "id": "rear-right",
+        "center": [
+          -1.4007562994956968,
+          0.277185668698512,
+          0.7887554764747622
+        ],
+        "radius": 0.39613259566249326,
+        "min": [
+          -1.7968885898590086,
+          -0.11894723226316273,
+          0.6182111501693728
+        ],
+        "max": [
+          -1.004624009132385,
+          0.6733185696601868,
+          0.9592998027801517
+        ]
+      }
+    ],
+    "parts": [
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "Tire",
+        "triangles": 1316
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "Tire",
+        "triangles": 1316
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "Tire",
+        "triangles": 1316
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "Tire",
+        "triangles": 1316
+      },
+      {
+        "id": "front-left",
+        "behavior": "rolling",
+        "material": "Rims.001",
+        "triangles": 5830
+      },
+      {
+        "id": "rear-left",
+        "behavior": "rolling",
+        "material": "Rims.001",
+        "triangles": 5830
+      },
+      {
+        "id": "rear-right",
+        "behavior": "rolling",
+        "material": "Rims.001",
+        "triangles": 5830
+      },
+      {
+        "id": "front-right",
+        "behavior": "rolling",
+        "material": "Rims.001",
+        "triangles": 5830
+      },
+      {
+        "id": "front-right",
+        "behavior": "fixed",
+        "material": "EngineBay1Mtl",
+        "triangles": 88
+      },
+      {
+        "id": "front-left",
+        "behavior": "fixed",
+        "material": "EngineBay1Mtl",
+        "triangles": 88
+      }
+    ],
+    "audit": [
+      {
+        "material": "Tire",
+        "bucket": "front-right:rolling",
+        "triangles": 1316
+      },
+      {
+        "material": "Tire",
+        "bucket": "rear-right:rolling",
+        "triangles": 1316
+      },
+      {
+        "material": "Tire",
+        "bucket": "rear-left:rolling",
+        "triangles": 1316
+      },
+      {
+        "material": "Tire",
+        "bucket": "front-left:rolling",
+        "triangles": 1316
+      },
+      {
+        "material": "Rims.001",
+        "bucket": "front-left:rolling",
+        "triangles": 5830
+      },
+      {
+        "material": "Rims.001",
+        "bucket": "rear-left:rolling",
+        "triangles": 5830
+      },
+      {
+        "material": "Rims.001",
+        "bucket": "rear-right:rolling",
+        "triangles": 5830
+      },
+      {
+        "material": "Rims.001",
+        "bucket": "front-right:rolling",
+        "triangles": 5830
+      },
+      {
+        "material": "EngineBay1Mtl",
+        "bucket": "body",
+        "triangles": 27194
+      },
+      {
+        "material": "EngineBay1Mtl",
+        "bucket": "front-right:fixed",
+        "triangles": 88
+      },
+      {
+        "material": "EngineBay1Mtl",
+        "bucket": "front-left:fixed",
+        "triangles": 88
+      }
+    ],
+    "materials": 21,
+    "sourceTriangles": 102126,
+    "derivedTriangles": 102126
+  }
+]

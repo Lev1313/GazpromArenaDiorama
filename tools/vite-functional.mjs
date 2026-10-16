@@ -28,6 +28,9 @@ window.__readDiorama = () => {
       blocked: Boolean(pedestrian.collision(pedestrian.model.position.x,pedestrian.model.position.z)),
       legAngle: pedestrian.model.children[0].children[4].rotation.x },
     parked: parked.map(c=>({...pose(c),footprint:c.userData.footprint})),
+    wheels: parked.map(c=>(c.userData.wheels??[]).map(w=>({id:w.id,radius:w.radius,angle:w.angle,distance:w.distance,
+      steer:w.steeringPivot.rotation.y,roll:w.rollingPivot.quaternion.toArray(),center:w.center.toArray(),
+      rollingParts:w.rollingPivot.children.filter(p=>p.userData.wheelPart).map(p=>p.name)}))),
     player: seating.serialize(),
     golfBlocking:seating.golfBlocksTraffic(),
     seats: vehicleRegistry.vehicles.map(v=>({vehicleId:v.vehicleId,canDrive:v.canDrive,
@@ -70,7 +73,18 @@ window.__approachSeat = (id,seatId) => {
 const originalPedestrianCollision=pedestrian.collision;
 window.__blockSeatExit = value => { pedestrian.collision=value?()=>true:originalPedestrianCollision; };
 window.__occupySeat = (id,seatId,occupied) => occupied ? vehicleRegistry.claim(id,seatId,'fixture-player')
-  : vehicleRegistry.release(id,seatId,'fixture-player');`;
+  : vehicleRegistry.release(id,seatId,'fixture-player');
+// Review camera only: vehicle motion and wheel angles remain driven by real keyboard input.
+let wheelView=null;
+window.__wheelView=(index,side)=>{wheelView=index===null?null:{index,side};};
+const originalDriveCamera=drive.updateDriveCamera;
+drive.updateDriveCamera=(dt,snap)=>{
+  if(!wheelView)return originalDriveCamera(dt,snap);
+  const car=parked[wheelView.index],side=wheelView.side;
+  const p=car.localToWorld(new THREE.Vector3(.1,.75,side*5.2));
+  const target=car.localToWorld(new THREE.Vector3(0,.45,0));
+  camera.position.copy(p);controls.target.copy(target);camera.lookAt(target);
+};`;
 
 function clock() {
   let time = 0, token = 0, gl;
@@ -426,6 +440,9 @@ async function seatingTests(page) {
     await page.keyboard.down('w');await step(page,index>=16?45:30,false);await page.keyboard.up('w');
     await page.keyboard.down('a');await step(page,8,false);await page.keyboard.up('a');
     let b=await snapshot(page);
+    check('Four real wheel pivots roll and front wheels steer '+id,b.wheels[index].length===4
+      && b.wheels[index].every(w=>w.angle>0 && Math.abs(w.angle-w.distance/w.radius)<1e-8
+        && (w.id.startsWith('front') ? w.steer>.01 : w.steer===0)));
     check('Keyboard physics moves and steers '+id,distance(a.parked[index].position,b.parked[index].position)>.35
       && Math.abs(a.parked[index].yaw-b.parked[index].yaw)>.005 && b.status.speedKmh>0
       && distance(b.player.position,seatIn(b,id,'driver').position)<1e-6);
@@ -500,6 +517,60 @@ async function seatingTests(page) {
   check('Legacy Golf button and R still reset home',!a.drive.active && distance(a.golf.position,a.home)<1e-7 && !a.golfBlocking);
 }
 
+async function wheelTests(page) {
+  await click(page,'#day');await click(page,'#walk');
+  await page.addStyleTag({content:'#golf-ui,#seating-ui,#full-hud,#hint,#hudToggle,#pedestrian-ui{visibility:hidden!important}'});
+  report.wheelSequences=[];
+  const capture=async(name)=>{await shot(page,name);return snapshot(page);};
+  const press=async code=>{await page.keyboard.press(code);await step(page,1,false);};
+  for(const [id,index,name] of [['parked-golf-red',2,'red-golf'],['parked-lexus-rx',17,'lexus-rx'],
+    ['parked-mercedes-gl',16,'mercedes-gl'],['parked-07',7,'procedural']]) {
+    await page.evaluate(id=>window.__approachSeat(id,'driver'),id);await press('KeyE');
+    let a=await snapshot(page),samples=[];
+    check('Wheel rig has four named real tires '+name,a.wheels[index].length===4
+      && a.wheels[index].every(w=>w.radius>.3&&w.radius<.41));
+    const parkedAngles=a.wheels[index].map(w=>w.angle);
+    await step(page,30,false);let b=await snapshot(page);
+    check('Idle tires stay stationary '+name,same(parkedAngles,b.wheels[index].map(w=>w.angle)));
+    await page.keyboard.down('KeyW');await step(page,45,false);await page.keyboard.up('KeyW');
+    await page.keyboard.down('KeyA');await step(page,8,false);await page.keyboard.up('KeyA');
+    b=await snapshot(page);
+    check('Four forward rotations match signed distance / radius '+name,b.wheels[index].every(w=>w.angle>0
+      && Math.abs(w.angle-w.distance/w.radius)<1e-8));
+    check('Only front axles steer while rolling '+name,b.wheels[index].every(w=>w.id.startsWith('front')?w.steer>.01:w.steer===0));
+    for(const side of [-1,1]) {
+      await page.evaluate(([index,side])=>window.__wheelView(index,side),[index,side]);
+      for(let frame=0;frame<3;frame++) {
+        if(frame)await step(page,4,false);
+        const file='wheel-'+name+'-'+(side<0?'left':'right')+'-'+frame;
+        const sample=await capture(file);samples.push({file:file+'.png',pose:sample.parked[index],wheels:sample.wheels[index]});
+      }
+    }
+    check('Rendered frame sequence changes all four rolling quaternions '+name,
+      samples[2].wheels.every((w,i)=>!same(w.roll,samples[0].wheels[i].roll))
+      && samples[5].wheels.every((w,i)=>!same(w.roll,samples[3].wheels[i].roll)));
+    a=await snapshot(page);await page.keyboard.down('Space');await step(page,15,false);b=await snapshot(page);
+    check('Handbrake locks rear tires while fronts continue '+name,b.wheels[index].every((w,i)=>w.id.startsWith('front')
+      ?w.angle>a.wheels[index][i].angle:w.angle===a.wheels[index][i].angle));
+    await step(page,120,false);await page.keyboard.up('Space');a=await snapshot(page);
+    await step(page,30,false);b=await snapshot(page);
+    check('Stopped tires do not spin '+name,b.wheels[index].every((w,i)=>w.angle===a.wheels[index][i].angle
+      && same(w.roll,a.wheels[index][i].roll)));
+    await page.keyboard.down('KeyS');await step(page,30,false);await page.keyboard.up('KeyS');b=await snapshot(page);
+    check('Reverse changes all four rolling angles backwards '+name,b.wheels[index].every((w,i)=>w.angle<a.wheels[index][i].angle));
+    await page.keyboard.down('Space');await step(page,120,false);await page.keyboard.up('Space');a=await snapshot(page);
+    const stopped=a.parked[index],angles=a.wheels[index].map(w=>w.angle);
+    await press('KeyE');b=await snapshot(page);
+    check('Exit preserves parked pose and rolling angles '+name,b.player.vehicleId===null && same(stopped,b.parked[index])
+      && same(angles,b.wheels[index].map(w=>w.angle)));
+    await page.evaluate(id=>window.__approachSeat(id,'driver'),id);await press('KeyE');b=await snapshot(page);
+    check('Reentry retains rolling angles without model reload '+name,b.drive.active && same(angles,b.wheels[index].map(w=>w.angle))
+      && same(a.resources.models,b.resources.models));
+    await press('KeyE');await page.evaluate(()=>window.__wheelView(null));
+    report.wheelSequences.push({id,index,samples});
+  }
+}
+
 let server,browser;
 try {
   await mkdir(out,{recursive:true});
@@ -511,8 +582,8 @@ try {
   browser=await chromium.launch({channel:'msedge',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--force-color-profile=srgb']});
   report.browser=browser.version();
   const url='http://127.0.0.1:'+server.address().port+'/';
-  const scenarios=[['seating',seatingTests],['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
-  const selected=process.argv.includes('--seating')?'seating':process.argv.includes('--pedestrian')?'pedestrian':null;
+  const scenarios=[['wheels',wheelTests],['seating',seatingTests],['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
+  const selected=process.argv.includes('--wheels')?'wheels':process.argv.includes('--seating')?'seating':process.argv.includes('--pedestrian')?'pedestrian':null;
   for(const [name,test,mobile] of selected ? scenarios.filter(s=>s[0]===selected) : scenarios) {
     console.log('\nScenario: '+name);
     const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1400,height:850},deviceScaleFactor:1,isMobile:Boolean(mobile),hasTouch:Boolean(mobile)});
