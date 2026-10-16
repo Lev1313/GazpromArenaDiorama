@@ -2,6 +2,7 @@
 # Gazprom Arena Diorama
 
 ## Stage 7C — 2026-10-16
+- Implementation `117877e`; PR https://github.com/Lev1313/GazpromArenaDiorama/pull/7 is open into master. Not merged; Production not published.
 - Worktree `.worktrees/multi-car-driving`, branch `feature/multi-car-driving`, based on fetched `origin/master` `e7dcf3e` (PR #5 merged). Original uncommitted CONTEXT, user ZIP and backup GLB preserved. ROADMAP.md and source GLBs unchanged; Mercedes GLA remains outside this stage.
 - `vehicleDrive.js` owns one selected-vehicle controller; `golfDrive.js` preserves the previous exports as a compatibility adapter. Registry driver seats on all 18 roots start the shared controller. Passenger seats never enable it. Physical exit stops inputs and preserves root position/yaw; subsequent entry continues there. Legacy Golf shortcut selects only the silver Golf and retains its legacy exit/reset behavior. Inactive overview transitions cannot reset the last physically driven car.
 - `vehicleTuning.js` defines separate immutable arcade configurations for silver Golf, red Golf GLB, RX, GL X166 and procedural cars: conditional inertia, acceleration/braking, limits, steering, wheelbase, grip and handbrake slip. These are game values, not measured vehicle specifications. HUD uses each registry display name.
