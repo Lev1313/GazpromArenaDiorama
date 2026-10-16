@@ -17,7 +17,7 @@ import { replaceWithParkedLexus } from './vehicles/parkedLexusModel.js';
 import { replaceWithParkedMercedes } from './vehicles/parkedMercedesModel.js';
 import { createDriftSystem } from './vehicles/drift.js';
 import { createTrafficSystem } from './vehicles/traffic.js';
-import { createGolfDrive } from './vehicles/golfDrive.js';
+import { createVehicleDrive } from './vehicles/vehicleDrive.js';
 import { installDriveUi } from './ui/driveUi.js';
 import { createHudController } from './ui/hudController.js';
 import { installFullHud } from './ui/fullHud.js';
@@ -46,6 +46,8 @@ const highway = createZsd(scene, mat, materials);
 createLakhta(scene, mat, materials, steel);
 createSurroundings(scene, mat, materials, arenaX, islandOutline, steel);
 const staticObstacles = groundObstacles(scene);
+// Keep compact-car projections unchanged; the GL has a taller roof envelope.
+const tallVehicleObstacles = groundObstacles(scene, 1.92);
 const pedestrianObstacles = groundObstacles(scene, 1.85);
 const pedestrianGround = captureGroundSurface(scene);
 
@@ -85,11 +87,12 @@ const drift = createDriftSystem(scene, carFactory);
 scene.userData.drifters = drift.drifters.length;
 
 const pavedArea = driveArea(parkingOutline);
-const drive = createGolfDrive({
+const drive = createVehicleDrive({
   golf, golfLabel, parked, people,
   visitors: traffic.visitors, drifters: drift.drifters,
   drift, camera, controls, lotOutline: parkingOutline,
   isDriveable: freeDriveArea(islandOutline), staticObstacles,
+  getStaticObstacles: footprint => (footprint.height ?? 1.7) > 1.7 ? tallVehicleObstacles : staticObstacles,
   getGroundHeight: (x,z) => pavedArea(x,z) || (x>=-14.5 && x<=-5.5 && z>=-49.5 && z<=-38.5)
     ? 0 : Math.hypot(x-arenaX,z)<=36 ? -.13 : -.33,
 });
@@ -104,7 +107,7 @@ const seating = createVehicleInteraction({registry:vehicleRegistry,pedestrian,dr
 const root = document.getElementById('app');
 const driveUi = installDriveUi(root, drive);
 const updateHeadlights = configureNightLighting(scene, { arenaX, headlightCars: [
-  {car:golf,isActive:()=>drive.state.active,projector:true},
+  {get car(){return drive.golf;},isActive:()=>drive.state.active,projector:true},
   ...drift.drifters.map((c,i)=>({car:c.o,isActive:()=>true,projector:i===0})),
   ...traffic.highCars.map(c=>({car:c.o,isActive:()=>true})),
   ...traffic.visitors.map(c=>({car:c.o,isActive:()=>c.delay===0 && c.state!=='park'})),
@@ -132,9 +135,10 @@ function frame(now) {
     const simDt = dt * hud.state.speedScale;
     // A physically parked Golf remains an obstacle after its driver gets out.
     const golfBlocking = seating.golfBlocksTraffic();
-    traffic.update(simDt, { driving: golfBlocking, golfPosition: golf.position });
+    const obstacles = parked;
+    traffic.update(simDt, { driving: golfBlocking, golfPosition: drive.golf.position, obstacles });
     drift.update(simDt, {
-      people, driving: golfBlocking, golfPosition: golf.position,
+      people, driving: golfBlocking, golfPosition: drive.golf.position, obstacles,
     });
     pedestrian.update(walkDt);
   }

@@ -18,7 +18,7 @@ export async function replaceWithParkedMercedes(car) {
   car.clear();
   car.add(model);
   car.userData.frontWheels = [];
-  car.userData.footprint = { halfLength: size.x / 2, halfWidth: size.z / 2 };
+  car.userData.footprint = { halfLength: size.x / 2, halfWidth: size.z / 2, height: size.y };
   car.userData.attribution = {
     title: 'Mercedes GL X166 — Obsidian Black', author: null, license: null,
     note: 'User-supplied prepared asset; author and license were not provided.',

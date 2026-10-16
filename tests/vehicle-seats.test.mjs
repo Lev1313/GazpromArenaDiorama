@@ -5,7 +5,7 @@ import { createVehicleRegistry } from '../src/vehicles/vehicleSeats.js';
 
 const parkedCars = () => Array.from({ length: 18 }, () => new Group());
 
-test('all 18 parked vehicles have deterministic distinct identities; only silver Golf drives', () => {
+test('all 18 parked vehicles have deterministic distinct identities; all support driving', () => {
   const parked = parkedCars(), registry = createVehicleRegistry(parked);
   assert.equal(registry.vehicles.length, 18);
   const ids = registry.vehicles.map(vehicle => vehicle.vehicleId);
@@ -14,7 +14,7 @@ test('all 18 parked vehicles have deterministic distinct identities; only silver
   assert.equal(ids[5], 'parked-golf-player');
   assert.equal(ids[16], 'parked-mercedes-gl');
   assert.equal(ids[17], 'parked-lexus-rx');
-  assert.deepEqual(registry.vehicles.filter(vehicle => vehicle.canDrive).map(vehicle => vehicle.index), [5]);
+  assert.deepEqual(registry.vehicles.filter(vehicle => vehicle.canDrive).map(vehicle => vehicle.index), Array.from({length:18},(_,i)=>i));
   assert.deepEqual(createVehicleRegistry(parkedCars()).vehicles.map(vehicle => vehicle.vehicleId), ids);
   for (const vehicle of registry.vehicles) {
     assert.equal(vehicle.car.userData.vehicleId, vehicle.vehicleId);

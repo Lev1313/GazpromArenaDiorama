@@ -44,7 +44,7 @@ function place(o,p,t){o.position.copy(p.getPointAt(t));const d=p.getTangentAt(t)
    * @param {number} dt - simulation time in seconds, clamped by main RAF
    * @param {{ driving?:boolean, golfPosition?:THREE.Vector3|null }} options
    */
-  function update(dt, { driving = false, golfPosition = null } = {}) {
+  function update(dt, { driving = false, golfPosition = null, obstacles = [] } = {}) {
  for(const c of highCars){c.t=(c.t+dt*.025)%1;const t=c.direction===1?c.t:1-c.t,d=highwayCurve.getTangentAt(t);c.o.position.copy(highwayPoint(t,c.lane));c.o.rotation.y=-Math.atan2(d.z,d.x)+(c.direction===1?0:Math.PI);}
  for(const c of visitors){
    if(c.delay>0){c.delay=Math.max(0,c.delay-dt);continue;}
@@ -55,6 +55,7 @@ function place(o,p,t){o.position.copy(p.getPointAt(t));const d=p.getTangentAt(t)
    if(driving && golfPosition && nextPos.distanceTo(golfPosition)<4.6)continue;
    const tangent=p.getTangentAt(nextT);
    const yaw=-Math.atan2(tangent.z,tangent.x)+(c.state==='reverse'?Math.PI:0);
+   if(obstacles.some(o=>carOverlap(nextPos,yaw,o,.3)))continue;
    if(visitors.some(other=>other!==c && other.o.visible && other.delay===0
      && carOverlap(nextPos,yaw,other.o,.25)))continue;
    c.t=nextT;place(c.o,p,c.t);

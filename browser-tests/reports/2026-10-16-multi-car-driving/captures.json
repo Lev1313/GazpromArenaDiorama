@@ -1,0 +1,127 @@
+{
+  "errors": [],
+  "captures": [
+    {
+      "id": "parked-golf-red",
+      "file": "red-golf.png",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          -8
+        ],
+        "yaw": 0,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.137426495552063,
+          "halfWidth": 1.03955751657486,
+          "height": 1.551530297845602
+        }
+      },
+      "after": {
+        "position": [
+          -19.920428315784473,
+          0,
+          -8.013135018746038
+        ],
+        "yaw": 0.05168161057061426,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.137426495552063,
+          "halfWidth": 1.03955751657486,
+          "height": 1.551530297845602
+        }
+      },
+      "speed": 17
+    },
+    {
+      "id": "parked-lexus-rx",
+      "file": "lexus-rx.png",
+      "before": {
+        "position": [
+          2,
+          0,
+          33
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.4326908588409424,
+          "halfWidth": 1.0762507319450383,
+          "height": 1.6900029182434086
+        }
+      },
+      "after": {
+        "position": [
+          1.9946986312807047,
+          0,
+          30.966905721545068
+        ],
+        "yaw": 1.5968985395682762,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.4326908588409424,
+          "halfWidth": 1.0762507319450383,
+          "height": 1.6900029182434086
+        }
+      },
+      "speed": 14
+    },
+    {
+      "id": "parked-mercedes-gl",
+      "file": "mercedes-gl.png",
+      "before": {
+        "position": [
+          -5,
+          0,
+          33
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.5599999427795415,
+          "halfWidth": 1.132063031196595,
+          "height": 1.9186533689498901
+        }
+      },
+      "after": {
+        "position": [
+          -5.003304790254874,
+          0,
+          31.13712629980977
+        ],
+        "yaw": 1.588726466957736,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.5599999427795415,
+          "halfWidth": 1.132063031196595,
+          "height": 1.9186533689498901
+        }
+      },
+      "speed": 12
+    },
+    {
+      "id": "parked-07",
+      "file": "procedural.png",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          -24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          3.7352107461116915,
+          0,
+          -23.988321638264132
+        ],
+        "yaw": 3.1898007784384688,
+        "visible": true
+      },
+      "speed": 16
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { carOverlap } from './golfDrive.js';
 import { createSmokeTexture } from '../materials/textures.js';
 
 // Keep the parking-centre envelope; vary both radius and pace independently.
@@ -62,7 +63,8 @@ export function createDriftSystem(
   let skidCursor = 0, skidCount = 0;
 
   function rearPoints(o) {
-    return [-.88, .88].map(z => new THREE.Vector3(-1.13, -.108, z)
+    const fp=o.userData.footprint;
+    return [-1,1].map(side => new THREE.Vector3(-(fp?.halfLength ?? 1.96)*1.13/1.96, -.108, side*(fp?.halfWidth ?? 1.04)*.88/1.04)
       .applyAxisAngle(new THREE.Vector3(0, 1, 0), o.rotation.y)
       .add(o.position));
   }
@@ -143,11 +145,14 @@ export function createDriftSystem(
    * @param {number} dt - simulation seconds (already scaled for speed)
    * @param {{ driving?:boolean, golfPosition?:THREE.Vector3|null, people?:THREE.Group[] }} options
    */
-  function update(dt, { driving = false, golfPosition = null, people = [] } = {}) {
+  function update(dt, { driving = false, golfPosition = null, people = [], obstacles = [] } = {}) {
     simTime += dt;
     trackTimer += dt;
 
-    driftWaiting = Boolean(driving && golfPosition && drifters.some(c => {
+    driftWaiting = drifters.some(c=>{
+      const p=driftPose(driftTime+dt+.3,c.phase);
+      return obstacles.some(o=>carOverlap({x:p.x,z:p.z},p.angle,o,.4));
+    }) || Boolean(driving && golfPosition && drifters.some(c => {
       const p = driftPose(driftTime + dt + .3, c.phase);
       return Math.hypot(p.x - golfPosition.x, p.z - golfPosition.z) < 5;
     }));

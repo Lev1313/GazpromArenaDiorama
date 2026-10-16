@@ -50,7 +50,7 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
     pedestrian.suspendWalking();
     state.vehicleId=vehicle.vehicleId; state.seatId=seat.seatId; state.mode=seat.role;
     cameraView=0; message=''; messageTime=0;
-    if (vehicle.canDrive && seat.role==='driver') modes.beginSeatedDriving();
+    if (vehicle.canDrive && seat.role==='driver') modes.beginSeatedDriving(vehicle);
     controls.enabled=false; updatePose(); updateCamera(1,true);
     return true;
   }
@@ -71,7 +71,7 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
   function exit() {
     const occupied=current(); if (!occupied) return false;
     if (occupied.vehicle.canDrive && drive.state.active && Math.abs(drive.state.speed)>safeExitSpeed)
-      return feedback('Останови Golf перед высадкой');
+      return feedback('Останови автомобиль перед высадкой');
     const point=findExit();
     if (!point) return feedback('У двери нет свободного места для высадки');
     // Clear the seat only after the checked ground point is accepted.
@@ -98,11 +98,11 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
       prompt:target ? target.seat.occupiedBy ? 'Место занято' : 'E — сесть' : '' };
   }
   function canLegacyDrive() {
-    const vehicle=registry.vehicles.find(v=>v.canDrive);
+    const vehicle=registry.vehicles.find(v=>v.car===drive.legacyGolf);
     return !vehicle?.seats.find(s=>s.role==='driver')?.occupiedBy || feedback('Водительское место Golf занято');
   }
   function golfBlocksTraffic() {
-    const p=drive.golf.position,home=drive.golfHome;
+    const p=drive.legacyGolf.position,home=drive.golfHome;
     return drive.state.active || Math.hypot(p.x-home.x,p.z-home.z)>.1;
   }
   modes.attachSeating?.({isSeated,exit,canLegacyDrive});

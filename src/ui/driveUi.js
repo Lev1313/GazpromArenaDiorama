@@ -21,7 +21,7 @@ export function installDriveUi(root, drive) {
       <span id="hint">ЛКМ — вращение · колесо — масштаб · ПКМ — перемещение</span>
     </div>
     <section id="drivePanel" hidden aria-label="Управление автомобилем">
-      <div class="driveHeading">GOLF VI <span>Свободный заезд</span></div>
+      <div class="driveHeading"><b id="vehicleName">GOLF VI</b> <span>Свободный заезд</span></div>
       <div class="instrument">
         <strong id="kmh">0</strong><span>км/ч</span><b id="gear">N</b>
       </div>
@@ -48,12 +48,13 @@ export function installDriveUi(root, drive) {
   const hint = $('#hint');
   function render() {
     const status = drive.getStatus();
+    $('#vehicleName').textContent = status.vehicleName;
     $('#kmh').textContent = String(status.speedKmh);
     $('#gear').textContent = status.gear;
     $('#driveMessage').textContent = status.message;
     $('#viewName').textContent = status.viewName;
     panel.hidden = !status.active;
-    button.textContent = status.active ? 'Выйти из Golf' : 'За руль Golf VI';
+    button.textContent = status.active ? 'Выйти из машины' : 'За руль Golf VI';
     button.setAttribute('aria-pressed', String(status.active));
     layer.classList.toggle('driving', status.active);
     hint.textContent = status.active

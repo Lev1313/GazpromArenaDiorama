@@ -198,3 +198,11 @@ test('all guests complete repeated visits without collisions or visible teleport
   }
   assert.ok(completed.every(n=>n>=3), `Visitors stuck: completed ${completed}`);
 });
+test('visitors yield to a relocated SUV and resume when its live footprint clears',()=>{
+  const {traffic}=makeSetup(), visitor=traffic.visitors[0], car=new THREE.Group();
+  car.userData.footprint={halfLength:2.56,halfWidth:1.132};
+  car.position.copy(visitor.arrive.getPointAt(.001));
+  traffic.update(1/60,{obstacles:[car]});assert.equal(visitor.t,0);
+  car.position.set(-100,0,-100);
+  traffic.update(1/60,{obstacles:[car]});assert(visitor.t>0);
+});
