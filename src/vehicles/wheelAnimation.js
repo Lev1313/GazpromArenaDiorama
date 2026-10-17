@@ -40,6 +40,13 @@ export function resetWheels(car) {
   for(const wheel of car.userData.wheels??[]){wheel.angle=wheel.distance=0;wheel.rollingPivot.quaternion.identity();}
 }
 
+/** Absolute signed axle distances from the agreed network state; calipers stay fixed. */
+export function setWheelDistances(car,front,rear,steer){
+  steerWheels(car,steer);
+  for(const wheel of car.userData.wheels??[]){wheel.distance=wheel.front?front:rear;wheel.angle=wheel.distance/wheel.radius;
+    wheel.rollingPivot.quaternion.setFromAxisAngle(axle,-(wheel.angle%(2*Math.PI)));}
+}
+
 /** Partitioned primitives share original vertex accessors; bounds must use their own indices. */
 export function prepareWheelBounds(model) {
   const v=new Vector3();

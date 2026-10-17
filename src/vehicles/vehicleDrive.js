@@ -83,7 +83,7 @@ export function createVehicleDrive({
 }) {
   const legacyGolf = golf;
   const homes = new Map(parked.map(car => [car, {position:car.position.clone(),yaw:car.rotation.y}]));
-  let physical = false;
+  let physical = false,resetHandler=null;
   let tuning = vehicleTuning(golf.userData.vehicleId);
   const footprint = () => golf.userData.footprint ?? defaultFootprint;
   const golfHome = golf.position.clone();
@@ -153,6 +153,7 @@ export function createVehicleDrive({
   }
 
   function resetGolf() {
+    if(resetHandler)return resetHandler();
     keys.clear();
     const home=homes.get(golf);
     if(blocked(home.position,home.yaw)){state.contact=.65;return false;}
@@ -350,5 +351,6 @@ export function createVehicleDrive({
     startVehicle, startLegacy, get physical(){return physical;},
     blocked, setKey, clearKeys, setDriving, stopDriving, resetGolf,
     cycleDriveView, updateDriving, updateDriveCamera, getStatus,
+    setResetHandler(handler){resetHandler=handler;},
   };
 }

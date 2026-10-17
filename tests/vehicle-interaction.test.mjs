@@ -58,6 +58,22 @@ function approach(f, index, seatId = 'driver') {
   return { vehicle, seat, entry, target };
 }
 
+test('network seating grants no local rights before confirmation and waits at a newly obstructed exit',()=>{
+  const f=fixture(),{vehicle,seat}=approach(f,5);let requested=0;
+  f.modes.setNetworkMode(true);
+  f.interaction.setNetworkAdapter({enter(){requested++;return false;},speed:()=>0,exit:()=>false});
+  assert.equal(f.interaction.enter(),false);assert.equal(requested,1);assert.equal(f.pedestrian.state.mode,'onFoot');
+  assert.equal(f.drive.state.active,false);assert.equal(seat.occupiedBy,null);
+  seat.occupiedBy=f.pedestrian.state.playerId;f.interaction.applyNetworkSeat(vehicle.vehicleId,'driver');
+  assert(f.drive.state.active);const point=f.interaction.findExit(),carPosition=vehicle.car.position.clone();assert(point);
+  const original=f.pedestrian.collision;f.pedestrian.collision=()=>true;
+  seat.occupiedBy=null;f.interaction.applyNetworkSeat(null,null,point);
+  assert(f.interaction.getStatus().waitingExit);assert(!f.drive.state.active);assert.equal(f.pedestrian.state.vehicleId,vehicle.vehicleId);
+  f.pedestrian.collision=original;f.interaction.update(.02);
+  assert(!f.interaction.getStatus().waitingExit);assert.equal(f.pedestrian.state.mode,'onFoot');assert(f.pedestrian.state.active);
+  assert(f.pedestrian.model.position.distanceTo(point)<1.5);assert(vehicle.car.position.equals(carPosition));
+});
+
 function assertPose(f, vehicle, seat) {
   const expectedPosition = f.registry.worldPosition(vehicle, seat, 'localPosition');
   const origin = vehicle.car.localToWorld(new THREE.Vector3());

@@ -26,6 +26,7 @@ export function installVehicleInteractionUi(root, seating, drive, hud) {
     $('#seatMessage').textContent=status.message || (drive.state.active
       ? 'WASD — ехать · Пробел — ручник · остановись перед выходом'
       : 'Осмотр из автомобиля · E / Esc — выйти');
+    $('#seatExit').disabled=Boolean(status.waitingExit);
     $('#seatCamera').hidden=drive.state.active;
     $('#seatPanel').classList.toggle('driving',drive.state.active);
     if(status.seated && !drive.state.active) root.querySelector('#hint').textContent='E / Esc — выйти · C — вид автомобиля';

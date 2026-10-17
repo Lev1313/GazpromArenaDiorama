@@ -1,0 +1,1681 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "Single-player starts with no socket or remote avatar",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "UI creates unpredictable room and server player ID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Share link contains room and endpoint, never reconnect secret",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Room link prefills join form",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Two isolated clients own distinct IDs and exactly one remote each",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Nicknames are assigned to the correct remote",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A keyboard moves only A local controller",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "B sees A position and direction through WebSocket",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Remote walking animation advances only while peer moves",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "B independently moves; A sees B without receiving B controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Peer disappears immediately after socket disconnect",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Automatic reconnect keeps ID and creates no duplicate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Delayed real WebSocket link converges without extra avatars",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Delayed peer is interpolated across intermediate positions",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "E request does not grant driver before server confirmation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A receives the server-owned driver seat",
+      "ok": true,
+      "detail": "{\"a\":{\"status\":{\"phase\":\"connected\",\"roomId\":\"YIzaqcJgt44whg9J\",\"playerId\":\"62a85ac3-2628-4d6d-8bfa-2264359f997a\",\"nickname\":\"Игрок А\",\"peers\":1,\"reason\":\"\",\"attempt\":0},\"remotes\":[{\"playerId\":\"8705670c-2f7d-438b-a6d6-2fc788f1d66f\",\"nickname\":\"Игрок Б\",\"position\":[-16,-0.11999999999999111,-8],\"yaw\":3.141592653589793,\"stride\":0,\"seq\":40,\"samples\":2,\"seat\":null}],\"fleet\":{\"ready\":true,\"pending\":null,\"vehicles\":[{\"vehicleId\":\"parked-00\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":-24,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-01\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":-16,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-golf-red\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":-8,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-03\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":0,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-04\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":8,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-golf-player\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":16,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-06\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.4,\"y\":0,\"z\":24,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-07\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.1,\"y\":0,\"z\":-24,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-08\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.1,\"y\":0,\"z\":-16,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-09\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.1,\"y\":0,\"z\":-8,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-10\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.5,\"y\":0,\"z\":-37,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-11\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.1,\"y\":0,\"z\":8,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-12\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.1,\"y\":0,\"z\":16,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-13\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.1,\"y\":0,\"z\":24,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-14\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-19,\"y\":0,\"z\":33,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-15\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-12,\"y\":0,\"z\":33,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-mercedes-gl\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-5,\"y\":0,\"z\":33,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-lexus-rx\",\"revision\":0,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":2,\"y\":0,\"z\":33,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":1},{\"vehicleId\":\"parked-mercedes-gla-x156\",\"revision\":16,\"seats\":{\"driver\":\"62a85ac3-2628-4d6d-8bfa-2264359f997a\",\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.5,\"y\":0,\"z\":37,\"yaw\":-1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":0,\"rearDistance\":0},\"samples\":16}]},\"local\":{\"position\":[6.842668698171805,-0.2,36.83079460254401],\"yaw\":0,\"playerId\":\"62a85ac3-2628-4d6d-8bfa-2264359f997a\",\"mode\":\"driver\",\"keys\":[]},\"drive\":true,\"remoteRoots\":1,\"renderFrames\":280,\"canvases\":1},\"message\":\"\"}"
+    },
+    {
+      "name": "B joins the same GLA as passenger with no driver controller",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger owns an independent seated camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger WASD and R cannot move/reset the car",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Confirmed driver physically accelerates and turns the GLA",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake locks the rear while front wheels keep rolling",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Both browsers converge on the same car pose and wheel distances",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger follows its exact seat through turning and drift",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Remote occupied car keeps its lightweight night headlights",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse is shared and reverses wheel rotation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver disconnect freezes agreed car and preserves passenger seat",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver reconnect restores one driver and one passenger without duplicates",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger disconnect reserves only its existing seat",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger reconnect restores the same seat without driving rights",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Passenger safely exits through server-confirmed door",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver exits without resetting the car",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switching cars preserves GLA and grants a different stable vehicle ID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Concurrent browser requests produce exactly one driver",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Rejected seat keeps loser walking with readable occupancy feedback",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network driver seat parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network movement and real wheel rotation parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network safe exit parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Late join adopts every moved car pose without cloning models",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reconnect cycle 0 keeps one remote and stable resources",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reconnect cycle 1 keeps one remote and stable resources",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reconnect cycle 2 keeps one remote and stable resources",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network mode disables legacy drive and camera preset buttons",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Physical E waits for server-confirmed seat and starts the driver",
+      "ok": true,
+      "detail": "{\"a\":{\"status\":{\"phase\":\"connected\",\"roomId\":\"YIzaqcJgt44whg9J\",\"playerId\":\"62a85ac3-2628-4d6d-8bfa-2264359f997a\",\"nickname\":\"Игрок А\",\"peers\":1,\"reason\":\"\",\"attempt\":0},\"remotes\":[{\"playerId\":\"6bbdf5f0-4f2c-4b8c-87c0-059ef44b6145\",\"nickname\":\"Игрок Б\",\"position\":[-13.5,-0.11999999999999111,-8],\"yaw\":3.141592653589793,\"stride\":0,\"seq\":68,\"samples\":2,\"seat\":null}],\"fleet\":{\"ready\":true,\"pending\":null,\"vehicles\":[{\"vehicleId\":\"parked-00\",\"revision\":54,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.104750011602935,\"y\":0,\"z\":-24,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839706385,\"rearDistance\":0.12958332173041143},\"samples\":1},{\"vehicleId\":\"parked-01\",\"revision\":30,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.104750011602935,\"y\":0,\"z\":-16,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839706385,\"rearDistance\":0.12958332173041143},\"samples\":1},{\"vehicleId\":\"parked-golf-red\",\"revision\":46,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.0797503640955,\"y\":0,\"z\":-8,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.3202496359044993,\"rearDistance\":0.13858296923785218},\"samples\":1},{\"vehicleId\":\"parked-03\",\"revision\":41,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.104750011602935,\"y\":0,\"z\":0,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839706385,\"rearDistance\":0.12958332173041143},\"samples\":1},{\"vehicleId\":\"parked-04\",\"revision\":26,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.104750011602867,\"y\":0,\"z\":8,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839713135,\"rearDistance\":0.1295833217304434},\"samples\":1},{\"vehicleId\":\"parked-golf-player\",\"revision\":31,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.104750011602867,\"y\":0,\"z\":16,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839713135,\"rearDistance\":0.1295833217304434},\"samples\":1},{\"vehicleId\":\"parked-06\",\"revision\":29,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-22.104750011602867,\"y\":0,\"z\":24,\"yaw\":0,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839713135,\"rearDistance\":0.1295833217304434},\"samples\":1},{\"vehicleId\":\"parked-07\",\"revision\":35,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.80475001160287,\"y\":0,\"z\":-24,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839712957,\"rearDistance\":0.12958332173043807},\"samples\":1},{\"vehicleId\":\"parked-08\",\"revision\":32,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.80475001160287,\"y\":0,\"z\":-16,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839712957,\"rearDistance\":0.12958332173043807},\"samples\":1},{\"vehicleId\":\"parked-09\",\"revision\":36,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.80475001160287,\"y\":0,\"z\":-8,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839712957,\"rearDistance\":0.12958332173043807},\"samples\":1},{\"vehicleId\":\"parked-10\",\"revision\":44,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.5,\"y\":0,\"z\":-37.29524998839714,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839713845,\"rearDistance\":0.1295833217304363},\"samples\":1},{\"vehicleId\":\"parked-11\",\"revision\":31,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.80475001160287,\"y\":0,\"z\":8,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839712957,\"rearDistance\":0.12958332173043807},\"samples\":1},{\"vehicleId\":\"parked-12\",\"revision\":28,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.80475001160287,\"y\":0,\"z\":16,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839712957,\"rearDistance\":0.12958332173043807},\"samples\":1},{\"vehicleId\":\"parked-13\",\"revision\":33,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":5.80475001160287,\"y\":0,\"z\":24,\"yaw\":3.141592653589793,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839712957,\"rearDistance\":0.12958332173043807},\"samples\":1},{\"vehicleId\":\"parked-14\",\"revision\":29,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-19,\"y\":0,\"z\":32.70475001160286,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839713845,\"rearDistance\":0.1295833217304363},\"samples\":1},{\"vehicleId\":\"parked-15\",\"revision\":30,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-12,\"y\":0,\"z\":32.704750011603,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.29524998839700345,\"rearDistance\":0.12958332173037235},\"samples\":1},{\"vehicleId\":\"parked-mercedes-gl\",\"revision\":33,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":-5,\"y\":0,\"z\":32.79449550545228,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.2055044945477178,\"rearDistance\":0.1036989389921601},\"samples\":1},{\"vehicleId\":\"parked-lexus-rx\",\"revision\":25,\"seats\":{\"driver\":null,\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":2,\"y\":0,\"z\":32.766875000000084,\"yaw\":1.5707963267948966,\"speed\":0,\"steer\":0,\"handbrake\":true,\"frontDistance\":0.23312499999991587,\"rearDistance\":0.11111111111107164},\"samples\":1},{\"vehicleId\":\"parked-mercedes-gla-x156\",\"revision\":338,\"seats\":{\"driver\":\"62a85ac3-2628-4d6d-8bfa-2264359f997a\",\"front-passenger\":null,\"rear-left\":null,\"rear-right\":null},\"state\":{\"x\":6.776860529370533,\"y\":-0.3299999999999998,\"z\":40.41312416539,\"yaw\":-0.9568842409405474,\"speed\":0,\"steer\":0,\"handbrake\":false,\"frontDistance\":3.351622519850374,\"rearDistance\":0.9337141591519638},\"samples\":9}]},\"local\":{\"position\":[6.959484058289039,-0.5299999999999998,40.07741454396048],\"yaw\":0.6139120858543488,\"playerId\":\"62a85ac3-2628-4d6d-8bfa-2264359f997a\",\"mode\":\"driver\",\"keys\":[]},\"drive\":true,\"remoteRoots\":1,\"renderFrames\":2488,\"canvases\":1},\"message\":\"\"}"
+    },
+    {
+      "name": "Server-confirmed E exit restores walking",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Leaving clears remote/label resources and restores local identity",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network never reloads any of the four car GLBs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Nickname markup stays literal text, never DOM elements",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Real server refusal produces a readable error indicator",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Single-player physical GLA driving is restored after leaving",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Single-player GLA still moves and rolls wheels",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Joining while driving refuses without changing seats or opening a socket",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No browser/server errors or dialogs",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "two-players-client-a.png",
+    "two-players-client-b.png",
+    "shared-motion-4.png",
+    "shared-motion-11.png",
+    "shared-ride-driver.png",
+    "shared-ride-passenger.png",
+    "shared-ride-night.png"
+  ],
+  "method": "Separate Node WebSocket process; two isolated Edge contexts; actual UI and keyboard. Manual local simulation clock, native monotonic receive clock. Real WebSocket delay proxy (200 ms each direction).",
+  "serverProcess": true,
+  "browser": "155.0.4283.45",
+  "walkSamples": [
+    0.5034146962085901,
+    0.24998833984980326,
+    0.6275552318972146,
+    0.8150494016861569,
+    0.9081562509499171,
+    0.9543917439766225
+  ],
+  "latency": {
+    "oneWayMs": 200,
+    "samples": [
+      [
+        -18,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -18,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.706666666666706,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.706666666666706,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.706666666666706,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.568056255805722,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.55369010144409,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.409453262786677,
+        -0.11999999999999111,
+        -9.32000000000007
+      ]
+    ],
+    "finalLocal": [
+      -16.826666666666824,
+      -0.11999999999999111,
+      -9.32000000000007
+    ],
+    "finalRemote": [
+      -16.826666666666824,
+      -0.11999999999999111,
+      -9.32000000000007
+    ]
+  },
+  "rideFrames": [
+    {
+      "phase": "forward",
+      "car": {
+        "position": [
+          6.5,
+          0,
+          37.33744855967079
+        ],
+        "yaw": -1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.210950526758291,
+          "halfWidth": 1.0078491122700144,
+          "height": 1.557958608239272
+        }
+      },
+      "wheels": [
+        {
+          "id": "front-left",
+          "radius": 0.35091981069624134,
+          "angle": 0.9616115972514523,
+          "distance": 0.3374485596707899,
+          "steer": 0,
+          "roll": [
+            0,
+            0,
+            -0.46249376483469723,
+            0.886622533826559
+          ],
+          "center": [
+            1.3057888046769637,
+            0.23091992245495196,
+            -0.7632126027824369
+          ],
+          "rollingParts": [
+            "Object_5-front-leftrolling"
+          ]
+        },
+        {
+          "id": "front-right",
+          "radius": 0.35091981069624134,
+          "angle": 0.9616115972514523,
+          "distance": 0.3374485596707899,
+          "steer": 0,
+          "roll": [
+            0,
+            0,
+            -0.46249376483469723,
+            0.886622533826559
+          ],
+          "center": [
+            1.3057888046769632,
+            0.23091992245495196,
+            0.7632126027824373
+          ],
+          "rollingParts": [
+            "Object_5-front-rightrolling"
+          ]
+        },
+        {
+          "id": "rear-left",
+          "radius": 0.35092001931250116,
+          "angle": 0.9616110255889542,
+          "distance": 0.3374485596707899,
+          "steer": 0,
+          "roll": [
+            0,
+            0,
+            -0.4624935114102521,
+            0.8866226660216933
+          ],
+          "center": [
+            -1.3934181838246886,
+            0.23091992245495196,
+            -0.7632126027824373
+          ],
+          "rollingParts": [
+            "Object_5-rear-leftrolling"
+          ]
+        },
+        {
+          "id": "rear-right",
+          "radius": 0.3509200193125012,
+          "angle": 0.9616110255889541,
+          "distance": 0.3374485596707899,
+          "steer": 0,
+          "roll": [
+            0,
+            0,
+            -0.462493511410252,
+            0.8866226660216933
+          ],
+          "center": [
+            -1.3934181838246888,
+            0.23091992245495196,
+            0.7632126027824369
+          ],
+          "rollingParts": [
+            "Object_5-rear-rightrolling"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "forward",
+      "car": {
+        "position": [
+          6.657690079076864,
+          0,
+          38.90414127602133
+        ],
+        "yaw": -1.3420401119227154,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.210950526758291,
+          "halfWidth": 1.0078491122700144,
+          "height": 1.557958608239272
+        }
+      },
+      "wheels": [
+        {
+          "id": "front-left",
+          "radius": 0.35091981069624134,
+          "angle": 5.460077557076596,
+          "distance": 1.9160493827161145,
+          "steer": 0.4490482377966141,
+          "roll": [
+            0,
+            0,
+            -0.4000339373501874,
+            -0.9165003267692305
+          ],
+          "center": [
+            1.3057888046769637,
+            0.23091992245495196,
+            -0.7632126027824369
+          ],
+          "rollingParts": [
+            "Object_5-front-leftrolling"
+          ]
+        },
+        {
+          "id": "front-right",
+          "radius": 0.35091981069624134,
+          "angle": 5.460077557076596,
+          "distance": 1.9160493827161145,
+          "steer": 0.4490482377966141,
+          "roll": [
+            0,
+            0,
+            -0.4000339373501874,
+            -0.9165003267692305
+          ],
+          "center": [
+            1.3057888046769632,
+            0.23091992245495196,
+            0.7632126027824373
+          ],
+          "rollingParts": [
+            "Object_5-front-rightrolling"
+          ]
+        },
+        {
+          "id": "rear-left",
+          "radius": 0.35092001931250116,
+          "angle": 5.460074311149046,
+          "distance": 1.9160493827161145,
+          "steer": 0,
+          "roll": [
+            0,
+            0,
+            -0.40003542479649057,
+            -0.9164996775274344
+          ],
+          "center": [
+            -1.3934181838246886,
+            0.23091992245495196,
+            -0.7632126027824373
+          ],
+          "rollingParts": [
+            "Object_5-rear-leftrolling"
+          ]
+        },
+        {
+          "id": "rear-right",
+          "radius": 0.3509200193125012,
+          "angle": 5.460074311149043,
+          "distance": 1.9160493827161145,
+          "steer": 0,
+          "roll": [
+            0,
+            0,
+            -0.4000354247964918,
+            -0.9164996775274339
+          ],
+          "center": [
+            -1.3934181838246888,
+            0.23091992245495196,
+            0.7632126027824369
+          ],
+          "rollingParts": [
+            "Object_5-rear-rightrolling"
+          ]
+        }
+      ]
+    }
+  ],
+  "allVehicleDrives": [
+    {
+      "vehicleId": "parked-00",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          -24
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -22.104750011602935,
+          0,
+          -24
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -22.104750011602935,
+          0,
+          -24
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.32395830432602857
+    },
+    {
+      "vehicleId": "parked-01",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          -16
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -22.104750011602935,
+          0,
+          -16
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -22.104750011602935,
+          0,
+          -16
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.32395830432602857
+    },
+    {
+      "vehicleId": "parked-golf-red",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          -8
+        ],
+        "yaw": 0,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.137426495552063,
+          "halfWidth": 1.03955751657486,
+          "height": 1.551530297845602
+        }
+      },
+      "after": {
+        "position": [
+          -22.0797503640955,
+          0,
+          -8
+        ],
+        "yaw": 0,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.137426495552063,
+          "halfWidth": 1.03955751657486,
+          "height": 1.551530297845602
+        }
+      },
+      "peer": {
+        "position": [
+          -22.0797503640955,
+          0,
+          -8
+        ],
+        "yaw": 0,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.137426495552063,
+          "halfWidth": 1.03955751657486,
+          "height": 1.551530297845602
+        }
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 1.02349040356888
+    },
+    {
+      "vehicleId": "parked-03",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          0
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -22.104750011602935,
+          0,
+          0
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -22.104750011602935,
+          0,
+          0
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.32395830432602857
+    },
+    {
+      "vehicleId": "parked-04",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          8
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -22.104750011602867,
+          0,
+          8
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -22.104750011602867,
+          0,
+          8
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043261085
+    },
+    {
+      "vehicleId": "parked-golf-player",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          16
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -22.104750011602867,
+          0,
+          16
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -22.104750011602867,
+          0,
+          16
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043261085
+    },
+    {
+      "vehicleId": "parked-06",
+      "before": {
+        "position": [
+          -22.4,
+          0,
+          24
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -22.104750011602867,
+          0,
+          24
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -22.104750011602867,
+          0,
+          24
+        ],
+        "yaw": 0,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043261085
+    },
+    {
+      "vehicleId": "parked-07",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          -24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.80475001160287,
+          0,
+          -24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.80475001160287,
+          0,
+          -24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043260952
+    },
+    {
+      "vehicleId": "parked-08",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          -16
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.80475001160287,
+          0,
+          -16
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.80475001160287,
+          0,
+          -16
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043260952
+    },
+    {
+      "vehicleId": "parked-09",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          -8
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.80475001160287,
+          0,
+          -8
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.80475001160287,
+          0,
+          -8
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043260952
+    },
+    {
+      "vehicleId": "parked-10",
+      "before": {
+        "position": [
+          5.5,
+          0,
+          -37
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.5,
+          0,
+          -37.29524998839714
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.5,
+          0,
+          -37.29524998839714
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.32395830432609074
+    },
+    {
+      "vehicleId": "parked-11",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          8
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.80475001160287,
+          0,
+          8
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.80475001160287,
+          0,
+          8
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043260952
+    },
+    {
+      "vehicleId": "parked-12",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          16
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.80475001160287,
+          0,
+          16
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.80475001160287,
+          0,
+          16
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043260952
+    },
+    {
+      "vehicleId": "parked-13",
+      "before": {
+        "position": [
+          6.1,
+          0,
+          24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          5.80475001160287,
+          0,
+          24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          5.80475001160287,
+          0,
+          24
+        ],
+        "yaw": 3.141592653589793,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.3239583043260952
+    },
+    {
+      "vehicleId": "parked-14",
+      "before": {
+        "position": [
+          -19,
+          0,
+          33
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -19,
+          0,
+          32.70475001160286
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -19,
+          0,
+          32.70475001160286
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.32395830432609074
+    },
+    {
+      "vehicleId": "parked-15",
+      "before": {
+        "position": [
+          -12,
+          0,
+          33
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "after": {
+        "position": [
+          -12,
+          0,
+          32.704750011603
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "peer": {
+        "position": [
+          -12,
+          0,
+          32.704750011603
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.32395830432593087
+    },
+    {
+      "vehicleId": "parked-mercedes-gl",
+      "before": {
+        "position": [
+          -5,
+          0,
+          33
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.5599999427795415,
+          "halfWidth": 1.132063031196595,
+          "height": 1.9186533689498901
+        }
+      },
+      "after": {
+        "position": [
+          -5,
+          0,
+          32.79449550545228
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.5599999427795415,
+          "halfWidth": 1.132063031196595,
+          "height": 1.9186533689498901
+        }
+      },
+      "peer": {
+        "position": [
+          -5,
+          0,
+          32.79449550545228
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.5599999427795415,
+          "halfWidth": 1.132063031196595,
+          "height": 1.9186533689498901
+        }
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.518776949740114
+    },
+    {
+      "vehicleId": "parked-lexus-rx",
+      "before": {
+        "position": [
+          2,
+          0,
+          33
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.4326908588409424,
+          "halfWidth": 1.0762507319450383,
+          "height": 1.6900029182434086
+        }
+      },
+      "after": {
+        "position": [
+          2,
+          0,
+          32.766875000000084
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.4326908588409424,
+          "halfWidth": 1.0762507319450383,
+          "height": 1.6900029182434086
+        }
+      },
+      "peer": {
+        "position": [
+          2,
+          0,
+          32.766875000000084
+        ],
+        "yaw": 1.5707963267948966,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.4326908588409424,
+          "halfWidth": 1.0762507319450383,
+          "height": 1.6900029182434086
+        }
+      },
+      "wheelBefore": 0,
+      "wheelAfter": 0.6096318167922654
+    },
+    {
+      "vehicleId": "parked-mercedes-gla-x156",
+      "before": {
+        "position": [
+          6.618654748030657,
+          -0.3299999999999998,
+          40.18864172905897
+        ],
+        "yaw": -0.9568842409405474,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.210950526758291,
+          "halfWidth": 1.0078491122700144,
+          "height": 1.557958608239272
+        }
+      },
+      "after": {
+        "position": [
+          6.776860529370533,
+          -0.3299999999999998,
+          40.41312416539
+        ],
+        "yaw": -0.9568842409405474,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.210950526758291,
+          "halfWidth": 1.0078491122700144,
+          "height": 1.557958608239272
+        }
+      },
+      "peer": {
+        "position": [
+          6.776860529370533,
+          -0.3299999999999998,
+          40.41312416539
+        ],
+        "yaw": -0.9568842409405474,
+        "visible": true,
+        "footprint": {
+          "halfLength": 2.210950526758291,
+          "halfWidth": 1.0078491122700144,
+          "height": 1.557958608239272
+        }
+      },
+      "wheelBefore": 8.768364727303096,
+      "wheelAfter": 9.550964116846519
+    }
+  ],
+  "reconnectResources": [
+    [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 246066,
+        "calls": 57,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 71666,
+        "calls": 115,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ],
+    [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 246066,
+        "calls": 57,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 71666,
+        "calls": 115,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ],
+    [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 246066,
+        "calls": 57,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 71666,
+        "calls": 115,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ]
+  ],
+  "resources": {
+    "baseA": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 384,
+      "geometries": 1261,
+      "textures": 19,
+      "triangles": 305130,
+      "calls": 186,
+      "models": [
+        "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "baseB": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 384,
+      "geometries": 1261,
+      "textures": 19,
+      "triangles": 305130,
+      "calls": 186,
+      "models": [
+        "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "active": [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 246066,
+        "calls": 57,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 389,
+        "geometries": 1294,
+        "textures": 21,
+        "triangles": 71678,
+        "calls": 116,
+        "models": [
+          "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ],
+    "endA": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 384,
+      "geometries": 1282,
+      "textures": 20,
+      "triangles": 246064,
+      "calls": 56,
+      "models": [
+        "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "endB": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 384,
+      "geometries": 1282,
+      "textures": 20,
+      "triangles": 71664,
+      "calls": 114,
+      "models": [
+        "http://127.0.0.1:59396/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:59396/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    }
+  }
+}

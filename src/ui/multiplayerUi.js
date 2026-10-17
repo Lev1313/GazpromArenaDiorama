@@ -21,10 +21,10 @@ export function installMultiplayerUi(root,multiplayer) {
   toggle.setAttribute('aria-controls','multiplayerPanel');toggle.setAttribute('aria-expanded','false');
   root.querySelector('.hud-buttons').appendChild(toggle);
   const panel=document.createElement('section');panel.id='multiplayerPanel';panel.hidden=true;
-  panel.setAttribute('aria-label','Сетевая прогулка');
+  panel.setAttribute('aria-label','Сетевая комната');
   panel.innerHTML=`<button id="mpClose" type="button" aria-label="Закрыть сетевую панель">×</button>
-    <strong>Сетевая прогулка · 2 игрока</strong>
-    <p>В комнате доступна только прогулка. Автомобили, трафик и дрифт у каждого локальные.</p>
+    <strong>Совместная поездка · 2 игрока</strong>
+    <p>Гуляйте и садитесь через E: один водитель, второй пассажир. Трафик и автоматический дрифт локальные.</p>
     <form id="mpForm">
       <label>WebSocket-сервер<input id="mpServer" type="url" placeholder="ws://127.0.0.1:8787/ws" maxlength="256" autocomplete="off" required></label>
       <label>Никнейм<input id="mpNickname" maxlength="48" autocomplete="off" required></label>
@@ -66,18 +66,20 @@ export function installMultiplayerUi(root,multiplayer) {
   const previousButtons=new Map();
   function render(force=false) {
     const s=multiplayer.getStatus(),active=multiplayer.active;
+    root.classList.toggle('network-room',active);
     for(const id of guarded){const button=root.querySelector('#'+id);if(!button)continue;
       if(active){if(!previousButtons.has(button))previousButtons.set(button,{disabled:button.disabled,title:button.title});
         button.disabled=true;button.title='Сначала выйдите из комнаты';}
       else if(previousButtons.has(button)){Object.assign(button,previousButtons.get(button));previousButtons.delete(button);}}
-    if(active){const prompt=root.querySelector('#seatPrompt');if(prompt)prompt.disabled=true;}
     const signature=JSON.stringify([s,localMessage]);if(!force&&signature===last)return;last=signature;
     toggle.textContent=s.phase==='connected'?`В комнате: ${s.peers+1}/2`:active?'Сеть: '+(s.phase==='error'?'ошибка':'подключение'):'Два игрока';
     const phase={offline:'Одиночный режим',connecting:'Подключение…',connected:`Подключено · ${s.peers+1}/2`,
       reconnecting:`Переподключение · попытка ${s.attempt}/5`,error:'Ошибка подключения'}[s.phase];
     $('mpStatus').textContent=localMessage||[phase,reasons[s.reason]??(s.reason?'Ошибка сети.':'')].filter(Boolean).join(' · ');
-    $('mpIdentity').textContent=s.playerId?`${s.nickname} · Вы`:'';
+    const role={driver:'Водитель',passenger:'Пассажир',onFoot:'Пешком'}[s.role]??'Пешком';
+    $('mpIdentity').textContent=s.playerId?`${s.nickname} · ${role}${s.vehicleName?' · '+s.vehicleName:''}${active&&!s.ready?' · ожидание состояния':''}`:'';
     for(const id of ['mpCreate','mpJoin','mpServer','mpNickname','mpCode'])$(id).disabled=active;
+    $('mpForm').hidden=active;
     $('mpLeave').hidden=!active;$('mpReconnect').hidden=!active||!['error','reconnecting'].includes(s.phase);
     const share=Boolean(s.roomId);$('mpShare').hidden=$('mpCopy').hidden=!share;
     if(share){$('mpCode').value=s.roomId;$('mpLink').value=roomLink(location.href,s.roomId,$('mpServer').value.trim());}

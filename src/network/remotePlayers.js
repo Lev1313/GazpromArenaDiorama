@@ -13,7 +13,7 @@ export function createNameLabel(nickname) {
 
 /** Arrival-time interpolation, independent of local controls, collisions and camera. */
 export function createRemotePlayers(scene,{delayMs=120,now=()=>performance.now(),makeLabel=createNameLabel}={}) {
-  const players=new Map();
+  const players=new Map();let seatBindings=new Map(),registry=null;
   function remove(id) {
     const p=players.get(id);if(!p)return;
     scene.remove(p.model);p.label.userData.dispose();p.model.remove(p.label);
@@ -41,6 +41,12 @@ export function createRemotePlayers(scene,{delayMs=120,now=()=>performance.now()
   function update(dt) {
     const time=now()-delayMs;
     for(const p of players.values()) {
+      const seat=seatBindings.get(p.model.userData.remotePlayerId);
+      if(seat&&registry){const vehicle=registry.get(seat.vehicleId);
+        p.label.position.y=seat.seatId==='driver'?2.4:3;
+        p.model.position.copy(registry.worldPosition(vehicle,seat.seatId,'localPosition'));
+        p.model.rotation.y=Math.PI/2+vehicle.car.rotation.y;p.stride=0;p.animate(0,0,true);continue;}
+      p.label.position.y=2.08;
       while(p.samples.length>2&&p.samples[1].time<=time)p.samples.shift();
       const a=p.samples[0],b=p.samples[1]??a;
       const t=a===b?0:Math.max(0,Math.min(1,(time-a.time)/Math.max(1,b.time-a.time)));
@@ -53,7 +59,7 @@ export function createRemotePlayers(scene,{delayMs=120,now=()=>performance.now()
       p.stride+=((moving?1:0)-p.stride)*(1-Math.exp(-Math.max(0,dt)*14));p.animate(p.phase,p.stride);
     }
   }
-  return {roster,receive,update,clear(){for(const id of players.keys())remove(id);},
+  return {roster,receive,update,bindSeats(bindings,vehicleRegistry){seatBindings=bindings;registry=vehicleRegistry;},clear(){for(const id of players.keys())remove(id);seatBindings.clear();},
     snapshot:()=>[...players].map(([playerId,p])=>({playerId,nickname:p.nickname,position:p.model.position.toArray(),
-      yaw:p.model.rotation.y,stride:p.stride,seq:p.seq,samples:p.samples.length}))};
+      yaw:p.model.rotation.y,stride:p.stride,seq:p.seq,samples:p.samples.length,seat:seatBindings.get(playerId)??null}))};
 }

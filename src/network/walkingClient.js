@@ -1,4 +1,5 @@
 import { VERSION, MAX_BYTES, validRoom, validId, validToken, exact, validNickname, validPose, validPlayers, validSequence } from './protocol.js';
+import {validWorld,validVehicle} from './vehicleProtocol.js';
 
 export function websocketURL(value, securePage=false) {
   const url=new URL(value);
@@ -14,7 +15,8 @@ export function roomLink(base,roomId,server) {
 
 /** Native browser WebSocket only. Secrets live in this closure, never URLs/storage. */
 export function createWalkingClient({ getPose, onRoster=()=>{}, onPose=()=>{}, onSession=()=>{}, onStatus=()=>{},
-  WebSocketImpl=globalThis.WebSocket, sendMs=100, retryMs=500, maxRetries=5, welcomeMs=6000 }={}) {
+  WebSocketImpl=globalThis.WebSocket, sendMs=100, retryMs=500, maxRetries=5, welcomeMs=6000,
+  onWorld=null,onVehicle=()=>{},onAction=()=>{},getVehicleState=()=>null }={}) {
   let socket=null,epoch=0,interval=null,deadline=null,retry=null,intent=null,credentials=null,seq=0,attempt=0;
   let status={phase:'offline',roomId:null,playerId:null,nickname:'',peers:0,reason:'',attempt:0};
   const publish=patch=>{status={...status,...patch};onStatus({...status});};
@@ -22,7 +24,11 @@ export function createWalkingClient({ getPose, onRoster=()=>{}, onPose=()=>{}, o
   function clearRemote(){onRoster([]);publish({peers:0});}
   function send(message){if(socket?.readyState===1&&socket.bufferedAmount<16384)socket.send(JSON.stringify(message));}
   function pose(){if(status.phase!=='connected'||!credentials)return;const value=getPose();if(validPose(value))send({type:'pose',
-    roomId:credentials.roomId,playerId:credentials.playerId,seq:++seq,pose:value});}
+    roomId:credentials.roomId,playerId:credentials.playerId,seq:++seq,pose:value});
+    const vehicle=getVehicleState();if(onWorld&&vehicle)command('vehicle-state',vehicle);
+  }
+  function command(type,payload){if(status.phase!=='connected'||!credentials||socket?.readyState!==1)return null;
+    const id=++seq;send({type,roomId:credentials.roomId,playerId:credentials.playerId,seq:id,...payload});return id;}
   function start() {
     timers();const generation=++epoch;const previous=socket;socket=null;previous?.close();
     publish({phase:attempt?'reconnecting':'connecting',attempt,reason:''});
@@ -36,11 +42,11 @@ export function createWalkingClient({ getPose, onRoster=()=>{}, onPose=()=>{}, o
       const message=credentials?{type:'join',v:VERSION,nickname:intent.nickname,roomId:credentials.roomId,
         playerId:credentials.playerId,resumeToken:credentials.resumeToken}
         :{type:intent.create?'create':'join',v:VERSION,nickname:intent.nickname,...(intent.create?{}:{roomId:intent.roomId})};
-      send(message);
+      send(onWorld?{...message,vehicles:true}:message);
     });
     ws.addEventListener('message',event=>{
       if(!current())return;
-      if(typeof event.data!=='string'||new TextEncoder().encode(event.data).length>MAX_BYTES*3){protocolError();return;}
+      if(typeof event.data!=='string'||new TextEncoder().encode(event.data).length>(onWorld?32768:MAX_BYTES*3)){protocolError();return;}
       let m;try{m=JSON.parse(event.data);}catch{protocolError();return;}
       if(exact(m,['type','code'])&&m.type==='error'&&typeof m.code==='string'&&m.code.length<64) {
         terminal=true;if(m.code==='resume-expired')credentials=null;
@@ -58,6 +64,11 @@ export function createWalkingClient({ getPose, onRoster=()=>{}, onPose=()=>{}, o
         if(!current()||status.phase!=='connected'||!credentials)return;
         onRoster(m.players.filter(p=>p.playerId!==m.playerId));publish({peers:m.players.length-1});
         interval=setInterval(pose,sendMs);pose();return;
+      }
+      if(status.phase==='connected'&&onWorld){
+        if(m?.type==='world'&&validWorld(m)){onWorld(m);return;}
+        if(m?.type==='vehicle'&&exact(m,['type','vehicle'])&&validVehicle(m.vehicle)){onVehicle(m.vehicle);return;}
+        if(m?.type==='action-result'&&exact(m,['type','requestId','ok','code'])&&validSequence(m.requestId)&&typeof m.ok==='boolean'&&typeof m.code==='string'&&m.code.length<64){onAction(m);return;}
       }
       if(status.phase!=='connected'||m?.roomId!==credentials?.roomId){protocolError();return;}
       if(m.type==='roster'&&exact(m,['type','roomId','players'])&&validPlayers(m.players)
@@ -89,5 +100,5 @@ export function createWalkingClient({ getPose, onRoster=()=>{}, onPose=()=>{}, o
     clearRemote();onSession(null);publish({phase:'offline',roomId:null,playerId:null,nickname:'',reason:'',attempt:0});
   }
   function reconnect(){if(!intent)return false;attempt=0;start();return true;}
-  return {connect,leave,reconnect,dispose:leave,getStatus:()=>({...status}),get active(){return intent!==null;}};
+  return {connect,leave,reconnect,command,flushPose:pose,dispose:leave,getStatus:()=>({...status}),get active(){return intent!==null;}};
 }

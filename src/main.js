@@ -115,8 +115,10 @@ const modes = createControlModes(drive, pedestrian);
 const seating = createVehicleInteraction({registry:vehicleRegistry,pedestrian,drive,modes,camera,controls});
 const root = document.getElementById('app');
 const driveUi = installDriveUi(root, drive);
+let multiplayer;
 const updateHeadlights = configureNightLighting(scene, { arenaX, headlightCars: [
   {get car(){return drive.golf;},isActive:()=>drive.state.active,projector:true},
+  {get car(){return multiplayer?.remoteDriver??golf;},isActive:()=>Boolean(multiplayer?.remoteDriver)},
   ...drift.drifters.map((c,i)=>({car:c.o,isActive:()=>true,projector:i===0})),
   ...traffic.highCars.map(c=>({car:c.o,isActive:()=>true})),
   ...traffic.visitors.map(c=>({car:c.o,isActive:()=>c.delay===0 && c.state!=='park'})),
@@ -128,7 +130,7 @@ const hud = createHudController({
 const fullHud = installFullHud(root, hud, driveUi, drive);
 const pedestrianUi = installPedestrianUi(root, pedestrian, modes, hud, canvas);
 const seatingUi = installVehicleInteractionUi(root, seating, drive, hud);
-const multiplayer = createMultiplayer({scene,pedestrian,modes,hud});
+multiplayer = createMultiplayer({scene,pedestrian,modes,hud,registry:vehicleRegistry,drive,seating,drift});
 const multiplayerUi = installMultiplayerUi(root,multiplayer);
 
 let last = performance.now();
