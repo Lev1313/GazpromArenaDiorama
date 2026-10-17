@@ -11,7 +11,7 @@ import { configureNightLighting } from '../src/core/lighting.js';
 function setup() {
   const scene=new THREE.Scene(), {mat}=createMaterialSystem();
   const cars=createCarFactory(scene,mat);
-  const parked=Array.from({length:18},(_,i)=>{const c=cars.car(0xff0000);c.position.set(-60+i*7,0,60);return c;});
+  const parked=Array.from({length:19},(_,i)=>{const c=cars.car(0xff0000);c.position.set(-60+i*7,0,60);return c;});
   const registry=createVehicleRegistry(parked);
   const drift=createDriftSystem(scene,cars,{makeSmokeTexture:()=>new THREE.Texture()});
   const obstacles=[];
@@ -42,7 +42,7 @@ test('selected SUV footprint, height and yaw reach beyond Golf collision bounds'
 });
 
 test('handbrake smoke and skids use selected car rear axle, bounded shared pools',()=>{
-  const f=setup(), car=f.parked[17];car.userData.footprint={halfLength:2.4327,halfWidth:1.0763};
+  const f=setup(), car=f.parked[17];car.position.set(0,0,0);car.userData.footprint={halfLength:2.4327,halfWidth:1.0763};
   f.drive.startVehicle(f.registry.vehicles[17]);f.drive.setKey('KeyW',true);
   for(let i=0;i<70;i++)f.drive.updateDriving(1/60);
   f.drive.setKey('KeyW',false);f.drive.setKey('Space',true);f.drive.setKey('KeyA',true);
@@ -72,10 +72,10 @@ test('automatic drifters yield to any relocated parked vehicle without a Golf fl
   f.drift.update(0,{obstacles:[car]});assert.equal(f.drift.driftWaiting,true);
 });
 
-test('Golf, RX, GL and procedural physics stop at fences, other cars and water under held throttle',()=>{
-  for(const index of [0,2,5,16,17])for(const obstacle of ['fence','car','water']) {
+test('Golf, RX, GL, GLA and procedural physics stop at fences, other cars and water under held throttle',()=>{
+  for(const index of [0,2,5,16,17,18])for(const obstacle of ['fence','car','water']) {
     const f=setup(), car=f.parked[index];
-    const halfLength=index===16?2.56:index===17?2.4327:index===2?2.1375:1.96;
+    const halfLength=index===16?2.56:index===17?2.4327:index===2?2.1375:index===18?2.210951:1.96;
     car.userData.footprint={halfLength,halfWidth:1.132};
     // Fixture sets the starting line; all subsequent motion is the live controller.
     car.position.set(obstacle==='water'?140:0,0,0);car.rotation.y=0;

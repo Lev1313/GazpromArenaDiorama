@@ -1,5 +1,18 @@
-
 # Gazprom Arena Diorama
+
+## Stage 7D - Mercedes-Benz GLA X156 - 2026-10-17
+- User explicitly approved the audited X156 instead of H247; this supersedes the historical source-audit stop below. Do not label this model H247 or an unverified engine/trim. ItsDiyor / CC BY 4.0; source/license and derivative changes are in public/models/cars/ATTRIBUTION.md.
+- Fetched master cc3aaa7 (PR #8 merged), retained the existing worktree .worktrees/mercedes-gla-h247 and renamed its branch to feature/mercedes-gla-x156. Original checkout CONTEXT, source ZIP, backup GLBs and visual baselines remain intact.
+- Appended parked[18] at (6.5,37), yaw -PI/2, without changing any of the original eighteen roots/IDs/slots or GL X166. ID parked-mercedes-gla-x156; four calibrated root-local seats, one shared selected-vehicle drive controller, separate arcade tuning. Driver/passenger roles, E/exit/speed/clearance guards, persistent pose, R, smoke/skids and the shared headlight projector all reuse existing mechanisms.
+- parkedGlaModel.js performs one background load. Original Y-up/+Z nose is rotated +PI/2 Y; measured bounds 4.421901 x 2.015698 x 1.557959 m, grounded at -.12, footprint uses those dimensions. No cloning/reloading on entry, no additional lights.
+- prepare-gla-model.mjs partitions complete connected components from the material atlas into four rolling assemblies and four steering-only caliper assemblies (three source components per caliper). Four real wheels use wheelAnimation.js: normalised Y steering/-Z rolling, geometry radius ~.350920 m, signed accepted distance/radius, reverse and rear handbrake lock. No wheel/body geometry is faked.
+- Prepared GLB: 11271788 bytes, 176140 triangles (all source triangles retained), fourteen mesh primitives/five material definitions. Compact reindexing, four byte-identical duplicate UV channels removed with assertions, all atlas texture references remapped to the retained identical UV, textures capped at 1024 px. Paint only changed to black with a uniform lacquer roughness; source non-paint material roles retained. Preparation uses the extracted licensed ZIP and optional Windows System.Drawing texture tool; old three wheel derivatives are never rewritten.
+- Scope: shared rigid-wheel animation (no suspension/Ackermann/differential), source cabin/glazing retained, game tuning rather than factory data. Positions persist for the session, not page reloads. Software-render performance measurements do not establish hardware GPU/phone FPS.
+- Implementation c6edd0f; PR https://github.com/Lev1313/GazpromArenaDiorama/pull/9 is open into master, not merged. Final build, 125/125 unit and 489/489 full Edge/SwiftShader browser checks passed without errors. Evidence: browser-tests/reports/2026-10-17-gla-x156/ (four-side/night images, six motion frames, wheel angles, audit, source hashes and performance). Renderer.info calls 604 -> 618; local ready median 356.80 -> 468.61 ms versus cc3aaa7. RPC frame timings contain severe outliers and cannot establish hardware FPS. No Production deployment. ROADMAP tracks H247 as optional future work.
+
+## Stage 7D source audit - 2026-10-16
+- Fetched origin/master `cc3aaa7` (PR #8 merged), created `.worktrees/mercedes-gla-h247`, branch `feature/mercedes-gla-h247`.
+- User archive exists in main checkout at `public/models/cars/mercedes-benz_gla-class_2020.zip`, not its root. Source glTF/license identify ItsDiyor, CC BY 4.0. Browser render reveals X156 body rather than requested H247 (front fog lamps and rear lamp/body shapes). Per explicit user condition, integration stopped pending correct H247 source. No nineteenth car or application changes; originals/user files/baselines preserved. No PR/merge/Production. Evidence: `browser-tests/reports/2026-10-16-gla-source-audit/`.
 
 ## Stage 7C.1 — 2026-10-16
 - Implementation `55e1f70`; PR https://github.com/Lev1313/GazpromArenaDiorama/pull/8 is open into master, not merged. Production not published.

@@ -20,7 +20,7 @@ function fixture() {
     target: new THREE.Vector3(-4, 12, -25), enabled: true, enableDamping: true,
     update() {},
   };
-  const parked = Array.from({ length: 18 }, (_, index) => {
+  const parked = Array.from({ length: 19 }, (_, index) => {
     const car = new THREE.Group();
     car.position.set((index % 6) * 12 - 30, 0, 45 + Math.floor(index / 6) * 12);
     car.rotation.y = index === 5 ? 0 : index * .23;
@@ -68,9 +68,9 @@ function assertPose(f, vehicle, seat) {
   assert.equal(f.pedestrian.state.yaw, f.pedestrian.model.rotation.y);
 }
 
-test('all 18 specific parked cars support driver seating and nearby safe exit; all drivers activate the selected car', () => {
+test('all 19 specific parked cars support driver seating and nearby safe exit; all drivers activate the selected car', () => {
   const f = fixture();
-  for (let index = 0; index < 18; index++) {
+  for (let index = 0; index < 19; index++) {
     const { vehicle, seat } = approach(f, index);
     f.pedestrian.setKey('KeyW', true);
     f.pedestrian.setKey('ShiftLeft', true);
@@ -378,9 +378,9 @@ test('stationary seated camera cycling and overview exit restore the original vi
 });
 
 // Stage 7C: drive through the same proximity/occupancy path as the UI, never by assigning poses.
-test('all 18 drivers accelerate, steer, brake, exit and reenter without moving previous cars',()=>{
+test('all 19 drivers accelerate, steer, brake, exit and reenter without moving previous cars',()=>{
   const f=fixture(), saved=new Map();
-  for(let index=0;index<18;index++) {
+  for(let index=0;index<19;index++) {
     const {vehicle,seat}=approach(f,index), before=vehicle.car.position.clone(), yaw=vehicle.car.rotation.y;
     assert(f.interaction.enter());assert.equal(f.drive.golf,vehicle.car);
     f.drive.setKey('KeyW',true);
@@ -405,7 +405,7 @@ test('all 18 drivers accelerate, steer, brake, exit and reenter without moving p
 });
 test('every passenger seat rejects driving input after switching vehicle',()=>{
   const f=fixture();
-  for(let index=0;index<18;index++)for(const seatId of ['front-passenger','rear-left','rear-right']) {
+  for(let index=0;index<19;index++)for(const seatId of ['front-passenger','rear-left','rear-right']) {
     const {vehicle}=approach(f,index,seatId);const before=vehicle.car.position.clone();
     assert(f.interaction.enter());f.drive.setKey('KeyW',true);f.drive.updateDriving(.5);
     assert.equal(f.drive.state.active,false);assert(vehicle.car.position.equals(before));assert(f.interaction.exit());
@@ -414,7 +414,7 @@ test('every passenger seat rejects driving input after switching vehicle',()=>{
 
 test('explicit reset targets each occupied vehicle and preserves its driver seat',()=>{
   const f=fixture();
-  for(let index=0;index<18;index++) {
+  for(let index=0;index<19;index++) {
     const {vehicle,seat}=approach(f,index), home=vehicle.car.position.clone(), yaw=vehicle.car.rotation.y;
     assert(f.interaction.enter());f.drive.setKey('KeyW',true);
     for(let i=0;i<30;i++)f.drive.updateDriving(1/60);
