@@ -29,6 +29,8 @@ import { captureGroundSurface } from './player/groundSurface.js';
 import { createVehicleRegistry } from './vehicles/vehicleSeats.js';
 import { createVehicleInteraction } from './player/vehicleInteraction.js';
 import { installVehicleInteractionUi } from './ui/vehicleInteractionUi.js';
+import { createMultiplayer } from './network/multiplayer.js';
+import { installMultiplayerUi } from './ui/multiplayerUi.js';
 
 // Stage 4.5: restore the original HUD on top of the complete modular scene.
 const canvas = document.createElement('canvas');
@@ -126,6 +128,8 @@ const hud = createHudController({
 const fullHud = installFullHud(root, hud, driveUi, drive);
 const pedestrianUi = installPedestrianUi(root, pedestrian, modes, hud, canvas);
 const seatingUi = installVehicleInteractionUi(root, seating, drive, hud);
+const multiplayer = createMultiplayer({scene,pedestrian,modes,hud});
+const multiplayerUi = installMultiplayerUi(root,multiplayer);
 
 let last = performance.now();
 function frame(now) {
@@ -150,6 +154,7 @@ function frame(now) {
     pedestrian.update(walkDt);
   }
   updateHeadlights();
+  multiplayer.update(walkDt);
   seating.update(hud.state.running ? walkDt : 0);
   if (pedestrian.state.active) {
     pedestrian.updateCamera(walkDt);
@@ -164,6 +169,7 @@ function frame(now) {
   fullHud.render();
   pedestrianUi.render();
   seatingUi.render();
+  multiplayerUi.render();
   renderer.render(scene, camera);
 }
 requestAnimationFrame(frame);

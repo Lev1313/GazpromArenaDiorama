@@ -39,6 +39,7 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
     pedestrian.setSeatedPose(position,Math.atan2(front.x,front.z));
   }
   function enter(target = nearest()) {
+    if(modes.canEnterVehicle?.()===false)return feedback('В комнате доступна только прогулка — выйди из комнаты для поездки');
     if (isSeated()) return feedback('Ты уже занимаешь место');
     if (!pedestrian.state.active || !target) return feedback('Подойди к двери автомобиля');
     // Recompute proximity on commit: stale UI targets never bypass reach/side.

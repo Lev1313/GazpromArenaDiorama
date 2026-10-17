@@ -1,0 +1,403 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "Single-player starts with no socket or remote avatar",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "UI creates unpredictable room and server player ID",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Share link contains room and endpoint, never reconnect secret",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Room link prefills join form",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Two isolated clients own distinct IDs and exactly one remote each",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Nicknames are assigned to the correct remote",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A keyboard moves only A local controller",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "B sees A position and direction through WebSocket",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Remote walking animation advances only while peer moves",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "B independently moves; A sees B without receiving B controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Peer disappears immediately after socket disconnect",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Automatic reconnect keeps ID and creates no duplicate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Delayed real WebSocket link converges without extra avatars",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Delayed peer is interpolated across intermediate positions",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reconnect cycle 0 keeps one remote and stable resources",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reconnect cycle 1 keeps one remote and stable resources",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reconnect cycle 2 keeps one remote and stable resources",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network mode disables legacy drive and camera preset buttons",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Physical E cannot claim a car while in the room",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Leaving clears remote/label resources and restores local identity",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Network never reloads any of the four car GLBs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Nickname markup stays literal text, never DOM elements",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Real server refusal produces a readable error indicator",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Single-player physical GLA driving is restored after leaving",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Single-player GLA still moves and rolls wheels",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Joining while driving refuses without changing seats or opening a socket",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No browser/server errors or dialogs",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "two-players-client-a.png",
+    "two-players-client-b.png"
+  ],
+  "method": "Separate Node WebSocket process; two isolated Edge contexts; actual UI and keyboard. Manual local simulation clock, native monotonic receive clock. Real WebSocket delay proxy (200 ms each direction).",
+  "serverProcess": true,
+  "browser": "155.0.4283.45",
+  "walkSamples": [
+    0.5034146962085901,
+    0.24998833984980326,
+    0.6275552318972146,
+    0.8150494016861569,
+    0.9081562509499171,
+    0.9543917439766225
+  ],
+  "latency": {
+    "oneWayMs": 200,
+    "samples": [
+      [
+        -18,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -18,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.706666666666706,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.706666666666706,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.706666666666706,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.569426198560922,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.505568627423,
+        -0.11999999999999111,
+        -9.32000000000007
+      ],
+      [
+        -17.389335770864818,
+        -0.11999999999999111,
+        -9.32000000000007
+      ]
+    ],
+    "finalLocal": [
+      -16.826666666666824,
+      -0.11999999999999111,
+      -9.32000000000007
+    ],
+    "finalRemote": [
+      -16.826666666666824,
+      -0.11999999999999111,
+      -9.32000000000007
+    ]
+  },
+  "reconnectResources": [
+    [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 214484,
+        "calls": 147,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 167396,
+        "calls": 151,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ],
+    [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 214484,
+        "calls": 147,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 167396,
+        "calls": 151,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ],
+    [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 214484,
+        "calls": 147,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 167396,
+        "calls": 151,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ]
+  ],
+  "resources": {
+    "baseA": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 383,
+      "geometries": 1261,
+      "textures": 19,
+      "triangles": 305130,
+      "calls": 186,
+      "models": [
+        "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "baseB": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 383,
+      "geometries": 1261,
+      "textures": 19,
+      "triangles": 305130,
+      "calls": 186,
+      "models": [
+        "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "active": [
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 214484,
+        "calls": 147,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      {
+        "sceneGeometries": 1310,
+        "sceneTextures": 21,
+        "sceneMaterials": 388,
+        "geometries": 1274,
+        "textures": 22,
+        "triangles": 167396,
+        "calls": 151,
+        "models": [
+          "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      }
+    ],
+    "endA": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 383,
+      "geometries": 1262,
+      "textures": 20,
+      "triangles": 260906,
+      "calls": 63,
+      "models": [
+        "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "endB": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 383,
+      "geometries": 1262,
+      "textures": 20,
+      "triangles": 167172,
+      "calls": 137,
+      "models": [
+        "http://127.0.0.1:58575/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:58575/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    }
+  }
+}

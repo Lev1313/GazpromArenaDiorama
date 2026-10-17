@@ -1,8 +1,9 @@
 /** Owns mode transitions without changing Golf physics or input semantics. */
 export function createControlModes(drive, pedestrian) {
   const setDriving = drive.setDriving;
-  let seating;
+  let seating,walkingOnly=false;
   drive.setDriving = active => {
+    if(active&&walkingOnly)return false;
     if (seating?.isSeated()) {
       if (!seating.exit()) return false;
       if (!active) return true;
@@ -14,15 +15,25 @@ export function createControlModes(drive, pedestrian) {
   };
   return {
     walk(active) {
+      if(walkingOnly&&!active)return false;
       if (seating?.isSeated()) return seating.exit();
       if (active) drive.setDriving(false);
       return pedestrian.setWalking(active);
     },
     overview() {
+      if(walkingOnly)return false;
       if (seating?.isSeated() && !seating.exit()) return false;
       pedestrian.setWalking(false); drive.setDriving(false); return true;
     },
     attachSeating(controller) { seating = controller; },
+    canEnterVehicle() { return !walkingOnly; },
+    setWalkingOnly(active) {
+      if(active) {
+        if(drive.state.active||seating?.isSeated())return false;
+        if(!pedestrian.setWalking(true))return false;
+      }
+      walkingOnly=Boolean(active);return true;
+    },
     beginSeatedDriving(vehicle) { drive.startVehicle(vehicle); },
     finishSeatedDriving() { drive.stopDriving({restoreCamera:false}); },
   };
