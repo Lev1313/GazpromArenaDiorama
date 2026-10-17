@@ -91,4 +91,4 @@
 
 ![Езда, кадр 2](wheel-gla-x156-left-2.png)
 
-PR создаётся отдельно в master. Самостоятельный merge и Production не выполняются.
+Реализация `c6edd0f`; [PR #9](https://github.com/Lev1313/GazpromArenaDiorama/pull/9) открыт в master. Самостоятельный merge и Production не выполнялись.
