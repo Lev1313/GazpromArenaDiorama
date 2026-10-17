@@ -24,7 +24,10 @@
     "test:pedestrian:browser": "node tools/vite-functional.mjs --pedestrian",
     "multiplayer:server": "node server/multiplayer.mjs",
     "test:multiplayer": "node --test tests/network-*.test.mjs",
-    "test:multiplayer:browser": "node tools/multiplayer-browser.mjs"
+    "test:multiplayer:browser": "node tools/multiplayer-browser.mjs",
+    "check:quick": "npm run test:multiplayer",
+    "check:network": "npm run test:multiplayer && npm run test:multiplayer:browser",
+    "check:release": "npm run build && npm run test:unit && npm run test:browser"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",
