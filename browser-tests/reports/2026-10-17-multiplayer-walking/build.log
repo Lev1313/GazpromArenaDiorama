@@ -12,13 +12,13 @@ dist/assets/index-BXcnHO5L.css    7.75 kB │ gzip:   2.14 kB
 dist/assets/index-C6oaIM0G.js   684.98 kB │ gzip: 186.19 kB
 
 ✓ built in 197ms
-npm.cmd : [plugin builtin:vite-reporter] 
+npm.cmd : [plugin builtin:vite-reporter]
 строка:2 знак:1
 + npm.cmd run build > browser-tests/_current/multiplayer/build.log 2>&1 ...
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     + CategoryInfo          : NotSpecified: ([plugin builtin:vite-reporter] :String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
- 
+
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeS
