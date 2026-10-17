@@ -1,3 +1,10 @@
+## Stage 8C (в работе) — подготовка публичного WebSocket и экономных проверок, 2026-10-17
+- PR Stage 8B/#12 уже объединён в master, 19 сетевых машин, комнаты по 2.
+- Ветка feature/public-ws-render-fast-checks содержит Render Blueprint для Node WebSocket на Free, ручной deploy (`autoDeployTrigger: off`), `HOST=0.0.0.0`, `ALLOWED_ORIGINS=https://gazprom-arena-diorama.vercel.app`, health `/health`. Публичного URL пока нет: полноценный онлайн НЕ объявлять готовым до фактического развертывания и внешнего 2-клиентского теста.
+- Для публичного HTTPS на Vercel нужен `wss://...` фактического Render-сервиса; ручной ввод адреса уже поддержан, invite URL передаёт `ws`. Опциональный `VITE_MULTIPLAYER_URL` подставляется при сборке Vercel.
+- Экономный цикл: `check:quick` (сетевые тесты), `check:network` (целевой сетевой браузер), `check:release` (полная проверка один раз перед игровым merge). Конфигурационные PR не требуют полного игрового браузерного прогона. Не отключать/assert не ослаблять.
+- Планируемый выбор машины до посадки отложен до публичного онлайна; PR #11 с дорожной картой остаётся отдельно открытым.
+
 # Gazprom Arena Diorama
 
 ## Stage 8B - shared vehicle rides - 2026-10-17
