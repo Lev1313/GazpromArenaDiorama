@@ -1,0 +1,22 @@
+# Render Blueprint — one small WebSocket service; Vercel keeps serving the frontend.
+# Creating/syncing this Blueprint requires an explicit action in Render.
+# No paid resources. Automatic deployment on commits is intentionally disabled.
+services:
+  - type: web
+    name: gazprom-arena-diorama-ws
+    runtime: node
+    plan: free
+    region: frankfurt
+    repo: https://github.com/Lev1313/GazpromArenaDiorama
+    branch: master
+    autoDeployTrigger: "off"
+    buildCommand: npm ci --omit=dev
+    startCommand: npm run multiplayer:server
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        value: https://gazprom-arena-diorama.vercel.app
