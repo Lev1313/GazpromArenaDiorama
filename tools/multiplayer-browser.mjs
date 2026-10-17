@@ -20,7 +20,10 @@ window.__readNetwork=()=>({...multiplayer.snapshot(),local:{position:pedestrian.
 window.__networkView=()=>{const bodies=[pedestrian.model,...scene.children.filter(o=>o.name==='remote-player')];
   const center=new THREE.Vector3();for(const body of bodies)center.add(body.position);center.multiplyScalar(1/bodies.length);
   camera.position.copy(center).add(new THREE.Vector3(0,3.3,8));controls.target.copy(center).add(new THREE.Vector3(0,1,0));
-  camera.lookAt(controls.target);renderer.render(scene,camera);};`;
+  camera.lookAt(controls.target);renderer.render(scene,camera);};
+window.__rideView=()=>{const car=vehicleRegistry.get('parked-mercedes-gla-x156').car;
+  camera.position.copy(car.localToWorld(new THREE.Vector3(6,3.1,6)));
+  controls.target.copy(car.position).add(new THREE.Vector3(0,.8,0));camera.lookAt(controls.target);renderer.render(scene,camera);};`;
 const report={ok:false,checks:[],errors:[],screenshots:[],method:'Separate Node WebSocket process; two isolated Edge contexts; actual UI and keyboard. Manual local simulation clock, native monotonic receive clock. Real WebSocket delay proxy (200 ms each direction).'};
 const check=(name,condition,detail='')=>{report.checks.push({name,ok:Boolean(condition),detail});console.log((condition?'PASS ':'FAIL ')+name);assert(condition,name+' '+detail);};
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
@@ -70,7 +73,7 @@ try {
     const file=id.replaceAll('\\','/');
     if(file===root.replaceAll('\\','/')+'/src/main.js')return code+'\n'+observation+extra;
     // Preserve the real receive clock while only local movement uses the manual RAF clock.
-    if(file.endsWith('/src/network/remotePlayers.js'))return code.replace('now=()=>performance.now()','now=()=>window.__networkClock()');
+    if(file.endsWith('/src/network/remotePlayers.js')||file.endsWith('/src/network/networkVehicles.js'))return code.replace('now=()=>performance.now()','now=()=>window.__networkClock()');
   }}]});
   const endpoint=await startChild();
   http=await startServer({root:out+'/dist',port:0});const url='http://127.0.0.1:'+http.address().port;
@@ -122,6 +125,94 @@ try {
   check('Delayed real WebSocket link converges without extra avatars',distance(sb.remotes[0].position,sa.local.position)<.08&&sb.remoteRoots===1&&sa.remoteRoots===1);
   check('Delayed peer is interpolated across intermediate positions',samples.filter(Boolean).some(p=>distance(p,beforeLag.remotes[0].position)>.02)
     &&samples.filter(Boolean).some(p=>distance(p,sa.local.position)>.1));report.latency={oneWayMs:200,samples,finalLocal:sa.local.position,finalRemote:sb.remotes[0].position};
+  // Actual shared ride, keeping B behind the real 200 ms forwarding proxy.
+  const gla='parked-mercedes-gla-x156';
+  await a.evaluate(id=>window.__approachSeat(id,'driver'),gla);await sync(a,b,300);
+  await a.keyboard.press('KeyE');await step(a,1);
+  check('E request does not grant driver before server confirmation',!(await read(a)).drive);
+  await sync(a,b,700);
+  check('A receives the server-owned driver seat',(await read(a)).drive&&(await scene(b)).seats[18].seats[0].occupiedBy===identity,JSON.stringify({a:await read(a),message:(await scene(a)).seatMessage}));
+  await b.evaluate(id=>window.__approachSeat(id,'front-passenger'),gla);await sync(a,b,450);await b.keyboard.press('KeyE');await sync(a,b,1100);
+  check('B joins the same GLA as passenger with no driver controller',(await read(b)).local.mode==='passenger'&&!(await read(b)).drive
+    &&(await scene(a)).seats[18].seats[1].occupiedBy===(await read(b)).status.playerId);
+  const passengerBefore=(await scene(b)).camera;await b.keyboard.press('KeyC');await step(b,1);
+  check('Passenger owns an independent seated camera',distance((await scene(b)).camera.position,passengerBefore.position)>1);
+  const beforeRide=(await scene(a)).parked[18].position;
+  await b.keyboard.down('KeyW');await b.keyboard.down('KeyA');await b.keyboard.press('KeyR');await sync(a,b,400);await b.keyboard.up('KeyW');await b.keyboard.up('KeyA');
+  check('Passenger WASD and R cannot move/reset the car',distance((await scene(a)).parked[18].position,beforeRide)<1e-8&&!(await read(b)).drive);
+  report.rideFrames=[];
+  await a.keyboard.down('KeyW');
+  for(let i=0;i<12;i++){
+    if(i===5)await a.keyboard.down('KeyA');await step(a,4);await step(b,4);await wait(70);
+    if([4,11].includes(i)){const state=await scene(a);report.rideFrames.push({phase:'forward',car:state.parked[18],wheels:state.wheels[18]});
+      const name='shared-motion-'+i;await a.evaluate(()=>window.__rideView());await a.screenshot({path:out+'/'+name+'.png',timeout:120000});report.screenshots.push(name+'.png');}
+  }
+  await a.keyboard.up('KeyW');await a.keyboard.up('KeyA');
+  let driven=await scene(a);check('Confirmed driver physically accelerates and turns the GLA',distance(driven.parked[18].position,beforeRide)>.4&&driven.wheels[18][0].angle>0
+    &&Math.abs(driven.wheels[18][0].steer)>.01);
+  await a.keyboard.down('Space');await a.keyboard.down('KeyA');
+  const rearStart=driven.wheels[18][2].angle,frontStart=driven.wheels[18][0].angle;
+  for(let i=0;i<4;i++){await step(a,4);await step(b,4);await wait(70);}await a.keyboard.up('KeyA');
+  driven=await scene(a);check('Handbrake locks the rear while front wheels keep rolling',Math.abs(driven.wheels[18][2].angle-rearStart)<1e-8&&driven.wheels[18][0].angle>frontStart);
+  for(let i=0;i<45&&(await scene(a)).drive.speed>.2;i++){await step(a,4);await step(b,4);await wait(65);}await a.keyboard.up('Space');await sync(a,b,1000);
+  let remoteCar=await scene(b);driven=await scene(a);
+  check('Both browsers converge on the same car pose and wheel distances',distance(driven.parked[18].position,remoteCar.parked[18].position)<.08
+    &&Math.abs(driven.wheels[18][0].angle-remoteCar.wheels[18][0].angle)<.15);
+  const passengerPosition=remoteCar.seats[18].seats[1].position;
+  check('Passenger follows its exact seat through turning and drift',distance((await read(b)).local.position,passengerPosition)<1e-6
+    &&distance((await read(a)).remotes[0].position,(await scene(a)).seats[18].seats[1].position)<1e-6);
+  for(const [page,name] of [[a,'shared-ride-driver'],[b,'shared-ride-passenger']]){
+    await page.evaluate(()=>window.__rideView());await page.screenshot({path:out+'/'+name+'.png',timeout:120000});report.screenshots.push(name+'.png');}
+  await b.evaluate(()=>document.querySelector('#day').click());await step(b,2,true);
+  check('Remote occupied car keeps its lightweight night headlights',(await scene(b)).headlights.some(h=>h.vehicleId===gla&&h.visible));
+  await b.evaluate(()=>window.__rideView());await b.screenshot({path:out+'/shared-ride-night.png',timeout:120000});report.screenshots.push('shared-ride-night.png');
+  await b.evaluate(()=>document.querySelector('#day').click());await step(b,2);
+  const forwardAngle=driven.wheels[18][0].angle;
+  await a.keyboard.down('KeyS');for(let i=0;i<7;i++){await step(a,4);await step(b,4);await wait(70);}await a.keyboard.up('KeyS');await sync(a,b,500);
+  check('Reverse is shared and reverses wheel rotation',(await scene(a)).wheels[18][0].angle<forwardAngle&&(await scene(b)).drive.active===false);
+  await a.keyboard.down('Space');for(let i=0;i<35&&Math.abs((await scene(a)).drive.speed)>.15;i++){await step(a,4);await step(b,4);await wait(65);}await a.keyboard.up('Space');await sync(a,b,800);
+  // Disconnect the real driver socket while B remains seated.
+  const rideSockets=await a.evaluate(()=>window.__testSockets.length);await a.evaluate(()=>window.__testSockets.at(-1).close());
+  await until(async()=>(await read(b)).status.peers===0);await sync(a,b,150);
+  check('Driver disconnect freezes agreed car and preserves passenger seat',Math.abs((await read(b)).fleet.vehicles[18].state.speed)<1e-9&&(await read(b)).local.mode==='passenger');
+  await until(async()=>await a.evaluate(()=>window.__testSockets.length)>rideSockets&&(await read(a)).status.phase==='connected');await sync(a,b,1000);
+  check('Driver reconnect restores one driver and one passenger without duplicates',(await read(a)).drive&&(await read(b)).local.mode==='passenger'
+    &&(await scene(a)).seats.flatMap(v=>v.seats).filter(s=>s.occupiedBy===identity).length===1);
+  const passengerIdentity=(await read(b)).status.playerId,passengerSockets=await b.evaluate(()=>window.__testSockets.length);
+  await b.evaluate(()=>window.__testSockets.at(-1).close());await until(async()=>(await read(a)).status.peers===0);
+  check('Passenger disconnect reserves only its existing seat',(await scene(a)).seats[18].seats[1].occupiedBy===passengerIdentity&&(await read(a)).drive);
+  await until(async()=>await b.evaluate(()=>window.__testSockets.length)>passengerSockets&&(await read(b)).status.phase==='connected');await sync(a,b,1000);
+  check('Passenger reconnect restores the same seat without driving rights',(await read(b)).status.playerId===passengerIdentity&&(await read(b)).local.mode==='passenger'&&!(await read(b)).drive
+    &&(await scene(a)).seats.flatMap(v=>v.seats).filter(s=>s.occupiedBy===passengerIdentity).length===1);
+  await b.keyboard.press('KeyE');await sync(a,b,1100);check('Passenger safely exits through server-confirmed door',(await read(b)).local.mode==='onFoot');
+  await a.keyboard.press('KeyE');await sync(a,b,800);check('Driver exits without resetting the car',(await read(a)).local.mode==='onFoot'&&distance((await scene(a)).parked[18].position,beforeRide)>.2);
+  await a.evaluate(()=>window.__approachSeat('parked-golf-red','driver'));await sync(a,b,350);await a.keyboard.press('KeyE');await sync(a,b,800);
+  check('Switching cars preserves GLA and grants a different stable vehicle ID',(await scene(a)).player.vehicleId==='parked-golf-red'&&(await scene(b)).seats[2].seats[0].occupiedBy===identity);
+  await a.keyboard.press('KeyE');await sync(a,b,800);
+  for(const page of [a,b])await page.evaluate(()=>window.__approachSeat('parked-00','driver'));await sync(a,b,500);
+  await Promise.all([a.keyboard.press('KeyE'),b.keyboard.press('KeyE')]);await sync(a,b,1200);
+  const contenders=[await read(a),await read(b)],winner=contenders.findIndex(s=>s.local.mode==='driver');
+  check('Concurrent browser requests produce exactly one driver',winner>=0&&contenders.filter(s=>s.local.mode==='driver').length===1
+    &&(await scene(a)).seats[0].seats[0].occupiedBy===(await scene(b)).seats[0].seats[0].occupiedBy);
+  const loser=[a,b][1-winner];check('Rejected seat keeps loser walking with readable occupancy feedback',(await read(loser)).local.mode==='onFoot'&&(await scene(loser)).seatMessage.includes('занято'));
+  await [a,b][winner].keyboard.press('KeyE');await sync(a,b,1000);
+  report.allVehicleDrives=[];
+  for(const [index,entry] of (await scene(a)).seats.entries()){
+    const id=entry.vehicleId;
+    await a.evaluate(id=>window.__approachSeat(id,'driver'),id);await sync(a,b,250);await a.keyboard.press('KeyE');await sync(a,b,650);
+    const before=await scene(a);check('Network driver seat '+id,before.player.vehicleId===id&&before.drive.active);
+    await a.keyboard.down('KeyW');for(let j=0;j<3;j++){await step(a,4);await step(b,4);await wait(70);}await a.keyboard.up('KeyW');
+    await a.keyboard.down('Space');for(let j=0;j<15&&Math.abs((await scene(a)).drive.speed)>.12;j++){await step(a,4);await step(b,4);await wait(70);}await a.keyboard.up('Space');await sync(a,b,800);
+    const driven=await scene(a),seen=await scene(b),motion=distance(before.parked[index].position,driven.parked[index].position);
+    check('Network movement and real wheel rotation '+id,motion>.015&&Math.abs(driven.wheels[index][0].angle-before.wheels[index][0].angle)>.02
+      &&distance(driven.parked[index].position,seen.parked[index].position)<.08);
+    report.allVehicleDrives.push({vehicleId:id,before:before.parked[index],after:driven.parked[index],peer:seen.parked[index],wheelBefore:before.wheels[index][0].angle,wheelAfter:driven.wheels[index][0].angle});
+    await a.keyboard.press('KeyE');await sync(a,b,700);check('Network safe exit '+id,(await read(a)).local.mode==='onFoot');
+  }
+  const agreedFleet=(await scene(a)).parked.map(v=>v.position);
+  await click(b,'mpLeave');await sync(a,b,500);await click(b,'mpJoin');await until(async()=>(await read(b)).status.phase==='connected');await sync(a,b,1100);
+  check('Late join adopts every moved car pose without cloning models',(await scene(b)).parked.every((v,i)=>distance(v.position,agreedFleet[i])<.08)
+    &&(await read(b)).remoteRoots===1&&(await read(b)).fleet.vehicles.length===19);
   // Pause local simulation for stable resource counts; networking remains active.
   await a.evaluate(()=>document.querySelector('#pause').click());await b.evaluate(()=>document.querySelector('#pause').click());await sync(a,b,400);
   const activeResources=[(await scene(a)).resources,(await scene(b)).resources];
@@ -135,9 +226,13 @@ try {
         currentResources[0][key]===activeResources[0][key]&&currentResources[1][key]===activeResources[1][key]));
   }
   check('Network mode disables legacy drive and camera preset buttons',await a.locator('#drive').isDisabled()&&await a.locator('#map').isDisabled());
-  await a.evaluate(()=>window.__approachSeat('parked-mercedes-gla-x156','driver'));await a.keyboard.press('KeyE');await step(a,1);
-  check('Physical E cannot claim a car while in the room',!(await read(a)).drive&&(await read(a)).local.mode==='onFoot'
-    &&(await scene(a)).seats.every(v=>v.seats.every(s=>s.occupiedBy===null)));
+  await a.evaluate(()=>document.querySelector('#pause').click());
+  await a.evaluate(()=>window.__approachSeat('parked-mercedes-gla-x156','driver'));await a.keyboard.press('KeyE');await step(a,1);await sync(a,b,600);
+  check('Physical E waits for server-confirmed seat and starts the driver',(await read(a)).drive&&(await read(a)).local.mode==='driver'
+    &&(await scene(b)).seats[18].seats[0].occupiedBy===identity,JSON.stringify({a:await read(a),message:(await scene(a)).seatMessage}));
+  await a.keyboard.press('KeyE');await sync(a,b,600);
+  check('Server-confirmed E exit restores walking',(await read(a)).local.mode==='onFoot'&&!(await read(a)).drive);
+  await a.evaluate(()=>document.querySelector('#pause').click());
   await click(a,'mpLeave');await click(b,'mpLeave');await sync(a,b,500);
   const endA=(await scene(a)).resources,endB=(await scene(b)).resources;
   check('Leaving clears remote/label resources and restores local identity',(await read(a)).remoteRoots===0&&(await read(b)).remoteRoots===0
@@ -162,7 +257,9 @@ try {
   check('Joining while driving refuses without changing seats or opening a socket',(await read(a)).drive&&(await read(a)).local.mode==='driver'
     &&await a.evaluate(()=>window.__testSockets.length)===connections&&(await a.locator('#mpStatus').textContent()).includes('выйдите'));
   check('No browser/server errors or dialogs',report.errors.length===0,report.errors.join(' | '));report.ok=true;
-} catch(error) {report.errors.push(String(error.stack??error));console.error(error);process.exitCode=1;}
+} catch(error) {
+  report.lastStates=[];for(const context of browser?.contexts()??[])for(const page of context.pages())try{report.lastStates.push({network:await read(page),scene:await scene(page)});}catch{}
+  report.errors.push(String(error.stack??error));console.error(error);process.exitCode=1;}
 finally {
   await browser?.close();for(const ws of proxySockets)ws.terminate();
   if(proxy)await new Promise(done=>proxy.close(done));if(http)await new Promise(done=>http.close(done));

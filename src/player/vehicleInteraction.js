@@ -6,7 +6,7 @@ export const safeExitSpeed = .5; // m/s, below walking pace
 /** One actor/state; vehicles/seats are independent of GLB child meshes. */
 export function createVehicleInteraction({ registry, pedestrian, drive, modes, camera, controls }) {
   const state = pedestrian.state;
-  let message = '', messageTime = 0, cameraView = 0;
+  let message = '', messageTime = 0, cameraView = 0,network=null,waitingExit=false;
   const isSeated = () => state.vehicleId !== null;
   const current = () => {
     const vehicle = registry.get(state.vehicleId);
@@ -47,6 +47,7 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
     if (!nearby || nearby.vehicle.vehicleId!==target.vehicle.vehicleId || nearby.seat.seatId!==target.seat.seatId)
       return feedback('Подойди ближе к выбранной двери');
     const {vehicle,seat}=nearby;
+    if(network)return network.enter(vehicle,seat);
     if (!registry.claim(vehicle.vehicleId,seat.seatId,state.playerId)) return feedback('Это место занято');
     pedestrian.suspendWalking();
     state.vehicleId=vehicle.vehicleId; state.seatId=seat.seatId; state.mode=seat.role;
@@ -71,6 +72,12 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
   }
   function exit() {
     const occupied=current(); if (!occupied) return false;
+    if(waitingExit)return feedback('Ожидаю свободный выход у выбранной двери');
+    if(network){
+      if(Math.abs(network.speed(occupied.vehicle.vehicleId))>safeExitSpeed)return feedback('Останови автомобиль перед высадкой');
+      const point=findExit();if(!point)return feedback('У двери нет свободного места для выхода');
+      return network.exit(point);
+    }
     if (occupied.vehicle.canDrive && drive.state.active && Math.abs(drive.state.speed)>safeExitSpeed)
       return feedback('Останови автомобиль перед высадкой');
     const point=findExit();
@@ -82,7 +89,10 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
     state.vehicleId=state.seatId=null; state.mode='onFoot';
     message=''; messageTime=0; return true;
   }
-  function update(dt) { messageTime=Math.max(0,messageTime-dt); updatePose(); }
+  function update(dt) {
+    if(waitingExit){const point=findExit();if(point)applyNetworkSeat(null,null,point);}
+    messageTime=Math.max(0,messageTime-dt); updatePose();
+  }
   function updateCamera(dt,snap=false) {
     const occupied=current(); if (!occupied) return;
     if (drive.state.active) { drive.updateDriveCamera(dt,snap); return; }
@@ -94,7 +104,7 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
   function getStatus() {
     const occupied=current(), target=nearest();
     return { seated:isSeated(), vehicleName:occupied?.vehicle.displayName ?? target?.vehicle.displayName ?? '',
-      role:state.mode, seatId:state.seatId, target,
+      role:state.mode, seatId:state.seatId, target,waitingExit,
       message:messageTime>0?message:'',
       prompt:target ? target.seat.occupiedBy ? 'Место занято' : 'E — сесть' : '' };
   }
@@ -107,7 +117,32 @@ export function createVehicleInteraction({ registry, pedestrian, drive, modes, c
     return drive.state.active || Math.hypot(p.x-home.x,p.z-home.z)>.1;
   }
   modes.attachSeating?.({isSeated,exit,canLegacyDrive});
+  function applyNetworkSeat(vehicleId,seatId,point=null){
+    // A moving local obstacle may reach the door during the server round trip.
+    // Wait at this same door instead of stranding the actor or using a distant spawn.
+    if(!vehicleId&&state.vehicleId&&network&&(point||waitingExit)){
+      if(!point||pedestrian.collision(point.x,point.z))point=findExit();
+      if(!point){waitingExit=true;if(drive.state.active)modes.finishSeatedDriving();
+        feedback('У двери появился объект — ожидаю свободный выход');return;}
+    }
+    waitingExit=false;
+    if(state.vehicleId===vehicleId&&state.seatId===seatId){
+      if(vehicleId&&seatId==='driver'&&!drive.state.active)modes.beginSeatedDriving(registry.get(vehicleId));
+      return;
+    }
+    if(drive.state.active)modes.finishSeatedDriving();
+    state.vehicleId=vehicleId;state.seatId=seatId;cameraView=0;
+    if(vehicleId){const vehicle=registry.get(vehicleId),seat=vehicle.seats.find(s=>s.seatId===seatId);
+      pedestrian.suspendWalking();state.mode=seat.role;
+      if(seat.role==='driver')modes.beginSeatedDriving(vehicle);
+      controls.enabled=false;updatePose();updateCamera(1,true);
+    }else{
+      state.mode='onFoot';const safe=point??pedestrian.findSpawn(pedestrian.model.position);
+      if(safe)pedestrian.resumeAt(safe,state.yaw);
+    }
+  }
   return { state, isSeated, nearest, enter, exit, findExit, update, updateCamera, getStatus,canLegacyDrive,golfBlocksTraffic,
+    feedback,setNetworkAdapter(adapter){network=adapter;},applyNetworkSeat,
     cycleCamera() { cameraView=1-cameraView; updateCamera(1,true); },
     serialize() { return {playerId:state.playerId,mode:state.mode,vehicleId:state.vehicleId,seatId:state.seatId,
       position:pedestrian.model.position.toArray(),yaw:state.yaw}; } };

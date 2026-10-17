@@ -1,7 +1,7 @@
 /** Owns mode transitions without changing Golf physics or input semantics. */
 export function createControlModes(drive, pedestrian) {
   const setDriving = drive.setDriving;
-  let seating,walkingOnly=false;
+  let seating,walkingOnly=false,networkSeats=false;
   drive.setDriving = active => {
     if(active&&walkingOnly)return false;
     if (seating?.isSeated()) {
@@ -26,7 +26,8 @@ export function createControlModes(drive, pedestrian) {
       pedestrian.setWalking(false); drive.setDriving(false); return true;
     },
     attachSeating(controller) { seating = controller; },
-    canEnterVehicle() { return !walkingOnly; },
+    canEnterVehicle() { return !walkingOnly||networkSeats; },
+    setNetworkMode(active) {networkSeats=Boolean(active);walkingOnly=Boolean(active);},
     setWalkingOnly(active) {
       if(active) {
         if(drive.state.active||seating?.isSeated())return false;

@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { WebSocketServer, WebSocket } from 'ws';
 import { VERSION, MAX_BYTES, validRoom, validId, validToken, exact, validNickname, validPose, validSequence } from '../src/network/protocol.js';
+import {createVehicleRoom,occupied,vehicleSnapshot,broadcastWorld,stopPlayerVehicle,handleVehicleMessage} from './vehicleRoom.mjs';
 
 /** Memory-only two-person rooms. IDs and ownership always belong to the socket. */
 export async function startMultiplayerServer({ host='127.0.0.1', port=8787, origins=[],
@@ -39,7 +40,7 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
   const players=room=>[...room.players.values()].filter(p=>p.ws?.readyState===WebSocket.OPEN).map(publicPlayer);
   function roster(room){const message={type:'roster',roomId:room.id,players:players(room)};
     for(const p of room.players.values())send(p.ws,message);}
-  function remove(room,p) {room.players.delete(p.id);if(!room.players.size)rooms.delete(room.id);}
+  function remove(room,p) {stopPlayerVehicle(room,p,send,true);room.players.delete(p.id);if(!room.players.size)rooms.delete(room.id);}
   function reject(ws,code){send(ws,{type:'error',code});ws.close(1008,code);}
   wss.on('connection',ws=>{
     let membership=null,handshaken=false,tokens=burst,last=performance.now(),alive=true;
@@ -54,8 +55,8 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
       let m;try{m=JSON.parse(bytes.toString());}catch{reject(ws,'invalid-json');return;}
       if(!handshaken) {
         const create=m?.type==='create',join=m?.type==='join';
-        if((!create&&!join) || !exact(m,create?['type','v','nickname']:['type','v','nickname','roomId'],join?['playerId','resumeToken']:[])
-          || m.v!==VERSION || !validNickname(m.nickname) || (join&&!validRoom(m.roomId))
+        if((!create&&!join) || !exact(m,create?['type','v','nickname']:['type','v','nickname','roomId'],join?['playerId','resumeToken','vehicles']:['vehicles'])
+          || m.v!==VERSION || !validNickname(m.nickname) || (m.vehicles!==undefined&&m.vehicles!==true) || (join&&!validRoom(m.roomId))
           || (join&&(Object.hasOwn(m,'playerId')!==Object.hasOwn(m,'resumeToken')))
           || (join&&m.playerId!==undefined&&(!validId(m.playerId)||!validToken(m.resumeToken)))) {
           reject(ws,'invalid-handshake');return;
@@ -63,7 +64,7 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
         let room;
         if(create) {
           if(rooms.size>=maxRooms){reject(ws,'server-full');return;}
-          const id=randomBytes(12).toString('base64url');room={id,players:new Map()};rooms.set(id,room);
+          const id=randomBytes(12).toString('base64url');room={id,players:new Map(),fleet:createVehicleRoom()};rooms.set(id,room);
         } else room=rooms.get(m.roomId);
         if(!room){reject(ws,'room-not-found');return;}
         let player;
@@ -79,9 +80,9 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
             pose:{x:spawn,y:-.12,z:-8,yaw:Math.PI,moving:false},seq:0,ws:null,expires:Infinity};
           room.players.set(player.id,player);
         }
-        player.ws=ws;player.expires=Infinity;membership={room,player};handshaken=true;clearTimeout(deadline);
+        player.vehicles=m.vehicles===true;player.ws=ws;player.expires=Infinity;membership={room,player};handshaken=true;clearTimeout(deadline);
         send(ws,{type:'welcome',v:VERSION,roomId:room.id,playerId:player.id,resumeToken:player.token,players:players(room)});
-        roster(room);return;
+        if(player.vehicles)send(ws,vehicleSnapshot(room));roster(room);return;
       }
       const {room,player}=membership;
       if(rooms.get(room.id)!==room || room.players.get(player.id)!==player || player.ws!==ws
@@ -89,16 +90,17 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
       if(m.type==='leave' && exact(m,['type','roomId','playerId'])) {
         player.ws=null;membership=null;remove(room,player);roster(room);ws.close(1000,'left');return;
       }
+      if(handleVehicleMessage(room,player,m,send,reject))return;
       if(m.type!=='pose' || !exact(m,['type','roomId','playerId','seq','pose']) || !validSequence(m.seq)
         || m.seq<=player.seq || !validPose(m.pose)){reject(ws,'invalid-state');return;}
-      player.pose=m.pose;player.seq=m.seq;
+      if(!occupied(room,player.id))player.pose=m.pose;player.seq=m.seq;
       for(const other of room.players.values())if(other!==player)send(other.ws,{type:'pose',roomId:room.id,playerId:player.id,seq:player.seq,pose:player.pose});
     });
     ws.on('close',()=>{
       clearTimeout(deadline);if(!membership)return;
       const {room,player}=membership;
       if(player.ws!==ws)return;
-      player.ws=null;player.pose={...player.pose,moving:false};player.expires=Date.now()+graceMs;roster(room);
+      player.ws=null;player.pose={...player.pose,moving:false};player.expires=Date.now()+graceMs;stopPlayerVehicle(room,player,send);roster(room);
     });
     ws.isAlive=()=>alive;
     ws.markWaiting=()=>{alive=false;};

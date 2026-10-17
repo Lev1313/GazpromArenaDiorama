@@ -1,0 +1,5727 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "All original eighteen registry IDs retain their indices",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger door front-passenger",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger cannot drive front-passenger",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger safely exits front-passenger",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger door rear-left",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger cannot drive rear-left",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger safely exits rear-left",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger door rear-right",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger cannot drive rear-right",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA passenger safely exits rear-right",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA HUD names X156 without an unverified trim",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA reuses active night headlight projector",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA drives from bay and stops at actual island obstacle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA explicit reset returns only GLA",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "GLA reset does not break physical exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Wheel rig has four named real tires red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Idle tires stay stationary red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four forward rotations match signed distance / radius red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Only front axles steer while rolling red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Rendered frame sequence changes all four rolling quaternions red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake locks rear tires while fronts continue red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Stopped tires do not spin red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse changes all four rolling angles backwards red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Exit preserves parked pose and rolling angles red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry retains rolling angles without model reload red-golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Wheel rig has four named real tires lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Idle tires stay stationary lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four forward rotations match signed distance / radius lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Only front axles steer while rolling lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Rendered frame sequence changes all four rolling quaternions lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake locks rear tires while fronts continue lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Stopped tires do not spin lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse changes all four rolling angles backwards lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Exit preserves parked pose and rolling angles lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry retains rolling angles without model reload lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Wheel rig has four named real tires mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Idle tires stay stationary mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four forward rotations match signed distance / radius mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Only front axles steer while rolling mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Rendered frame sequence changes all four rolling quaternions mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake locks rear tires while fronts continue mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Stopped tires do not spin mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse changes all four rolling angles backwards mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Exit preserves parked pose and rolling angles mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry retains rolling angles without model reload mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Wheel rig has four named real tires gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Idle tires stay stationary gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four forward rotations match signed distance / radius gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Only front axles steer while rolling gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Rendered frame sequence changes all four rolling quaternions gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake locks rear tires while fronts continue gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Stopped tires do not spin gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse changes all four rolling angles backwards gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Exit preserves parked pose and rolling angles gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry retains rolling angles without model reload gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Wheel rig has four named real tires procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Idle tires stay stationary procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four forward rotations match signed distance / radius procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Only front axles steer while rolling procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Rendered frame sequence changes all four rolling quaternions procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake locks rear tires while fronts continue procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Stopped tires do not spin procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reverse changes all four rolling angles backwards procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Exit preserves parked pose and rolling angles procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry retains rolling angles without model reload procedural",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "19 distinct stable vehicle identities and 76 seat records",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-00",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-01",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-golf-red",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-03",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-04",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-golf-player",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-06",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-07",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-08",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-09",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-10",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-11",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-12",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 12 while driving parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-13",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 12 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 13 while driving parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-14",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 12 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 13 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 14 while driving parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-15",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 12 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 13 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 14 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 15 while driving parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-mercedes-gl",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 12 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 13 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 14 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 15 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 16 while driving parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night projector follows selected Lexus",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-lexus-rx",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Driver E activates selected vehicle parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Four real wheel pivots roll and front wheels steer parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Keyboard physics moves and steers parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 0 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 1 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 2 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 3 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 4 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 5 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 6 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 7 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 8 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 9 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 10 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 11 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 12 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 13 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 14 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 15 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 16 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Switch preserves previous vehicle 17 while driving parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving exit refuses parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Selected rear axle emits skids parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake stops parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Safe exit preserves position and yaw parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Reentry resumes at saved pose parked-mercedes-gla-x156",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "All-car session keeps model requests and scene resources bounded",
+      "ok": true,
+      "detail": "{\"initialResources\":{\"sceneGeometries\":1298,\"sceneTextures\":19,\"sceneMaterials\":384,\"geometries\":1261,\"textures\":19,\"triangles\":305356,\"calls\":189,\"models\":[\"http://127.0.0.1:51707/models/cars/golf6_red_v2_wheels.glb\",\"http://127.0.0.1:51707/models/cars/lexus_rx_deep_blue_mica_wheels.glb\",\"http://127.0.0.1:51707/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb\",\"http://127.0.0.1:51707/models/cars/mercedes_gla_x156_black_wheels.glb\"]},\"finalResources\":{\"sceneGeometries\":1298,\"sceneTextures\":19,\"sceneMaterials\":384,\"geometries\":1292,\"textures\":20,\"triangles\":245926,\"calls\":58,\"models\":[\"http://127.0.0.1:51707/models/cars/golf6_red_v2_wheels.glb\",\"http://127.0.0.1:51707/models/cars/lexus_rx_deep_blue_mica_wheels.glb\",\"http://127.0.0.1:51707/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb\",\"http://127.0.0.1:51707/models/cars/mercedes_gla_x156_black_wheels.glb\"]}}"
+    },
+    {
+      "name": "Right side selects front passenger",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Blocked exit refuses without teleport or releasing occupancy",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Preset cannot bypass blocked physical exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Occupied nearest seat rejects E without switching sides",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Silver Golf driver seat starts existing drive controller",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Physical seated Golf drives and carries character",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Moving Golf refuses physical exit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking button cannot bypass speed guard",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Handbrake still stops seated Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Drive exit preserves stopped Golf pose and resumes on foot",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf passenger seat does not give driving input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night works while seated",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset safely releases passenger seat and preserves parked Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Legacy Golf button and R still reset home",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Initial scene counts and unique controls",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Initial stats are rendered",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Highway vehicles actually move",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Both drifters move, emit smoke and leave tire marks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pause freezes traffic, visitors, drift and effects",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset meet",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset arena",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset high",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset map",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset drift",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset reset",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Orbit mouse drag rotates camera while paused",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mouse wheel zooms camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Day updates actual sky, fog, light and exposure",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night restores dim moon lighting",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Smoke off hides actual particles",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume advances simulation while disabled smoke stays hidden",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Smoke emission resumes",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo 0.3 changes simulation time and traffic rate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo 1 changes simulation time and traffic rate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Tempo 2 changes simulation time and traffic rate",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Photo sources removed; main interface hides and restores",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Desktop resize updates canvas and camera projection",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Visitor arrives, parks, reverses, departs and hides before next visit",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Live parking counter follows actual visitor states",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Long simulation keeps smoke, skid buffers and scene size bounded",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Entering Golf enables drive HUD and updates counter",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pause also freezes Golf position and speed",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume clears held driving keys",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf camera Сверху",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf camera Свободно",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf camera Сзади",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "W accelerates and physically moves Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "A steers left and changes heading",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "D steers right",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Space reduces speed and writes Golf skid segments",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Brake stops Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Obstacle collision stops Golf and displays warning",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "S reverses away from obstacle",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "R restores home pose, speed and steering",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowUp",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowLeft",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowDown",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Arrow key reaches driving controller: ArrowRight",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Blur handler clears throttle without stuck acceleration",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Hidden-document handler clears driving keys",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Typing in input does not accelerate Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Esc restores overview, car and scene HUD",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Scene tempo does not scale Golf acceleration",
+      "ok": true,
+      "detail": "1.0333333333333523 / 1.033333333333318"
+    },
+    {
+      "name": "Mobile pedals visible",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Real touch throttle accelerates Golf",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Multitouch gas and steering work together",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Touch release clears both keys",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile reverse pedal selects reverse gear",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Touch cancellation releases captured key",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile camera button switches to overhead",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile landscape resize updates render dimensions",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mobile exit hides pedals and restores scene",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk enters at a clear parking point with third-person camera",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "W walks through parking lane and animates legs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Shift increases walking pace",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pause freezes position and animation; paused input is ignored",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Resume has no stuck movement key",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking cannot pass through actual Golf GLB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Character slides beside Golf and can move away",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking cannot pass through actual Lexus GLB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Character slides beside Lexus and can move away",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking cannot pass through actual Mercedes GLB",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Character slides beside Mercedes and can move away",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Existing parking fence blocks pedestrian",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Pedestrian slides along actual parking fence",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Feet rest on actual raised footpath",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Actual island boundary stops walking into water and follows grass height",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Mouse rotates smooth chase camera while OrbitControls remain disabled",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking follows rotated camera direction",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Night walking preserves lighting scheme",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk exits, hides character and restores overview",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Camera preset exits walk and retains arena preset",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf activation exits walking with exclusive input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Golf still accelerates after walking",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walking activation exits Golf and clears its input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk blur clears held input",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "Walk recovery returns to a clear point",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "name": "No browser console or page errors",
+      "ok": true,
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "screenshots": [
+    "gla-driving-night.png",
+    "wheel-red-golf-left-0.png",
+    "wheel-red-golf-left-1.png",
+    "wheel-red-golf-left-2.png",
+    "wheel-red-golf-right-0.png",
+    "wheel-red-golf-right-1.png",
+    "wheel-red-golf-right-2.png",
+    "wheel-lexus-rx-left-0.png",
+    "wheel-lexus-rx-left-1.png",
+    "wheel-lexus-rx-left-2.png",
+    "wheel-lexus-rx-right-0.png",
+    "wheel-lexus-rx-right-1.png",
+    "wheel-lexus-rx-right-2.png",
+    "wheel-mercedes-gl-left-0.png",
+    "wheel-mercedes-gl-left-1.png",
+    "wheel-mercedes-gl-left-2.png",
+    "wheel-mercedes-gl-right-0.png",
+    "wheel-mercedes-gl-right-1.png",
+    "wheel-mercedes-gl-right-2.png",
+    "wheel-gla-x156-left-0.png",
+    "wheel-gla-x156-left-1.png",
+    "wheel-gla-x156-left-2.png",
+    "wheel-gla-x156-right-0.png",
+    "wheel-gla-x156-right-1.png",
+    "wheel-gla-x156-right-2.png",
+    "wheel-procedural-left-0.png",
+    "wheel-procedural-left-1.png",
+    "wheel-procedural-left-2.png",
+    "wheel-procedural-right-0.png",
+    "wheel-procedural-right-1.png",
+    "wheel-procedural-right-2.png",
+    "driving-procedural.png",
+    "driving-red-golf.png",
+    "driving-mercedes-gl.png",
+    "driving-lexus-rx.png",
+    "seating-golf-driving.png",
+    "seating-golf-exit.png",
+    "desktop-controls.png",
+    "visitor-route-2.png",
+    "visitor-route-30.png",
+    "visitor-route-65.png",
+    "visitor-route-100.png",
+    "traffic-long-run.png",
+    "golf-functional.png",
+    "mobile-touch.png",
+    "pedestrian-day.png",
+    "pedestrian-golf.png",
+    "pedestrian-lexus.png",
+    "pedestrian-mercedes.png",
+    "pedestrian-night.png"
+  ],
+  "generatedAt": "2026-10-17T16:42:03.692Z",
+  "head": "d795ea8f5b223af146e46e4e14aa285ec181123c",
+  "mode": "Production bundle with snapshot and pedestrian start-position fixtures; manual 60 Hz clock; Edge SwiftShader",
+  "browser": "155.0.4283.45",
+  "wheelSequences": [
+    {
+      "id": "parked-golf-red",
+      "index": 2,
+      "samples": [
+        {
+          "file": "wheel-red-golf-left-0.png",
+          "pose": {
+            "position": [
+              -19.844077537681045,
+              0,
+              -8.017611091657754
+            ],
+            "yaw": 0.0607300988237639,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.137426495552063,
+              "halfWidth": 1.03955751657486,
+              "height": 1.551530297845602
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3128995003644377,
+              "angle": 8.169630738032216,
+              "distance": 2.5562733760922343,
+              "steer": 0.28509457655855597,
+              "roll": [
+                0,
+                0,
+                -0.8094546224784528,
+                0.5871824368526918
+              ],
+              "center": [
+                1.2413731515407564,
+                0.23153814731165767,
+                -0.7727189958095548
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-leftrolling",
+                "Gar_p1b-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.31289958965498954,
+              "angle": 8.169628406706575,
+              "distance": 2.5562733760922343,
+              "steer": 0.28509457655855597,
+              "roll": [
+                0,
+                0,
+                -0.8094539380211674,
+                0.5871833804034512
+              ],
+              "center": [
+                1.2332243621349332,
+                0.23092988214455545,
+                0.7804282903671267
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-rightrolling",
+                "Gar_p1b-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.31289960455615073,
+              "angle": 8.169628017645842,
+              "distance": 2.5562733760922343,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.8094538237961536,
+                0.5871835378668117
+              ],
+              "center": [
+                -1.358709007501602,
+                0.23153084597550333,
+                -0.7732320725917818
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-leftrolling",
+                "Gar_p1b-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.31289972376544034,
+              "angle": 8.169624905161301,
+              "distance": 2.5562733760922343,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.8094529099953315,
+                0.587184797572357
+              ],
+              "center": [
+                -1.3667118549346924,
+                0.23093155107460916,
+                0.7536927163600919
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-rightrolling",
+                "Gar_p1b-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-red-golf-left-1.png",
+          "pose": {
+            "position": [
+              -19.47080187116617,
+              0,
+              -8.04686032359508
+            ],
+            "yaw": 0.08922888767918637,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.137426495552063,
+              "halfWidth": 1.03955751657486,
+              "height": 1.551530297845602
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3128995003644377,
+              "angle": 9.366281154924366,
+              "distance": 2.9307046936486834,
+              "steer": 0.13466914233412386,
+              "roll": [
+                0,
+                0,
+                -0.9995722959551775,
+                0.02924423291685146
+              ],
+              "center": [
+                1.2413731515407564,
+                0.23153814731165767,
+                -0.7727189958095548
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-leftrolling",
+                "Gar_p1b-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.31289958965498954,
+              "angle": 9.36627848211673,
+              "distance": 2.9307046936486834,
+              "steer": 0.13466914233412386,
+              "roll": [
+                0,
+                0,
+                -0.9995722568721803,
+                0.029245568749057857
+              ],
+              "center": [
+                1.2332243621349332,
+                0.23092988214455545,
+                0.7804282903671267
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-rightrolling",
+                "Gar_p1b-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.31289960455615073,
+              "angle": 9.366278036068145,
+              "distance": 2.9307046936486834,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9995722503496832,
+                0.02924579167795239
+              ],
+              "center": [
+                -1.358709007501602,
+                0.23153084597550333,
+                -0.7732320725917818
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-leftrolling",
+                "Gar_p1b-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.31289972376544034,
+              "angle": 9.366274467681004,
+              "distance": 2.9307046936486834,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9995721981679387,
+                0.029247575108288328
+              ],
+              "center": [
+                -1.3667118549346924,
+                0.23093155107460916,
+                0.7536927163600919
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-rightrolling",
+                "Gar_p1b-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-red-golf-left-2.png",
+          "pose": {
+            "position": [
+              -19.1111921847471,
+              0,
+              -8.0818837238226
+            ],
+            "yaw": 0.10207453125480893,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.137426495552063,
+              "halfWidth": 1.03955751657486,
+              "height": 1.551530297845602
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3128995003644377,
+              "angle": 10.52100791063817,
+              "distance": 3.29201811856898,
+              "steer": 0.06361319852495888,
+              "roll": [
+                0,
+                0,
+                -0.8535082853584551,
+                -0.5210792711521635
+              ],
+              "center": [
+                1.2413731515407564,
+                0.23153814731165767,
+                -0.7727189958095548
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-leftrolling",
+                "Gar_p1b-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.31289958965498954,
+              "angle": 10.521004908312078,
+              "distance": 3.29201811856898,
+              "steer": 0.06361319852495888,
+              "roll": [
+                0,
+                0,
+                -0.8535090675824395,
+                -0.5210779898964787
+              ],
+              "center": [
+                1.2332243621349332,
+                0.23092988214455545,
+                0.7804282903671267
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-rightrolling",
+                "Gar_p1b-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.31289960455615073,
+              "angle": 10.521004407272164,
+              "distance": 3.29201811856898,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.8535091981228482,
+                -0.5210777760754076
+              ],
+              "center": [
+                -1.358709007501602,
+                0.23153084597550333,
+                -0.7732320725917818
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-leftrolling",
+                "Gar_p1b-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.31289972376544034,
+              "angle": 10.521000398954593,
+              "distance": 3.29201811856898,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.853510242443737,
+                -0.5210760655064031
+              ],
+              "center": [
+                -1.3667118549346924,
+                0.23093155107460916,
+                0.7536927163600919
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-rightrolling",
+                "Gar_p1b-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-red-golf-right-0.png",
+          "pose": {
+            "position": [
+              -19.04085934160105,
+              0,
+              -8.089172204417292
+            ],
+            "yaw": 0.10363535121448851,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.137426495552063,
+              "halfWidth": 1.03955751657486,
+              "height": 1.551530297845602
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3128995003644377,
+              "angle": 10.746989372378637,
+              "distance": 3.3627276050391974,
+              "steer": 0.05475238737634278,
+              "roll": [
+                0,
+                0,
+                -0.7893138218569535,
+                -0.6139899759976293
+              ],
+              "center": [
+                1.2413731515407564,
+                0.23153814731165767,
+                -0.7727189958095548
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-leftrolling",
+                "Gar_p1b-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.31289958965498954,
+              "angle": 10.746986305565374,
+              "distance": 3.3627276050391974,
+              "steer": 0.05475238737634278,
+              "roll": [
+                0,
+                0,
+                -0.7893147633523268,
+                -0.6139887656578583
+              ],
+              "center": [
+                1.2332243621349332,
+                0.23092988214455545,
+                0.7804282903671267
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-rightrolling",
+                "Gar_p1b-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.31289960455615073,
+              "angle": 10.746985793763589,
+              "distance": 3.3627276050391974,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.789314920472574,
+                -0.6139885636714858
+              ],
+              "center": [
+                -1.358709007501602,
+                0.23153084597550333,
+                -0.7732320725917818
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-leftrolling",
+                "Gar_p1b-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.31289972376544034,
+              "angle": 10.746981699351085,
+              "distance": 3.3627276050391974,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7893161774321459,
+                -0.6139869477797595
+              ],
+              "center": [
+                -1.3667118549346924,
+                0.23093155107460916,
+                0.7536927163600919
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-rightrolling",
+                "Gar_p1b-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-red-golf-right-1.png",
+          "pose": {
+            "position": [
+              -18.696944385864523,
+              0,
+              -8.126002327433236
+            ],
+            "yaw": 0.10862190826127614,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.137426495552063,
+              "halfWidth": 1.03955751657486,
+              "height": 1.551530297845602
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3128995003644377,
+              "angle": 11.852397791139705,
+              "distance": 3.708609346968179,
+              "steer": 0.02586319647930358,
+              "roll": [
+                0,
+                0,
+                -0.34945223011590754,
+                -0.9369541818397625
+              ],
+              "center": [
+                1.2413731515407564,
+                0.23153814731165767,
+                -0.7727189958095548
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-leftrolling",
+                "Gar_p1b-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.31289958965498954,
+              "angle": 11.85239440888171,
+              "distance": 3.708609346968179,
+              "steer": 0.02586319647930358,
+              "roll": [
+                0,
+                0,
+                -0.3494538146257943,
+                -0.936953590869623
+              ],
+              "center": [
+                1.2332243621349332,
+                0.23092988214455545,
+                0.7804282903671267
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-rightrolling",
+                "Gar_p1b-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.31289960455615073,
+              "angle": 11.852393844437275,
+              "distance": 3.708609346968179,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.34945407905490017,
+                -0.9369534922459554
+              ],
+              "center": [
+                -1.358709007501602,
+                0.23153084597550333,
+                -0.7732320725917818
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-leftrolling",
+                "Gar_p1b-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.31289972376544034,
+              "angle": 11.852389328883751,
+              "distance": 3.708609346968179,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.3494561944858314,
+                -0.9369527032542683
+              ],
+              "center": [
+                -1.3667118549346924,
+                0.23093155107460916,
+                0.7536927163600919
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-rightrolling",
+                "Gar_p1b-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-red-golf-right-2.png",
+          "pose": {
+            "position": [
+              -18.365693317106548,
+              0,
+              -8.162590624552683
+            ],
+            "yaw": 0.11089065231707008,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.137426495552063,
+              "halfWidth": 1.03955751657486,
+              "height": 1.551530297845602
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3128995003644377,
+              "angle": 12.917486374651201,
+              "distance": 4.041875032592793,
+              "steer": 0.012216908963792131,
+              "roll": [
+                0,
+                0,
+                -0.17465746985654862,
+                0.9846292541984057
+              ],
+              "center": [
+                1.2413731515407564,
+                0.23153814731165767,
+                -0.7727189958095548
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-leftrolling",
+                "Gar_p1b-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.31289958965498954,
+              "angle": 12.917482688454339,
+              "distance": 4.041875032592793,
+              "steer": 0.012216908963792131,
+              "roll": [
+                0,
+                0,
+                -0.1746556550876182,
+                0.9846295761076421
+              ],
+              "center": [
+                1.2332243621349332,
+                0.23092988214455545,
+                0.7804282903671267
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-front-rightrolling",
+                "Gar_p1b-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.31289960455615073,
+              "angle": 12.917482073287399,
+              "distance": 4.041875032592793,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.17465535223182846,
+                0.9846296298287879
+              ],
+              "center": [
+                -1.358709007501602,
+                0.23153084597550333,
+                -0.7732320725917818
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-leftrolling",
+                "Gar_p1b-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.31289972376544034,
+              "angle": 12.917477151953998,
+              "distance": 4.041875032592793,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.17465292938595714,
+                0.9846300595944163
+              ],
+              "center": [
+                -1.3667118549346924,
+                0.23093155107460916,
+                0.7536927163600919
+              ],
+              "rollingParts": [
+                "golf6_silver_rims-rear-rightrolling",
+                "Gar_p1b-rear-rightrolling"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parked-lexus-rx",
+      "index": 17,
+      "samples": [
+        {
+          "file": "wheel-lexus-rx-left-0.png",
+          "pose": {
+            "position": [
+              1.9928357675416284,
+              0,
+              30.90458349327784
+            ],
+            "yaw": 1.6018962749202497,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.4326908588409424,
+              "halfWidth": 1.0762507319450383,
+              "height": 1.6900029182434086
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3824029415435746,
+              "angle": 5.4797927520595495,
+              "distance": 2.095488867436732,
+              "steer": 0.2146521184413065,
+              "roll": [
+                0,
+                0,
+                -0.39098015640716266,
+                -0.9203991076135563
+              ],
+              "center": [
+                1.3497631251811983,
+                0.2624034930095764,
+                -0.7886142432689662
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-leftrolling",
+                "optimized_silver_d-front-leftrolling",
+                "optimized_silver-front-leftrolling",
+                "optimized_black_matt-front-leftrolling",
+                "optimized_brakes1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3824029415435746,
+              "angle": 5.4797927520595495,
+              "distance": 2.095488867436732,
+              "steer": 0.2146521184413065,
+              "roll": [
+                0,
+                0,
+                -0.39098015640716266,
+                -0.9203991076135563
+              ],
+              "center": [
+                1.3497631251811981,
+                0.2624034930095767,
+                0.7887677252292637
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-rightrolling",
+                "optimized_silver_d-front-rightrolling",
+                "optimized_silver-front-rightrolling",
+                "optimized_black_matt-front-rightrolling",
+                "optimized_brakes1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.38240303099155437,
+              "angle": 5.479791470279982,
+              "distance": 2.095488867436732,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.3909807462814675,
+                -0.9203988570381793
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.2624031054973603,
+                -0.7886142432689665
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-leftrolling",
+                "optimized_silver_d-rear-leftrolling",
+                "optimized_silver-rear-leftrolling",
+                "optimized_black_matt-rear-leftrolling",
+                "optimized_brakes1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.38240303099155426,
+              "angle": 5.479791470279983,
+              "distance": 2.095488867436732,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.3909807462814671,
+                -0.9203988570381794
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.26240310549736073,
+                0.7887677252292635
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-rightrolling",
+                "optimized_silver_d-rear-rightrolling",
+                "optimized_silver-rear-rightrolling",
+                "optimized_black_matt-rear-rightrolling",
+                "optimized_brakes1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-lexus-rx-left-1.png",
+          "pose": {
+            "position": [
+              1.9800756242046227,
+              0,
+              30.60036006093947
+            ],
+            "yaw": 1.620209806185642,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.4326908588409424,
+              "halfWidth": 1.0762507319450383,
+              "height": 1.6900029182434086
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3824029415435746,
+              "angle": 6.2760598805807986,
+              "distance": 2.399983759637713,
+              "steer": 0.13201394392363622,
+              "roll": [
+                0,
+                0,
+                -0.003562705762522667,
+                -0.9999936535436861
+              ],
+              "center": [
+                1.3497631251811983,
+                0.2624034930095764,
+                -0.7886142432689662
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-leftrolling",
+                "optimized_silver_d-front-leftrolling",
+                "optimized_silver-front-leftrolling",
+                "optimized_black_matt-front-leftrolling",
+                "optimized_brakes1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3824029415435746,
+              "angle": 6.2760598805807986,
+              "distance": 2.399983759637713,
+              "steer": 0.13201394392363622,
+              "roll": [
+                0,
+                0,
+                -0.003562705762522667,
+                -0.9999936535436861
+              ],
+              "center": [
+                1.3497631251811981,
+                0.2624034930095767,
+                0.7887677252292637
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-rightrolling",
+                "optimized_silver_d-front-rightrolling",
+                "optimized_silver-front-rightrolling",
+                "optimized_black_matt-front-rightrolling",
+                "optimized_brakes1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.38240303099155437,
+              "angle": 6.276058412546207,
+              "distance": 2.399983759637713,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.0035634397751591325,
+                -0.999993650928329
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.2624031054973603,
+                -0.7886142432689665
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-leftrolling",
+                "optimized_silver_d-rear-leftrolling",
+                "optimized_silver-rear-leftrolling",
+                "optimized_black_matt-rear-leftrolling",
+                "optimized_brakes1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.38240303099155426,
+              "angle": 6.276058412546209,
+              "distance": 2.399983759637713,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.0035634397751582443,
+                -0.999993650928329
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.26240310549736073,
+                0.7887677252292635
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-rightrolling",
+                "optimized_silver_d-rear-rightrolling",
+                "optimized_silver-rear-rightrolling",
+                "optimized_black_matt-rear-rightrolling",
+                "optimized_brakes1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-lexus-rx-left-2.png",
+          "pose": {
+            "position": [
+              1.963771763328686,
+              0,
+              30.308280483395414
+            ],
+            "yaw": 1.6309649020565513,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.4326908588409424,
+              "halfWidth": 1.0762507319450383,
+              "height": 1.6900029182434086
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3824029415435746,
+              "angle": 7.041052903615826,
+              "distance": 2.6925193419066185,
+              "steer": 0.08119035356754847,
+              "roll": [
+                0,
+                0,
+                -0.3699301148827362,
+                0.929059583720466
+              ],
+              "center": [
+                1.3497631251811983,
+                0.2624034930095764,
+                -0.7886142432689662
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-leftrolling",
+                "optimized_silver_d-front-leftrolling",
+                "optimized_silver-front-leftrolling",
+                "optimized_black_matt-front-leftrolling",
+                "optimized_brakes1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3824029415435746,
+              "angle": 7.041052903615826,
+              "distance": 2.6925193419066185,
+              "steer": 0.08119035356754847,
+              "roll": [
+                0,
+                0,
+                -0.3699301148827362,
+                0.929059583720466
+              ],
+              "center": [
+                1.3497631251811981,
+                0.2624034930095767,
+                0.7887677252292637
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-rightrolling",
+                "optimized_silver_d-front-rightrolling",
+                "optimized_silver-front-rightrolling",
+                "optimized_black_matt-front-rightrolling",
+                "optimized_brakes1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.38240303099155437,
+              "angle": 7.041051256641541,
+              "distance": 2.6925193419066185,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.36992934981398895,
+                0.9290598883528443
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.2624031054973603,
+                -0.7886142432689665
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-leftrolling",
+                "optimized_silver_d-rear-leftrolling",
+                "optimized_silver-rear-leftrolling",
+                "optimized_black_matt-rear-leftrolling",
+                "optimized_brakes1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.38240303099155426,
+              "angle": 7.041051256641543,
+              "distance": 2.6925193419066185,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.3699293498139898,
+                0.9290598883528439
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.26240310549736073,
+                0.7887677252292635
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-rightrolling",
+                "optimized_silver_d-rear-rightrolling",
+                "optimized_silver-rear-rightrolling",
+                "optimized_black_matt-rear-rightrolling",
+                "optimized_brakes1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-lexus-rx-right-0.png",
+          "pose": {
+            "position": [
+              1.9602722701422812,
+              0,
+              30.251300355705677
+            ],
+            "yaw": 1.6325128339094703,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.4326908588409424,
+              "halfWidth": 1.0762507319450383,
+              "height": 1.6900029182434086
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3824029415435746,
+              "angle": 7.1903391325711885,
+              "distance": 2.7496068349910967,
+              "steer": 0.07366842044110675,
+              "roll": [
+                0,
+                0,
+                -0.43818356537774655,
+                0.8988855116380763
+              ],
+              "center": [
+                1.3497631251811983,
+                0.2624034930095764,
+                -0.7886142432689662
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-leftrolling",
+                "optimized_silver_d-front-leftrolling",
+                "optimized_silver-front-leftrolling",
+                "optimized_black_matt-front-leftrolling",
+                "optimized_brakes1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3824029415435746,
+              "angle": 7.1903391325711885,
+              "distance": 2.7496068349910967,
+              "steer": 0.07366842044110675,
+              "roll": [
+                0,
+                0,
+                -0.43818356537774655,
+                0.8988855116380763
+              ],
+              "center": [
+                1.3497631251811981,
+                0.2624034930095767,
+                0.7887677252292637
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-rightrolling",
+                "optimized_silver_d-front-rightrolling",
+                "optimized_silver-front-rightrolling",
+                "optimized_black_matt-front-rightrolling",
+                "optimized_brakes1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.38240303099155437,
+              "angle": 7.190337450677328,
+              "distance": 2.7496068349910967,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.43818280946257987,
+                0.8988858801268826
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.2624031054973603,
+                -0.7886142432689665
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-leftrolling",
+                "optimized_silver_d-rear-leftrolling",
+                "optimized_silver-rear-leftrolling",
+                "optimized_black_matt-rear-leftrolling",
+                "optimized_brakes1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.38240303099155426,
+              "angle": 7.19033745067733,
+              "distance": 2.7496068349910967,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.4381828094625807,
+                0.8988858801268822
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.26240310549736073,
+                0.7887677252292635
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-rightrolling",
+                "optimized_silver_d-rear-rightrolling",
+                "optimized_silver-rear-rightrolling",
+                "optimized_black_matt-rear-rightrolling",
+                "optimized_brakes1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-lexus-rx-right-1.png",
+          "pose": {
+            "position": [
+              1.9421662892627634,
+              0,
+              29.973476612181827
+            ],
+            "yaw": 1.6382105951782606,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.4326908588409424,
+              "halfWidth": 1.0762507319450383,
+              "height": 1.6900029182434086
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3824029415435746,
+              "angle": 7.918402205732571,
+              "distance": 3.028020295797264,
+              "steer": 0.04530707078818957,
+              "roll": [
+                0,
+                0,
+                -0.7295121737615858,
+                0.6839678269726185
+              ],
+              "center": [
+                1.3497631251811983,
+                0.2624034930095764,
+                -0.7886142432689662
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-leftrolling",
+                "optimized_silver_d-front-leftrolling",
+                "optimized_silver-front-leftrolling",
+                "optimized_black_matt-front-leftrolling",
+                "optimized_brakes1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3824029415435746,
+              "angle": 7.918402205732571,
+              "distance": 3.028020295797264,
+              "steer": 0.04530707078818957,
+              "roll": [
+                0,
+                0,
+                -0.7295121737615858,
+                0.6839678269726185
+              ],
+              "center": [
+                1.3497631251811981,
+                0.2624034930095767,
+                0.7887677252292637
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-rightrolling",
+                "optimized_silver_d-front-rightrolling",
+                "optimized_silver-front-rightrolling",
+                "optimized_black_matt-front-rightrolling",
+                "optimized_brakes1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.38240303099155437,
+              "angle": 7.9184003535373115,
+              "distance": 3.028020295797264,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7295115403402896,
+                0.6839685025718201
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.2624031054973603,
+                -0.7886142432689665
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-leftrolling",
+                "optimized_silver_d-rear-leftrolling",
+                "optimized_silver-rear-leftrolling",
+                "optimized_black_matt-rear-leftrolling",
+                "optimized_brakes1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.38240303099155426,
+              "angle": 7.918400353537313,
+              "distance": 3.028020295797264,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7295115403402903,
+                0.6839685025718195
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.26240310549736073,
+                0.7887677252292635
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-rightrolling",
+                "optimized_silver_d-rear-rightrolling",
+                "optimized_silver-rear-rightrolling",
+                "optimized_black_matt-rear-rightrolling",
+                "optimized_brakes1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-lexus-rx-right-2.png",
+          "pose": {
+            "position": [
+              1.9236649704864168,
+              0,
+              29.707294006766812
+            ],
+            "yaw": 1.641566703864613,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.4326908588409424,
+              "halfWidth": 1.0762507319450383,
+              "height": 1.6900029182434086
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3824029415435746,
+              "angle": 8.61616076417794,
+              "distance": 3.294845221033977,
+              "steer": 0.02786445876149942,
+              "roll": [
+                0,
+                0,
+                -0.919374602704355,
+                0.39338319727996707
+              ],
+              "center": [
+                1.3497631251811983,
+                0.2624034930095764,
+                -0.7886142432689662
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-leftrolling",
+                "optimized_silver_d-front-leftrolling",
+                "optimized_silver-front-leftrolling",
+                "optimized_black_matt-front-leftrolling",
+                "optimized_brakes1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3824029415435746,
+              "angle": 8.61616076417794,
+              "distance": 3.294845221033977,
+              "steer": 0.02786445876149942,
+              "roll": [
+                0,
+                0,
+                -0.919374602704355,
+                0.39338319727996707
+              ],
+              "center": [
+                1.3497631251811981,
+                0.2624034930095767,
+                0.7887677252292637
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-front-rightrolling",
+                "optimized_silver_d-front-rightrolling",
+                "optimized_silver-front-rightrolling",
+                "optimized_black_matt-front-rightrolling",
+                "optimized_brakes1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.38240303099155437,
+              "angle": 8.616158748769816,
+              "distance": 3.294845221033977,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9193742062900425,
+                0.39338412373728854
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.2624031054973603,
+                -0.7886142432689665
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-leftrolling",
+                "optimized_silver_d-rear-leftrolling",
+                "optimized_silver-rear-leftrolling",
+                "optimized_black_matt-rear-leftrolling",
+                "optimized_brakes1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.38240303099155426,
+              "angle": 8.616158748769818,
+              "distance": 3.294845221033977,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9193742062900429,
+                0.3933841237372877
+              ],
+              "center": [
+                -1.4083470702171326,
+                0.26240310549736073,
+                0.7887677252292635
+              ],
+              "rollingParts": [
+                "optimized_tire_mat4-rear-rightrolling",
+                "optimized_silver_d-rear-rightrolling",
+                "optimized_silver-rear-rightrolling",
+                "optimized_black_matt-rear-rightrolling",
+                "optimized_brakes1-rear-rightrolling"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parked-mercedes-gl",
+      "index": 16,
+      "samples": [
+        {
+          "file": "wheel-mercedes-gl-left-0.png",
+          "pose": {
+            "position": [
+              -5.004477632424881,
+              0,
+              31.08019535538141
+            ],
+            "yaw": 1.5922596638524908,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.5599999427795415,
+              "halfWidth": 1.132063031196595,
+              "height": 1.9186533689498901
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3961326628923415,
+              "angle": 4.8464464767095095,
+              "distance": 1.9198357483841442,
+              "steer": 0.18473929102392947,
+              "roll": [
+                0,
+                0,
+                -0.6581579129585665,
+                -0.7528799118119861
+              ],
+              "center": [
+                1.7059945464134216,
+                0.2761330354213718,
+                -0.7886467278003697
+              ],
+              "rollingParts": [
+                "part_0-front-leftrolling",
+                "part_1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3961325956624932,
+              "angle": 4.84644729922668,
+              "distance": 1.9198357483841442,
+              "steer": 0.18473929102392947,
+              "roll": [
+                0,
+                0,
+                -0.6581576033301834,
+                -0.7528801824850146
+              ],
+              "center": [
+                1.7059945464134216,
+                0.277185668698512,
+                0.7887554764747615
+              ],
+              "rollingParts": [
+                "part_0-front-rightrolling",
+                "part_1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.3961326628923416,
+              "angle": 4.846446476709508,
+              "distance": 1.9198357483841442,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.6581579129585672,
+                -0.7528799118119855
+              ],
+              "center": [
+                -1.4007562994956972,
+                0.27613303542137146,
+                -0.7886467278003689
+              ],
+              "rollingParts": [
+                "part_0-rear-leftrolling",
+                "part_1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.39613259566249326,
+              "angle": 4.8464472992266785,
+              "distance": 1.9198357483841442,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.658157603330184,
+                -0.7528801824850141
+              ],
+              "center": [
+                -1.4007562994956968,
+                0.277185668698512,
+                0.7887554764747623
+              ],
+              "rollingParts": [
+                "part_0-rear-rightrolling",
+                "part_1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-mercedes-gl-left-1.png",
+          "pose": {
+            "position": [
+              -5.012639471362186,
+              0,
+              30.802620051519686
+            ],
+            "yaw": 1.6058523516556924,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.5599999427795415,
+              "halfWidth": 1.132063031196595,
+              "height": 1.9186533689498901
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3961326628923415,
+              "angle": 5.5474674158298525,
+              "distance": 2.1975330397411756,
+              "steer": 0.12368166235944167,
+              "roll": [
+                0,
+                0,
+                -0.35961844115152136,
+                -0.9330994463527185
+              ],
+              "center": [
+                1.7059945464134216,
+                0.2761330354213718,
+                -0.7886467278003697
+              ],
+              "rollingParts": [
+                "part_0-front-leftrolling",
+                "part_1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3961325956624932,
+              "angle": 5.547468357321153,
+              "distance": 2.1975330397411756,
+              "steer": 0.12368166235944167,
+              "roll": [
+                0,
+                0,
+                -0.35961800189897575,
+                -0.9330996156414321
+              ],
+              "center": [
+                1.7059945464134216,
+                0.277185668698512,
+                0.7887554764747615
+              ],
+              "rollingParts": [
+                "part_0-front-rightrolling",
+                "part_1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.3961326628923416,
+              "angle": 5.54746741582985,
+              "distance": 2.1975330397411756,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.35961844115152264,
+                -0.933099446352718
+              ],
+              "center": [
+                -1.4007562994956972,
+                0.27613303542137146,
+                -0.7886467278003689
+              ],
+              "rollingParts": [
+                "part_0-rear-leftrolling",
+                "part_1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.39613259566249326,
+              "angle": 5.547468357321152,
+              "distance": 2.1975330397411756,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.3596180018989766,
+                -0.9330996156414317
+              ],
+              "center": [
+                -1.4007562994956968,
+                0.277185668698512,
+                0.7887554764747623
+              ],
+              "rollingParts": [
+                "part_0-rear-rightrolling",
+                "part_1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-mercedes-gl-left-2.png",
+          "pose": {
+            "position": [
+              -5.023313553090997,
+              0,
+              30.5367165318232
+            ],
+            "yaw": 1.614536034444159,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.5599999427795415,
+              "halfWidth": 1.132063031196595,
+              "height": 1.9186533689498901
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3961326628923415,
+              "angle": 6.219258689408124,
+              "distance": 2.463651505851574,
+              "steer": 0.08280400730786323,
+              "roll": [
+                0,
+                0,
+                -0.031957866594730794,
+                -0.9994892169316852
+              ],
+              "center": [
+                1.7059945464134216,
+                0.2761330354213718,
+                -0.7886467278003697
+              ],
+              "rollingParts": [
+                "part_0-front-leftrolling",
+                "part_1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3961325956624932,
+              "angle": 6.219259744912828,
+              "distance": 2.463651505851574,
+              "steer": 0.08280400730786323,
+              "roll": [
+                0,
+                0,
+                -0.03195733911194127,
+                -0.9994892337973853
+              ],
+              "center": [
+                1.7059945464134216,
+                0.277185668698512,
+                0.7887554764747615
+              ],
+              "rollingParts": [
+                "part_0-front-rightrolling",
+                "part_1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.3961326628923416,
+              "angle": 6.219258689408122,
+              "distance": 2.463651505851574,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.031957866594732126,
+                -0.9994892169316852
+              ],
+              "center": [
+                -1.4007562994956972,
+                0.27613303542137146,
+                -0.7886467278003689
+              ],
+              "rollingParts": [
+                "part_0-rear-leftrolling",
+                "part_1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.39613259566249326,
+              "angle": 6.219259744912827,
+              "distance": 2.463651505851574,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.03195733911194216,
+                -0.9994892337973853
+              ],
+              "center": [
+                -1.4007562994956968,
+                0.277185668698512,
+                0.7887554764747623
+              ],
+              "rollingParts": [
+                "part_0-rear-rightrolling",
+                "part_1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-mercedes-gl-right-0.png",
+          "pose": {
+            "position": [
+              -5.025632172659109,
+              0,
+              30.484920510543635
+            ],
+            "yaw": 1.615853649617365,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.5599999427795415,
+              "halfWidth": 1.132063031196595,
+              "height": 1.9186533689498901
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3961326628923415,
+              "angle": 6.35014386677233,
+              "distance": 2.515499399693993,
+              "steer": 0.07641886150783396,
+              "roll": [
+                0,
+                0,
+                -0.033473025870472586,
+                0.9994396212573697
+              ],
+              "center": [
+                1.7059945464134216,
+                0.2761330354213718,
+                -0.7886467278003697
+              ],
+              "rollingParts": [
+                "part_0-front-leftrolling",
+                "part_1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3961325956624932,
+              "angle": 6.350144944490279,
+              "distance": 2.515499399693993,
+              "steer": 0.07641886150783396,
+              "roll": [
+                0,
+                0,
+                -0.03347356442747739,
+                0.9994396032199843
+              ],
+              "center": [
+                1.7059945464134216,
+                0.277185668698512,
+                0.7887554764747615
+              ],
+              "rollingParts": [
+                "part_0-front-rightrolling",
+                "part_1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.3961326628923416,
+              "angle": 6.350143866772327,
+              "distance": 2.515499399693993,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.033473025870471254,
+                0.9994396212573697
+              ],
+              "center": [
+                -1.4007562994956972,
+                0.27613303542137146,
+                -0.7886467278003689
+              ],
+              "rollingParts": [
+                "part_0-rear-leftrolling",
+                "part_1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.39613259566249326,
+              "angle": 6.350144944490277,
+              "distance": 2.515499399693993,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.0334735644274765,
+                0.9994396032199843
+              ],
+              "center": [
+                -1.4007562994956968,
+                0.277185668698512,
+                0.7887554764747623
+              ],
+              "rollingParts": [
+                "part_0-rear-rightrolling",
+                "part_1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-mercedes-gl-right-1.png",
+          "pose": {
+            "position": [
+              -5.037748724940806,
+              0,
+              30.232785994287095
+            ],
+            "yaw": 1.6209322898874232,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.5599999427795415,
+              "halfWidth": 1.132063031196595,
+              "height": 1.9186533689498901
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3961326628923415,
+              "angle": 6.987369130238787,
+              "distance": 2.767925140173234,
+              "steer": 0.051161892927696545,
+              "roll": [
+                0,
+                0,
+                -0.34486214035459745,
+                0.9386533461028336
+              ],
+              "center": [
+                1.7059945464134216,
+                0.2761330354213718,
+                -0.7886467278003697
+              ],
+              "rollingParts": [
+                "part_0-front-leftrolling",
+                "part_1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3961325956624932,
+              "angle": 6.98737031610375,
+              "distance": 2.767925140173234,
+              "steer": 0.051161892927696545,
+              "roll": [
+                0,
+                0,
+                -0.34486269691259447,
+                0.938653141622704
+              ],
+              "center": [
+                1.7059945464134216,
+                0.277185668698512,
+                0.7887554764747615
+              ],
+              "rollingParts": [
+                "part_0-front-rightrolling",
+                "part_1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.3961326628923416,
+              "angle": 6.987369130238783,
+              "distance": 2.767925140173234,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.3448621403545954,
+                0.9386533461028344
+              ],
+              "center": [
+                -1.4007562994956972,
+                0.27613303542137146,
+                -0.7886467278003689
+              ],
+              "rollingParts": [
+                "part_0-rear-leftrolling",
+                "part_1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.39613259566249326,
+              "angle": 6.987370316103748,
+              "distance": 2.767925140173234,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.34486269691259364,
+                0.9386531416227043
+              ],
+              "center": [
+                -1.4007562994956968,
+                0.277185668698512,
+                0.7887554764747623
+              ],
+              "rollingParts": [
+                "part_0-rear-rightrolling",
+                "part_1-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-mercedes-gl-right-2.png",
+          "pose": {
+            "position": [
+              -5.050291057214522,
+              0,
+              29.991939014099074
+            ],
+            "yaw": 1.6241786261754443,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.5599999427795415,
+              "halfWidth": 1.132063031196595,
+              "height": 1.9186533689498901
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.3961326628923415,
+              "angle": 7.596188999245653,
+              "distance": 3.00909857610469,
+              "steer": 0.03425252923555729,
+              "roll": [
+                0,
+                0,
+                -0.6103495917746515,
+                0.792132170676407
+              ],
+              "center": [
+                1.7059945464134216,
+                0.2761330354213718,
+                -0.7886467278003697
+              ],
+              "rollingParts": [
+                "part_0-front-leftrolling",
+                "part_1-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.3961325956624932,
+              "angle": 7.5961902884367944,
+              "distance": 3.00909857610469,
+              "steer": 0.03425252923555729,
+              "roll": [
+                0,
+                0,
+                -0.6103501023794133,
+                0.792131777247599
+              ],
+              "center": [
+                1.7059945464134216,
+                0.277185668698512,
+                0.7887554764747615
+              ],
+              "rollingParts": [
+                "part_0-front-rightrolling",
+                "part_1-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.3961326628923416,
+              "angle": 7.596188999245649,
+              "distance": 3.00909857610469,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.6103495917746498,
+                0.7921321706764083
+              ],
+              "center": [
+                -1.4007562994956972,
+                0.27613303542137146,
+                -0.7886467278003689
+              ],
+              "rollingParts": [
+                "part_0-rear-leftrolling",
+                "part_1-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.39613259566249326,
+              "angle": 7.596190288436793,
+              "distance": 3.00909857610469,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.6103501023794126,
+                0.7921317772475994
+              ],
+              "center": [
+                -1.4007562994956968,
+                0.277185668698512,
+                0.7887554764747623
+              ],
+              "rollingParts": [
+                "part_0-rear-rightrolling",
+                "part_1-rear-rightrolling"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parked-mercedes-gla-x156",
+      "index": 18,
+      "samples": [
+        {
+          "file": "wheel-gla-x156-left-0.png",
+          "pose": {
+            "position": [
+              6.511685531263295,
+              0,
+              39.329421970939435
+            ],
+            "yaw": -1.5259012987353615,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.210950526758291,
+              "halfWidth": 1.0078491122700144,
+              "height": 1.557958608239272
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.35091981069624134,
+              "angle": 6.638534387309182,
+              "distance": 2.329593230495027,
+              "steer": 0.25538260421702236,
+              "roll": [
+                0,
+                0,
+                -0.17674120232318935,
+                0.9842573583170986
+              ],
+              "center": [
+                1.3057888046769637,
+                0.23091992245495196,
+                -0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.35091981069624134,
+              "angle": 6.638534387309182,
+              "distance": 2.329593230495027,
+              "steer": 0.25538260421702236,
+              "roll": [
+                0,
+                0,
+                -0.17674120232318935,
+                0.9842573583170986
+              ],
+              "center": [
+                1.3057888046769632,
+                0.23091992245495196,
+                0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.35092001931250116,
+              "angle": 6.638530440808163,
+              "distance": 2.329593230495027,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.1767392601365113,
+                0.9842577070698499
+              ],
+              "center": [
+                -1.3934181838246886,
+                0.23091992245495196,
+                -0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.3509200193125012,
+              "angle": 6.638530440808161,
+              "distance": 2.329593230495027,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.17673926013651045,
+                0.9842577070698502
+              ],
+              "center": [
+                -1.3934181838246888,
+                0.23091992245495196,
+                0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-gla-x156-left-1.png",
+          "pose": {
+            "position": [
+              6.531774301333301,
+              0,
+              39.66891247196115
+            ],
+            "yaw": -1.5022920367360777,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.210950526758291,
+              "halfWidth": 1.0078491122700144,
+              "height": 1.557958608239272
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.35091981069624134,
+              "angle": 7.60767773731955,
+              "distance": 2.669684831418187,
+              "steer": 0.13775529393255115,
+              "roll": [
+                0,
+                0,
+                -0.6148897962023842,
+                0.7886130473978924
+              ],
+              "center": [
+                1.3057888046769637,
+                0.23091992245495196,
+                -0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.35091981069624134,
+              "angle": 7.60767773731955,
+              "distance": 2.669684831418187,
+              "steer": 0.13775529393255115,
+              "roll": [
+                0,
+                0,
+                -0.6148897962023842,
+                0.7886130473978924
+              ],
+              "center": [
+                1.3057888046769632,
+                0.23091992245495196,
+                0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.35092001931250116,
+              "angle": 7.607673214678528,
+              "distance": 2.669684831418187,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.6148880128939528,
+                0.7886144378587842
+              ],
+              "center": [
+                -1.3934181838246886,
+                0.23091992245495196,
+                -0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.3509200193125012,
+              "angle": 7.607673214678526,
+              "distance": 2.669684831418187,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.6148880128939518,
+                0.7886144378587849
+              ],
+              "center": [
+                -1.3934181838246888,
+                0.23091992245495196,
+                0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-gla-x156-left-2.png",
+          "pose": {
+            "position": [
+              6.556583879909784,
+              0,
+              39.99554221478138
+            ],
+            "yaw": -1.4901350175710526,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.210950526758291,
+              "halfWidth": 1.0078491122700144,
+              "height": 1.557958608239272
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.35091981069624134,
+              "angle": 8.541145887375423,
+              "distance": 2.997257297926765,
+              "steer": 0.07430623970894061,
+              "roll": [
+                0,
+                0,
+                -0.9039766500156546,
+                0.4275818240132228
+              ],
+              "center": [
+                1.3057888046769637,
+                0.23091992245495196,
+                -0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.35091981069624134,
+              "angle": 8.541145887375423,
+              "distance": 2.997257297926765,
+              "steer": 0.07430623970894061,
+              "roll": [
+                0,
+                0,
+                -0.9039766500156546,
+                0.4275818240132228
+              ],
+              "center": [
+                1.3057888046769632,
+                0.23091992245495196,
+                0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.35092001931250116,
+              "angle": 8.541140809802727,
+              "distance": 2.997257297926765,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9039755644738439,
+                0.42758411901542304
+              ],
+              "center": [
+                -1.3934181838246886,
+                0.23091992245495196,
+                -0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.3509200193125012,
+              "angle": 8.541140809802723,
+              "distance": 2.997257297926765,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9039755644738431,
+                0.42758411901542465
+              ],
+              "center": [
+                -1.3934181838246888,
+                0.23091992245495196,
+                0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-gla-x156-right-0.png",
+          "pose": {
+            "position": [
+              6.561820893444781,
+              -0.07299574158644109,
+              40.059358022895566
+            ],
+            "yaw": -1.488525354668186,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.210950526758291,
+              "halfWidth": 1.0078491122700144,
+              "height": 1.557958608239272
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.35091981069624134,
+              "angle": 8.723610190979528,
+              "distance": 3.061287636806339,
+              "steer": 0.06567630053775825,
+              "roll": [
+                0,
+                0,
+                -0.939172339882273,
+                0.3434462345113954
+              ],
+              "center": [
+                1.3057888046769637,
+                0.23091992245495196,
+                -0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.35091981069624134,
+              "angle": 8.723610190979528,
+              "distance": 3.061287636806339,
+              "steer": 0.06567630053775825,
+              "roll": [
+                0,
+                0,
+                -0.939172339882273,
+                0.3434462345113954
+              ],
+              "center": [
+                1.3057888046769632,
+                0.23091992245495196,
+                0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.35092001931250116,
+              "angle": 8.723605004934761,
+              "distance": 3.061287636806339,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9391714493153419,
+                0.34344866980514
+              ],
+              "center": [
+                -1.3934181838246886,
+                0.23091992245495196,
+                -0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.3509200193125012,
+              "angle": 8.723605004934758,
+              "distance": 3.061287636806339,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9391714493153414,
+                0.34344866980514166
+              ],
+              "center": [
+                -1.3934181838246888,
+                0.23091992245495196,
+                0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-gla-x156-right-1.png",
+          "pose": {
+            "position": [
+              6.588561268606998,
+              -0.2563670471510262,
+              40.37103041295958
+            ],
+            "yaw": -1.4830057342331806,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.210950526758291,
+              "halfWidth": 1.0078491122700144,
+              "height": 1.557958608239272
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.35091981069624134,
+              "angle": 9.615032553775135,
+              "distance": 3.3741054036089686,
+              "steer": 0.035426289557659765,
+              "roll": [
+                0,
+                0,
+                -0.9954788097037717,
+                -0.09498389037495789
+              ],
+              "center": [
+                1.3057888046769637,
+                0.23091992245495196,
+                -0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.35091981069624134,
+              "angle": 9.615032553775135,
+              "distance": 3.3741054036089686,
+              "steer": 0.035426289557659765,
+              "roll": [
+                0,
+                0,
+                -0.9954788097037717,
+                -0.09498389037495789
+              ],
+              "center": [
+                1.3057888046769632,
+                0.23091992245495196,
+                0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.35092001931250116,
+              "angle": 9.61502683779423,
+              "distance": 3.3741054036089686,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9954790811627579,
+                -0.09498104530563638
+              ],
+              "center": [
+                -1.3934181838246886,
+                0.23091992245495196,
+                -0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.3509200193125012,
+              "angle": 9.615026837794227,
+              "distance": 3.3741054036089686,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9954790811627581,
+                -0.0949810453056346
+              ],
+              "center": [
+                -1.3934181838246888,
+                0.23091992245495196,
+                0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-rear-rightrolling"
+              ]
+            }
+          ]
+        },
+        {
+          "file": "wheel-gla-x156-right-2.png",
+          "pose": {
+            "position": [
+              6.615443655289043,
+              -0.3089038058017908,
+              40.67055952692456
+            ],
+            "yaw": -1.4801449702866172,
+            "visible": true,
+            "footprint": {
+              "halfLength": 2.210950526758291,
+              "halfWidth": 1.0078491122700144,
+              "height": 1.557958608239272
+            }
+          },
+          "wheels": [
+            {
+              "id": "front-left",
+              "radius": 0.35091981069624134,
+              "angle": 10.472017856760978,
+              "distance": 3.6748385239022228,
+              "steer": 0.019109206540974755,
+              "roll": [
+                0,
+                0,
+                -0.8660148173915825,
+                -0.5000183357220254
+              ],
+              "center": [
+                1.3057888046769637,
+                0.23091992245495196,
+                -0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-front-leftrolling"
+              ]
+            },
+            {
+              "id": "front-right",
+              "radius": 0.35091981069624134,
+              "angle": 10.472017856760978,
+              "distance": 3.6748385239022228,
+              "steer": 0.019109206540974755,
+              "roll": [
+                0,
+                0,
+                -0.8660148173915825,
+                -0.5000183357220254
+              ],
+              "center": [
+                1.3057888046769632,
+                0.23091992245495196,
+                0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-front-rightrolling"
+              ]
+            },
+            {
+              "id": "rear-left",
+              "radius": 0.35092001931250116,
+              "angle": 10.472011631316212,
+              "distance": 3.6748385239022228,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.8660163738056526,
+                -0.5000156400558969
+              ],
+              "center": [
+                -1.3934181838246886,
+                0.23091992245495196,
+                -0.7632126027824373
+              ],
+              "rollingParts": [
+                "Object_5-rear-leftrolling"
+              ]
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.3509200193125012,
+              "angle": 10.472011631316208,
+              "distance": 3.6748385239022228,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.8660163738056534,
+                -0.5000156400558954
+              ],
+              "center": [
+                -1.3934181838246888,
+                0.23091992245495196,
+                0.7632126027824369
+              ],
+              "rollingParts": [
+                "Object_5-rear-rightrolling"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parked-07",
+      "index": 7,
+      "samples": [
+        {
+          "file": "wheel-procedural-left-0.png",
+          "pose": {
+            "position": [
+              3.6624629276671334,
+              0,
+              -23.984344246967442
+            ],
+            "yaw": 3.198236930988239,
+            "visible": true
+          },
+          "wheels": [
+            {
+              "id": "rear-left",
+              "radius": 0.4,
+              "angle": 6.094570034609919,
+              "distance": 2.4378280138439683,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.09416790418097992,
+                -0.9955563298086963
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.4,
+              "angle": 6.094570034609919,
+              "distance": 2.4378280138439683,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.09416790418097992,
+                -0.9955563298086963
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-left",
+              "radius": 0.4,
+              "angle": 6.094570034609919,
+              "distance": 2.4378280138439683,
+              "steer": 0.2865106750031689,
+              "roll": [
+                0,
+                0,
+                -0.09416790418097992,
+                -0.9955563298086963
+              ],
+              "center": [
+                1.15,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-right",
+              "radius": 0.4,
+              "angle": 6.094570034609919,
+              "distance": 2.4378280138439683,
+              "steer": 0.2865106750031689,
+              "roll": [
+                0,
+                0,
+                -0.09416790418097992,
+                -0.9955563298086963
+              ],
+              "center": [
+                1.15,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            }
+          ]
+        },
+        {
+          "file": "wheel-procedural-left-1.png",
+          "pose": {
+            "position": [
+              3.3069160501618033,
+              0,
+              -23.95837133103069
+            ],
+            "yaw": 3.224790966597152,
+            "visible": true
+          },
+          "wheels": [
+            {
+              "id": "rear-left",
+              "radius": 0.4,
+              "angle": 6.985829393827116,
+              "distance": 2.794331757530847,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.34413939885913364,
+                0.9389185663053394
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.4,
+              "angle": 6.985829393827116,
+              "distance": 2.794331757530847,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.34413939885913364,
+                0.9389185663053394
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-left",
+              "radius": 0.4,
+              "angle": 6.985829393827116,
+              "distance": 2.794331757530847,
+              "steer": 0.1353380598747408,
+              "roll": [
+                0,
+                0,
+                -0.34413939885913364,
+                0.9389185663053394
+              ],
+              "center": [
+                1.15,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-right",
+              "radius": 0.4,
+              "angle": 6.985829393827116,
+              "distance": 2.794331757530847,
+              "steer": 0.1353380598747408,
+              "roll": [
+                0,
+                0,
+                -0.34413939885913364,
+                0.9389185663053394
+              ],
+              "center": [
+                1.15,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            }
+          ]
+        },
+        {
+          "file": "wheel-procedural-left-2.png",
+          "pose": {
+            "position": [
+              2.964619217826686,
+              0,
+              -23.927304292578793
+            ],
+            "yaw": 3.236747986439642,
+            "visible": true
+          },
+          "wheels": [
+            {
+              "id": "rear-left",
+              "radius": 0.4,
+              "angle": 7.845093457475954,
+              "distance": 3.1380373829903827,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7039573639533131,
+                0.7102422331401469
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.4,
+              "angle": 7.845093457475954,
+              "distance": 3.1380373829903827,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7039573639533131,
+                0.7102422331401469
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-left",
+              "radius": 0.4,
+              "angle": 7.845093457475954,
+              "distance": 3.1380373829903827,
+              "steer": 0.06392917279768488,
+              "roll": [
+                0,
+                0,
+                -0.7039573639533131,
+                0.7102422331401469
+              ],
+              "center": [
+                1.15,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-right",
+              "radius": 0.4,
+              "angle": 7.845093457475954,
+              "distance": 3.1380373829903827,
+              "steer": 0.06392917279768488,
+              "roll": [
+                0,
+                0,
+                -0.7039573639533131,
+                0.7102422331401469
+              ],
+              "center": [
+                1.15,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            }
+          ]
+        },
+        {
+          "file": "wheel-procedural-right-0.png",
+          "pose": {
+            "position": [
+              2.89770561847835,
+              0,
+              -23.920843361831352
+            ],
+            "yaw": 3.2381998835466352,
+            "visible": true
+          },
+          "wheels": [
+            {
+              "id": "rear-left",
+              "radius": 0.4,
+              "angle": 8.013155461533358,
+              "distance": 3.2052621846133444,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7610855840049112,
+                0.6486514733043495
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.4,
+              "angle": 8.013155461533358,
+              "distance": 3.2052621846133444,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.7610855840049112,
+                0.6486514733043495
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-left",
+              "radius": 0.4,
+              "angle": 8.013155461533358,
+              "distance": 3.2052621846133444,
+              "steer": 0.05502434895322261,
+              "roll": [
+                0,
+                0,
+                -0.7610855840049112,
+                0.6486514733043495
+              ],
+              "center": [
+                1.15,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-right",
+              "radius": 0.4,
+              "angle": 8.013155461533358,
+              "distance": 3.2052621846133444,
+              "steer": 0.05502434895322261,
+              "roll": [
+                0,
+                0,
+                -0.7610855840049112,
+                0.6486514733043495
+              ],
+              "center": [
+                1.15,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            }
+          ]
+        },
+        {
+          "file": "wheel-procedural-right-1.png",
+          "pose": {
+            "position": [
+              2.570693911896169,
+              0,
+              -23.888217132547755
+            ],
+            "yaw": 3.242835882588503,
+            "visible": true
+          },
+          "wheels": [
+            {
+              "id": "rear-left",
+              "radius": 0.4,
+              "angle": 8.834744251488251,
+              "distance": 3.5338977005953005,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.956797241869439,
+                0.29075597663854524
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.4,
+              "angle": 8.834744251488251,
+              "distance": 3.5338977005953005,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.956797241869439,
+                0.29075597663854524
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-left",
+              "radius": 0.4,
+              "angle": 8.834744251488251,
+              "distance": 3.5338977005953005,
+              "steer": 0.025991662031851014,
+              "roll": [
+                0,
+                0,
+                -0.956797241869439,
+                0.29075597663854524
+              ],
+              "center": [
+                1.15,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-right",
+              "radius": 0.4,
+              "angle": 8.834744251488251,
+              "distance": 3.5338977005953005,
+              "steer": 0.025991662031851014,
+              "roll": [
+                0,
+                0,
+                -0.956797241869439,
+                0.29075597663854524
+              ],
+              "center": [
+                1.15,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            }
+          ]
+        },
+        {
+          "file": "wheel-procedural-right-2.png",
+          "pose": {
+            "position": [
+              2.2560517896830197,
+              0,
+              -23.855842922279304
+            ],
+            "yaw": 3.2449428368760564,
+            "visible": true
+          },
+          "wheels": [
+            {
+              "id": "rear-left",
+              "radius": 0.4,
+              "angle": 9.625502543024279,
+              "distance": 3.850201017209712,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9949679312181768,
+                -0.10019389126798751
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "rear-right",
+              "radius": 0.4,
+              "angle": 9.625502543024279,
+              "distance": 3.850201017209712,
+              "steer": 0,
+              "roll": [
+                0,
+                0,
+                -0.9949679312181768,
+                -0.10019389126798751
+              ],
+              "center": [
+                -1.13,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-left",
+              "radius": 0.4,
+              "angle": 9.625502543024279,
+              "distance": 3.850201017209712,
+              "steer": 0.012277591793994319,
+              "roll": [
+                0,
+                0,
+                -0.9949679312181768,
+                -0.10019389126798751
+              ],
+              "center": [
+                1.15,
+                0.4,
+                -0.88
+              ],
+              "rollingParts": []
+            },
+            {
+              "id": "front-right",
+              "radius": 0.4,
+              "angle": 9.625502543024279,
+              "distance": 3.850201017209712,
+              "steer": 0.012277591793994319,
+              "roll": [
+                0,
+                0,
+                -0.9949679312181768,
+                -0.10019389126798751
+              ],
+              "center": [
+                1.15,
+                0.4,
+                0.88
+              ],
+              "rollingParts": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "multiCarResources": {
+    "initial": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 384,
+      "geometries": 1261,
+      "textures": 19,
+      "triangles": 305356,
+      "calls": 189,
+      "models": [
+        "http://127.0.0.1:51707/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:51707/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:51707/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:51707/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    },
+    "final": {
+      "sceneGeometries": 1298,
+      "sceneTextures": 19,
+      "sceneMaterials": 384,
+      "geometries": 1292,
+      "textures": 20,
+      "triangles": 245926,
+      "calls": 58,
+      "models": [
+        "http://127.0.0.1:51707/models/cars/golf6_red_v2_wheels.glb",
+        "http://127.0.0.1:51707/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+        "http://127.0.0.1:51707/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+        "http://127.0.0.1:51707/models/cars/mercedes_gla_x156_black_wheels.glb"
+      ]
+    }
+  }
+}

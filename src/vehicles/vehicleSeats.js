@@ -1,12 +1,6 @@
 import { Vector3 } from 'three';
 
-const specialVehicles = {
-  2: { vehicleId: 'parked-golf-red', displayName: 'Golf VI · красный', anchorY: -.28, frontX: -.25, rearX: -.85 },
-  5: { vehicleId: 'parked-golf-player', displayName: 'Golf VI · серебристый', anchorY: .05 },
-  16: { vehicleId: 'parked-mercedes-gl', displayName: 'Mercedes GL', anchorY: .15, frontX: -.25, rearX: -.85 },
-  17: { vehicleId: 'parked-lexus-rx', displayName: 'Lexus RX', anchorY: -.02, frontX: -.25, rearX: -.85 },
-  18: { vehicleId: 'parked-mercedes-gla-x156', displayName: 'Mercedes-Benz GLA X156', anchorY: -.20, frontX: -.15, rearX: -.88 },
-};
+import { specialVehicles } from '../network/vehicleCatalog.js';
 
 // Root-local coordinates only: the vehicle nose is +X, left doors are -Z.
 // The compact seated pose keeps its pelvis .72 m above the root anchor.
