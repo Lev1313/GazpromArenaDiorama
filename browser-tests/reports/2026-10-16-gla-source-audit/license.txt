@@ -1,0 +1,11 @@
+Model Information:
+* title:	Mercedes-Benz GLA-Class 2020
+* source:	https://sketchfab.com/3d-models/mercedes-benz-gla-class-2020-ab7b5df3ba634f38a14effde3d542466
+* author:	ItsDiyor (https://sketchfab.com/ItsDiyor)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Mercedes-Benz GLA-Class 2020" (https://sketchfab.com/3d-models/mercedes-benz-gla-class-2020-ab7b5df3ba634f38a14effde3d542466) by ItsDiyor (https://sketchfab.com/ItsDiyor) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

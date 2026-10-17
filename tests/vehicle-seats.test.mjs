@@ -3,18 +3,20 @@ import assert from 'node:assert/strict';
 import { Group, Vector3 } from 'three';
 import { createVehicleRegistry } from '../src/vehicles/vehicleSeats.js';
 
-const parkedCars = () => Array.from({ length: 18 }, () => new Group());
+const parkedCars = () => Array.from({ length: 19 }, () => new Group());
 
-test('all 18 parked vehicles have deterministic distinct identities; all support driving', () => {
+test('all 19 parked vehicles have deterministic distinct identities; all support driving', () => {
   const parked = parkedCars(), registry = createVehicleRegistry(parked);
-  assert.equal(registry.vehicles.length, 18);
+  assert.equal(registry.vehicles.length, 19);
   const ids = registry.vehicles.map(vehicle => vehicle.vehicleId);
-  assert.equal(new Set(ids).size, 18);
+  assert.equal(new Set(ids).size, 19);
   assert.equal(ids[2], 'parked-golf-red');
   assert.equal(ids[5], 'parked-golf-player');
   assert.equal(ids[16], 'parked-mercedes-gl');
   assert.equal(ids[17], 'parked-lexus-rx');
-  assert.deepEqual(registry.vehicles.filter(vehicle => vehicle.canDrive).map(vehicle => vehicle.index), Array.from({length:18},(_,i)=>i));
+  assert.equal(ids[18], 'parked-mercedes-gla-x156');
+  assert.deepEqual(ids.slice(0,18), Array.from({length:18},(_,i)=>({2:'parked-golf-red',5:'parked-golf-player',16:'parked-mercedes-gl',17:'parked-lexus-rx'}[i]??'parked-'+String(i).padStart(2,'0'))));
+  assert.deepEqual(registry.vehicles.filter(vehicle => vehicle.canDrive).map(vehicle => vehicle.index), Array.from({length:19},(_,i)=>i));
   assert.deepEqual(createVehicleRegistry(parkedCars()).vehicles.map(vehicle => vehicle.vehicleId), ids);
   for (const vehicle of registry.vehicles) {
     assert.equal(vehicle.car.userData.vehicleId, vehicle.vehicleId);
@@ -57,7 +59,7 @@ test('driver and rear-left doors use -Z; front and rear passenger right doors us
     assert.equal(seat.role, seat.seatId === 'driver' ? 'driver' : 'passenger');
     assert.equal(Math.sign(seat.entryPoint.z), ['driver', 'rear-left'].includes(seat.seatId) ? -1 : 1);
     assert.equal(Math.sign(seat.localPosition.z), seat.side);
-    assert.equal(Math.sign(seat.localPosition.x), seat.front && ![2, 16, 17].includes(vehicle.index) ? 1 : -1);
+    assert.equal(Math.sign(seat.localPosition.x), seat.front && ![2, 16, 17, 18].includes(vehicle.index) ? 1 : -1);
     assert(Math.abs(seat.entryPoint.z) - Math.abs(seat.localPosition.z) > .9);
   }
 });
@@ -70,7 +72,7 @@ test('calibrated cabin heights and row positions are retained across footprint r
     registry.refresh(vehicle);
     for (const seat of vehicle.seats) {
       assert.equal(seat.localPosition.y, height);
-      const glb = [2, 16, 17].includes(index);
+      const glb = [2, 16, 17, 18].includes(index);
       const expectedX = (seat.front ? glb ? -.25 : .3 : glb ? -.85 : -.72) * 3 / 1.96;
       assert.equal(seat.localPosition.x, expectedX);
       assert.equal(seat.entryPoint.x, expectedX);

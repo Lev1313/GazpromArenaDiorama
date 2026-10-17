@@ -1,0 +1,3392 @@
+{
+  "hud": {
+    "running": false,
+    "day": false,
+    "speedScale": 1
+  },
+  "golf": {
+    "position": [
+      -22.4,
+      0,
+      16
+    ],
+    "yaw": 0,
+    "visible": true
+  },
+  "home": [
+    -22.4,
+    0,
+    16
+  ],
+  "pedestrian": {
+    "position": [
+      6.842668698171805,
+      -0.2,
+      36.83079460254401
+    ],
+    "yaw": 0,
+    "visible": true,
+    "playerId": "local-player",
+    "mode": "driver",
+    "vehicleId": "parked-mercedes-gla-x156",
+    "seatId": "driver",
+    "active": false,
+    "speed": 0,
+    "cameraYaw": 1.2246467991473532e-16,
+    "phase": 0,
+    "stride": 0,
+    "contact": false,
+    "keys": [],
+    "blocked": true,
+    "legAngle": -1.3
+  },
+  "parked": [
+    {
+      "position": [
+        -22.4,
+        0,
+        -24
+      ],
+      "yaw": 0,
+      "visible": true
+    },
+    {
+      "position": [
+        -22.4,
+        0,
+        -16
+      ],
+      "yaw": 0,
+      "visible": true
+    },
+    {
+      "position": [
+        -22.4,
+        0,
+        -8
+      ],
+      "yaw": 0,
+      "visible": true,
+      "footprint": {
+        "halfLength": 2.137426495552063,
+        "halfWidth": 1.03955751657486,
+        "height": 1.551530297845602
+      }
+    },
+    {
+      "position": [
+        -22.4,
+        0,
+        0
+      ],
+      "yaw": 0,
+      "visible": true
+    },
+    {
+      "position": [
+        -22.4,
+        0,
+        8
+      ],
+      "yaw": 0,
+      "visible": true
+    },
+    {
+      "position": [
+        -22.4,
+        0,
+        16
+      ],
+      "yaw": 0,
+      "visible": true
+    },
+    {
+      "position": [
+        -22.4,
+        0,
+        24
+      ],
+      "yaw": 0,
+      "visible": true
+    },
+    {
+      "position": [
+        6.1,
+        0,
+        -24
+      ],
+      "yaw": 3.141592653589793,
+      "visible": true
+    },
+    {
+      "position": [
+        6.1,
+        0,
+        -16
+      ],
+      "yaw": 3.141592653589793,
+      "visible": true
+    },
+    {
+      "position": [
+        6.1,
+        0,
+        -8
+      ],
+      "yaw": 3.141592653589793,
+      "visible": true
+    },
+    {
+      "position": [
+        5.5,
+        0,
+        -37
+      ],
+      "yaw": 1.5707963267948966,
+      "visible": true
+    },
+    {
+      "position": [
+        6.1,
+        0,
+        8
+      ],
+      "yaw": 3.141592653589793,
+      "visible": true
+    },
+    {
+      "position": [
+        6.1,
+        0,
+        16
+      ],
+      "yaw": 3.141592653589793,
+      "visible": true
+    },
+    {
+      "position": [
+        6.1,
+        0,
+        24
+      ],
+      "yaw": 3.141592653589793,
+      "visible": true
+    },
+    {
+      "position": [
+        -19,
+        0,
+        33
+      ],
+      "yaw": 1.5707963267948966,
+      "visible": true
+    },
+    {
+      "position": [
+        -12,
+        0,
+        33
+      ],
+      "yaw": 1.5707963267948966,
+      "visible": true
+    },
+    {
+      "position": [
+        -5,
+        0,
+        33
+      ],
+      "yaw": 1.5707963267948966,
+      "visible": true,
+      "footprint": {
+        "halfLength": 2.5599999427795415,
+        "halfWidth": 1.132063031196595,
+        "height": 1.9186533689498901
+      }
+    },
+    {
+      "position": [
+        2,
+        0,
+        33
+      ],
+      "yaw": 1.5707963267948966,
+      "visible": true,
+      "footprint": {
+        "halfLength": 2.4326908588409424,
+        "halfWidth": 1.0762507319450383,
+        "height": 1.6900029182434086
+      }
+    },
+    {
+      "position": [
+        6.5,
+        0,
+        37
+      ],
+      "yaw": -1.5707963267948966,
+      "visible": true,
+      "footprint": {
+        "halfLength": 2.210950526758291,
+        "halfWidth": 1.0078491122700144,
+        "height": 1.557958608239272
+      }
+    }
+  ],
+  "wheels": [
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "front-left",
+        "radius": 0.3128995003644377,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.2413731515407564,
+          0.23153814731165767,
+          -0.7727189958095548
+        ],
+        "rollingParts": [
+          "golf6_silver_rims-front-leftrolling",
+          "Gar_p1b-front-leftrolling"
+        ]
+      },
+      {
+        "id": "front-right",
+        "radius": 0.31289958965498954,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.2332243621349332,
+          0.23092988214455545,
+          0.7804282903671267
+        ],
+        "rollingParts": [
+          "golf6_silver_rims-front-rightrolling",
+          "Gar_p1b-front-rightrolling"
+        ]
+      },
+      {
+        "id": "rear-left",
+        "radius": 0.31289960455615073,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.358709007501602,
+          0.23153084597550333,
+          -0.7732320725917818
+        ],
+        "rollingParts": [
+          "golf6_silver_rims-rear-leftrolling",
+          "Gar_p1b-rear-leftrolling"
+        ]
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.31289972376544034,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.3667118549346924,
+          0.23093155107460916,
+          0.7536927163600919
+        ],
+        "rollingParts": [
+          "golf6_silver_rims-rear-rightrolling",
+          "Gar_p1b-rear-rightrolling"
+        ]
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "rear-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.13,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-left",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          -0.88
+        ],
+        "rollingParts": []
+      },
+      {
+        "id": "front-right",
+        "radius": 0.4,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.15,
+          0.4,
+          0.88
+        ],
+        "rollingParts": []
+      }
+    ],
+    [
+      {
+        "id": "front-left",
+        "radius": 0.3961326628923415,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.7059945464134216,
+          0.2761330354213718,
+          -0.7886467278003697
+        ],
+        "rollingParts": [
+          "part_0-front-leftrolling",
+          "part_1-front-leftrolling"
+        ]
+      },
+      {
+        "id": "front-right",
+        "radius": 0.3961325956624932,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.7059945464134216,
+          0.277185668698512,
+          0.7887554764747615
+        ],
+        "rollingParts": [
+          "part_0-front-rightrolling",
+          "part_1-front-rightrolling"
+        ]
+      },
+      {
+        "id": "rear-left",
+        "radius": 0.3961326628923416,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.4007562994956972,
+          0.27613303542137146,
+          -0.7886467278003689
+        ],
+        "rollingParts": [
+          "part_0-rear-leftrolling",
+          "part_1-rear-leftrolling"
+        ]
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.39613259566249326,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.4007562994956968,
+          0.277185668698512,
+          0.7887554764747623
+        ],
+        "rollingParts": [
+          "part_0-rear-rightrolling",
+          "part_1-rear-rightrolling"
+        ]
+      }
+    ],
+    [
+      {
+        "id": "front-left",
+        "radius": 0.3824029415435746,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.3497631251811983,
+          0.2624034930095764,
+          -0.7886142432689662
+        ],
+        "rollingParts": [
+          "optimized_tire_mat4-front-leftrolling",
+          "optimized_silver_d-front-leftrolling",
+          "optimized_silver-front-leftrolling",
+          "optimized_black_matt-front-leftrolling",
+          "optimized_brakes1-front-leftrolling"
+        ]
+      },
+      {
+        "id": "front-right",
+        "radius": 0.3824029415435746,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.3497631251811981,
+          0.2624034930095767,
+          0.7887677252292637
+        ],
+        "rollingParts": [
+          "optimized_tire_mat4-front-rightrolling",
+          "optimized_silver_d-front-rightrolling",
+          "optimized_silver-front-rightrolling",
+          "optimized_black_matt-front-rightrolling",
+          "optimized_brakes1-front-rightrolling"
+        ]
+      },
+      {
+        "id": "rear-left",
+        "radius": 0.38240303099155437,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.4083470702171326,
+          0.2624031054973603,
+          -0.7886142432689665
+        ],
+        "rollingParts": [
+          "optimized_tire_mat4-rear-leftrolling",
+          "optimized_silver_d-rear-leftrolling",
+          "optimized_silver-rear-leftrolling",
+          "optimized_black_matt-rear-leftrolling",
+          "optimized_brakes1-rear-leftrolling"
+        ]
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.38240303099155426,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.4083470702171326,
+          0.26240310549736073,
+          0.7887677252292635
+        ],
+        "rollingParts": [
+          "optimized_tire_mat4-rear-rightrolling",
+          "optimized_silver_d-rear-rightrolling",
+          "optimized_silver-rear-rightrolling",
+          "optimized_black_matt-rear-rightrolling",
+          "optimized_brakes1-rear-rightrolling"
+        ]
+      }
+    ],
+    [
+      {
+        "id": "front-left",
+        "radius": 0.35091981069624134,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.3057888046769637,
+          0.23091992245495196,
+          -0.7632126027824369
+        ],
+        "rollingParts": [
+          "Object_5-front-leftrolling"
+        ]
+      },
+      {
+        "id": "front-right",
+        "radius": 0.35091981069624134,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          1.3057888046769632,
+          0.23091992245495196,
+          0.7632126027824373
+        ],
+        "rollingParts": [
+          "Object_5-front-rightrolling"
+        ]
+      },
+      {
+        "id": "rear-left",
+        "radius": 0.35092001931250116,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.3934181838246886,
+          0.23091992245495196,
+          -0.7632126027824373
+        ],
+        "rollingParts": [
+          "Object_5-rear-leftrolling"
+        ]
+      },
+      {
+        "id": "rear-right",
+        "radius": 0.3509200193125012,
+        "angle": 0,
+        "distance": 0,
+        "steer": 0,
+        "roll": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "center": [
+          -1.3934181838246888,
+          0.23091992245495196,
+          0.7632126027824369
+        ],
+        "rollingParts": [
+          "Object_5-rear-rightrolling"
+        ]
+      }
+    ]
+  ],
+  "player": {
+    "playerId": "local-player",
+    "mode": "driver",
+    "vehicleId": "parked-mercedes-gla-x156",
+    "seatId": "driver",
+    "position": [
+      6.842668698171805,
+      -0.2,
+      36.83079460254401
+    ],
+    "yaw": 0
+  },
+  "golfBlocking": true,
+  "seats": [
+    {
+      "vehicleId": "parked-00",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            -25.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            -24.3536
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            -22.31
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            -23.6464
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            -25.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            -24.3536
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            -22.31
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            -23.6464
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-01",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            -17.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            -16.3536
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            -14.31
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            -15.6464
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            -17.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            -16.3536
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            -14.31
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            -15.6464
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-golf-red",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.67263093055511,
+            -0.12,
+            -9.68955751657486
+          ],
+          "position": [
+            -22.67263093055511,
+            -0.28,
+            -8.353449555635452
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.67263093055511,
+            -0.12,
+            -6.31044248342514
+          ],
+          "position": [
+            -22.67263093055511,
+            -0.28,
+            -7.646550444364547
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.326945163887373,
+            -0.12,
+            -9.68955751657486
+          ],
+          "position": [
+            -23.326945163887373,
+            -0.28,
+            -8.353449555635452
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.326945163887373,
+            -0.12,
+            -6.31044248342514
+          ],
+          "position": [
+            -23.326945163887373,
+            -0.28,
+            -7.646550444364547
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-03",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            -1.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            -0.3536
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            1.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            0.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            -1.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            -0.3536
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            1.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            0.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-04",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            6.3100000000000005
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            7.6464
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            9.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            8.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            6.3100000000000005
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            7.6464
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            9.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            8.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-golf-player",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            14.31
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            15.6464
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            17.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            16.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            14.31
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            15.6464
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            17.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            16.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-06",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            22.31
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            23.6464
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -22.099999999999998,
+            -0.12,
+            25.69
+          ],
+          "position": [
+            -22.099999999999998,
+            0.05,
+            24.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            22.31
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            23.6464
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -23.119999999999997,
+            -0.12,
+            25.69
+          ],
+          "position": [
+            -23.119999999999997,
+            0.05,
+            24.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-07",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            -22.31
+          ],
+          "position": [
+            5.8,
+            0.05,
+            -23.6464
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            -25.69
+          ],
+          "position": [
+            5.8,
+            0.05,
+            -24.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.819999999999999,
+            -0.12,
+            -22.31
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            -23.6464
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.82,
+            -0.12,
+            -25.69
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            -24.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-08",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            -14.31
+          ],
+          "position": [
+            5.8,
+            0.05,
+            -15.6464
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            -17.69
+          ],
+          "position": [
+            5.8,
+            0.05,
+            -16.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.819999999999999,
+            -0.12,
+            -14.31
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            -15.6464
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.82,
+            -0.12,
+            -17.69
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            -16.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-09",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            -6.3100000000000005
+          ],
+          "position": [
+            5.8,
+            0.05,
+            -7.6464
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            -9.69
+          ],
+          "position": [
+            5.8,
+            0.05,
+            -8.3536
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.819999999999999,
+            -0.12,
+            -6.3100000000000005
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            -7.6464
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.82,
+            -0.12,
+            -9.69
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            -8.3536
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-10",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            3.81,
+            -0.12,
+            -37.3
+          ],
+          "position": [
+            5.1464,
+            0.05,
+            -37.3
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            7.1899999999999995,
+            -0.12,
+            -37.3
+          ],
+          "position": [
+            5.8536,
+            0.05,
+            -37.3
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            3.8099999999999996,
+            -0.12,
+            -36.28
+          ],
+          "position": [
+            5.1464,
+            0.05,
+            -36.28
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            7.1899999999999995,
+            -0.12,
+            -36.28
+          ],
+          "position": [
+            5.8536,
+            0.05,
+            -36.28
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-11",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            9.69
+          ],
+          "position": [
+            5.8,
+            0.05,
+            8.3536
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            6.3100000000000005
+          ],
+          "position": [
+            5.8,
+            0.05,
+            7.6464
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.819999999999999,
+            -0.12,
+            9.69
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            8.3536
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.82,
+            -0.12,
+            6.3100000000000005
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            7.6464
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-12",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            17.69
+          ],
+          "position": [
+            5.8,
+            0.05,
+            16.3536
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            14.31
+          ],
+          "position": [
+            5.8,
+            0.05,
+            15.6464
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.819999999999999,
+            -0.12,
+            17.69
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            16.3536
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.82,
+            -0.12,
+            14.31
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            15.6464
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-13",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            25.69
+          ],
+          "position": [
+            5.8,
+            0.05,
+            24.3536
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            5.8,
+            -0.12,
+            22.31
+          ],
+          "position": [
+            5.8,
+            0.05,
+            23.6464
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.819999999999999,
+            -0.12,
+            25.69
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            24.3536
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            6.82,
+            -0.12,
+            22.31
+          ],
+          "position": [
+            6.819999999999999,
+            0.05,
+            23.6464
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-14",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -20.69,
+            -0.12,
+            32.7
+          ],
+          "position": [
+            -19.3536,
+            0.05,
+            32.7
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -17.31,
+            -0.12,
+            32.7
+          ],
+          "position": [
+            -18.6464,
+            0.05,
+            32.7
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -20.69,
+            -0.12,
+            33.72
+          ],
+          "position": [
+            -19.3536,
+            0.05,
+            33.72
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -17.31,
+            -0.12,
+            33.72
+          ],
+          "position": [
+            -18.6464,
+            0.05,
+            33.72
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-15",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -13.69,
+            -0.12,
+            32.7
+          ],
+          "position": [
+            -12.3536,
+            0.05,
+            32.7
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -10.31,
+            -0.12,
+            32.7
+          ],
+          "position": [
+            -11.6464,
+            0.05,
+            32.7
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -13.69,
+            -0.12,
+            33.72
+          ],
+          "position": [
+            -12.3536,
+            0.05,
+            33.72
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -10.31,
+            -0.12,
+            33.72
+          ],
+          "position": [
+            -11.6464,
+            0.05,
+            33.72
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-mercedes-gl",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            -6.782063031196595,
+            -0.12,
+            33.32653060494637
+          ],
+          "position": [
+            -5.384901430606842,
+            0.15,
+            33.32653060494637
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -3.217936968803405,
+            -0.12,
+            33.32653060494637
+          ],
+          "position": [
+            -4.615098569393158,
+            0.15,
+            33.32653060494637
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -6.7820630311965955,
+            -0.12,
+            34.11020405681766
+          ],
+          "position": [
+            -5.384901430606843,
+            0.15,
+            34.11020405681766
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            -3.2179369688034054,
+            -0.12,
+            34.11020405681766
+          ],
+          "position": [
+            -4.615098569393158,
+            0.15,
+            34.11020405681766
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-lexus-rx",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": null,
+          "entry": [
+            0.2737492680549618,
+            -0.12,
+            33.31029220138277
+          ],
+          "position": [
+            1.6340747511386868,
+            -0.02,
+            33.31029220138277
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            3.726250731945038,
+            -0.12,
+            33.31029220138277
+          ],
+          "position": [
+            2.365925248861313,
+            -0.02,
+            33.31029220138277
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            0.2737492680549616,
+            -0.12,
+            34.05499348470143
+          ],
+          "position": [
+            1.6340747511386868,
+            -0.02,
+            34.05499348470143
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            3.726250731945038,
+            -0.12,
+            34.05499348470143
+          ],
+          "position": [
+            2.3659252488613127,
+            -0.02,
+            34.05499348470143
+          ]
+        }
+      ]
+    },
+    {
+      "vehicleId": "parked-mercedes-gla-x156",
+      "canDrive": true,
+      "seats": [
+        {
+          "seatId": "driver",
+          "role": "driver",
+          "occupiedBy": "local-player",
+          "entry": [
+            8.157849112270014,
+            -0.12,
+            36.83079460254401
+          ],
+          "position": [
+            6.842668698171805,
+            -0.2,
+            36.83079460254401
+          ]
+        },
+        {
+          "seatId": "front-passenger",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            4.842150887729986,
+            -0.12,
+            36.83079460254401
+          ],
+          "position": [
+            6.157331301828195,
+            -0.2,
+            36.83079460254401
+          ]
+        },
+        {
+          "seatId": "rear-left",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            8.157849112270014,
+            -0.12,
+            36.00732833492485
+          ],
+          "position": [
+            6.842668698171805,
+            -0.2,
+            36.00732833492485
+          ]
+        },
+        {
+          "seatId": "rear-right",
+          "role": "passenger",
+          "occupiedBy": null,
+          "entry": [
+            4.842150887729986,
+            -0.12,
+            36.00732833492485
+          ],
+          "position": [
+            6.1573313018281945,
+            -0.2,
+            36.00732833492485
+          ]
+        }
+      ]
+    }
+  ],
+  "seatMessage": "",
+  "drive": {
+    "active": true,
+    "speed": 0,
+    "steer": 0,
+    "view": 0,
+    "contact": 0,
+    "skidTime": 0,
+    "lastRear": null,
+    "slip": 0
+  },
+  "keys": [],
+  "status": {
+    "vehicleId": "parked-mercedes-gla-x156",
+    "vehicleName": "Mercedes-Benz GLA X156",
+    "speedKmh": 0,
+    "gear": "N",
+    "message": "Свободный заезд",
+    "viewName": "Сзади",
+    "active": true
+  },
+  "camera": {
+    "position": [
+      3.5000000000000013,
+      2.5,
+      43
+    ],
+    "target": [
+      6.5,
+      0.65,
+      37
+    ],
+    "aspect": 1.5,
+    "enabled": false
+  },
+  "lighting": {
+    "background": 1054501,
+    "fog": 1054501,
+    "hemi": 0.4,
+    "sun": 0.65,
+    "exposure": 1.15
+  },
+  "highCars": [
+    {
+      "position": [
+        -24.680925419213985,
+        16.8,
+        77.46193592396087
+      ],
+      "yaw": 1.7684691558694563,
+      "visible": true,
+      "t": 0.0012500000000000002
+    },
+    {
+      "position": [
+        -28.63832047366616,
+        16.8,
+        46.783392245701684
+      ],
+      "yaw": 1.7582494584253923,
+      "visible": true,
+      "t": 0.14410714285714288
+    },
+    {
+      "position": [
+        -32.21570367361637,
+        16.8,
+        16.09839977805541
+      ],
+      "yaw": 1.7191893741217081,
+      "visible": true,
+      "t": 0.2869642857142857
+    },
+    {
+      "position": [
+        -30.390540616311057,
+        16.8,
+        -14.180292539796431
+      ],
+      "yaw": 1.4439900927298621,
+      "visible": true,
+      "t": 0.4298214285714286
+    },
+    {
+      "position": [
+        -27.464648317363125,
+        16.8,
+        -45.48852506928551
+      ],
+      "yaw": 1.1147590178466968,
+      "visible": true,
+      "t": 0.5726785714285713
+    },
+    {
+      "position": [
+        -7.633998455934583,
+        16.8,
+        -70.06690254397618
+      ],
+      "yaw": 0.7848634346755918,
+      "visible": true,
+      "t": 0.7155357142857142
+    },
+    {
+      "position": [
+        14.437434430309482,
+        16.8,
+        -91.63085006456545
+      ],
+      "yaw": 1.047368054558128,
+      "visible": true,
+      "t": 0.858392857142857
+    },
+    {
+      "position": [
+        13.754184742889224,
+        16.8,
+        -125.1973012385207
+      ],
+      "yaw": 4.290714888754328,
+      "visible": true,
+      "t": 0.0012500000000000002
+    },
+    {
+      "position": [
+        7.784456997751151,
+        16.8,
+        -94.91134679731034
+      ],
+      "yaw": 4.180758025880046,
+      "visible": true,
+      "t": 0.14410714285714288
+    },
+    {
+      "position": [
+        -13.265211187368408,
+        16.8,
+        -74.9000562931951
+      ],
+      "yaw": 3.92959057836893,
+      "visible": true,
+      "t": 0.2869642857142857
+    },
+    {
+      "position": [
+        -34.367454104420325,
+        16.8,
+        -48.21622930549429
+      ],
+      "yaw": 4.260973272468874,
+      "visible": true,
+      "t": 0.4298214285714286
+    },
+    {
+      "position": [
+        -46.53682829065684,
+        16.8,
+        -15.615682243215144
+      ],
+      "yaw": 4.591474991283707,
+      "visible": true,
+      "t": 0.5726785714285713
+    },
+    {
+      "position": [
+        -39.449857082587016,
+        16.8,
+        17.75082162213471
+      ],
+      "yaw": 4.8644464657323345,
+      "visible": true,
+      "t": 0.7155357142857142
+    },
+    {
+      "position": [
+        -35.80638786466732,
+        16.8,
+        48.700467407917124
+      ],
+      "yaw": 4.900720595139994,
+      "visible": true,
+      "t": 0.858392857142857
+    }
+  ],
+  "visitors": [
+    {
+      "position": [
+        94.84989553742514,
+        0,
+        30.5
+      ],
+      "yaw": -3.141592653589793,
+      "visible": true,
+      "state": "arrive",
+      "t": 0.0008196069194565856,
+      "wait": 0,
+      "delay": 0
+    },
+    {
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "yaw": 0,
+      "visible": false,
+      "state": "arrive",
+      "t": 0,
+      "wait": 0,
+      "delay": 11.949999999999998
+    },
+    {
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "yaw": 0,
+      "visible": false,
+      "state": "arrive",
+      "t": 0,
+      "wait": 0,
+      "delay": 23.950000000000003
+    }
+  ],
+  "parkedVisitors": 0,
+  "drift": {
+    "time": 0.05,
+    "simTime": 0.05,
+    "waiting": false,
+    "cars": [
+      {
+        "position": [
+          -0.5966052144807703,
+          0,
+          0.4392920605086881
+        ],
+        "yaw": -1.5792620920324185,
+        "visible": true
+      },
+      {
+        "position": [
+          -13.397333870350547,
+          0,
+          -12.633909298227032
+        ],
+        "yaw": 0.6489561566902193,
+        "visible": true
+      }
+    ],
+    "skidCount": 0,
+    "skidCapacity": 4000,
+    "skidArrayLength": 24000,
+    "smokeEnabled": true,
+    "smokePoolSize": 90,
+    "smokeVisible": 0
+  },
+  "resources": {
+    "sceneGeometries": 1298,
+    "sceneTextures": 19,
+    "sceneMaterials": 383,
+    "geometries": 1261,
+    "textures": 19,
+    "triangles": 946911,
+    "calls": 440,
+    "models": [
+      "http://127.0.0.1:49951/models/cars/golf6_red_v2_wheels.glb",
+      "http://127.0.0.1:49951/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+      "http://127.0.0.1:49951/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+      "http://127.0.0.1:49951/models/cars/mercedes_gla_x156_black_wheels.glb"
+    ]
+  },
+  "headlights": [
+    {
+      "vehicleId": "parked-mercedes-gla-x156",
+      "visible": true,
+      "intensity": 65
+    },
+    {
+      "visible": true,
+      "intensity": 65
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": true
+    },
+    {
+      "visible": false
+    },
+    {
+      "visible": false
+    }
+  ],
+  "counts": {
+    "parked": 19,
+    "people": 32,
+    "children": 488
+  },
+  "canvas": {
+    "width": 1200,
+    "height": 800
+  },
+  "stats": "Дрифт: 2 авто · на парковке: 18 · зрителей: 32"
+}

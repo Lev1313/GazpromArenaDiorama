@@ -1,0 +1,24 @@
+{
+  "archive": "..\\..\\public\\models\\cars\\mercedes-benz_gla-class_2020.zip",
+  "archiveBytes": 13858202,
+  "sha256": "11798302643b930fdf8ba9a705615b05edb4ce60a3757bf497878b72310bcf10",
+  "asset": {
+    "extras": {
+      "author": "ItsDiyor (https://sketchfab.com/ItsDiyor)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/mercedes-benz-gla-class-2020-ab7b5df3ba634f38a14effde3d542466",
+      "title": "Mercedes-Benz GLA-Class 2020"
+    },
+    "generator": "Sketchfab-16.65.0",
+    "version": "2.0"
+  },
+  "triangles": 176140,
+  "meshCount": 6,
+  "materials": 5,
+  "measuredBoundsMeters": [
+    2.015698224540028,
+    1.557958608239272,
+    4.4219010535165815
+  ],
+  "decision": "Rejected for Stage 7D: visually X156 body, not H247."
+}

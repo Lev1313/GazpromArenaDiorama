@@ -2,7 +2,7 @@
 
 Stage 7C.1 wheel derivatives: `golf6_red_v2_wheels.glb`, `lexus_rx_deep_blue_mica_wheels.glb` and `mercedes_gl_x166_obsidian_black_wheels.glb` are lossless topology partitions of the corresponding prepared assets below. Whole connected tire/rim/caliper components were assigned separate mesh nodes for animation; triangles, vertex attributes, embedded images and material definitions were preserved. Reproduce with `node tools/prepare-wheel-models.mjs`. Original assets remain intact. Author/source/license attribution below also applies to these derivatives.
 
-All three car assets originate from downloaded Sketchfab source archives. Those ZIPs include `license.txt` files with the attribution below. The GLB conversions may not embed this metadata; keep this credits file with the project and make it discoverable from the public site.
+All four car assets originate from downloaded Sketchfab source archives. Those ZIPs include `license.txt` files with the attribution below. The GLB conversions may not embed this metadata; keep this credits file with the project and make it discoverable from the public site.
 
 ## Volkswagen Golf 6
 - Author: **bimboit34** — https://sketchfab.com/bimboit34
@@ -22,6 +22,16 @@ All three car assets originate from downloaded Sketchfab source archives. Those 
 - Source: https://sketchfab.com/3d-models/mercedes-benz-gl-350-2012-f74b3803425248799902579e10027864
 - License: **CC BY 4.0** — https://creativecommons.org/licenses/by/4.0/
 - Prepared asset: `mercedes_gl_x166_obsidian_black.glb` — recolored black metallic and normalized to scale/ground for the diorama.
+
+## License notes
+## Mercedes-Benz GLA — X156, black
+- Author: **ItsDiyor** — https://sketchfab.com/ItsDiyor
+- Source: **Mercedes-Benz GLA-Class 2020** — https://sketchfab.com/3d-models/mercedes-benz-gla-class-2020-ab7b5df3ba634f38a14effde3d542466
+- License: **CC BY 4.0** — https://creativecommons.org/licenses/by/4.0/
+- Prepared asset: `mercedes_gla_x156_black_wheels.glb`. Visually identified as X156; the source title does not confirm H247 or a specific engine/trim.
+- Changes: black body paint, four independent rolling wheel assemblies and steering-only calipers, compact indexed geometry, removal of four byte-identical UV channels, textures resized to at most 1024 px and embedded in GLB. All 176,140 source triangles retained. Other material roles preserved. Source ZIP and previous cars are unchanged.
+- This work is based on “Mercedes-Benz GLA-Class 2020” by ItsDiyor, licensed under CC BY 4.0. No endorsement is implied.
+- Reproduction: extract the original ZIP, run `powershell -ExecutionPolicy Bypass -File tools/prepare-gla-textures.ps1 -Source <extracted-directory>`, then `node tools/prepare-gla-model.mjs <extracted-directory>`. Texture preparation uses Windows System.Drawing; no runtime dependency. Original license: `mercedes_gla_x156_license.txt`.
 
 ## License notes
 - License attribution obtained from the original `license.txt` included with each source ZIP (the Lexus and Mercedes ZIPs were verified on 2026-10-13).

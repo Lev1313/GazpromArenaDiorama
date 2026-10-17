@@ -150,7 +150,7 @@ async function shot(page, name) {
 
 async function sceneTests(page) {
   let a = await snapshot(page);
-  check('Initial scene counts and unique controls', a.counts.parked === 18 && a.counts.people === 32
+  check('Initial scene counts and unique controls', a.counts.parked === 19 && a.counts.people === 32
     && a.highCars.length === 14 && a.visitors.length === 3 && a.drift.cars.length === 2
     && await page.locator('#drive').count() === 1 && await page.locator('#full-hud').count() === 1);
   check('Initial stats are rendered', await page.locator('#stats').textContent() === a.stats);
@@ -230,7 +230,7 @@ async function trafficTests(page) {
   await shot(page,'traffic-long-run');
 }
 function checkStats(s, text) {
-  assert.equal(text, `Дрифт: 2 авто · на парковке: ${18-Number(s.drive.active)+s.parkedVisitors} · зрителей: 32`);
+  assert.equal(text, `Дрифт: 2 авто · на парковке: ${19-Number(s.drive.active)+s.parkedVisitors} · зрителей: 32`);
 }
 
 async function accelerate(page) {
@@ -427,8 +427,8 @@ async function seatingTests(page) {
   const seatIn=(s,id,seat)=>s.seats.find(v=>v.vehicleId===id).seats.find(v=>v.seatId===seat);
   await click(page,'#day');await click(page,'#walk');
   let a=await snapshot(page);
-  check('18 distinct stable vehicle identities and 72 seat records',a.seats.length===18
-    && new Set(a.seats.map(v=>v.vehicleId)).size===18 && a.seats.every(v=>v.seats.length===4));
+  check('19 distinct stable vehicle identities and 76 seat records',a.seats.length===19
+    && new Set(a.seats.map(v=>v.vehicleId)).size===19 && a.seats.every(v=>v.seats.length===4));
   const initialResources=a.resources;
   const previousPoses=new Map();
   for(const [index,vehicle] of a.seats.entries()) {
@@ -465,7 +465,11 @@ async function seatingTests(page) {
     check('Safe exit preserves position and yaw '+id,b.player.vehicleId===null && b.pedestrian.active
       && same(b.parked[index],stopped) && !b.pedestrian.blocked);
     await approach(id,'driver');await seatKey('KeyE');b=await snapshot(page);
-    check('Reentry resumes at saved pose '+id,b.drive.active && same(b.parked[index],stopped));
+    // Ground-height smoothing can retain sub-picometre floating-point residue off asphalt.
+    const retained=b.drive.active && distance(b.parked[index].position,stopped.position)<1e-9
+      && Math.abs(b.parked[index].yaw-stopped.yaw)<1e-12;
+    check('Reentry resumes at saved pose '+id,retained,
+      retained?'':JSON.stringify({stopped,actual:b.parked[index],player:b.player,drive:b.drive,message:b.seatMessage}));
     await seatKey('KeyE'); previousPoses.set(index,(await snapshot(page)).parked[index]);
   }
   let finalResources=(await snapshot(page)).resources;
@@ -524,7 +528,7 @@ async function wheelTests(page) {
   const capture=async(name)=>{await shot(page,name);return snapshot(page);};
   const press=async code=>{await page.keyboard.press(code);await step(page,1,false);};
   for(const [id,index,name] of [['parked-golf-red',2,'red-golf'],['parked-lexus-rx',17,'lexus-rx'],
-    ['parked-mercedes-gl',16,'mercedes-gl'],['parked-07',7,'procedural']]) {
+    ['parked-mercedes-gl',16,'mercedes-gl'],['parked-mercedes-gla-x156',18,'gla-x156'],['parked-07',7,'procedural']]) {
     await page.evaluate(id=>window.__approachSeat(id,'driver'),id);await press('KeyE');
     let a=await snapshot(page),samples=[];
     check('Wheel rig has four named real tires '+name,a.wheels[index].length===4
@@ -571,6 +575,34 @@ async function wheelTests(page) {
   }
 }
 
+async function glaTests(page) {
+  const id='parked-mercedes-gla-x156',index=18;
+  await click(page,'#day');await click(page,'#walk');
+  const press=async key=>{await page.keyboard.press(key);await step(page,1,false);};
+  let a=await snapshot(page);
+  const expected=Array.from({length:18},(_,i)=>({2:'parked-golf-red',5:'parked-golf-player',16:'parked-mercedes-gl',17:'parked-lexus-rx'}[i]??'parked-'+String(i).padStart(2,'0')));
+  check('All original eighteen registry IDs retain their indices',same(a.seats.slice(0,18).map(v=>v.vehicleId),expected));
+  for(const seat of ['front-passenger','rear-left','rear-right']) {
+    await page.evaluate(([id,seat])=>window.__approachSeat(id,seat),[id,seat]);await press('KeyE');a=await snapshot(page);
+    check('GLA passenger door '+seat,a.player.mode==='passenger'&&a.player.seatId===seat&&!a.drive.active);
+    const pose=a.parked[index];await page.keyboard.down('KeyW');await step(page,20,false);await page.keyboard.up('KeyW');
+    check('GLA passenger cannot drive '+seat,same(pose,(await snapshot(page)).parked[index]));
+    await press('KeyE');check('GLA passenger safely exits '+seat,(await snapshot(page)).player.mode==='onFoot');
+  }
+  await page.evaluate(id=>window.__approachSeat(id,'driver'),id);await press('KeyE');a=await snapshot(page);
+  check('GLA HUD names X156 without an unverified trim',a.status.vehicleName==='Mercedes-Benz GLA X156');
+  await click(page,'#day');a=await snapshot(page);
+  check('GLA reuses active night headlight projector',a.headlights[0].vehicleId===id&&a.headlights[0].intensity>0&&a.headlights[0].visible);
+  await shot(page,'gla-driving-night');await click(page,'#day');
+  const start=a.parked[index].position;
+  await page.keyboard.down('KeyW');await step(page,600,false);await page.keyboard.up('KeyW');a=await snapshot(page);
+  check('GLA drives from bay and stops at actual island obstacle',distance(start,a.parked[index].position)>3&&Math.abs(a.drive.speed)<.01
+    &&a.parked[index].position[2]<50);
+  await press('KeyR');a=await snapshot(page);
+  check('GLA explicit reset returns only GLA',distance(start,a.parked[index].position)<1e-7);
+  await press('KeyE');check('GLA reset does not break physical exit',(await snapshot(page)).player.mode==='onFoot');
+}
+
 let server,browser;
 try {
   await mkdir(out,{recursive:true});
@@ -582,8 +614,8 @@ try {
   browser=await chromium.launch({channel:'msedge',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader','--force-color-profile=srgb']});
   report.browser=browser.version();
   const url='http://127.0.0.1:'+server.address().port+'/';
-  const scenarios=[['wheels',wheelTests],['seating',seatingTests],['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
-  const selected=process.argv.includes('--wheels')?'wheels':process.argv.includes('--seating')?'seating':process.argv.includes('--pedestrian')?'pedestrian':null;
+  const scenarios=[['gla',glaTests],['wheels',wheelTests],['seating',seatingTests],['scene',sceneTests],['traffic',trafficTests],['drive',driveTests],['mobile',mobileTests,true],['pedestrian',pedestrianTests]];
+  const selected=process.argv.includes('--gla')?'gla':process.argv.includes('--wheels')?'wheels':process.argv.includes('--seating')?'seating':process.argv.includes('--pedestrian')?'pedestrian':null;
   for(const [name,test,mobile] of selected ? scenarios.filter(s=>s[0]===selected) : scenarios) {
     console.log('\nScenario: '+name);
     const context=await browser.newContext({viewport:mobile?{width:390,height:844}:{width:1400,height:850},deviceScaleFactor:1,isMobile:Boolean(mobile),hasTouch:Boolean(mobile)});
@@ -594,7 +626,8 @@ try {
       await page.addInitScript(clock); await page.goto(url);
       await page.waitForFunction(()=>typeof window.__readDiorama==='function',null,{polling:100,timeout:120000});
       await page.waitForFunction(()=>document.getElementById('view')?.dataset.lexusModel==='loaded'
-        && document.getElementById('view')?.dataset.mercedesModel==='loaded',null,{timeout:120000,polling:100});
+        && document.getElementById('view')?.dataset.mercedesModel==='loaded'
+        && document.getElementById('view')?.dataset.glaModel==='loaded',null,{timeout:120000,polling:100});
       await step(page,2); await test(page,context);
       report.errors.push(...await page.evaluate(()=>window.__functionalErrors));
     } catch(error) {

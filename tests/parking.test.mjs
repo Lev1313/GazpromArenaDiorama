@@ -24,17 +24,17 @@ function setup() {
   return { scene, materials, cars, ...result };
 }
 
-test('original parking has exactly 18 cars and 32 spectators', () => {
+test('original parking has exactly 19 cars and 32 spectators', () => {
   const { scene, parked, people, staticCount } = setup();
-  assert.equal(staticCount, 18);
-  assert.equal(parked.length, 18);
+  assert.equal(staticCount, 19);
+  assert.equal(parked.length, 19);
   assert.equal(people.length, 32);
-  assert.equal(scene.children.filter(o => o.isGroup).length, 50);
+  assert.equal(scene.children.filter(o => o.isGroup).length, 51);
   assert.ok(parked.every(o => o.parent === scene));
   assert.ok(people.every(o => o.parent === scene));
-  // 18 car groups + 32 people groups + 28 painted bay marks +
+  // 19 car groups + 32 people groups + 28 painted bay marks +
   // 6 picnic table boxes; orange boundary cones have been removed.
-  assert.equal(scene.children.length, 84);
+  assert.equal(scene.children.length, 85);
 });
 
 test('parked-car rows and visitor-free slots retain original coordinates', () => {
@@ -55,6 +55,8 @@ test('parked-car rows and visitor-free slots retain original coordinates', () =>
   }
   assert.equal(parked[14].children.length, 18, 'first arrival-side car is sporty');
   assert.equal(parked[15].children.length, 14);
+  assert.deepEqual(parked[18].position.toArray(), [6.5, 0, 37]);
+  assert.equal(parked[18].rotation.y, -Math.PI / 2);
 });
 
 test('car factory retains original dimensions, wheels and independent paint', () => {

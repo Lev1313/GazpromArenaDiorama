@@ -15,6 +15,7 @@ import { createParkingMeet } from './world/parkingMeet.js';
 import { replaceWithParkedGolf } from './vehicles/parkedGolfModel.js';
 import { replaceWithParkedLexus } from './vehicles/parkedLexusModel.js';
 import { replaceWithParkedMercedes } from './vehicles/parkedMercedesModel.js';
+import { replaceWithParkedGla } from './vehicles/parkedGlaModel.js';
 import { createDriftSystem } from './vehicles/drift.js';
 import { createTrafficSystem } from './vehicles/traffic.js';
 import { createVehicleDrive } from './vehicles/vehicleDrive.js';
@@ -75,6 +76,12 @@ replaceWithParkedMercedes(parked[16]).then(() => {
   console.error('Unable to load parked Mercedes model', error);
 });
 scene.userData.parkedCars = parked.length;
+replaceWithParkedGla(parked[18]).then(() => {
+  canvas.dataset.glaModel = 'loaded';
+}).catch(error => {
+  canvas.dataset.glaModel = 'failed';
+  console.error('Unable to load parked GLA model', error);
+});
 scene.userData.spectators = people.length;
 
 // The original scene constructs highway/visitor traffic before drifters.

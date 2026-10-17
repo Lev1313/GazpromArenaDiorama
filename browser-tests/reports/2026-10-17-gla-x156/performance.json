@@ -1,0 +1,394 @@
+{
+  "baseline": "cc3aaa7",
+  "browser": "155.0.4283.45",
+  "method": "Local cold browser contexts, same paused day full scene/camera at new bay. Three alternating repetitions, 8 warmup + 20 frames. Node RPC wall time around render+gl.finish; not hardware FPS or internet loading. Resource timings use native browser ResourceTiming, not manual simulation clock.",
+  "runs": [
+    {
+      "run": 0,
+      "version": "baseline",
+      "readyMs": 535.0619999999999,
+      "samples": [
+        1222.2574000000004,
+        11.761000000000422,
+        5.655100000001767,
+        5.131499999999505,
+        26.00799999999981,
+        4.489299999999275,
+        1167.3018999999986,
+        1197.7752999999993,
+        10.29030000000057,
+        29.05159999999887,
+        8.81079999999929,
+        94.84469999999965,
+        6006.2289,
+        1191.2449000000015,
+        9.077700000001641,
+        6.844999999997526,
+        30.69800000000032,
+        5.874599999999191,
+        5994.683100000002,
+        1214.6961999999985
+      ],
+      "resources": {
+        "sceneGeometries": 1284,
+        "sceneTextures": 11,
+        "sceneMaterials": 378,
+        "geometries": 1235,
+        "textures": 11,
+        "triangles": 1154218,
+        "calls": 604,
+        "models": [
+          "http://127.0.0.1:63672/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:63672/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:63672/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb"
+        ]
+      },
+      "models": [
+        {
+          "file": "golf6_red_v2_wheels.glb",
+          "durationMs": 16.599999994039536,
+          "transferBytes": 5574692
+        },
+        {
+          "file": "lexus_rx_deep_blue_mica_wheels.glb",
+          "durationMs": 53,
+          "transferBytes": 17675656
+        },
+        {
+          "file": "mercedes_gl_x166_obsidian_black_wheels.glb",
+          "durationMs": 15.099999994039536,
+          "transferBytes": 5878252
+        }
+      ]
+    },
+    {
+      "run": 0,
+      "version": "candidate",
+      "readyMs": 468.6064000000006,
+      "samples": [
+        11.700400000001537,
+        8.682400000005146,
+        5.201300000000629,
+        26.162900000002992,
+        5.239999999997963,
+        1277.2351999999955,
+        1326.6598999999987,
+        8.031600000002072,
+        6.939400000002934,
+        5.3171000000002095,
+        29.203300000001036,
+        6551.2863,
+        1319.5855999999985,
+        7.977699999995821,
+        5.7700000000040745,
+        5.269799999994575,
+        26.303100000004633,
+        6580.496800000001,
+        1335.4084999999977,
+        1334.2402000000002
+      ],
+      "resources": {
+        "sceneGeometries": 1298,
+        "sceneTextures": 19,
+        "sceneMaterials": 383,
+        "geometries": 1249,
+        "textures": 19,
+        "triangles": 1330358,
+        "calls": 618,
+        "models": [
+          "http://127.0.0.1:63673/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      "models": [
+        {
+          "file": "golf6_red_v2_wheels.glb",
+          "durationMs": 18,
+          "transferBytes": 5574692
+        },
+        {
+          "file": "lexus_rx_deep_blue_mica_wheels.glb",
+          "durationMs": 69,
+          "transferBytes": 17675656
+        },
+        {
+          "file": "mercedes_gl_x166_obsidian_black_wheels.glb",
+          "durationMs": 31.700000017881393,
+          "transferBytes": 5878252
+        },
+        {
+          "file": "mercedes_gla_x156_black_wheels.glb",
+          "durationMs": 44.5,
+          "transferBytes": 11272088
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "version": "candidate",
+      "readyMs": 464.97869999999966,
+      "samples": [
+        1327.029899999994,
+        11.603000000002794,
+        4.918499999999767,
+        5.0592000000033295,
+        6.309699999997974,
+        10.128100000001723,
+        1297.9228000000003,
+        1319.880600000004,
+        8.088000000003376,
+        7.392900000006193,
+        5.908899999994901,
+        26.052800000004936,
+        6508.670700000002,
+        1308.3105000000069,
+        8.638699999995879,
+        6.730799999990268,
+        5.100999999995111,
+        26.346400000009453,
+        6579.166100000002,
+        1417.5380000000005
+      ],
+      "resources": {
+        "sceneGeometries": 1298,
+        "sceneTextures": 19,
+        "sceneMaterials": 383,
+        "geometries": 1249,
+        "textures": 19,
+        "triangles": 1330358,
+        "calls": 618,
+        "models": [
+          "http://127.0.0.1:63673/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      "models": [
+        {
+          "file": "golf6_red_v2_wheels.glb",
+          "durationMs": 15.900000005960464,
+          "transferBytes": 5574692
+        },
+        {
+          "file": "lexus_rx_deep_blue_mica_wheels.glb",
+          "durationMs": 68.59999999403954,
+          "transferBytes": 17675656
+        },
+        {
+          "file": "mercedes_gl_x166_obsidian_black_wheels.glb",
+          "durationMs": 31.400000005960464,
+          "transferBytes": 5878252
+        },
+        {
+          "file": "mercedes_gla_x156_black_wheels.glb",
+          "durationMs": 43.29999998211861,
+          "transferBytes": 11272088
+        }
+      ]
+    },
+    {
+      "run": 1,
+      "version": "baseline",
+      "readyMs": 346.8613999999943,
+      "samples": [
+        1220.6971000000049,
+        11.94550000000163,
+        30.625800000008894,
+        6.24199999999837,
+        119.6470999999874,
+        7.076499999995576,
+        1022.9186999999947,
+        1207.9323000000004,
+        10.940400000006775,
+        6.896699999997509,
+        24.42500000000291,
+        5.981799999994109,
+        5949.497500000012,
+        1216.4772999999986,
+        8.057399999990594,
+        6.479699999996228,
+        7.197599999999511,
+        23.515599999998813,
+        5946.260900000008,
+        1183.0241999999998
+      ],
+      "resources": {
+        "sceneGeometries": 1284,
+        "sceneTextures": 11,
+        "sceneMaterials": 378,
+        "geometries": 1235,
+        "textures": 11,
+        "triangles": 1154218,
+        "calls": 604,
+        "models": [
+          "http://127.0.0.1:63672/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:63672/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:63672/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb"
+        ]
+      },
+      "models": [
+        {
+          "file": "golf6_red_v2_wheels.glb",
+          "durationMs": 15.699999988079071,
+          "transferBytes": 5574692
+        },
+        {
+          "file": "lexus_rx_deep_blue_mica_wheels.glb",
+          "durationMs": 50.5,
+          "transferBytes": 17675656
+        },
+        {
+          "file": "mercedes_gl_x166_obsidian_black_wheels.glb",
+          "durationMs": 30,
+          "transferBytes": 5878252
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "version": "baseline",
+      "readyMs": 356.8046999999933,
+      "samples": [
+        1214.9347999999882,
+        7.05559999999241,
+        7.939700000017183,
+        27.99810000002617,
+        5.841400000004796,
+        112.19959999999264,
+        1017.5532999999996,
+        1207.2332999999926,
+        10.215400000015507,
+        27.568800000008196,
+        6.337900000013178,
+        71.5630999999994,
+        5933.394700000004,
+        1204.3076,
+        8.303199999994831,
+        6.241599999979371,
+        26.13210000001709,
+        5.03959999998915,
+        5882.151500000007,
+        1199.6779999999853
+      ],
+      "resources": {
+        "sceneGeometries": 1284,
+        "sceneTextures": 11,
+        "sceneMaterials": 378,
+        "geometries": 1235,
+        "textures": 11,
+        "triangles": 1154218,
+        "calls": 604,
+        "models": [
+          "http://127.0.0.1:63672/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:63672/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:63672/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb"
+        ]
+      },
+      "models": [
+        {
+          "file": "golf6_red_v2_wheels.glb",
+          "durationMs": 16.299999982118607,
+          "transferBytes": 5574692
+        },
+        {
+          "file": "lexus_rx_deep_blue_mica_wheels.glb",
+          "durationMs": 51,
+          "transferBytes": 17675656
+        },
+        {
+          "file": "mercedes_gl_x166_obsidian_black_wheels.glb",
+          "durationMs": 28.400000005960464,
+          "transferBytes": 5878252
+        }
+      ]
+    },
+    {
+      "run": 2,
+      "version": "candidate",
+      "readyMs": 475.30790000001434,
+      "samples": [
+        12.389400000014575,
+        10.29069999998319,
+        6.452000000019325,
+        23.82039999999688,
+        4.821800000005169,
+        1264.7337000000116,
+        1332.3686999999918,
+        7.831900000019232,
+        7.101800000004005,
+        5.371299999998882,
+        25.48420000000624,
+        6557.1177000000025,
+        1318.4290999999794,
+        8.436499999981606,
+        6.23320000001695,
+        5.07760000001872,
+        5.6859999999869615,
+        6543.030599999998,
+        1348.637400000007,
+        1333.6531999999715
+      ],
+      "resources": {
+        "sceneGeometries": 1298,
+        "sceneTextures": 19,
+        "sceneMaterials": 383,
+        "geometries": 1249,
+        "textures": 19,
+        "triangles": 1330358,
+        "calls": 618,
+        "models": [
+          "http://127.0.0.1:63673/models/cars/golf6_red_v2_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/lexus_rx_deep_blue_mica_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb",
+          "http://127.0.0.1:63673/models/cars/mercedes_gla_x156_black_wheels.glb"
+        ]
+      },
+      "models": [
+        {
+          "file": "golf6_red_v2_wheels.glb",
+          "durationMs": 15.700000017881393,
+          "transferBytes": 5574692
+        },
+        {
+          "file": "lexus_rx_deep_blue_mica_wheels.glb",
+          "durationMs": 74.59999999403954,
+          "transferBytes": 17675656
+        },
+        {
+          "file": "mercedes_gl_x166_obsidian_black_wheels.glb",
+          "durationMs": 33.5,
+          "transferBytes": 5878252
+        },
+        {
+          "file": "mercedes_gla_x156_black_wheels.glb",
+          "durationMs": 49.400000005960464,
+          "transferBytes": 11272088
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "baseline": {
+      "readyMedianMs": 356.8046999999933,
+      "frameWallMedianMs": 27.568800000008196,
+      "calls": 604,
+      "triangles": 1154218,
+      "geometries": 1284,
+      "materials": 378,
+      "textures": 11
+    },
+    "candidate": {
+      "readyMedianMs": 468.6064000000006,
+      "frameWallMedianMs": 11.700400000001537,
+      "calls": 618,
+      "triangles": 1330358,
+      "geometries": 1298,
+      "materials": 383,
+      "textures": 19
+    }
+  }
+}

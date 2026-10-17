@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "before": "wheel-gla-x156-left-0.png",
+  "after": "wheel-gla-x156-left-2.png",
+  "angles": "front-left: angle 8.541146 rad, radius 0.350920 m, steer 0.074306\nfront-right: angle 8.541146 rad, radius 0.350920 m, steer 0.074306\nrear-left: angle 8.541141 rad, radius 0.350920 m, steer 0.000000\nrear-right: angle 8.541141 rad, radius 0.350920 m, steer 0.000000"
+}

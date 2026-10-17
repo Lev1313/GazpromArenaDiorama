@@ -4,6 +4,9 @@ const compact = Object.freeze({name:'Procedural car',inertia:1,acceleration:6.2,
   wheelbase:2.65,grip:5,slideGrip:.65,handbrakeDrag:4.5,handbrakeTurn:1.6,maxSlip:.85});
 export const vehicleConfigurations = Object.freeze({
   procedural:compact,
+  'parked-mercedes-gla-x156':Object.freeze({...compact,name:'Mercedes-Benz GLA X156',inertia:1.08,
+    acceleration:6.4,braking:13,maxSpeed:14.5,steerAngle:.51,steerRate:8,wheelbase:2.7,
+    grip:5.5,handbrakeTurn:1.45,maxSlip:.75}),
   'parked-golf-player':Object.freeze({...compact,name:'Golf VI Silver'}),
   'parked-golf-red':Object.freeze({...compact,name:'Golf VI Red',acceleration:6.5,grip:5.3,wheelbase:2.58}),
   'parked-lexus-rx':Object.freeze({...compact,name:'Lexus RX',inertia:1.2,acceleration:6.4,braking:12,maxSpeed:14,

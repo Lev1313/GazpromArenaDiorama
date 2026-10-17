@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { createPrimitives } from '../utils/primitives.js';
 
 /**
- * Original 18 parked cars and 32 spectators, including the Golf VI, parking
+ * Original 18 parked cars plus GLA X156 and 32 spectators, including the Golf VI, parking
  * lines and picnic tables. No traffic or drifters yet.
  *
  * @param {THREE.Scene} scene
@@ -22,7 +22,7 @@ export function createParkingMeet(
 
 const people=[],parked=[];
 function person(x,z,color,pose=0){const g=new THREE.Group();const add=(geo,m,px,py,pz)=>{const o=new THREE.Mesh(geo,m);o.position.set(px,py,pz);g.add(o);return o};const cloth=mat(color);add(new THREE.CylinderGeometry(.23,.28,.68,5),cloth,0,.9,0);add(new THREE.IcosahedronGeometry(.22,1),mat(0xd7ad8f),0,1.49,0);for(const dx of [-.13,.13])add(new THREE.BoxGeometry(.15,.57,.19),rubber,dx,.32,0);for(const dx of [-.3,.3]){const arm=add(new THREE.BoxGeometry(.14,.5,.14),cloth,dx,pose?1.2:.9,.06);arm.rotation.z=pose?dx*2:dx*.5;}if(pose)add(new THREE.BoxGeometry(.22,.32,.055),windows,0,1.48,.29);g.position.set(x,0,z);g.rotation.y=x<-8?Math.PI/2:-Math.PI/2;scene.add(g);people.push(g);return g;}
-const markings=mat(0x93a6ac),staticCount=18;
+const markings=mat(0x93a6ac);
 for(const x of [-22.4,6.1])for(let j=0;j<7;j++){
  const z=-24+j*8,o=car(palette[(j+(x>0?2:0))%7],{hatch:j%3===0||(x<0&&j===5)});o.position.set(x,0,z);o.rotation.y=x<0?0:Math.PI;parked.push(o);
  const relocated=x>0&&j===3;
@@ -32,6 +32,11 @@ for(const x of [-22.4,6.1])for(let j=0;j<7;j++){
 }
 for(let j=0;j<4;j++){const o=car(palette[j],{sport:j===0});o.position.set(-19+j*7,0,33);o.rotation.y=Math.PI/2;parked.push(o);person(-19+j*7,37,palette[(j+2)%7],1);}
 // Small picnic points and a Golf-style silver hatch at the perimeter.
+// Append only: preserve all original slot indices. Southern bay beside the original southern row,
+// outside both the visitor lane and the automatic drift ellipse.
+const gla=car(0x080a0e,{hatch:true});
+gla.position.set(6.5,0,37);gla.rotation.y=-Math.PI/2;parked.push(gla);
+const staticCount=parked.length;
 parked[5].children[0].material.color.set(0xbdc8d1);
 const golfLabel=null;
 for(const [x,z] of [[8,12],[-25,-12]]){cube(1.4,.1,.8,slab,x,1.05,z);for(const dx of [-.5,.5])cube(.1,1,.1,concrete,x+dx,.5,z);}
