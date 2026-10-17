@@ -1,0 +1,538 @@
+
+> gazprom-arena-diorama@0.0.0 test:browser
+> node tools/vite-functional.mjs && node tools/multiplayer-browser.mjs
+
+
+Scenario: gla
+PASS All original eighteen registry IDs retain their indices
+PASS GLA passenger door front-passenger
+PASS GLA passenger cannot drive front-passenger
+PASS GLA passenger safely exits front-passenger
+PASS GLA passenger door rear-left
+PASS GLA passenger cannot drive rear-left
+PASS GLA passenger safely exits rear-left
+PASS GLA passenger door rear-right
+PASS GLA passenger cannot drive rear-right
+PASS GLA passenger safely exits rear-right
+PASS GLA HUD names X156 without an unverified trim
+PASS GLA reuses active night headlight projector
+PASS GLA drives from bay and stops at actual island obstacle
+PASS GLA explicit reset returns only GLA
+PASS GLA reset does not break physical exit
+
+Scenario: wheels
+PASS Wheel rig has four named real tires red-golf
+PASS Idle tires stay stationary red-golf
+PASS Four forward rotations match signed distance / radius red-golf
+PASS Only front axles steer while rolling red-golf
+PASS Rendered frame sequence changes all four rolling quaternions red-golf
+PASS Handbrake locks rear tires while fronts continue red-golf
+PASS Stopped tires do not spin red-golf
+PASS Reverse changes all four rolling angles backwards red-golf
+PASS Exit preserves parked pose and rolling angles red-golf
+PASS Reentry retains rolling angles without model reload red-golf
+PASS Wheel rig has four named real tires lexus-rx
+PASS Idle tires stay stationary lexus-rx
+PASS Four forward rotations match signed distance / radius lexus-rx
+PASS Only front axles steer while rolling lexus-rx
+PASS Rendered frame sequence changes all four rolling quaternions lexus-rx
+PASS Handbrake locks rear tires while fronts continue lexus-rx
+PASS Stopped tires do not spin lexus-rx
+PASS Reverse changes all four rolling angles backwards lexus-rx
+PASS Exit preserves parked pose and rolling angles lexus-rx
+PASS Reentry retains rolling angles without model reload lexus-rx
+PASS Wheel rig has four named real tires mercedes-gl
+PASS Idle tires stay stationary mercedes-gl
+PASS Four forward rotations match signed distance / radius mercedes-gl
+PASS Only front axles steer while rolling mercedes-gl
+PASS Rendered frame sequence changes all four rolling quaternions mercedes-gl
+PASS Handbrake locks rear tires while fronts continue mercedes-gl
+PASS Stopped tires do not spin mercedes-gl
+PASS Reverse changes all four rolling angles backwards mercedes-gl
+PASS Exit preserves parked pose and rolling angles mercedes-gl
+PASS Reentry retains rolling angles without model reload mercedes-gl
+PASS Wheel rig has four named real tires gla-x156
+PASS Idle tires stay stationary gla-x156
+PASS Four forward rotations match signed distance / radius gla-x156
+PASS Only front axles steer while rolling gla-x156
+PASS Rendered frame sequence changes all four rolling quaternions gla-x156
+PASS Handbrake locks rear tires while fronts continue gla-x156
+PASS Stopped tires do not spin gla-x156
+PASS Reverse changes all four rolling angles backwards gla-x156
+PASS Exit preserves parked pose and rolling angles gla-x156
+PASS Reentry retains rolling angles without model reload gla-x156
+PASS Wheel rig has four named real tires procedural
+PASS Idle tires stay stationary procedural
+PASS Four forward rotations match signed distance / radius procedural
+PASS Only front axles steer while rolling procedural
+PASS Rendered frame sequence changes all four rolling quaternions procedural
+PASS Handbrake locks rear tires while fronts continue procedural
+PASS Stopped tires do not spin procedural
+PASS Reverse changes all four rolling angles backwards procedural
+PASS Exit preserves parked pose and rolling angles procedural
+PASS Reentry retains rolling angles without model reload procedural
+
+Scenario: seating
+PASS 19 distinct stable vehicle identities and 76 seat records
+PASS Driver E activates selected vehicle parked-00
+PASS Four real wheel pivots roll and front wheels steer parked-00
+PASS Keyboard physics moves and steers parked-00
+PASS Moving exit refuses parked-00
+PASS Selected rear axle emits skids parked-00
+PASS Handbrake stops parked-00
+PASS Safe exit preserves position and yaw parked-00
+PASS Reentry resumes at saved pose parked-00
+PASS Driver E activates selected vehicle parked-01
+PASS Four real wheel pivots roll and front wheels steer parked-01
+PASS Keyboard physics moves and steers parked-01
+PASS Switch preserves previous vehicle 0 while driving parked-01
+PASS Moving exit refuses parked-01
+PASS Selected rear axle emits skids parked-01
+PASS Handbrake stops parked-01
+PASS Safe exit preserves position and yaw parked-01
+PASS Reentry resumes at saved pose parked-01
+PASS Driver E activates selected vehicle parked-golf-red
+PASS Four real wheel pivots roll and front wheels steer parked-golf-red
+PASS Keyboard physics moves and steers parked-golf-red
+PASS Switch preserves previous vehicle 0 while driving parked-golf-red
+PASS Switch preserves previous vehicle 1 while driving parked-golf-red
+PASS Moving exit refuses parked-golf-red
+PASS Selected rear axle emits skids parked-golf-red
+PASS Handbrake stops parked-golf-red
+PASS Safe exit preserves position and yaw parked-golf-red
+PASS Reentry resumes at saved pose parked-golf-red
+PASS Driver E activates selected vehicle parked-03
+PASS Four real wheel pivots roll and front wheels steer parked-03
+PASS Keyboard physics moves and steers parked-03
+PASS Switch preserves previous vehicle 0 while driving parked-03
+PASS Switch preserves previous vehicle 1 while driving parked-03
+PASS Switch preserves previous vehicle 2 while driving parked-03
+PASS Moving exit refuses parked-03
+PASS Selected rear axle emits skids parked-03
+PASS Handbrake stops parked-03
+PASS Safe exit preserves position and yaw parked-03
+PASS Reentry resumes at saved pose parked-03
+PASS Driver E activates selected vehicle parked-04
+PASS Four real wheel pivots roll and front wheels steer parked-04
+PASS Keyboard physics moves and steers parked-04
+PASS Switch preserves previous vehicle 0 while driving parked-04
+PASS Switch preserves previous vehicle 1 while driving parked-04
+PASS Switch preserves previous vehicle 2 while driving parked-04
+PASS Switch preserves previous vehicle 3 while driving parked-04
+PASS Moving exit refuses parked-04
+PASS Selected rear axle emits skids parked-04
+PASS Handbrake stops parked-04
+PASS Safe exit preserves position and yaw parked-04
+PASS Reentry resumes at saved pose parked-04
+PASS Driver E activates selected vehicle parked-golf-player
+PASS Four real wheel pivots roll and front wheels steer parked-golf-player
+PASS Keyboard physics moves and steers parked-golf-player
+PASS Switch preserves previous vehicle 0 while driving parked-golf-player
+PASS Switch preserves previous vehicle 1 while driving parked-golf-player
+PASS Switch preserves previous vehicle 2 while driving parked-golf-player
+PASS Switch preserves previous vehicle 3 while driving parked-golf-player
+PASS Switch preserves previous vehicle 4 while driving parked-golf-player
+PASS Moving exit refuses parked-golf-player
+PASS Selected rear axle emits skids parked-golf-player
+PASS Handbrake stops parked-golf-player
+PASS Safe exit preserves position and yaw parked-golf-player
+PASS Reentry resumes at saved pose parked-golf-player
+PASS Driver E activates selected vehicle parked-06
+PASS Four real wheel pivots roll and front wheels steer parked-06
+PASS Keyboard physics moves and steers parked-06
+PASS Switch preserves previous vehicle 0 while driving parked-06
+PASS Switch preserves previous vehicle 1 while driving parked-06
+PASS Switch preserves previous vehicle 2 while driving parked-06
+PASS Switch preserves previous vehicle 3 while driving parked-06
+PASS Switch preserves previous vehicle 4 while driving parked-06
+PASS Switch preserves previous vehicle 5 while driving parked-06
+PASS Moving exit refuses parked-06
+PASS Selected rear axle emits skids parked-06
+PASS Handbrake stops parked-06
+PASS Safe exit preserves position and yaw parked-06
+PASS Reentry resumes at saved pose parked-06
+PASS Driver E activates selected vehicle parked-07
+PASS Four real wheel pivots roll and front wheels steer parked-07
+PASS Keyboard physics moves and steers parked-07
+PASS Switch preserves previous vehicle 0 while driving parked-07
+PASS Switch preserves previous vehicle 1 while driving parked-07
+PASS Switch preserves previous vehicle 2 while driving parked-07
+PASS Switch preserves previous vehicle 3 while driving parked-07
+PASS Switch preserves previous vehicle 4 while driving parked-07
+PASS Switch preserves previous vehicle 5 while driving parked-07
+PASS Switch preserves previous vehicle 6 while driving parked-07
+PASS Moving exit refuses parked-07
+PASS Selected rear axle emits skids parked-07
+PASS Handbrake stops parked-07
+PASS Safe exit preserves position and yaw parked-07
+PASS Reentry resumes at saved pose parked-07
+PASS Driver E activates selected vehicle parked-08
+PASS Four real wheel pivots roll and front wheels steer parked-08
+PASS Keyboard physics moves and steers parked-08
+PASS Switch preserves previous vehicle 0 while driving parked-08
+PASS Switch preserves previous vehicle 1 while driving parked-08
+PASS Switch preserves previous vehicle 2 while driving parked-08
+PASS Switch preserves previous vehicle 3 while driving parked-08
+PASS Switch preserves previous vehicle 4 while driving parked-08
+PASS Switch preserves previous vehicle 5 while driving parked-08
+PASS Switch preserves previous vehicle 6 while driving parked-08
+PASS Switch preserves previous vehicle 7 while driving parked-08
+PASS Moving exit refuses parked-08
+PASS Selected rear axle emits skids parked-08
+PASS Handbrake stops parked-08
+PASS Safe exit preserves position and yaw parked-08
+PASS Reentry resumes at saved pose parked-08
+PASS Driver E activates selected vehicle parked-09
+PASS Four real wheel pivots roll and front wheels steer parked-09
+PASS Keyboard physics moves and steers parked-09
+PASS Switch preserves previous vehicle 0 while driving parked-09
+PASS Switch preserves previous vehicle 1 while driving parked-09
+PASS Switch preserves previous vehicle 2 while driving parked-09
+PASS Switch preserves previous vehicle 3 while driving parked-09
+PASS Switch preserves previous vehicle 4 while driving parked-09
+PASS Switch preserves previous vehicle 5 while driving parked-09
+PASS Switch preserves previous vehicle 6 while driving parked-09
+PASS Switch preserves previous vehicle 7 while driving parked-09
+PASS Switch preserves previous vehicle 8 while driving parked-09
+PASS Moving exit refuses parked-09
+PASS Selected rear axle emits skids parked-09
+PASS Handbrake stops parked-09
+PASS Safe exit preserves position and yaw parked-09
+PASS Reentry resumes at saved pose parked-09
+PASS Driver E activates selected vehicle parked-10
+PASS Four real wheel pivots roll and front wheels steer parked-10
+PASS Keyboard physics moves and steers parked-10
+PASS Switch preserves previous vehicle 0 while driving parked-10
+PASS Switch preserves previous vehicle 1 while driving parked-10
+PASS Switch preserves previous vehicle 2 while driving parked-10
+PASS Switch preserves previous vehicle 3 while driving parked-10
+PASS Switch preserves previous vehicle 4 while driving parked-10
+PASS Switch preserves previous vehicle 5 while driving parked-10
+PASS Switch preserves previous vehicle 6 while driving parked-10
+PASS Switch preserves previous vehicle 7 while driving parked-10
+PASS Switch preserves previous vehicle 8 while driving parked-10
+PASS Switch preserves previous vehicle 9 while driving parked-10
+PASS Moving exit refuses parked-10
+PASS Selected rear axle emits skids parked-10
+PASS Handbrake stops parked-10
+PASS Safe exit preserves position and yaw parked-10
+PASS Reentry resumes at saved pose parked-10
+PASS Driver E activates selected vehicle parked-11
+PASS Four real wheel pivots roll and front wheels steer parked-11
+PASS Keyboard physics moves and steers parked-11
+PASS Switch preserves previous vehicle 0 while driving parked-11
+PASS Switch preserves previous vehicle 1 while driving parked-11
+PASS Switch preserves previous vehicle 2 while driving parked-11
+PASS Switch preserves previous vehicle 3 while driving parked-11
+PASS Switch preserves previous vehicle 4 while driving parked-11
+PASS Switch preserves previous vehicle 5 while driving parked-11
+PASS Switch preserves previous vehicle 6 while driving parked-11
+PASS Switch preserves previous vehicle 7 while driving parked-11
+PASS Switch preserves previous vehicle 8 while driving parked-11
+PASS Switch preserves previous vehicle 9 while driving parked-11
+PASS Switch preserves previous vehicle 10 while driving parked-11
+PASS Moving exit refuses parked-11
+PASS Selected rear axle emits skids parked-11
+PASS Handbrake stops parked-11
+PASS Safe exit preserves position and yaw parked-11
+PASS Reentry resumes at saved pose parked-11
+PASS Driver E activates selected vehicle parked-12
+PASS Four real wheel pivots roll and front wheels steer parked-12
+PASS Keyboard physics moves and steers parked-12
+PASS Switch preserves previous vehicle 0 while driving parked-12
+PASS Switch preserves previous vehicle 1 while driving parked-12
+PASS Switch preserves previous vehicle 2 while driving parked-12
+PASS Switch preserves previous vehicle 3 while driving parked-12
+PASS Switch preserves previous vehicle 4 while driving parked-12
+PASS Switch preserves previous vehicle 5 while driving parked-12
+PASS Switch preserves previous vehicle 6 while driving parked-12
+PASS Switch preserves previous vehicle 7 while driving parked-12
+PASS Switch preserves previous vehicle 8 while driving parked-12
+PASS Switch preserves previous vehicle 9 while driving parked-12
+PASS Switch preserves previous vehicle 10 while driving parked-12
+PASS Switch preserves previous vehicle 11 while driving parked-12
+PASS Moving exit refuses parked-12
+PASS Selected rear axle emits skids parked-12
+PASS Handbrake stops parked-12
+PASS Safe exit preserves position and yaw parked-12
+PASS Reentry resumes at saved pose parked-12
+PASS Driver E activates selected vehicle parked-13
+PASS Four real wheel pivots roll and front wheels steer parked-13
+PASS Keyboard physics moves and steers parked-13
+PASS Switch preserves previous vehicle 0 while driving parked-13
+PASS Switch preserves previous vehicle 1 while driving parked-13
+PASS Switch preserves previous vehicle 2 while driving parked-13
+PASS Switch preserves previous vehicle 3 while driving parked-13
+PASS Switch preserves previous vehicle 4 while driving parked-13
+PASS Switch preserves previous vehicle 5 while driving parked-13
+PASS Switch preserves previous vehicle 6 while driving parked-13
+PASS Switch preserves previous vehicle 7 while driving parked-13
+PASS Switch preserves previous vehicle 8 while driving parked-13
+PASS Switch preserves previous vehicle 9 while driving parked-13
+PASS Switch preserves previous vehicle 10 while driving parked-13
+PASS Switch preserves previous vehicle 11 while driving parked-13
+PASS Switch preserves previous vehicle 12 while driving parked-13
+PASS Moving exit refuses parked-13
+PASS Selected rear axle emits skids parked-13
+PASS Handbrake stops parked-13
+PASS Safe exit preserves position and yaw parked-13
+PASS Reentry resumes at saved pose parked-13
+PASS Driver E activates selected vehicle parked-14
+PASS Four real wheel pivots roll and front wheels steer parked-14
+PASS Keyboard physics moves and steers parked-14
+PASS Switch preserves previous vehicle 0 while driving parked-14
+PASS Switch preserves previous vehicle 1 while driving parked-14
+PASS Switch preserves previous vehicle 2 while driving parked-14
+PASS Switch preserves previous vehicle 3 while driving parked-14
+PASS Switch preserves previous vehicle 4 while driving parked-14
+PASS Switch preserves previous vehicle 5 while driving parked-14
+PASS Switch preserves previous vehicle 6 while driving parked-14
+PASS Switch preserves previous vehicle 7 while driving parked-14
+PASS Switch preserves previous vehicle 8 while driving parked-14
+PASS Switch preserves previous vehicle 9 while driving parked-14
+PASS Switch preserves previous vehicle 10 while driving parked-14
+PASS Switch preserves previous vehicle 11 while driving parked-14
+PASS Switch preserves previous vehicle 12 while driving parked-14
+PASS Switch preserves previous vehicle 13 while driving parked-14
+PASS Moving exit refuses parked-14
+PASS Selected rear axle emits skids parked-14
+PASS Handbrake stops parked-14
+PASS Safe exit preserves position and yaw parked-14
+PASS Reentry resumes at saved pose parked-14
+PASS Driver E activates selected vehicle parked-15
+PASS Four real wheel pivots roll and front wheels steer parked-15
+PASS Keyboard physics moves and steers parked-15
+PASS Switch preserves previous vehicle 0 while driving parked-15
+PASS Switch preserves previous vehicle 1 while driving parked-15
+PASS Switch preserves previous vehicle 2 while driving parked-15
+PASS Switch preserves previous vehicle 3 while driving parked-15
+PASS Switch preserves previous vehicle 4 while driving parked-15
+PASS Switch preserves previous vehicle 5 while driving parked-15
+PASS Switch preserves previous vehicle 6 while driving parked-15
+PASS Switch preserves previous vehicle 7 while driving parked-15
+PASS Switch preserves previous vehicle 8 while driving parked-15
+PASS Switch preserves previous vehicle 9 while driving parked-15
+PASS Switch preserves previous vehicle 10 while driving parked-15
+PASS Switch preserves previous vehicle 11 while driving parked-15
+PASS Switch preserves previous vehicle 12 while driving parked-15
+PASS Switch preserves previous vehicle 13 while driving parked-15
+PASS Switch preserves previous vehicle 14 while driving parked-15
+PASS Moving exit refuses parked-15
+PASS Selected rear axle emits skids parked-15
+PASS Handbrake stops parked-15
+PASS Safe exit preserves position and yaw parked-15
+PASS Reentry resumes at saved pose parked-15
+PASS Driver E activates selected vehicle parked-mercedes-gl
+PASS Four real wheel pivots roll and front wheels steer parked-mercedes-gl
+PASS Keyboard physics moves and steers parked-mercedes-gl
+PASS Switch preserves previous vehicle 0 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 1 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 2 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 3 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 4 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 5 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 6 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 7 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 8 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 9 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 10 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 11 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 12 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 13 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 14 while driving parked-mercedes-gl
+PASS Switch preserves previous vehicle 15 while driving parked-mercedes-gl
+PASS Moving exit refuses parked-mercedes-gl
+PASS Selected rear axle emits skids parked-mercedes-gl
+PASS Handbrake stops parked-mercedes-gl
+PASS Safe exit preserves position and yaw parked-mercedes-gl
+PASS Reentry resumes at saved pose parked-mercedes-gl
+PASS Driver E activates selected vehicle parked-lexus-rx
+PASS Four real wheel pivots roll and front wheels steer parked-lexus-rx
+PASS Keyboard physics moves and steers parked-lexus-rx
+PASS Switch preserves previous vehicle 0 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 1 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 2 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 3 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 4 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 5 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 6 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 7 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 8 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 9 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 10 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 11 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 12 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 13 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 14 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 15 while driving parked-lexus-rx
+PASS Switch preserves previous vehicle 16 while driving parked-lexus-rx
+PASS Night projector follows selected Lexus
+PASS Moving exit refuses parked-lexus-rx
+PASS Selected rear axle emits skids parked-lexus-rx
+PASS Handbrake stops parked-lexus-rx
+PASS Safe exit preserves position and yaw parked-lexus-rx
+PASS Reentry resumes at saved pose parked-lexus-rx
+PASS Driver E activates selected vehicle parked-mercedes-gla-x156
+PASS Four real wheel pivots roll and front wheels steer parked-mercedes-gla-x156
+PASS Keyboard physics moves and steers parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 0 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 1 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 2 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 3 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 4 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 5 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 6 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 7 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 8 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 9 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 10 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 11 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 12 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 13 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 14 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 15 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 16 while driving parked-mercedes-gla-x156
+PASS Switch preserves previous vehicle 17 while driving parked-mercedes-gla-x156
+PASS Moving exit refuses parked-mercedes-gla-x156
+PASS Selected rear axle emits skids parked-mercedes-gla-x156
+PASS Handbrake stops parked-mercedes-gla-x156
+PASS Safe exit preserves position and yaw parked-mercedes-gla-x156
+PASS Reentry resumes at saved pose parked-mercedes-gla-x156
+PASS All-car session keeps model requests and scene resources bounded — {"initialResources":{"sceneGeometries":1298,"sceneTextures":19,"sceneMaterials":383,"geometries":1261,"textures":19,"triangles":305356,"calls":189,"models":["http://127.0.0.1:58750/models/cars/golf6_red_v2_wheels.glb","http://127.0.0.1:58750/models/cars/lexus_rx_deep_blue_mica_wheels.glb","http://127.0.0.1:58750/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb","http://127.0.0.1:58750/models/cars/mercedes_gla_x156_black_wheels.glb"]},"finalResources":{"sceneGeometries":1298,"sceneTextures":19,"sceneMaterials":383,"geometries":1292,"textures":20,"triangles":245926,"calls":58,"models":["http://127.0.0.1:58750/models/cars/golf6_red_v2_wheels.glb","http://127.0.0.1:58750/models/cars/lexus_rx_deep_blue_mica_wheels.glb","http://127.0.0.1:58750/models/cars/mercedes_gl_x166_obsidian_black_wheels.glb","http://127.0.0.1:58750/models/cars/mercedes_gla_x156_black_wheels.glb"]}}
+PASS Right side selects front passenger
+PASS Blocked exit refuses without teleport or releasing occupancy
+PASS Preset cannot bypass blocked physical exit
+PASS Occupied nearest seat rejects E without switching sides
+PASS Silver Golf driver seat starts existing drive controller
+PASS Physical seated Golf drives and carries character
+PASS Moving Golf refuses physical exit
+PASS Walking button cannot bypass speed guard
+PASS Handbrake still stops seated Golf
+PASS Drive exit preserves stopped Golf pose and resumes on foot
+PASS Golf passenger seat does not give driving input
+PASS Night works while seated
+PASS Camera preset safely releases passenger seat and preserves parked Golf
+PASS Legacy Golf button and R still reset home
+
+Scenario: scene
+PASS Initial scene counts and unique controls
+PASS Initial stats are rendered
+PASS Highway vehicles actually move
+PASS Both drifters move, emit smoke and leave tire marks
+PASS Pause freezes traffic, visitors, drift and effects
+PASS Camera preset meet
+PASS Camera preset arena
+PASS Camera preset high
+PASS Camera preset map
+PASS Camera preset drift
+PASS Camera preset reset
+PASS Orbit mouse drag rotates camera while paused
+PASS Mouse wheel zooms camera
+PASS Day updates actual sky, fog, light and exposure
+PASS Night restores dim moon lighting
+PASS Smoke off hides actual particles
+PASS Resume advances simulation while disabled smoke stays hidden
+PASS Smoke emission resumes
+PASS Tempo 0.3 changes simulation time and traffic rate
+PASS Tempo 1 changes simulation time and traffic rate
+PASS Tempo 2 changes simulation time and traffic rate
+PASS Photo sources removed; main interface hides and restores
+PASS Desktop resize updates canvas and camera projection
+
+Scenario: traffic
+PASS Visitor arrives, parks, reverses, departs and hides before next visit
+PASS Live parking counter follows actual visitor states
+PASS Long simulation keeps smoke, skid buffers and scene size bounded
+
+Scenario: drive
+PASS Entering Golf enables drive HUD and updates counter
+PASS Pause also freezes Golf position and speed
+PASS Resume clears held driving keys
+PASS Golf camera Сверху
+PASS Golf camera Свободно
+PASS Golf camera Сзади
+PASS W accelerates and physically moves Golf
+PASS A steers left and changes heading
+PASS D steers right
+PASS Space reduces speed and writes Golf skid segments
+PASS Brake stops Golf
+PASS Obstacle collision stops Golf and displays warning
+PASS S reverses away from obstacle
+PASS R restores home pose, speed and steering
+PASS Arrow key reaches driving controller: ArrowUp
+PASS Arrow key reaches driving controller: ArrowLeft
+PASS Arrow key reaches driving controller: ArrowDown
+PASS Arrow key reaches driving controller: ArrowRight
+PASS Blur handler clears throttle without stuck acceleration
+PASS Hidden-document handler clears driving keys
+PASS Typing in input does not accelerate Golf
+PASS Esc restores overview, car and scene HUD
+PASS Scene tempo does not scale Golf acceleration — 1.0333333333333523 / 1.033333333333318
+
+Scenario: mobile
+PASS Mobile pedals visible
+PASS Real touch throttle accelerates Golf
+PASS Multitouch gas and steering work together
+PASS Touch release clears both keys
+PASS Mobile reverse pedal selects reverse gear
+PASS Touch cancellation releases captured key
+PASS Mobile camera button switches to overhead
+PASS Mobile landscape resize updates render dimensions
+PASS Mobile exit hides pedals and restores scene
+
+Scenario: pedestrian
+PASS Walk enters at a clear parking point with third-person camera
+PASS W walks through parking lane and animates legs
+PASS Shift increases walking pace
+PASS Pause freezes position and animation; paused input is ignored
+PASS Resume has no stuck movement key
+PASS Walking cannot pass through actual Golf GLB
+PASS Character slides beside Golf and can move away
+PASS Walking cannot pass through actual Lexus GLB
+PASS Character slides beside Lexus and can move away
+PASS Walking cannot pass through actual Mercedes GLB
+PASS Character slides beside Mercedes and can move away
+PASS Existing parking fence blocks pedestrian
+PASS Pedestrian slides along actual parking fence
+PASS Feet rest on actual raised footpath
+PASS Actual island boundary stops walking into water and follows grass height
+PASS Mouse rotates smooth chase camera while OrbitControls remain disabled
+PASS Walking follows rotated camera direction
+PASS Night walking preserves lighting scheme
+PASS Walk exits, hides character and restores overview
+PASS Camera preset exits walk and retains arena preset
+PASS Golf activation exits walking with exclusive input
+PASS Golf still accelerates after walking
+PASS Walking activation exits Golf and clears its input
+PASS Walk blur clears held input
+PASS Walk recovery returns to a clear point
+PASS No browser console or page errors
+489/489 checks passed; ok=true
+PASS Single-player starts with no socket or remote avatar
+PASS UI creates unpredictable room and server player ID
+PASS Share link contains room and endpoint, never reconnect secret
+PASS Room link prefills join form
+PASS Two isolated clients own distinct IDs and exactly one remote each
+PASS Nicknames are assigned to the correct remote
+PASS A keyboard moves only A local controller
+PASS B sees A position and direction through WebSocket
+PASS Remote walking animation advances only while peer moves
+PASS B independently moves; A sees B without receiving B controls
+PASS Peer disappears immediately after socket disconnect
+PASS Automatic reconnect keeps ID and creates no duplicate
+PASS Delayed real WebSocket link converges without extra avatars
+PASS Delayed peer is interpolated across intermediate positions
+PASS Reconnect cycle 0 keeps one remote and stable resources
+PASS Reconnect cycle 1 keeps one remote and stable resources
+PASS Reconnect cycle 2 keeps one remote and stable resources
+PASS Network mode disables legacy drive and camera preset buttons
+PASS Physical E cannot claim a car while in the room
+PASS Leaving clears remote/label resources and restores local identity
+PASS Network never reloads any of the four car GLBs
+PASS Nickname markup stays literal text, never DOM elements
+PASS Real server refusal produces a readable error indicator
+PASS Single-player physical GLA driving is restored after leaving
+PASS Single-player GLA still moves and rolls wheels
+PASS Joining while driving refuses without changing seats or opening a socket
+PASS No browser/server errors or dialogs
+27/27 checks; ok=true

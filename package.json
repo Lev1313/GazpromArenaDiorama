@@ -19,9 +19,12 @@
     "vite:approve": "node tools/vite-baseline.mjs --approve",
     "vite:verify": "node tools/vite-baseline.mjs --verify",
     "perf:compare": "npm run build && node tools/perf-compare.mjs",
-    "test:browser": "node tools/vite-functional.mjs",
+    "test:browser": "node tools/vite-functional.mjs && node tools/multiplayer-browser.mjs",
     "test:pedestrian": "node --test tests/pedestrian.test.mjs",
-    "test:pedestrian:browser": "node tools/vite-functional.mjs --pedestrian"
+    "test:pedestrian:browser": "node tools/vite-functional.mjs --pedestrian",
+    "multiplayer:server": "node server/multiplayer.mjs",
+    "test:multiplayer": "node --test tests/network-*.test.mjs",
+    "test:multiplayer:browser": "node tools/multiplayer-browser.mjs"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",
@@ -30,6 +33,7 @@
     "vite": "^8.3.4"
   },
   "dependencies": {
-    "three": "^0.164.1"
+    "three": "^0.164.1",
+    "ws": "^8.22.0"
   }
 }
