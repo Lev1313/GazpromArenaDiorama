@@ -1,3 +1,9 @@
+## 2026-10-25 — Stage 8D: выбор автомобиля, в работе
+- Добавлены новые src/ui/vehiclePicker.js, vehiclePickerState.js, vehiclePicker.css; интеграция src/main.js с минимальным изменением render loop. Каталог 19 авто + поиск + статус мест, маркер выбранного авто двигается с Three.js Group, обзор камерой на 3 секунды без телепорта.
+- Добавлены целевые node unit tests для индексов/ID, занятых сидений и ещё не синхронизированного сетевого реестра; малый CI workflow для build и test:picker.
+- В ROADMAP занесены будущий отдельный UI/UX-редизайн только после уточнения пожеланий пользователя, Geely EX5 EM-i и Maserati Ghibli с неопределёнными модификациями.
+- Разработка не объединена с master и не опубликована на Production; полный браузерный прогон ещё не выполнялся.
+
 ## 2026-10-17 — Stage 8C (подготовка), Render Blueprint и оптимизация проверок
 - Подготовлена отдельная ветка от `de4388a`: `feature/public-ws-render-fast-checks`. Конфигурация `render.yaml` для бесплатного Render Web Service, Node WS/health/Origin, без автоматических деплоев; руководство публичной настройки Vercel/wss добавлено в `server/README.md`.
 - Скрипты `check:quick`, `check:network`, `check:release`; политика выборочных тестов добавлена в AGENTS.md. Поведенческий код multiplayer, GLB и визуальные эталоны не менялись.

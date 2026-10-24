@@ -1,0 +1,42 @@
+#vehiclePickerPanel{
+  box-sizing:border-box;position:fixed;z-index:26;left:365px;top:18px;
+  width:min(335px,calc(100vw - 380px));max-height:calc(100dvh - 36px);
+  overflow:auto;padding:16px;color:#eaf5ff;background:#101c2ff5;
+  border:1px solid #6689b4;border-radius:14px;font:13px/1.45 system-ui,sans-serif;
+  box-shadow:0 15px 42px #0008;
+}
+#vehiclePickerPanel[hidden],#vehiclePickerPanel [hidden],#vehiclePickerWorldmark[hidden]{display:none!important}
+.vehicle-picker-head{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.vehicle-picker-head strong{font-size:16px}
+#vehiclePickerPanel p{color:#b9cede;margin:9px 0}
+#vehiclePickerPanel button{background:#294869;color:#fff;border:1px solid #6689b4;
+  border-radius:8px;padding:8px 10px;cursor:pointer;font:inherit;touch-action:manipulation}
+#vehiclePickerPanel button:hover{background:#35618a}
+#vehiclePickerPanel button:focus-visible,#vehiclePickerPanel input:focus-visible{outline:2px solid #65c9ff;outline-offset:2px}
+#vehiclePickerPanel button:disabled{opacity:.5;cursor:default}
+#vehiclePickerClose{font-size:21px!important;line-height:1}
+.vehicle-picker-search{display:block;color:#b9cede;margin:12px 0}
+.vehicle-picker-search input{display:block;width:100%;box-sizing:border-box;margin-top:4px;
+ padding:9px;color:#fff;border:1px solid #6689b4;background:#1a304a;border-radius:8px;font:inherit}
+#vehiclePickerList{display:flex;flex-direction:column;gap:5px;max-height:40vh;overflow:auto;padding:2px}
+#vehiclePickerList .vehicle-picker-item{display:flex;text-align:left;align-items:center;gap:10px;width:100%;flex-shrink:0}
+.vehicle-picker-item[aria-pressed="true"]{outline:2px solid #65dfff;outline-offset:-2px;background:#285775!important}
+.vehicle-picker-swatch{width:33px;height:22px;border-radius:5px;border:1px solid #a9bdcf;flex-shrink:0}
+.vehicle-picker-labels{display:flex;flex-direction:column;min-width:0;gap:1px}
+.vehicle-picker-labels strong{font-size:12px;white-space:normal;overflow-wrap:break-word}
+.vehicle-picker-labels small{color:#c8dcee;font-size:11px}
+#vehiclePickerSelected{border-top:1px solid #43617c;margin-top:12px;padding-top:12px}
+.vehicle-picker-actions{display:flex;gap:6px;flex-wrap:wrap}
+#vehiclePickerWorldmark{
+  position:fixed;z-index:12;pointer-events:none;transform:translate(-50%,-100%);
+  padding:5px 9px;background:#063950d9;color:#a6f2ff;border:1px solid #4ed7f9;
+  border-radius:20px;font:12px/1.2 system-ui;max-width:170px;text-align:center;
+  box-shadow:0 0 13px #26bfff70;
+}
+@media(max-width:900px){
+  #vehiclePickerPanel{left:10px;top:60px;width:min(340px,calc(100vw - 20px));max-height:calc(100dvh - 70px)}
+}
+@media(max-width:650px){
+  #vehiclePickerPanel{left:10px;right:10px;top:65px;width:auto;max-height:calc(100dvh - 75px)}
+  #vehiclePickerList{max-height:33vh}
+}
