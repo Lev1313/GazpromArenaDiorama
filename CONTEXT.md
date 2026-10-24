@@ -1,3 +1,8 @@
+## 2026-10-25 — Stage 8D: каталог выбора и идеи для будущего
+- Отдельная ветка feature/vehicle-picker-ui-roadmap от master f54a49a. Выбор одной из 19 машин по vehicleId, подсветка RingGeometry + текстовая экранная метка, краткий осмотр камерой без перемещения игрока, статус мест (серверный в multiplayer). Обычная посадка E и 19 существующих моделей/физика не изменяются.
+- UI-редизайн отложен до отдельного разговора с пользователем; никаких догадок о дизайне. В ROADMAP предварительно внесены Geely EX5 EM-i (распознано голосом как «Angelina EX5 MI», требуется подтверждение) и Maserati Ghibli (год/цвет уточнить).
+- Целевые проверки: tests/vehicle-picker.test.mjs и production build в GitHub Actions, не весь 489+106 сетевой браузер. Перед merge требуется визуальный просмотр сайта Preview и финальная ручная проверка, пользовательскую production не менять автоматически.
+
 ## Stage 8C (в работе) — подготовка публичного WebSocket и экономных проверок, 2026-10-17
 - PR Stage 8B/#12 уже объединён в master, 19 сетевых машин, комнаты по 2.
 - Ветка feature/public-ws-render-fast-checks содержит Render Blueprint для Node WebSocket на Free, ручной deploy (`autoDeployTrigger: off`), `HOST=0.0.0.0`, `ALLOWED_ORIGINS=https://gazprom-arena-diorama.vercel.app`, health `/health`. Публичного URL пока нет: полноценный онлайн НЕ объявлять готовым до фактического развертывания и внешнего 2-клиентского теста.
