@@ -40,7 +40,12 @@ export function installMultiplayerUi(root,multiplayer) {
   root.appendChild(panel);const $=id=>panel.querySelector('#'+id);
   const query=new URL(location.href).searchParams;
   const local=['localhost','127.0.0.1','[::1]'].includes(location.hostname);
-  $('mpServer').value=(query.get('ws')??import.meta.env.VITE_MULTIPLAYER_URL??(local?'ws://127.0.0.1:8787/ws':'')).slice(0,256);
+  // Render Free server is the public default. Explicit invite/env values still take priority.
+  // Keep localhost pointing at the developer's own WebSocket process.
+  const publicServer=location.hostname==='gazprom-arena-diorama.vercel.app'
+    ? 'wss://gazprom-arena-diorama-ws.onrender.com/ws' : '';
+  $('mpServer').value=(query.get('ws')??import.meta.env.VITE_MULTIPLAYER_URL
+    ??(local?'ws://127.0.0.1:8787/ws':publicServer)).slice(0,256);
   $('mpNickname').value='Игрок-'+crypto.getRandomValues(new Uint16Array(1))[0]%1000;
   if(ROOM_RE.test(query.get('room')??''))$('mpCode').value=query.get('room');
   let localMessage='',last='';
