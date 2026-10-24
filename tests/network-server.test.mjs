@@ -117,9 +117,9 @@ test('active browser-style pose traffic survives missing proxy pong frames acros
     await sleep(14);
     c.send(state(c.self,seq));
   }
+  await until(()=>s.rooms.get(c.self.roomId).players.get(c.self.playerId).seq===10);
   assert.equal(c.ws.readyState,WebSocket.OPEN);
   assert.equal(c.closed(),null);
-  assert.equal(s.rooms.get(c.self.roomId).players.get(c.self.playerId).seq,10);
 });
 
 test('heartbeat removes an unresponsive connection while a responsive peer stays connected',async t=>{
