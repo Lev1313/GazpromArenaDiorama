@@ -31,6 +31,7 @@ import { createVehicleInteraction } from './player/vehicleInteraction.js';
 import { installVehicleInteractionUi } from './ui/vehicleInteractionUi.js';
 import { createMultiplayer } from './network/multiplayer.js';
 import { installMultiplayerUi } from './ui/multiplayerUi.js';
+import { installVehiclePicker } from './ui/vehiclePicker.js';
 
 // Stage 4.5: restore the original HUD on top of the complete modular scene.
 const canvas = document.createElement('canvas');
@@ -132,6 +133,7 @@ const pedestrianUi = installPedestrianUi(root, pedestrian, modes, hud, canvas);
 const seatingUi = installVehicleInteractionUi(root, seating, drive, hud);
 multiplayer = createMultiplayer({scene,pedestrian,modes,hud,registry:vehicleRegistry,drive,seating,drift});
 const multiplayerUi = installMultiplayerUi(root,multiplayer);
+const vehiclePicker = installVehiclePicker(root,{scene,camera,registry:vehicleRegistry,pedestrian,seating,drive,multiplayer});
 
 let last = performance.now();
 function frame(now) {
@@ -172,6 +174,7 @@ function frame(now) {
   pedestrianUi.render();
   seatingUi.render();
   multiplayerUi.render();
+  vehiclePicker.update();
   renderer.render(scene, camera);
 }
 requestAnimationFrame(frame);
