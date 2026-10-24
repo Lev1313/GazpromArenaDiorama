@@ -49,6 +49,9 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
     ws.on('error',()=>{}); // Protocol/oversize errors close this socket, never the process.
     ws.on('message',(bytes,binary)=>{
       if(ws.readyState!==WebSocket.OPEN)return;
+      // Browser clients behind a reverse proxy may keep sending valid game frames
+      // even if control pong frames are delayed or swallowed. Traffic proves liveness.
+      alive=true;
       const now=performance.now();tokens=Math.min(burst,tokens+(now-last)*rate/1000);last=now;
       if(tokens<1){reject(ws,'rate-limit');return;}tokens--;
       if(binary || bytes.length>MAX_BYTES){reject(ws,'invalid-message');return;}
@@ -108,7 +111,14 @@ export async function startMultiplayerServer({ host='127.0.0.1', port=8787, orig
   const cleanup=setInterval(()=>{
     for(const room of rooms.values())for(const p of room.players.values())if(!p.ws&&p.expires<=Date.now())remove(room,p);
   },Math.min(1000,Math.max(20,graceMs/2)));cleanup.unref();
-  const heartbeat=setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive()){ws.terminate();continue;}ws.markWaiting();ws.ping();}},heartbeatMs);heartbeat.unref();
+  const heartbeat=setInterval(()=>{for(const ws of wss.clients){
+    if(!ws.isAlive()){
+      // No nicknames, rooms, IP addresses or session tokens in diagnostic logs.
+      console.warn('[ws] heartbeat-timeout: no pong or application frames');
+      ws.terminate();continue;
+    }
+    ws.markWaiting();ws.ping();
+  }},heartbeatMs);heartbeat.unref();
   await new Promise((done,fail)=>{http.once('error',fail);http.listen(port,host,done);});
   return {http,wss,rooms,address:()=>http.address(),async close(){clearInterval(cleanup);clearInterval(heartbeat);
     for(const ws of wss.clients)ws.terminate();await new Promise(done=>wss.close(done));await new Promise(done=>http.close(done));rooms.clear();}};

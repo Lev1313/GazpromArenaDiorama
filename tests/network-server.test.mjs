@@ -106,6 +106,22 @@ test('two production transports exchange walking and automatically reconnect to 
   assert.equal(a.getStatus().phase,'offline');assert(!a.active);
 });
 
+test('active browser-style pose traffic survives missing proxy pong frames across heartbeats',async t=>{
+  const s=await server(t,{heartbeatMs:30});
+  const c=await client(t,s,{autoPong:false});
+  c.send({type:'create',v:1,nickname:'Активный'});
+  c.self=await c.wait(m=>m.type==='welcome');
+  // Simulate a reverse proxy dropping WebSocket control pongs while forwarding
+  // ordinary 10 Hz game traffic (accelerated clocks to keep the test cheap).
+  for(let seq=1;seq<=10;seq++){
+    await sleep(14);
+    c.send(state(c.self,seq));
+  }
+  await until(()=>s.rooms.get(c.self.roomId).players.get(c.self.playerId).seq===10);
+  assert.equal(c.ws.readyState,WebSocket.OPEN);
+  assert.equal(c.closed(),null);
+});
+
 test('heartbeat removes an unresponsive connection while a responsive peer stays connected',async t=>{
   const s=await server(t,{heartbeatMs:30});
   const a=await create(t,s),b=await client(t,s,{autoPong:false});

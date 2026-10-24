@@ -116,3 +116,26 @@ test('world schema rejects duplicate car IDs, duplicate seat owners and malforme
     const copy=structuredClone(world);change(copy);assert(!validWorld(copy));
   }
 });
+
+test('network-jitter burst accepts bounded honest motion but still rejects a teleport',async t=>{
+  const s=await setup(t),a=await connect(t,s),v=vehicleCatalog[18];
+  assert((await enter(a,v,'driver')).ok);
+  const fleet=s.rooms.get(a.self.roomId).fleet.vehicles.get(v.vehicleId);
+  const home={...fleet.state};
+  // Four snapshots arrive in a tight batch after a network stall:
+  // each step is plausible, even though server receive gaps are near zero.
+  for(let step=1;step<=4;step++){
+    a.send('vehicle-state',{vehicleId:v.vehicleId,state:{
+      ...home,x:home.x+step,yaw:home.yaw,speed:8,
+      frontDistance:step,rearDistance:step,
+    }});
+  }
+  await until(()=>fleet.state.x>=home.x+4);
+  assert.equal(fleet.state.x,home.x+4);
+  const denied=await a.result(a.send('vehicle-state',{vehicleId:v.vehicleId,state:{
+    ...fleet.state,x:fleet.state.x+20,frontDistance:24,rearDistance:24,
+  }}));
+  assert.equal(denied.code,'movement-rejected');
+  assert.equal(fleet.state.x,home.x+4);
+  assert.equal(fleet.state.speed,0);
+});
