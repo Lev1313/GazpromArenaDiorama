@@ -3,7 +3,7 @@ import { exact,validPose,validSequence } from '../src/network/protocol.js';
 import { validVehicleId,validSeatId,validVehicleState } from '../src/network/vehicleProtocol.js';
 
 export function createVehicleRoom(){return {revision:0,vehicles:new Map(vehicleCatalog.map(v=>[v.vehicleId,{
-  vehicleId:v.vehicleId,revision:0,lastTime:performance.now(),state:{x:v.x,y:v.y,z:v.z,yaw:v.yaw,speed:0,steer:0,handbrake:false,frontDistance:0,rearDistance:0},
+  vehicleId:v.vehicleId,revision:0,lastTime:performance.now(),motionCredit:6,yawCredit:1.2,state:{x:v.x,y:v.y,z:v.z,yaw:v.yaw,speed:0,steer:0,handbrake:false,frontDistance:0,rearDistance:0},
   seats:Object.fromEntries(seatIds.map(id=>[id,null]))}]))};}
 export function occupied(room,id){for(const v of room.fleet.vehicles.values())for(const seatId of seatIds)if(v.seats[seatId]===id)return {vehicle:v,seatId};return null;}
 const publicVehicle=v=>({vehicleId:v.vehicleId,state:{...v.state},revision:v.revision,seats:{...v.seats}});
@@ -13,7 +13,7 @@ function touch(room,v){v.revision++;room.fleet.revision++;}
 export function stopPlayerVehicle(room,player,send,release=false){
   const seat=occupied(room,player.id);if(!seat)return;
   const v=seat.vehicle;
-  if(seat.seatId==='driver'){v.state={...v.state,speed:0,steer:0,handbrake:true};v.lastTime=performance.now();}
+  if(seat.seatId==='driver'){v.state={...v.state,speed:0,steer:0,handbrake:true};v.lastTime=performance.now();v.motionCredit=6;v.yawCredit=1.2;}
   if(release)v.seats[seat.seatId]=null;
   touch(room,v);broadcastWorld(room,send);
 }
@@ -47,7 +47,7 @@ export function handleVehicleMessage(room,player,m,send,reject){
     if(Math.abs(v.state.speed)>.5)return deny('vehicle-moving');
     const door=seatPoint({...v.state,vehicleId:v.vehicleId},m.seatId);
     if(Math.hypot(door.x-player.pose.x,door.z-player.pose.z)>1.2)return deny('too-far');
-    v.seats[m.seatId]=player.id;v.lastTime=performance.now();touch(room,v);updateRiders(room,v);broadcastWorld(room,send);reply(true);return true;
+    v.seats[m.seatId]=player.id;v.lastTime=performance.now();if(m.seatId==='driver'){v.motionCredit=6;v.yawCredit=1.2;}touch(room,v);updateRiders(room,v);broadcastWorld(room,send);reply(true);return true;
   }
   if(m.type==='seat-exit'){
     if(!validPose(m.pose)){reject(player.ws,'invalid-state');return true;}
@@ -65,15 +65,28 @@ export function handleVehicleMessage(room,player,m,send,reject){
     if(Math.abs(v.state.speed)>.5)return deny('vehicle-moving');
     const home=catalogById.get(v.vehicleId);if(homeBlocked(room,v,home))return deny('reset-blocked');
     v.state={x:home.x,y:home.y,z:home.z,yaw:home.yaw,speed:0,steer:0,handbrake:false,frontDistance:0,rearDistance:0};
+    v.motionCredit=6;v.yawCredit=1.2;
   }else{
     if(!validVehicleState(m.state,m.vehicleId)){reject(player.ws,'invalid-state');return true;}
-    const s=m.state,old=v.state,dt=Math.min(.5,Math.max(0,(performance.now()-v.lastTime)/1000));
+    const now=performance.now(),s=m.state,old=v.state,dt=Math.min(.5,Math.max(0,(now-v.lastTime)/1000));
     const distance=Math.hypot(s.x-old.x,s.z-old.z),yaw=Math.abs(Math.atan2(Math.sin(s.yaw-old.yaw),Math.cos(s.yaw-old.yaw)));
-    if(distance>18*dt+.35||Math.abs(s.y-old.y)>dt*4+.35||yaw>dt*6+.2
-      ||Math.abs(s.frontDistance-old.frontDistance)>distance+.5||Math.abs(s.rearDistance-old.rearDistance)>distance+.5){
-      // Stop the offender at the last agreed pose; never adopt arbitrary teleports.
+    // A websocket proxy can deliver multiple legitimate 10 Hz snapshots almost at once.
+    // A bounded refill budget tolerates bursts without allowing large teleports.
+    const travelBudget=Math.min(6,(v.motionCredit??6)+18*dt);
+    const turnBudget=Math.min(1.2,(v.yawCredit??1.2)+6*dt);
+    const invalidMotion=distance>Math.min(3.5,travelBudget)+1e-6
+      ||Math.abs(s.y-old.y)>4*dt+.35||yaw>Math.min(.7,turnBudget)+1e-6
+      ||Math.abs(s.frontDistance-old.frontDistance)>distance+.5
+      ||Math.abs(s.rearDistance-old.rearDistance)>distance+.5;
+    if(invalidMotion){
+      if(now-(v.lastRejectLog??-Infinity)>5000){
+        console.warn('[vehicle] movement-rejected (distance='+distance.toFixed(2)+'m, gap='+dt.toFixed(3)+'s, budget='+travelBudget.toFixed(2)+'m)');
+        v.lastRejectLog=now;
+      }
+      // Stop at the last agreed pose; still reject arbitrary teleports.
       stopPlayerVehicle(room,player,send);return deny('movement-rejected');
     }
+    v.motionCredit=Math.max(0,travelBudget-distance);v.yawCredit=Math.max(0,turnBudget-yaw);
     v.state={...s};
   }
   v.lastTime=performance.now();touch(room,v);updateRiders(room,v);
