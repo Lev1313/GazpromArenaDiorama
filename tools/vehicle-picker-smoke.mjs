@@ -1,6 +1,7 @@
 // Fast real-browser smoke of the picker. Does not run the 489+106 scenario suites.
 import assert from 'node:assert/strict';
 import {spawn} from 'node:child_process';
+import {mkdir} from 'node:fs/promises';
 import {setTimeout as sleep} from 'node:timers/promises';
 import {chromium} from 'playwright-core';
 
@@ -29,9 +30,12 @@ async function main(){
   const panel=page.locator('#vehiclePickerPanel');
   assert.equal(await panel.isVisible(),true);
   assert.equal(await page.locator('#vehiclePickerList button[data-vehicle-id]').count(),19);
+  await mkdir('browser-tests/_current/picker-review',{recursive:true});
+  await page.screenshot({path:'browser-tests/_current/picker-review/desktop.png'});
   await page.locator('#vehiclePickerSearch').fill('Mercedes');
   assert.equal(await page.locator('#vehiclePickerList button[data-vehicle-id]').count(),2);
   await page.locator('[data-vehicle-id="parked-mercedes-gla-x156"]').click();
+  assert.equal(await page.locator('[data-vehicle-id="parked-mercedes-gla-x156"]').evaluate(el=>el===document.activeElement),true,'Selection keeps keyboard focus on the car');
   assert.match(await page.locator('#vehiclePickerName').innerText(),/GLA X156/);
   assert.match(await page.locator('#vehiclePickerSeats').innerText(),/Свободно 4 из 4/);
   assert.equal(await page.locator('[data-vehicle-id="parked-mercedes-gla-x156"]').getAttribute('aria-pressed'),'true');
@@ -41,6 +45,7 @@ async function main(){
   assert.equal(await page.locator('#vehiclePickerWorldmark').isVisible(),true);
   await page.keyboard.press('Escape');
   assert.equal(await panel.isVisible(),false);
+  assert.equal(await page.locator('#vehiclePickerToggle').evaluate(el=>el===document.activeElement),true);
   await page.locator('#vehiclePickerToggle').click();
   await page.locator('#vehiclePickerClear').click();
   assert.equal(await page.locator('#vehiclePickerSelected').isVisible(),false);
@@ -51,6 +56,7 @@ async function main(){
   assert(bounds&&bounds.x>=0&&bounds.x+bounds.width<=391,'Catalog should fit mobile width');
   await page.locator('#vehiclePickerSearch').fill('Golf');
   assert.equal(await page.locator('#vehiclePickerList button[data-vehicle-id]').count(),2);
+  await page.screenshot({path:'browser-tests/_current/picker-review/mobile.png'});
   assert.deepEqual(errors,[]);
   console.log('PASS picker: desktop and mobile; 19 entries, search, seats, marker, camera peek, close, clear');
 }

@@ -55,7 +55,7 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
   function open(value){
     panel.hidden=!value;toggle.setAttribute('aria-expanded',String(value));
     if(value){render(true);$('vehiclePickerSearch').focus();}
-    else peekUntil=0;
+    else {peekUntil=0;toggle.focus();}
   }
   function listEntries(){
     const data=pickerEntries(registry,{connected:active(),ready:ready()});
@@ -65,6 +65,7 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
     const sig=JSON.stringify([selected,filter,...data.map(e=>[e.vehicleId,e.free,e.driverOccupied])]);
     if(sig===signature)return;signature=sig;
     const list=$('vehiclePickerList'),scroll=list.scrollTop;
+    const focusedId=list.contains(document.activeElement)?document.activeElement.dataset.vehicleId:null;
     const fragment=document.createDocumentFragment();
     for(const entry of filtered){
       const button=document.createElement('button');button.type='button';
@@ -78,7 +79,11 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
       labels.append(name,summary);button.append(swatch,labels);fragment.append(button);
     }
     if(!filtered.length){const p=document.createElement('p');p.textContent='Ничего не найдено';fragment.append(p);}
-    list.replaceChildren(fragment);list.scrollTop=scroll;
+    list.replaceChildren(fragment);
+    if(focusedId){
+      [...list.children].find(button=>button.dataset.vehicleId===focusedId)?.focus({preventScroll:true});
+    }
+    list.scrollTop=scroll;
   }
   function render(force=false){
     if(!force&&panel.hidden)return;
