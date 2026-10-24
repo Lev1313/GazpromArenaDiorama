@@ -1,0 +1,26 @@
+name: Vehicle picker focused checks
+on:
+  pull_request:
+    paths:
+      - "src/ui/vehiclePicker*"
+      - "src/main.js"
+      - "tests/vehicle-picker.test.mjs"
+      - ".github/workflows/vehicle-picker.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  picker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run test:picker
+      - run: npm run build
