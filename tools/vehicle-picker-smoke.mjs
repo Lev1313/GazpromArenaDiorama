@@ -45,8 +45,14 @@ async function main(){
   await page.locator('#vehiclePickerClear').click();
   assert.equal(await page.locator('#vehiclePickerSelected').isVisible(),false);
   assert.equal(await page.locator('#vehiclePickerWorldmark').isVisible(),false);
+  // One mobile viewport check in the same browser/session, without a second GLB load.
+  await page.setViewportSize({width:390,height:844});
+  const bounds=await panel.boundingBox();
+  assert(bounds&&bounds.x>=0&&bounds.x+bounds.width<=391,'Catalog should fit mobile width');
+  await page.locator('#vehiclePickerSearch').fill('Golf');
+  assert.equal(await page.locator('#vehiclePickerList button[data-vehicle-id]').count(),2);
   assert.deepEqual(errors,[]);
-  console.log('PASS vehicle picker: 19 entries, search, seats, marker, camera peek, close, clear, no page exceptions');
+  console.log('PASS picker: desktop and mobile; 19 entries, search, seats, marker, camera peek, close, clear');
 }
 try{await main();}catch(error){console.error(error);process.exitCode=1;}
 finally{await browser?.close();server.kill('SIGTERM');}
