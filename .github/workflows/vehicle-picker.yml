@@ -24,3 +24,5 @@ jobs:
       - run: npm ci
       - run: npm run test:picker
       - run: npm run build
+      - name: Browser smoke (Chrome, no full suite)
+        run: node tools/vehicle-picker-smoke.mjs
