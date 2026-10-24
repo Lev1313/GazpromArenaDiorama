@@ -28,7 +28,8 @@
     "check:quick": "npm run test:multiplayer",
     "check:network": "npm run test:multiplayer && npm run test:multiplayer:browser",
     "check:release": "npm run build && npm run test:unit && npm run test:browser",
-    "test:picker": "node --test tests/vehicle-picker.test.mjs"
+    "test:picker": "node --test tests/vehicle-picker.test.mjs",
+    "test:picker:camera": "node tools/vehicle-picker-camera.mjs"
   },
   "devDependencies": {
     "pixelmatch": "^8.0.0",

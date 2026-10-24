@@ -133,7 +133,7 @@ const pedestrianUi = installPedestrianUi(root, pedestrian, modes, hud, canvas);
 const seatingUi = installVehicleInteractionUi(root, seating, drive, hud);
 multiplayer = createMultiplayer({scene,pedestrian,modes,hud,registry:vehicleRegistry,drive,seating,drift});
 const multiplayerUi = installMultiplayerUi(root,multiplayer);
-const vehiclePicker = installVehiclePicker(root,{scene,camera,registry:vehicleRegistry,pedestrian,seating,drive,multiplayer});
+const vehiclePicker = installVehiclePicker(root,{scene,camera,controls,registry:vehicleRegistry,pedestrian,seating,drive,multiplayer});
 
 let last = performance.now();
 function frame(now) {
@@ -175,7 +175,7 @@ function frame(now) {
   seatingUi.render();
   multiplayerUi.render();
   vehiclePicker.update();
-  renderer.render(scene, camera);
+  renderer.render(scene, vehiclePicker.renderCamera);
 }
 requestAnimationFrame(frame);
 

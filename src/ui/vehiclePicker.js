@@ -8,7 +8,7 @@ const specialPaint={2:'#d42d3c',5:'#bdc8d1',16:'#17191f',17:'#103772',18:'#080a0
 function paint(index){return specialPaint[index]??palette[index<7?index:index<14?(index%7+2)%7:(index-14)%7];}
 
 /** A lightweight vehicle locator: no duplicate renderer, GLB or driving controller. */
-export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seating,drive,multiplayer}){
+export function installVehiclePicker(root,{scene,camera,controls,registry,pedestrian,seating,drive,multiplayer}){
   const toggle=document.createElement('button');
   toggle.id='vehiclePickerToggle';toggle.type='button';toggle.textContent='Автомобили · 19';
   toggle.setAttribute('aria-controls','vehiclePickerPanel');
@@ -43,19 +43,40 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
   const geometry=new RingGeometry(1,1.085,48),marker=new Mesh(geometry,material);
   marker.name='selected-vehicle-marker';marker.rotation.x=-Math.PI/2;marker.renderOrder=1000;marker.visible=false;scene.add(marker);
   const projected=new Vector3(),lookingAt=new Vector3(),eye=new Vector3();
-  let selected=null,peekUntil=0,signature='',lastListAt=0,detail='';
+  const peekCamera=camera.clone();
+  let selected=null,peekUntil=0,savedView=null,signature='',lastListAt=0;
   const active=()=>multiplayer.active,ready=()=>multiplayer.getStatus().ready;
   const current=()=>selected&&selectPickerEntry(registry,selected);
+  const cameraMode=()=>JSON.stringify([pedestrian.state.active,pedestrian.state.mode,
+    pedestrian.state.vehicleId,pedestrian.state.seatId,drive.state.active,drive.state.view]);
+  function restoreView(){
+    const damping=controls.enableDamping;
+    if(controls.enabled){controls.enableDamping=false;controls.update();controls.enableDamping=damping;}
+    camera.position.copy(savedView.position);camera.quaternion.copy(savedView.quaternion);
+    controls.target.copy(savedView.target);camera.updateMatrixWorld();
+  }
+  function stopPeek(){
+    if(savedView&&savedView.mode===cameraMode())restoreView();
+    savedView=null;peekUntil=0;
+  }
+  function startPeek(){
+    // Render the temporary view with a lightweight camera, so mode transitions
+    // never save the catalog view as their own overview/chase camera.
+    savedView={position:camera.position.clone(),quaternion:camera.quaternion.clone(),
+      target:controls.target.clone(),mode:cameraMode()};
+    restoreView(); // Clear orbit inertia without changing the captured visible pose.
+    peekUntil=performance.now()+3000;
+  }
 
   function choose(id){
     if(!registry.get(id))return;
-    selected=id;peekUntil=0;signature='';render(true);
+    stopPeek();selected=id;signature='';render(true);
   }
-  function clear(){selected=null;peekUntil=0;marker.visible=false;worldmark.hidden=true;signature='';render(true);}
+  function clear(){stopPeek();selected=null;marker.visible=false;worldmark.hidden=true;signature='';render(true);}
   function open(value){
     panel.hidden=!value;toggle.setAttribute('aria-expanded',String(value));
     if(value){render(true);$('vehiclePickerSearch').focus();}
-    else {peekUntil=0;toggle.focus();}
+    else {stopPeek();toggle.focus();}
   }
   function listEntries(){
     const data=pickerEntries(registry,{connected:active(),ready:ready()});
@@ -113,7 +134,7 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
   $('vehiclePickerClear').addEventListener('click',clear);
   $('vehiclePickerLook').addEventListener('click',()=>{
     if(seating.isSeated()||drive.state.active)return;
-    peekUntil=peekUntil>performance.now()?0:performance.now()+3000;
+    if(savedView)stopPeek();else startPeek();
     render(true);
   });
   function onKey(event){
@@ -124,13 +145,22 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
   window.addEventListener('keydown',onKey,true);
 
   function update(){
+    if(savedView&&(peekUntil<=performance.now()||savedView.mode!==cameraMode()
+      ||seating.isSeated()||drive.state.active)){stopPeek();render(true);}
     const v=current();
-    if(!v){marker.visible=false;worldmark.hidden=true;return;}
+    if(!v){stopPeek();marker.visible=false;worldmark.hidden=true;return;}
+    if(savedView){
+      peekCamera.copy(camera);
+      lookingAt.copy(v.car.position).add(new Vector3(0,1,0));
+      eye.set(8,6,9).applyAxisAngle(new Vector3(0,1,0),v.car.rotation.y);
+      peekCamera.position.copy(lookingAt).add(eye);peekCamera.lookAt(lookingAt);
+      peekCamera.updateMatrixWorld();
+    }
     const car=v.car,extent=car.userData.footprint;
     marker.visible=true;
     marker.position.set(car.position.x,car.position.y+.07,car.position.z);
     marker.scale.set((extent?.halfLength??1.96)+.6,(extent?.halfWidth??1.04)+.6,1);
-    projected.set(car.position.x,car.position.y+2.45,car.position.z).project(camera);
+    projected.set(car.position.x,car.position.y+2.45,car.position.z).project(savedView?peekCamera:camera);
     const inView=projected.z>=-1&&projected.z<=1&&Math.abs(projected.x)<1.1&&Math.abs(projected.y)<1.1;
     worldmark.hidden=!inView;
     if(inView){
@@ -138,15 +168,10 @@ export function installVehiclePicker(root,{scene,camera,registry,pedestrian,seat
       worldmark.style.left=((projected.x+1)*50).toFixed(2)+'%';
       worldmark.style.top=((1-projected.y)*50).toFixed(2)+'%';
     }
-    if(peekUntil>performance.now()&&!seating.isSeated()&&!drive.state.active){
-      lookingAt.copy(car.position).add(new Vector3(0,1,0));
-      eye.set(8,6,9).applyAxisAngle(new Vector3(0,1,0),car.rotation.y);
-      camera.position.copy(lookingAt).add(eye);camera.lookAt(lookingAt);
-      camera.updateMatrixWorld();
-    }else if(peekUntil!==0){peekUntil=0;render(true);}
     if(!panel.hidden&&performance.now()-lastListAt>500){lastListAt=performance.now();render();}
   }
-  return {update,select:choose,clear,render,dispose(){
+  return {update,select:choose,clear,render,get renderCamera(){return savedView?peekCamera:camera;},dispose(){
+    stopPeek();
     scene.remove(marker);geometry.dispose();material.dispose();
     window.removeEventListener('keydown',onKey,true);
     toggle.remove();panel.remove();worldmark.remove();
